@@ -10,12 +10,12 @@ using System.Collections.Generic;
 using System.Text;
 
 /// <summary>
-/// View namespace
+/// ViewModel namespace
 /// </summary>
 namespace easySave.ViewModel
 {
     /// <summary>
-    /// Class with all project views
+    /// Class to make the link between views and models
     /// </summary>
     class viewModel
     {

@@ -10,12 +10,12 @@ using System.Collections.Generic;
 using System.Text;
 
 /// <summary>
-/// 
+/// View namespace
 /// </summary>
 namespace easySave.Views
 {
     /// <summary>
-    /// 
+    /// Class with all project views
     /// </summary>
     class view
     {
