@@ -23,7 +23,7 @@ namespace easySave
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ViewModel.viewModel viewModel = new ViewModel.viewModel();
         }
     }
 }

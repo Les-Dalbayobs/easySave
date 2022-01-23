@@ -19,6 +19,39 @@ namespace easySave.ViewModel
     /// </summary>
     class viewModel
     {
+        Views.view view = new Views.view();
 
+        public viewModel()
+        {
+            menu();
+        }
+
+        public void menu()
+        {
+            int menu; 
+                
+            menu = view.displayMenu();
+
+            switch (menu)
+            {
+                case 1:
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    break;
+
+                case 4:
+                    break;
+
+                default:
+                    break;
+            } //end switch
+
+        }
     }
+
+
 }
