@@ -63,13 +63,17 @@ namespace easySave.Views
                 if (menu > 5)
                 {
                     errorMenu();
-                    displayMenu();
+                    int menuError = displayMenu();
+
+                    return menuError;
                 }
             }
             catch
             {
                 errorMenu();
-                displayMenu();
+                int menuError = displayMenu();
+
+                return menuError;
             }
 
 
@@ -139,13 +143,17 @@ namespace easySave.Views
                 if (valid > 2)
                 {
                     errorMenu();
-                    confirmCreate();
+                    int menuError = confirmCreate();
+
+                    return menuError;
                 }
             }
             catch
             {
                 errorMenu();
-                confirmCreate();
+                int menuError = confirmCreate();
+
+                return menuError;
             }
 
             return valid;
@@ -168,13 +176,17 @@ namespace easySave.Views
                 if (choose > 2)
                 {
                     errorMenu();
-                    finishCreate();
+                    int menuError = finishCreate();
+
+                    return menuError;
                 }
             }
             catch
             {
                 errorMenu();
-                finishCreate();
+                int menuError = finishCreate();
+
+                return menuError;
             }
 
             return choose;
