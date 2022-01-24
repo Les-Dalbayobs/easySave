@@ -40,11 +40,12 @@ namespace easySave.Views
         /// <summary>
         /// Basic application menu
         /// </summary>
-        /// <returns name="menu">Choice of main menu</returns>
+        /// <returns>Choice of main menu</returns>
         public int displayMenu()
         {
-            int menu = 10;
+            int menu = 10; //Choice of menu
 
+            //Displaying the menu
             Console.WriteLine(" ------------MENU-----------");
 
             Console.WriteLine(" 1.Create");
@@ -56,45 +57,60 @@ namespace easySave.Views
             Console.WriteLine(" ---------------------------");
 
             Console.Write(" Choose number and press enter : ");
+            //End of menu display
 
+            //Try catch to manage typing errors
             try
             {
+                //Retrieves the value entered by the user and converts it to int
                 menu = Convert.ToInt32(Console.ReadLine());
+
+                //if - to handle typing errors
                 if (menu > 5)
                 {
-                    errorMenu();
-                    int menuError = displayMenu();
+                    errorMenu(); //Launch the error window
+                    int menuError = displayMenu(); //Restarts the menu display and saves the return value
 
-                    return menuError;
+                    return menuError; //Returns the menu choice
                 }
             }
             catch
             {
-                errorMenu();
-                int menuError = displayMenu();
+                errorMenu(); // Launch the error window
+                int menuError = displayMenu(); // Restarts the menu display and saves the return value
 
-                return menuError;
+                return menuError; //Returns the menu choice
             }
 
 
-            return menu;
+            return menu; //Returns the menu choice
         }
 
+        /// <summary>
+        /// Method for choosing the job number to create the job
+        /// </summary>
+        /// <returns>Job chosen for creation</returns>
         public int chooseCreate()
         {
-
+            //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" 6.Exit");
             
             Console.Write(" Choose job number and press enter : ");
-            
+            //End of menu display
+
+            //Retrieves the value entered by the user and converts it to int
             int job = Convert.ToInt32(Console.ReadLine());
 
-            return job;
+            return job; //Returns the menu choice
         }
 
+        /// <summary>
+        /// Method for entering job information
+        /// </summary>
         public void create()
         {
+            //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" Fill in the fields");
 
@@ -113,12 +129,19 @@ namespace easySave.Views
             Console.WriteLine(" 2.Differential");
             Console.Write(" Type : ");
             Console.ReadLine();
+            //End of menu display
         }
 
+
+        /// <summary>
+        /// Method to validate job information
+        /// </summary>
+        /// <returns>Returns if the information entered is correct</returns>
         public int confirmCreate()
         {
-            int valid = 10;
+            int valid = 10; //Choice of menu
 
+            //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" Checking the information");
 
@@ -136,72 +159,92 @@ namespace easySave.Views
 
             
             Console.Write(" Choose number and press enter : ");
+            //End of menu display
 
+            //Try catch to manage typing errors
             try
             {
+                //Retrieves the value entered by the user and converts it to int
                 valid = Convert.ToInt32(Console.ReadLine());
+
+                //if - to handle typing errors
                 if (valid > 2)
                 {
-                    errorMenu();
-                    int menuError = confirmCreate();
+                    errorMenu(); //Launch the error window
+                    int menuError = confirmCreate(); //Restarts the menu display and saves the return value
 
-                    return menuError;
+                    return menuError; //Returns the menu choice
                 }
             }
             catch
             {
-                errorMenu();
-                int menuError = confirmCreate();
+                errorMenu(); //Launch the error window
+                int menuError = confirmCreate(); //Restarts the menu display and saves the return value
 
-                return menuError;
+                return menuError; //Returns the menu choice
             }
 
-            return valid;
+            return valid; //Returns the menu choice
         }
 
+        /// <summary>
+        /// Method to confirm job creation
+        /// </summary>
+        /// <returns></returns>
         public int finishCreate()
         {
-            int choose = 10;
+            int choose = 10; //Choice of menu
 
+            //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" Job created");
             Console.WriteLine(" 1.Back to the home page");
             Console.WriteLine(" 2.Back to the job creation page");
 
             Console.Write(" Choose number and press enter : ");
-            
+            //End of menu display
+
+            //Try catch to manage typing errors
             try
             {
+                //Retrieves the value entered by the user and converts it to int
                 choose = Convert.ToInt32(Console.ReadLine());
+
+                //if - to handle typing errors
                 if (choose > 2)
                 {
-                    errorMenu();
-                    int menuError = finishCreate();
+                    errorMenu(); //Restarts the menu display and saves the return value
+                    int menuError = finishCreate(); //Restarts the menu display and saves the return value
 
-                    return menuError;
+                    return menuError; //Returns the menu choice
                 }
             }
             catch
             {
-                errorMenu();
-                int menuError = finishCreate();
+                errorMenu(); //Restarts the menu display and saves the return value
+                int menuError = finishCreate(); //Restarts the menu display and saves the return value
 
-                return menuError;
+                return menuError; //Returns the menu choice
             }
 
-            return choose;
+            return choose; //Returns the menu choice
         }
 
+        /// <summary>
+        /// Method of displaying the errors concerning a menu
+        /// </summary>
         public void errorMenu()
         {
-            Console.Clear();
+            Console.Clear(); //Clean console
 
+            //Display of the error message
             Console.WriteLine(" Error, please try again");
-
             Console.Write(" Press enter to continue");
-            Console.ReadLine();
+            //End display
 
-            Console.Clear();
+            Console.ReadLine(); //Waits for the user to press enter
+
+            Console.Clear(); //Clean console
         }
         #endregion
 
