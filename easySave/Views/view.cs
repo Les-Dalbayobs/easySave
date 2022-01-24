@@ -37,22 +37,29 @@ namespace easySave.Views
 
         #region methods
 
+        /// <summary>
+        /// Basic application menu
+        /// </summary>
+        /// <returns name="menu">Choice of main menu</returns>
         public int displayMenu()
         {
+
             Console.WriteLine(" ------------MENU-----------");
-            int menu = 5;
+
             Console.WriteLine(" 1.Create");
             Console.WriteLine(" 2.Delete");
             Console.WriteLine(" 3.Save");
             Console.WriteLine(" 4.Language");
             Console.WriteLine(" 5.Exit");
+
             Console.WriteLine(" ---------------------------");
+
             Console.Write(" Chosse number and press enter : ");
-            menu = Convert.ToInt32(Console.ReadLine());
+            
+            int menu = Convert.ToInt32(Console.ReadLine());
 
             return menu;
         }
-
         #endregion
 
 

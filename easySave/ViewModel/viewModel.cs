@@ -19,13 +19,24 @@ namespace easySave.ViewModel
     /// </summary>
     class viewModel
     {
+        #region attributes
         Views.view view = new Views.view();
+        #endregion
 
+        #region properties
+        #endregion
+
+        #region constructor
         public viewModel()
         {
-            menu();
-        }
 
+        }
+        #endregion
+
+        #region methods
+        /// <summary>
+        /// Main program loop
+        /// </summary>
         public void menu()
         {
             int menu; 
@@ -51,6 +62,7 @@ namespace easySave.ViewModel
             } //end switch
 
         }
+        #endregion
     }
 
 
