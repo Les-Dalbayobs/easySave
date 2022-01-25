@@ -321,7 +321,7 @@ namespace easySave.Views
                 job = Convert.ToInt32(Console.ReadLine());
 
                 //if - to handle typing errors
-                if (job > 2 || job < 1)
+                if (job > 6 || job < 1)
                 {
                     errorMenu(); //Launch the error window
                     int menuError = chooseSave(); //Restarts the menu display and saves the return value
@@ -393,7 +393,7 @@ namespace easySave.Views
         public void completedSave()
         {
             //Display of the confirmation message
-            Console.WriteLine(" ---------DELETE JOB--------");
+            Console.WriteLine(" ----------SAVE JOB---------");
             Console.WriteLine(" Job n°.. successfully saved");
             Console.Write(" Press enter to continue");
             //End of display
