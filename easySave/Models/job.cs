@@ -87,14 +87,23 @@ namespace easySave.Models
             bool confirmSave = false;
 
             DirectoryInfo source = new DirectoryInfo(this.pathSource);
+            DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
 
             try
             {
+                if (this.typeSave)
+                {
+                    copyFolderComplete(source, destination);
+                    confirmSave = true;
+                }
+                else
+                {
 
+                }
             }
             catch
             {
-
+                confirmSave = false;
             }
 
 
@@ -120,6 +129,24 @@ namespace easySave.Models
             int size = Directory.GetFiles(this.pathSource, "*.*", SearchOption.AllDirectories).Length;
 
             return size;
+        }
+
+        public void copyFolderComplete(DirectoryInfo source, DirectoryInfo destination)
+        {
+            DirectoryInfo[] folders = source.GetDirectories();
+
+            Directory.CreateDirectory(destination.FullName);
+
+            foreach (FileInfo file in source.GetFiles())
+            {
+                file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+            }
+
+            foreach (DirectoryInfo subFolder in folders)
+            {
+                DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
+                copyFolderComplete(subFolder, destinationSubFolder);
+            }
         }
 
         #endregion
