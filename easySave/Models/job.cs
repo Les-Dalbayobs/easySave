@@ -29,8 +29,26 @@ namespace easySave.Models
 
         #region properties
         public string Name { get => name; set => name = value; }
-        public DirectoryInfo FolderSource { get => folderSource; set => folderSource = value; }
-        public DirectoryInfo FolderDestination { get => folderDestination; set => folderDestination = value; }
+        public DirectoryInfo GetFolderSource()
+        {
+            return folderSource;
+        }
+
+        public void SetFolderSource(string value)
+        {
+            folderSource = new DirectoryInfo(value);
+        }
+
+        public DirectoryInfo GetFolderDestination()
+        {
+            return folderDestination;
+        }
+
+        public void SetFolderDestination(string value)
+        {
+            folderDestination = new DirectoryInfo(value);
+        }
+
         public bool TypeSave { get => typeSave; set => typeSave = value; }
         #endregion
 
@@ -38,13 +56,14 @@ namespace easySave.Models
         job(string nameJob,string pathSource,string pathDestination,bool typeJob)
         {
             this.name = nameJob;
-            this.FolderSource = new DirectoryInfo(pathSource);
-            this.FolderDestination = new DirectoryInfo(pathDestination);
+            this.folderSource = new DirectoryInfo(pathSource);
+            this.folderDestination = new DirectoryInfo(pathDestination);
             this.TypeSave = typeJob;
         }
         #endregion
 
         #region methodes
+
         #endregion
 
     }
