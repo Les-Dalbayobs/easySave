@@ -18,14 +18,14 @@ namespace easySave.Views
     /// Class with all project views
     /// </summary>
     class view
-    {        
+    {
 
         #region attributes
         #endregion
 
         #region properties
         #endregion
-        
+
         #region constructor
         /// <summary>
         /// Constructor of the view class
@@ -95,7 +95,7 @@ namespace easySave.Views
             //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" 6.Exit");
-            
+
             Console.Write(" Choose job number and press enter : ");
             //End of menu display
 
@@ -157,7 +157,7 @@ namespace easySave.Views
             Console.WriteLine(" 1.Yes");
             Console.WriteLine(" 2.No");
 
-            
+
             Console.Write(" Choose number and press enter : ");
             //End of menu display
 
@@ -194,7 +194,7 @@ namespace easySave.Views
         {
             //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
-            
+
             Console.WriteLine(" Job created");
             Console.Write(" Press enter to continue");
             //End display
@@ -298,8 +298,54 @@ namespace easySave.Views
             Console.ReadLine(); //Waits for the user to press enter
         }
 
-        #endregion
+        /// <summary>
+        /// Method to select the job to save
+        /// </summary>
+        /// <returns>Selected job for save</returns>
+        public int chooseSave()
+        {
+            int job; // Initialize job variable
+
+            //Displaying the menu
+            Console.WriteLine(" ----------SAVE JOB---------");
+            Console.WriteLine(" 6.Exit");
 
 
+            Console.Write(" Choose job number and press enter : ");
+            //End of menu display
+
+            //Try catch to manage typing errors
+            try
+            {
+                //Retrieves the value entered by the user and converts it to int
+                job = Convert.ToInt32(Console.ReadLine());
+
+                //if - to handle typing errors
+                if (job < 1 || job > 6)
+                {
+                    errorMenu(); //Launch the error window
+                    int menuError = confirmSave(); //Restarts the menu display and saves the return value
+
+                    return menuError; //Returns the menu choice
+                }
+            }
+            catch
+            {
+                errorMenu(); //Launch the error window
+                int menuError = confirmSave(job); //Restarts the menu display and saves the return value
+
+                return menuError; //Returns the menu choice
+            }
+
+            return job; //Returns the menu choice
+
+        }
+
+        public int confirmSave(int job)
+        {
+            return job;
+        }
+
+            #endregion
     }
 }
