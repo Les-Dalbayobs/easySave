@@ -291,25 +291,25 @@ namespace easySave.Views
         {
             //Display of the error message
             Console.WriteLine(" ---------DELETE JOB--------");
-            Console.WriteLine(" Job n°.. delete");
+            Console.WriteLine(" Job n°.. deleted");
             Console.Write(" Press enter to continue");
             //End display
 
             Console.ReadLine(); //Waits for the user to press enter
         }
 
-        /// <summary>
-        /// Method to select the job to save
-        /// </summary>
-        /// <returns>Selected job for save</returns>
         public int chooseSave()
         {
-            int job; // Initialize job variable
+            int job; //Choice of menu
 
             //Displaying the menu
             Console.WriteLine(" ----------SAVE JOB---------");
+            Console.WriteLine(" 1.XX");
+            Console.WriteLine(" 2.XX");
+            Console.WriteLine(" 3.Empty");
+            Console.WriteLine(" 4.Empty");
+            Console.WriteLine(" 5.XX");
             Console.WriteLine(" 6.Exit");
-
 
             Console.Write(" Choose job number and press enter : ");
             //End of menu display
@@ -321,7 +321,53 @@ namespace easySave.Views
                 job = Convert.ToInt32(Console.ReadLine());
 
                 //if - to handle typing errors
-                if (job < 1 || job > 6)
+                if (job > 2 || job < 1)
+                {
+                    errorMenu(); //Launch the error window
+                    int menuError = chooseSave(); //Restarts the menu display and saves the return value
+
+                    return menuError; //Returns the menu choice
+                }
+            }
+            catch
+            {
+                errorMenu(); //Launch the error window
+                int menuError = chooseSave(); //Restarts the menu display and saves the return value
+
+                return menuError; //Returns the menu choice
+            }
+
+            return job;
+        }
+
+        /// <summary>
+        /// Method to confirm the job to save
+        /// </summary>
+        /// <returns>Selected job for save</returns>
+        public int confirmSave() 
+        {
+            int job; //Choice of menu
+
+            //Display of the error message
+            Console.WriteLine(" ----------SAVE JOB---------");
+            Console.WriteLine("You selected job number _ . Are you sure ?");
+
+            Console.WriteLine(" ---------VALIDATION--------");
+            Console.WriteLine(" 1.Yes");
+            Console.WriteLine(" 2.No");
+
+
+            Console.Write(" Choose number and press enter : ");
+            //End of menu display
+
+            //Try catch to manage typing errors
+            try
+            {
+                //Retrieves the value entered by the user and converts it to int
+                job = Convert.ToInt32(Console.ReadLine());
+
+                //if - to handle typing errors
+                if (job > 2 || job < 1)
                 {
                     errorMenu(); //Launch the error window
                     int menuError = confirmSave(); //Restarts the menu display and saves the return value
@@ -332,20 +378,29 @@ namespace easySave.Views
             catch
             {
                 errorMenu(); //Launch the error window
-                int menuError = confirmSave(job); //Restarts the menu display and saves the return value
+                int menuError = confirmSave(); //Restarts the menu display and saves the return value
 
                 return menuError; //Returns the menu choice
             }
 
-            return job; //Returns the menu choice
-
-        }
-
-        public int confirmSave(int job)
-        {
             return job;
         }
 
-            #endregion
+        /// <summary>
+        /// Method to show progress of saving, and then exit
+        /// </summary>
+        /// <returns>Nothing</returns>
+        public void completedSave()
+        {
+            //Display of the confirmation message
+            Console.WriteLine(" ---------DELETE JOB--------");
+            Console.WriteLine(" Job n°.. successfully saved");
+            Console.Write(" Press enter to continue");
+            //End of display
+
+            Console.ReadLine(); //Waits for the user to press enter
+        }
+
+        #endregion
     }
 }

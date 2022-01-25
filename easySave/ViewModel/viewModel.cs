@@ -59,6 +59,9 @@ namespace easySave.ViewModel
                     break;
 
                 case 3:
+                    view.chooseSave();
+                    view.confirmSave();
+                    view.completedSave();
                     break;
 
                 case 4:
