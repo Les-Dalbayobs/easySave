@@ -76,7 +76,11 @@ namespace easySave.ViewModel
             Console.WriteLine(job1.Name);
             Console.WriteLine(job1.PathSource);
             Console.WriteLine(job1.PathDestination);
-            Console.WriteLine(Convert.ToInt32(job1.TypeSave));
+            Console.WriteLine(job1.TypeSave);
+
+            Console.WriteLine(job1.verifExist());
+
+            Console.WriteLine(job1.calculSize());
         }
 
         #endregion

@@ -82,6 +82,45 @@ namespace easySave.Models
         #endregion
 
         #region methodes
+        public bool copy()
+        {
+            bool confirmSave = false;
+
+            DirectoryInfo source = new DirectoryInfo(this.pathSource);
+
+            try
+            {
+
+            }
+            catch
+            {
+
+            }
+
+
+            return confirmSave;
+        }
+
+        public bool verifExist()
+        {
+            bool exist = false;
+
+            DirectoryInfo source = new DirectoryInfo(this.pathSource);
+
+            if (source.Exists)
+            {
+                exist = true;
+            }
+
+            return exist;
+        }
+
+        public int calculSize()
+        {
+            int size = Directory.GetFiles(this.pathSource, "*.*", SearchOption.AllDirectories).Length;
+
+            return size;
+        }
 
         #endregion
 
