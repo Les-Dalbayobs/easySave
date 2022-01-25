@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 /// <summary>
@@ -20,9 +21,17 @@ namespace easySave.Models
     class job
     {
         #region attributes
+        string name;
+        DirectoryInfo folderSource;
+        DirectoryInfo folderDestination;
+        bool typeSave;
         #endregion
 
         #region properties
+        public string Name { get => name; set => name = value; }
+        public DirectoryInfo FolderSource { get => folderSource; set => folderSource = value; }
+        public DirectoryInfo FolderDestination { get => folderDestination; set => folderDestination = value; }
+        public bool TypeSave { get => typeSave; set => typeSave = value; }
         #endregion
 
         #region constructors
