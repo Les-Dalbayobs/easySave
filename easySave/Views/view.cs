@@ -190,45 +190,16 @@ namespace easySave.Views
         /// <summary>
         /// Method to confirm job creation
         /// </summary>
-        /// <returns></returns>
-        public int finishCreate()
+        public void finishCreate()
         {
-            int choose = 10; //Choice of menu
-
             //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
             
             Console.WriteLine(" Job created");
-            Console.WriteLine(" 1.Back to the home page");
-            Console.WriteLine(" 2.Back to the job creation page");
+            Console.Write(" Press enter to continue");
+            //End display
 
-            Console.Write(" Choose number and press enter : ");
-            //End of menu display
-
-            //Try catch to manage typing errors
-            try
-            {
-                //Retrieves the value entered by the user and converts it to int
-                choose = Convert.ToInt32(Console.ReadLine());
-
-                //if - to handle typing errors
-                if (choose > 2)
-                {
-                    errorMenu(); //Restarts the menu display and saves the return value
-                    int menuError = finishCreate(); //Restarts the menu display and saves the return value
-
-                    return menuError; //Returns the menu choice
-                }
-            }
-            catch
-            {
-                errorMenu(); //Restarts the menu display and saves the return value
-                int menuError = finishCreate(); //Restarts the menu display and saves the return value
-
-                return menuError; //Returns the menu choice
-            }
-
-            return choose; //Returns the menu choice
+            Console.ReadLine(); //Waits for the user to press enter
         }
 
         /// <summary>
@@ -248,6 +219,10 @@ namespace easySave.Views
             Console.Clear(); //Clean console
         }
 
+        /// <summary>
+        /// Method for selecting the job number to delete the job
+        /// </summary>
+        /// <returns>Selected job for deletion</returns>
         public int chooseDelete()
         {
             //Displaying the menu
@@ -263,6 +238,10 @@ namespace easySave.Views
             return job; //Returns the menu choice
         }
 
+        /// <summary>
+        /// Method for validating the chosen job
+        /// </summary>
+        /// <returns>Returns if the information entered is correct</returns>
         public int confirmDelete()
         {
             int valid; //Choice of menu
@@ -303,7 +282,21 @@ namespace easySave.Views
             }
 
             return valid; //Returns the menu choice
-        }    
+        }
+
+        /// <summary>
+        /// Method to confirm job deletion
+        /// </summary>
+        public void finishDelete()
+        {
+            //Display of the error message
+            Console.WriteLine(" ---------DELETE JOB--------");
+            Console.WriteLine(" Job n°.. delete");
+            Console.Write(" Press enter to continue");
+            //End display
+
+            Console.ReadLine(); //Waits for the user to press enter
+        }
 
         #endregion
 
