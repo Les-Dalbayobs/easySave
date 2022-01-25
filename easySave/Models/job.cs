@@ -35,6 +35,13 @@ namespace easySave.Models
         #endregion
 
         #region constructors
+        job(string nameJob,string pathSource,string pathDestination,bool typeJob)
+        {
+            this.name = nameJob;
+            this.FolderSource = new DirectoryInfo(pathSource);
+            this.FolderDestination = new DirectoryInfo(pathDestination);
+            this.TypeSave = typeJob;
+        }
         #endregion
 
         #region methodes
