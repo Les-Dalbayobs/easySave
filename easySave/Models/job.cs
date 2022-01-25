@@ -27,14 +27,14 @@ namespace easySave.Models
         string name;
 
         /// <summary>
-        /// Stores the directoryInfo of the source folder
+        /// Stores the path of the source folder
         /// </summary>
-        DirectoryInfo folderSource;
+        string pathSource;
 
         /// <summary>
-        /// Stores the directoryInfo of the destination folder
+        /// Stores the path of the destination folder
         /// </summary>
-        DirectoryInfo folderDestination;
+        string pathDestination;
 
         /// <summary>
         /// Stores the type of the backup job
@@ -44,50 +44,24 @@ namespace easySave.Models
 
         #region properties
         /// <summary>
-        /// Getter setter of the name property 
+        /// Getter setter of the name attribute 
         /// </summary>
         public string Name { get => name; set => name = value; }
 
         /// <summary>
-        /// Getter of the DirectoryInfo source
-        /// </summary>
-        /// <returns>DirectoryInfo source</returns>
-        public DirectoryInfo GetFolderSource()
-        {
-            return folderSource;
-        }
-
-        /// <summary>
-        /// Setter of the DirectoryInfo source
-        /// </summary>
-        /// <param name="value">Path source</param>
-        public void SetFolderSource(string value)
-        {
-            folderSource = new DirectoryInfo(value);
-        }
-
-        /// <summary>
-        /// Getter of the DirectoryInfo destination
-        /// </summary>
-        /// <returns>DirectoryInfo destination</returns>
-        public DirectoryInfo GetFolderDestination()
-        {
-            return folderDestination;
-        }
-
-        /// <summary>
-        /// Setter of the DirectoryInfo destination
-        /// </summary>
-        /// <param name="value">Path destination</param>
-        public void SetFolderDestination(string value)
-        {
-            folderDestination = new DirectoryInfo(value);
-        }
-
-        /// <summary>
-        /// Getter setter of the type property 
+        /// Getter setter of the type attribute 
         /// </summary>
         public bool TypeSave { get => typeSave; set => typeSave = value; }
+
+        /// <summary>
+        /// Getter setter of the pathSource attribute
+        /// </summary>
+        public string PathSource { get => pathSource; set => pathSource = value; }
+
+        /// <summary>
+        /// Getter setter of the pathSource attribute
+        /// </summary>
+        public string PathDestination { get => pathDestination; set => pathDestination = value; }
         #endregion
 
         #region constructors
@@ -98,11 +72,11 @@ namespace easySave.Models
         /// <param name="pathSource">Source folder path</param>
         /// <param name="pathDestination">Destination folder path</param>
         /// <param name="typeJob">Type of backup</param>
-        job(string nameJob,string pathSource,string pathDestination,bool typeJob)
+        public job(string nameJob,string source,string destination,bool typeJob)
         {
             this.name = nameJob;
-            this.folderSource = new DirectoryInfo(pathSource);
-            this.folderDestination = new DirectoryInfo(pathDestination);
+            this.pathSource = source;
+            this.pathDestination = destination;
             this.typeSave = typeJob;
         }
         #endregion

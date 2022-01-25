@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 /// <summary>
 /// ViewModel namespace
@@ -29,7 +30,7 @@ namespace easySave.ViewModel
         #region constructor
         public viewModel()
         {
-            menu();
+            testCreateJob();
         }
         #endregion
 
@@ -67,8 +68,17 @@ namespace easySave.ViewModel
                 default:
                     break;
             } //end switch
-
         }
+
+        public void testCreateJob()
+        {
+            Models.job job1 = new Models.job("TEST 1", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\testdoc", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\testdoc1", true);
+            Console.WriteLine(job1.Name);
+            Console.WriteLine(job1.PathSource);
+            Console.WriteLine(job1.PathDestination);
+            Console.WriteLine(Convert.ToInt32(job1.TypeSave));
+        }
+
         #endregion
     }
 
