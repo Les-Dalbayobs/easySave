@@ -53,6 +53,9 @@ namespace easySave.ViewModel
                     break;
 
                 case 2:
+                    view.chooseDelete();
+                    view.confirmDelete();
+                    view.finishDelete();
                     break;
 
                 case 3:
