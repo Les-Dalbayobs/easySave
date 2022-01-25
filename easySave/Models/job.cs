@@ -58,7 +58,7 @@ namespace easySave.Models
             this.name = nameJob;
             this.folderSource = new DirectoryInfo(pathSource);
             this.folderDestination = new DirectoryInfo(pathDestination);
-            this.TypeSave = typeJob;
+            this.typeSave = typeJob;
         }
         #endregion
 
