@@ -29,7 +29,7 @@ namespace easySave.ViewModel
         #region constructor
         public viewModel()
         {
-
+            menu();
         }
         #endregion
 
@@ -46,6 +46,10 @@ namespace easySave.ViewModel
             switch (menu)
             {
                 case 1:
+                    view.chooseCreate();
+                    view.create();
+                    view.confirmCreate();
+                    view.finishCreate();
                     break;
 
                 case 2:
