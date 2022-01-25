@@ -93,7 +93,13 @@ namespace easySave.Models
             {
                 if (this.typeSave)
                 {
+                    if (destination.Exists)
+                    {
+                        destination.Delete(true);
+                    }
+
                     copyFolderComplete(source, destination);
+
                     confirmSave = true;
                 }
                 else
@@ -147,6 +153,36 @@ namespace easySave.Models
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
                 copyFolderComplete(subFolder, destinationSubFolder);
             }
+        }
+
+
+        public void copyFolderDifferential(DirectoryInfo source, DirectoryInfo destination)
+        {
+            
+
+            /*DirectoryInfo[] folders = source.GetDirectories();
+            
+            Directory.CreateDirectory(destination.FullName);
+            
+            foreach (FileInfo file in source.GetFiles())
+            {
+                foreach (FileInfo fileDestination in destination.GetFiles())
+                {
+                    //Console.WriteLine(file.Name);
+                    if(file.Name != fileDestination.Name && file.LastWriteTime < fileDestination.LastWriteTime)
+                    {
+                        Console.WriteLine("Copy : " + file.Name);
+                        file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                    }
+                }
+                
+            }
+
+            foreach (DirectoryInfo subFolder in folders)
+            {
+                DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
+                copyFolderDifferential(subFolder, destinationSubFolder);
+            }*/
         }
 
         #endregion
