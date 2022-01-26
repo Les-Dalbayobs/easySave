@@ -2,7 +2,7 @@
 /// \author Sheridan SHABANI
 /// \author Steven LUCAS
 /// \author Ahmed EL HARIRI
-/// \version 0.1
+/// \version 0.4
 /// \date 23/01/2022
 
 using System;
@@ -131,7 +131,6 @@ namespace easySave.Views
             Console.ReadLine();
             //End of menu display
         }
-
 
         /// <summary>
         /// Method to validate job information
@@ -299,7 +298,6 @@ namespace easySave.Views
         }
 
         #endregion
-
 
     }
 }

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 /// <summary>
 /// ViewModel namespace
@@ -21,19 +22,28 @@ namespace easySave.ViewModel
     {
         #region attributes
         Views.view view = new Views.view();
+        //Models.job job1 = new Models.job();
+        Models.job job2 = new Models.job();
+        Models.job job3 = new Models.job();
+        Models.job job4 = new Models.job();
+        Models.job job5 = new Models.job();
         #endregion
 
         #region properties
         #endregion
 
         #region constructor
+        /// <summary>
+        /// Constructor of the view class (without parameters)
+        /// </summary>
         public viewModel()
         {
-            menu();
+
         }
         #endregion
 
         #region methods
+
         /// <summary>
         /// Main program loop
         /// </summary>
@@ -67,10 +77,28 @@ namespace easySave.ViewModel
                 default:
                     break;
             } //end switch
-
         }
+
+        /// <summary>
+        /// Method to test the creation of a job and the backups 
+        /// </summary>
+        public void testCreateJob()
+        {
+            Models.job job1 = new Models.job("TEST 1", @"\\PC-SHERIDAN\c$\Users\Sheridan\Desktop\test doc", @"\\PC-SHERIDAN\c$\Users\Sheridan\Desktop\test doc1", false);
+            Console.WriteLine(job1.Name);
+            Console.WriteLine(job1.PathSource);
+            Console.WriteLine(job1.PathDestination);
+            Console.WriteLine(job1.TypeSave);
+
+            Console.WriteLine(job1.verifExist(job1.PathSource));
+
+            Console.WriteLine(job1.calculNbFiles(job1.PathSource));
+
+            Console.WriteLine(job1.calculSize(job1.PathSource));
+
+            Console.WriteLine(job1.copy());
+        }
+
         #endregion
     }
-
-
 }
