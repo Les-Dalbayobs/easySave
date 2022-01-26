@@ -98,7 +98,7 @@ namespace easySave.Models
                         destination.Delete(true);
                     }
 
-                    copyFolderComplete(source, destination);
+                    copyComplete(source, destination);
 
                     confirmSave = true;
                 }
@@ -137,7 +137,7 @@ namespace easySave.Models
             return size;
         }
 
-        public void copyFolderComplete(DirectoryInfo source, DirectoryInfo destination)
+        public void copyComplete(DirectoryInfo source, DirectoryInfo destination)
         {
             DirectoryInfo[] folders = source.GetDirectories();
 
@@ -156,9 +156,9 @@ namespace easySave.Models
         }
 
 
-        public void copyFolderDifferential(DirectoryInfo source, DirectoryInfo destination)
+        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination)
         {
-            
+
 
             /*DirectoryInfo[] folders = source.GetDirectories();
             
