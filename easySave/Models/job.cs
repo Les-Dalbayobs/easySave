@@ -68,6 +68,7 @@ namespace easySave.Models
         #endregion
 
         #region constructors
+
         /// <summary>
         /// Constructor without specifying a parameter
         /// </summary>
@@ -125,7 +126,7 @@ namespace easySave.Models
                 {
                     copyDifferential(source, destination); //Launch backup
 
-                    //compareDelete(this.pathSource, this.pathDestination);
+                    compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
 
                     confirmSave = true;
                 }
@@ -138,7 +139,6 @@ namespace easySave.Models
 
             return confirmSave; //Returns whether the backup was performed
         }
-
 
         /// <summary>
         /// Method to check if a directory exists
@@ -202,18 +202,26 @@ namespace easySave.Models
         /// <param name="destination">Destination DirectoryInfo</param>
         public void copyComplete(DirectoryInfo source, DirectoryInfo destination)
         {
-            DirectoryInfo[] folders = source.GetDirectories();
+            //Cache directories before we start copying
+            DirectoryInfo[] folders = source.GetDirectories(); 
+            
+            //Create the destination directory
+            Directory.CreateDirectory(destination.FullName); 
 
-            Directory.CreateDirectory(destination.FullName);
-
+            //Copy all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {
+                //Copy the file to the target folder
                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
             }
 
+            //Search and enter the subfolders of the current folder
             foreach (DirectoryInfo subFolder in folders)
             {
+                //Creates a sub-folder and saves this information in a DirectoryInfo
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
+
+                //Start saving the new folder
                 copyComplete(subFolder, destinationSubFolder);
             }
         }
@@ -225,80 +233,106 @@ namespace easySave.Models
         /// <param name="destination">Source DirectoryInfo</param>
         public void copyDifferential(DirectoryInfo source, DirectoryInfo destination)
         {
+            //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
-            
+
+            //Create the destination directory
             Directory.CreateDirectory(destination.FullName);
-            
+
+            //Copy iteration for all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {
+                //Now we look at all the files in the destination folder
                 foreach (FileInfo fileDestination in destination.GetFiles())
                 {
-                    if(file.Name == fileDestination.Name && file.LastWriteTime > fileDestination.LastWriteTime)
+                    //If the name of the source file and the destination file are the same,
+                    //as well as the date of modification of the source file superior to the destination file then it is copied.
+                    if (file.Name == fileDestination.Name && file.LastWriteTime > fileDestination.LastWriteTime)
                     {
-                        Console.WriteLine("Copy : " + file.Name);
-                        file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                        //Console.WriteLine("Copy : " + file.Name); //Test
+
+                        //Try catch which will allow error handling if needed
+                        try
+                        {
+                            //Copy the file to the target folder
+                            file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                        }
+                        catch (Exception e)
+                        {
+                            //Console.WriteLine("The process failed : " + e.ToString()); //Displays the error
+                        }
+
                     }
                 }
 
+                //Try catch which will allow error handling if needed
                 try
                 {
+                    //Copy the file to the target folder only if it does not exist
                     file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("The process failed : " + e.ToString());
+                    //Console.WriteLine("The process failed : " + e.ToString()); //Displays the error
                 }
 
             }
 
+            //Search and enter the subfolders of the current folder
             foreach (DirectoryInfo subFolder in folders)
             {
+                //Creates a sub-folder and saves this information in a DirectoryInfo
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
+
+                //Start saving the new folder
                 copyDifferential(subFolder, destinationSubFolder);
             }
         }
 
+        /// <summary>
+        /// Method to compare the source and destination to find the files to delete from the source.
+        /// </summary>
+        /// <param name="source">Source DirectoryInfo</param>
+        /// <param name="destination">Source DirectoryInfo</param>
         public void compareDelete(string source, string destination)
         {
-            var targetFiles = Directory.GetFiles(destination, "*", SearchOption.AllDirectories);
-            var notExists = targetFiles.Where(p => !File.Exists(p.Replace(source, destination))).ToList();
+            //Lists all files in both folders and stores them in an enumeration list
+            var sourceListPathFile = Directory.EnumerateFiles(source, ".", SearchOption.AllDirectories);
+            var destinationListPathFile = Directory.EnumerateFiles(destination, ".", SearchOption.AllDirectories);
 
-            foreach (var p in notExists)
+            //Create lists that will contain just the file names (not the full path)
+            var sourceFiles = new List<string>();
+            var destinationFiles = new List<string>();
+
+            //Adds all file names to the lists
+            foreach (string file in sourceListPathFile)
             {
-                try
-                {
-                    File.Delete(p);
-                    Console.WriteLine("File delete : " + p);
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("The process failed : " + e.ToString());
-                }
+                sourceFiles.Add(Path.GetFileName(file));
             }
-            /*var sourceFiles = Directory.EnumerateFiles(source, ".", SearchOption.AllDirectories);
-            var targetFiles = Directory.EnumerateFiles(destination, ".", SearchOption.AllDirectories);
+            foreach (string file in destinationListPathFile)
+            {
+                destinationFiles.Add(Path.GetFileName(file));
+            }
 
-            // Makes path relatives so you can compare files in subdirectories
-            sourceFiles = sourceFiles.Select(f => new Uri(f).MakeRelativeUri(source));
-            targetFiles = targetFiles.Select(f => new Uri(f).MakeRelativeUri(destination));
+            //Creation of list of files delete from the source
+            var filesToDelete = destinationFiles.Except(sourceFiles);
 
-            // Get files from targetDir that does not exist in sourceDir
-            var filesToDelete = targetFiles.Except(sourceFiles);
-
+            //Deletes all files found
             foreach (string file in filesToDelete)
             {
+                //Try catch which will allow error handling if needed
                 try
                 {
                     File.Delete(Path.Combine(destination, file));
-                    
+                    //Console.WriteLine("File delete : " + file);
+
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("The process failed : " + e.ToString());
+                    //Console.WriteLine("The process failed : " + e.ToString());
                 }
                 
-            }*/
+            }
         }
 
         #endregion

@@ -33,13 +33,17 @@ namespace easySave.ViewModel
         #endregion
 
         #region constructor
+        /// <summary>
+        /// Constructor of the view class (without parameters)
+        /// </summary>
         public viewModel()
         {
-            testCreateJob();
+
         }
         #endregion
 
         #region methods
+
         /// <summary>
         /// Main program loop
         /// </summary>
@@ -75,9 +79,12 @@ namespace easySave.ViewModel
             } //end switch
         }
 
+        /// <summary>
+        /// Method to test the creation of a job and the backups 
+        /// </summary>
         public void testCreateJob()
         {
-            Models.job job1 = new Models.job("TEST 1", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\testdoc", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\test doc1", false);
+            Models.job job1 = new Models.job("TEST 1", @"\\PC-SHERIDAN\c$\Users\Sheridan\Desktop\test doc", @"\\PC-SHERIDAN\c$\Users\Sheridan\Desktop\test doc1", false);
             Console.WriteLine(job1.Name);
             Console.WriteLine(job1.PathSource);
             Console.WriteLine(job1.PathDestination);
@@ -94,6 +101,4 @@ namespace easySave.ViewModel
 
         #endregion
     }
-
-
 }
