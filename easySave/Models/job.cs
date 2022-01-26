@@ -151,7 +151,7 @@ namespace easySave.Models
             foreach (DirectoryInfo subFolder in folders)
             {
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
-                copyFolderComplete(subFolder, destinationSubFolder);
+                copyComplete(subFolder, destinationSubFolder);
             }
         }
 
