@@ -21,20 +21,39 @@ namespace easySave.Views
     {
 
         #region attributes
-        string job1Name;
-        string job2Name;
-        string job3Name;
-        string job4Name;
-        string job5Name;
+        string job1Name; //Stored the name of the job1
+        string job2Name; //Stored the name of the job2
+        string job3Name; //Stored the name of the job3
+        string job4Name; //Stored the name of the job4
+        string job5Name; //Stored the name of the job5
 
         #endregion
 
         #region properties
 
+        /// <summary>
+        /// Getter setter of job1 name
+        /// </summary>
         public string Job1Name { get => job1Name; set => job1Name = value; }
+
+        /// <summary>
+        /// Getter setter of job2 name
+        /// </summary>
         public string Job2Name { get => job2Name; set => job2Name = value; }
+
+        /// <summary>
+        /// Getter setter of job3 name
+        /// </summary>
         public string Job3Name { get => job3Name; set => job3Name = value; }
+
+        /// <summary>
+        /// Getter setter of job4 name
+        /// </summary>
         public string Job4Name { get => job4Name; set => job4Name = value; }
+
+        /// <summary>
+        /// Getter setter of job5 name
+        /// </summary>
         public string Job5Name { get => job5Name; set => job5Name = value; }
 
         #endregion
