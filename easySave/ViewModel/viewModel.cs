@@ -77,7 +77,7 @@ namespace easySave.ViewModel
 
         public void testCreateJob()
         {
-            Models.job job1 = new Models.job("TEST 1", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\testdoc", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\test doc1", true);
+            Models.job job1 = new Models.job("TEST 1", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\testdoc", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\test doc1", false);
             Console.WriteLine(job1.Name);
             Console.WriteLine(job1.PathSource);
             Console.WriteLine(job1.PathDestination);
@@ -89,7 +89,7 @@ namespace easySave.ViewModel
 
             Console.WriteLine(job1.calculSize(job1.PathSource));
 
-            //Console.WriteLine(job1.copy());
+            Console.WriteLine(job1.copy());
         }
 
         #endregion

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 /// <summary>
@@ -122,7 +123,11 @@ namespace easySave.Models
                 }
                 else //Diferential
                 {
+                    copyDifferential(source, destination); //Launch backup
 
+                    //compareDelete(this.pathSource, this.pathDestination);
+
+                    confirmSave = true;
                 }
             }
             catch
@@ -220,9 +225,7 @@ namespace easySave.Models
         /// <param name="destination">Source DirectoryInfo</param>
         public void copyDifferential(DirectoryInfo source, DirectoryInfo destination)
         {
-            
-
-            /*DirectoryInfo[] folders = source.GetDirectories();
+            DirectoryInfo[] folders = source.GetDirectories();
             
             Directory.CreateDirectory(destination.FullName);
             
@@ -230,23 +233,73 @@ namespace easySave.Models
             {
                 foreach (FileInfo fileDestination in destination.GetFiles())
                 {
-                    //Console.WriteLine(file.Name);
-                    if(file.Name != fileDestination.Name && file.LastWriteTime < fileDestination.LastWriteTime)
+                    if(file.Name == fileDestination.Name && file.LastWriteTime > fileDestination.LastWriteTime)
                     {
                         Console.WriteLine("Copy : " + file.Name);
                         file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
                     }
                 }
-                
+
+                try
+                {
+                    file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The process failed : " + e.ToString());
+                }
+
             }
 
             foreach (DirectoryInfo subFolder in folders)
             {
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
-                copyFolderDifferential(subFolder, destinationSubFolder);
-            }*/
+                copyDifferential(subFolder, destinationSubFolder);
+            }
         }
 
+        public void compareDelete(string source, string destination)
+        {
+            var targetFiles = Directory.GetFiles(destination, "*", SearchOption.AllDirectories);
+            var notExists = targetFiles.Where(p => !File.Exists(p.Replace(source, destination))).ToList();
+
+            foreach (var p in notExists)
+            {
+                try
+                {
+                    File.Delete(p);
+                    Console.WriteLine("File delete : " + p);
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The process failed : " + e.ToString());
+                }
+            }
+            /*var sourceFiles = Directory.EnumerateFiles(source, ".", SearchOption.AllDirectories);
+            var targetFiles = Directory.EnumerateFiles(destination, ".", SearchOption.AllDirectories);
+
+            // Makes path relatives so you can compare files in subdirectories
+            sourceFiles = sourceFiles.Select(f => new Uri(f).MakeRelativeUri(source));
+            targetFiles = targetFiles.Select(f => new Uri(f).MakeRelativeUri(destination));
+
+            // Get files from targetDir that does not exist in sourceDir
+            var filesToDelete = targetFiles.Except(sourceFiles);
+
+            foreach (string file in filesToDelete)
+            {
+                try
+                {
+                    File.Delete(Path.Combine(destination, file));
+                    
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The process failed : " + e.ToString());
+                }
+                
+            }*/
+        }
 
         #endregion
 
