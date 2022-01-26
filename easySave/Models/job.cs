@@ -130,7 +130,7 @@ namespace easySave.Models
             return exist;
         }
 
-        public int calculSize()
+        public int calculNbFiles()
         {
             int size = Directory.GetFiles(this.pathSource, "*.*", SearchOption.AllDirectories).Length;
 
@@ -158,7 +158,7 @@ namespace easySave.Models
 
         public void copyDifferential(DirectoryInfo source, DirectoryInfo destination)
         {
-
+            
 
             /*DirectoryInfo[] folders = source.GetDirectories();
             
@@ -184,6 +184,7 @@ namespace easySave.Models
                 copyFolderDifferential(subFolder, destinationSubFolder);
             }*/
         }
+
 
         #endregion
 
