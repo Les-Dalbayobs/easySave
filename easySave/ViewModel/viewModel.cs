@@ -22,6 +22,11 @@ namespace easySave.ViewModel
     {
         #region attributes
         Views.view view = new Views.view();
+        //Models.job job1 = new Models.job();
+        Models.job job2 = new Models.job();
+        Models.job job3 = new Models.job();
+        Models.job job4 = new Models.job();
+        Models.job job5 = new Models.job();
         #endregion
 
         #region properties
@@ -72,7 +77,7 @@ namespace easySave.ViewModel
 
         public void testCreateJob()
         {
-            Models.job job1 = new Models.job("TEST 1", @"\\PC-SHERIDAN\c$\Users\Sheridan\Desktop\test doc", @"\\PC-SHERIDAN\c$\Users\Sheridan\Desktop\test doc1", true);
+            Models.job job1 = new Models.job("TEST 1", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\testdoc", @"\\LP-SHERIDAN\c$\Users\sheri\Desktop\test doc1", true);
             Console.WriteLine(job1.Name);
             Console.WriteLine(job1.PathSource);
             Console.WriteLine(job1.PathDestination);
@@ -80,9 +85,11 @@ namespace easySave.ViewModel
 
             Console.WriteLine(job1.verifExist());
 
-            Console.WriteLine(job1.calculSize());
+            Console.WriteLine(job1.calculNbFiles());
 
-            Console.WriteLine(job1.copy());
+            Console.WriteLine(job1.calculSize(job1.PathSource));
+
+            //Console.WriteLine(job1.copy());
         }
 
         #endregion

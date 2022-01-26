@@ -65,6 +65,12 @@ namespace easySave.Models
         #endregion
 
         #region constructors
+
+        public job()
+        {
+
+        }
+
         /// <summary>
         /// Constructor of the class
         /// </summary>
@@ -133,6 +139,25 @@ namespace easySave.Models
         public int calculNbFiles()
         {
             int size = Directory.GetFiles(this.pathSource, "*.*", SearchOption.AllDirectories).Length;
+
+            return size;
+        }
+
+        public Int64 calculSize(string pathSource)
+        {
+            Int64 size = 0;
+
+            DirectoryInfo folder = new DirectoryInfo(pathSource);
+
+            foreach (FileInfo file in folder.GetFiles())
+            {
+                size += file.Length;
+            }
+
+            foreach (DirectoryInfo dir in folder.GetDirectories())
+            {
+                size += calculSize(dir.FullName);
+            }
 
             return size;
         }
