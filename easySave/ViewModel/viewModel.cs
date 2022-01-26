@@ -38,7 +38,7 @@ namespace easySave.ViewModel
         /// </summary>
         public viewModel()
         {
-
+            menu();
         }
         #endregion
 
@@ -49,34 +49,39 @@ namespace easySave.ViewModel
         /// </summary>
         public void menu()
         {
-            int menu; 
-                
-            menu = view.displayMenu();
+            int menu = 0;
 
-            switch (menu)
+            do
             {
-                case 1:
-                    view.chooseCreate();
-                    view.create();
-                    view.confirmCreate();
-                    view.finishCreate();
-                    break;
+                 menu = view.displayMenu();
 
-                case 2:
-                    view.chooseDelete();
-                    view.confirmDelete();
-                    view.finishDelete();
-                    break;
+                switch (menu)
+                {
+                    case 1:
+                        view.chooseCreate();
+                        view.create();
+                        view.confirmCreate();
+                        view.finishCreate();
+                        break;
 
-                case 3:
-                    break;
+                    case 2:
+                        view.chooseDelete();
+                        view.confirmDelete();
+                        view.finishDelete();
+                        break;
 
-                case 4:
-                    break;
+                    case 3:
+                        break;
 
-                default:
-                    break;
-            } //end switch
+                    case 4:
+                        break;
+
+                    default:
+                        break;
+
+                } //end switch
+
+            } while (menu != 5);   
         }
 
         /// <summary>
