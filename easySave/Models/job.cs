@@ -37,7 +37,9 @@ namespace easySave.Models
         string pathDestination;
 
         /// <summary>
-        /// Stores the type of the backup job
+        /// Stores the type of the backup job,
+        /// True = Complete,
+        /// False = Differential
         /// </summary>
         bool typeSave;
         #endregion
@@ -65,7 +67,9 @@ namespace easySave.Models
         #endregion
 
         #region constructors
-
+        /// <summary>
+        /// Constructor without specifying a parameter
+        /// </summary>
         public job()
         {
 
@@ -80,88 +84,117 @@ namespace easySave.Models
         /// <param name="typeJob">Type of backup</param>
         public job(string nameJob,string source,string destination,bool typeJob)
         {
-            this.name = nameJob;
-            this.pathSource = source;
-            this.pathDestination = destination;
-            this.typeSave = typeJob;
+            this.name = nameJob; //Initializes the variable
+            this.pathSource = source; //Initializes the variable
+            this.pathDestination = destination; //Initializes the variable
+            this.typeSave = typeJob; //Initializes the variable
         }
+
         #endregion
 
         #region methodes
+
+        /// <summary>
+        /// Method to start a backup
+        /// </summary>
+        /// <returns>Return if the backup is well done</returns>
         public bool copy()
         {
-            bool confirmSave = false;
+            bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
-            DirectoryInfo source = new DirectoryInfo(this.pathSource);
-            DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
+            DirectoryInfo source = new DirectoryInfo(this.pathSource); //Create the DirectoryInfo of the source
+            DirectoryInfo destination = new DirectoryInfo(this.pathDestination); //Create the DirectoryInfo of the destination
 
+            //Try catch on the execution of the backup to avoid problems
             try
             {
-                if (this.typeSave)
+                if (this.typeSave) //Complete
                 {
+                    //Verification that the directory exists
                     if (destination.Exists)
                     {
-                        destination.Delete(true);
+                        destination.Delete(true); //Delete the directory
                     }
 
-                    copyComplete(source, destination);
+                    copyComplete(source, destination); //Launch backup
 
-                    confirmSave = true;
+                    confirmSave = true; //Validate the backup
                 }
-                else
+                else //Diferential
                 {
 
                 }
             }
             catch
             {
-                confirmSave = false;
+                confirmSave = false; //Backup not performed
             }
 
 
-            return confirmSave;
+            return confirmSave; //Returns whether the backup was performed
         }
 
-        public bool verifExist()
+
+        /// <summary>
+        /// Method to check if a directory exists
+        /// </summary>
+        /// <param name="path">Directory path</param>
+        /// <returns>Bool - On the existence of the directory</returns>
+        public bool verifExist(string path)
         {
-            bool exist = false;
+            bool exist = false; //Variable who stock the boolean result
 
-            DirectoryInfo source = new DirectoryInfo(this.pathSource);
+            DirectoryInfo source = new DirectoryInfo(path); //Create the DirectoryInfo of the path
 
-            if (source.Exists)
-            {
-                exist = true;
+            if (source.Exists) //To know if the source exist
+            { 
+                exist = true; //Update the variable with true
             }
 
-            return exist;
+            return exist; //Bool - On the existence of the directory
         }
 
-        public int calculNbFiles()
+        /// <summary>
+        /// Method for calculating the total number of files in a folder and the subfolders
+        /// </summary>
+        /// <param name="path">Directory path</param>
+        /// <returns>The total number of files in the folder and sub-folders </returns>
+        public int calculNbFiles(string path)
         {
-            int size = Directory.GetFiles(this.pathSource, "*.*", SearchOption.AllDirectories).Length;
+            int size = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Length;
 
             return size;
         }
 
+        /// <summary>
+        /// Method to calculate the size in bytes of a folder
+        /// </summary>
+        /// <param name="pathSource">Directory path</param>
+        /// <returns>Size in bytes</returns>
         public Int64 calculSize(string pathSource)
         {
-            Int64 size = 0;
+            Int64 size = 0; //Intialisation size of the repertory = 0
 
-            DirectoryInfo folder = new DirectoryInfo(pathSource);
+            DirectoryInfo folder = new DirectoryInfo(pathSource); //Create the DirectoryInfo of the path
 
-            foreach (FileInfo file in folder.GetFiles())
+            foreach (FileInfo file in folder.GetFiles()) //Keep all files 
             {
-                size += file.Length;
+                size += file.Length; //Foreach files sizes, add in size variable
             }
 
-            foreach (DirectoryInfo dir in folder.GetDirectories())
+            foreach (DirectoryInfo dir in folder.GetDirectories()) //Keep all folders
             {
-                size += calculSize(dir.FullName);
+                size += calculSize(dir.FullName);// Restart calculSize of the repertory
             }
 
-            return size;
+            return size; //Return total of the size
         }
 
+        /// <summary>
+        /// Method for making a full backup
+        /// </summary>
+        /// <param name="source">Source DirectoryInfo</param>
+        /// <param name="destination">Destination DirectoryInfo</param>
         public void copyComplete(DirectoryInfo source, DirectoryInfo destination)
         {
             DirectoryInfo[] folders = source.GetDirectories();
@@ -180,7 +213,11 @@ namespace easySave.Models
             }
         }
 
-
+        /// <summary>
+        /// Method for making a differential backup
+        /// </summary>
+        /// <param name="source">Source DirectoryInfo</param>
+        /// <param name="destination">Source DirectoryInfo</param>
         public void copyDifferential(DirectoryInfo source, DirectoryInfo destination)
         {
             

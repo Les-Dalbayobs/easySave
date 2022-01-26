@@ -83,9 +83,9 @@ namespace easySave.ViewModel
             Console.WriteLine(job1.PathDestination);
             Console.WriteLine(job1.TypeSave);
 
-            Console.WriteLine(job1.verifExist());
+            Console.WriteLine(job1.verifExist(job1.PathSource));
 
-            Console.WriteLine(job1.calculNbFiles());
+            Console.WriteLine(job1.calculNbFiles(job1.PathSource));
 
             Console.WriteLine(job1.calculSize(job1.PathSource));
 
