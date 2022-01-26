@@ -22,7 +22,7 @@ namespace easySave.ViewModel
     {
         #region attributes
         Views.view view = new Views.view();
-        //Models.job job1 = new Models.job();
+        Models.job job1 = new Models.job();
         Models.job job2 = new Models.job();
         Models.job job3 = new Models.job();
         Models.job job4 = new Models.job();
@@ -38,6 +38,7 @@ namespace easySave.ViewModel
         /// </summary>
         public viewModel()
         {
+            testSendJobNameView();
             menu();
         }
         #endregion
@@ -104,6 +105,14 @@ namespace easySave.ViewModel
             Console.WriteLine(job1.copy());
         }
 
+        public void testSendJobNameView()
+        {
+            view.Job1Name = this.job1.Name;
+            view.Job2Name = this.job2.Name;
+            view.Job3Name = this.job3.Name;
+            view.Job4Name = this.job4.Name;
+            view.Job5Name = this.job5.Name;
+        }
         #endregion
     }
 }
