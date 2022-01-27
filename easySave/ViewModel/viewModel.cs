@@ -21,25 +21,30 @@ namespace easySave.ViewModel
     class viewModel
     {
         #region attributes
+
         Views.view view = new Views.view();
-        //Models.job job1 = new Models.job();
+        Models.job job1 = new Models.job();
         Models.job job2 = new Models.job();
         Models.job job3 = new Models.job();
         Models.job job4 = new Models.job();
         Models.job job5 = new Models.job();
+
         #endregion
 
         #region properties
         #endregion
 
         #region constructor
+
         /// <summary>
         /// Constructor of the view class (without parameters)
         /// </summary>
         public viewModel()
         {
+            updateHeader();
             menu();
         }
+
         #endregion
 
         #region methods
@@ -102,6 +107,18 @@ namespace easySave.ViewModel
             Console.WriteLine(job1.calculSize(job1.PathSource));
 
             Console.WriteLine(job1.copy());
+        }
+
+        /// <summary>
+        /// Method to update job names in the header
+        /// </summary>
+        public void updateHeader()
+        {
+            view.Job1Name = this.job1.Name;
+            view.Job2Name = this.job2.Name;
+            view.Job3Name = this.job3.Name;
+            view.Job4Name = this.job4.Name;
+            view.Job5Name = this.job5.Name;
         }
 
         #endregion
