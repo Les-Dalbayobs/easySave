@@ -98,6 +98,7 @@ namespace easySave.ViewModel
 
                     case 4:
                         view.changeLanguage();
+
                         break;
 
                     default:
