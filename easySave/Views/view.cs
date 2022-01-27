@@ -19,13 +19,17 @@ namespace easySave.Views
     /// </summary>
     class view
     {
-
         #region attributes
         string job1Name; //Stored the name of the job1
         string job2Name; //Stored the name of the job2
         string job3Name; //Stored the name of the job3
         string job4Name; //Stored the name of the job4
         string job5Name; //Stored the name of the job5
+
+        string createJobName; //Storing the name of the job the user wants to create 
+        string createJobSource; //Storing the source of the job the user wants to create 
+        string createJobDestination; //Storing the destination of the job the user wants to create 
+        bool createJobType; //Storing the type of the job the user wants to create 
 
         #endregion
 
@@ -56,6 +60,26 @@ namespace easySave.Views
         /// </summary>
         public string Job5Name { get => job5Name; set => job5Name = value; }
 
+        /// <summary>
+        /// Getter setter of the name entered by the user
+        /// </summary>
+        public string CreateJobName { get => createJobName; set => createJobName = value; }
+
+        /// <summary>
+        /// Getter setter of the source entered by the user
+        /// </summary>
+        public string CreateJobSource { get => createJobSource; set => createJobSource = value; }
+
+        /// <summary>
+        /// Getter setter of the destination entered by the user
+        /// </summary>
+        public string CreateJobDestination { get => createJobDestination; set => createJobDestination = value; }
+
+        /// <summary>
+        /// Getter setter of the type entered by the user
+        /// </summary>
+        public bool CreateJobType { get => createJobType; set => createJobType = value; }
+
         #endregion
 
         #region constructor
@@ -69,6 +93,9 @@ namespace easySave.Views
 
         #region methods
 
+        /// <summary>
+        /// Displays the program header
+        /// </summary>
         public void header()
         {
             Console.Clear(); //Clean console
@@ -149,8 +176,30 @@ namespace easySave.Views
             Console.Write(" Choose job number and press enter : ");
             //End of menu display
 
-            //Retrieves the value entered by the user and converts it to int
-            int job = Convert.ToInt32(Console.ReadLine());
+            int job;
+
+            try
+            {
+                //Retrieves the value entered by the user and converts it to int
+                job = Convert.ToInt32(Console.ReadLine());
+
+                //if - to handle typing errors
+                if (job > 6 || job <= 0)
+                {
+                    errorMenu(); //Launch the error window
+                    int menuError = chooseCreate(); //Restarts the menu display and saves the return value
+
+                    return menuError; //Returns the menu choice
+                }
+            }
+            catch
+            {
+                errorMenu(); //Launch the error window
+                int menuError = chooseCreate(); //Restarts the menu display and saves the return value
+
+                return menuError; //Returns the menu choice
+            }
+            
 
             return job; //Returns the menu choice
         }
@@ -158,7 +207,7 @@ namespace easySave.Views
         /// <summary>
         /// Method for entering job information
         /// </summary>
-        public void create()
+        public void create(bool infoDisplay)
         {
             header(); //Display header
 
@@ -167,20 +216,67 @@ namespace easySave.Views
             Console.WriteLine(" Fill in the fields");
 
             Console.Write(" Job name : ");
-            Console.ReadLine();
+            //Checks if the information already filled in should be displayed
+            if (infoDisplay) 
+            {
+                Console.WriteLine(this.createJobName);
+            }
+            //If we don't display it, we store the value given by the user
+            else
+            {
+                this.createJobName = Console.ReadLine();
+            }
+            
 
             Console.Write(" Source path : ");
-            Console.ReadLine();
+            //Checks if the information already filled in should be displayed
+            if (infoDisplay)
+            {
+                Console.WriteLine(this.createJobSource);
+            }
+            //If we don't display it, we store the value given by the user
+            else
+            {
+                this.createJobSource = Console.ReadLine();
+            }
+            
 
             Console.Write(" Destination path : ");
-            Console.ReadLine();
+            //Checks if the information already filled in should be displayed
+            if (infoDisplay)
+            {
+                Console.WriteLine(this.createJobDestination);
+            }
+            //If we don't display it, we store the value given by the user
+            else
+            {
+                this.createJobDestination = Console.ReadLine();
+            }
 
             Console.WriteLine(" -----------TYPE----------");
             Console.WriteLine(" Choose the type :");
             Console.WriteLine(" 1.Complete");
             Console.WriteLine(" 2.Differential");
             Console.Write(" Type : ");
-            Console.ReadLine();
+
+            string type = Console.ReadLine();
+
+            if(type == "1") //Complete
+            {
+                this.createJobType = true;
+            }
+            else if (type == "2") //Differential
+            {
+                this.createJobType = false;
+            }
+            else //Incorrect
+            {
+                //Launch the error window
+                errorMenu();
+
+                //Restarts the display but with the information already filled in
+                create(true);
+            }
             //End of menu display
         }
 
@@ -198,13 +294,28 @@ namespace easySave.Views
             Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" Checking the information");
 
-            Console.WriteLine(" Job name : ");
+            Console.Write(" Job name : ");
+            //Displays the value entered by the user
+            Console.WriteLine(this.createJobName);
 
-            Console.WriteLine(" Source path : ");
+            Console.Write(" Source path : ");
+            //Displays the value entered by the user
+            Console.WriteLine(this.createJobSource);
 
-            Console.WriteLine(" Destination path : ");
+            Console.Write(" Destination path : ");
+            //Displays the value entered by the user
+            Console.WriteLine(this.createJobDestination);
 
-            Console.WriteLine(" Type : ");
+            Console.Write(" Type : ");
+            //Check if the user has chosen differential or complete
+            if (this.createJobType)
+            {
+                Console.WriteLine("Complete");
+            }
+            else
+            {
+                Console.WriteLine("Differential");
+            }
 
             Console.WriteLine(" ---------VALIDATION--------");
             Console.WriteLine(" 1.Yes");
