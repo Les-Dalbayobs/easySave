@@ -283,6 +283,11 @@ namespace easySave.ViewModel
 
         public void importConfig()
         {
+            if (!Directory.Exists(pathFilesEasySave))
+            {
+                Directory.CreateDirectory(pathFilesEasySave);
+            }
+
             using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
             {
                 using (var jsonReader = new JsonTextReader(streamReader))
