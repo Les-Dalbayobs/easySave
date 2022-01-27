@@ -69,8 +69,17 @@ namespace easySave.ViewModel
                             {
                                 break;
                             }
-                            view.create();
-                            view.confirmCreate();
+
+                            view.create(false);
+
+                            int valid = view.confirmCreate();
+                            if (valid == 2)
+                            {
+                                break;
+                            }
+
+                            createJob(nbJob);
+
                             view.finishCreate();
                             break;
                         }
@@ -128,6 +137,89 @@ namespace easySave.ViewModel
             view.Job5Name = this.job5.Name;
         }
 
+        /// <summary>
+        /// Method to create a job
+        /// </summary>
+        /// <param name="numberJob">Number of the job</param>
+        public void createJob(int numberJob)
+        {
+            if (numberJob == 1)
+            {
+                this.job1.Name = view.CreateJobName;
+                this.job1.PathSource = view.CreateJobSource;
+                this.job1.PathDestination = view.CreateJobDestination;
+                if (view.CreateJobType)
+                {
+                    this.job1.TypeSave = true;
+                }
+                else
+                {
+                    this.job1.TypeSave = false;
+                }
+            }
+
+            if (numberJob == 2)
+            {
+                this.job2.Name = view.CreateJobName;
+                this.job2.PathSource = view.CreateJobSource;
+                this.job2.PathDestination = view.CreateJobDestination;
+                if (view.CreateJobType)
+                {
+                    this.job2.TypeSave = true;
+                }
+                else
+                {
+                    this.job2.TypeSave = false;
+                }
+            }
+
+            if (numberJob == 3)
+            {
+                this.job3.Name = view.CreateJobName;
+                this.job3.PathSource = view.CreateJobSource;
+                this.job3.PathDestination = view.CreateJobDestination;
+                if (view.CreateJobType)
+                {
+                    this.job3.TypeSave = true;
+                }
+                else
+                {
+                    this.job3.TypeSave = false;
+                }
+            }
+
+            if (numberJob == 4)
+            {
+                this.job4.Name = view.CreateJobName;
+                this.job4.PathSource = view.CreateJobSource;
+                this.job4.PathDestination = view.CreateJobDestination;
+                if (view.CreateJobType)
+                {
+                    this.job4.TypeSave = true;
+                }
+                else
+                {
+                    this.job4.TypeSave = false;
+                }
+            }
+
+            if (numberJob == 5)
+            {
+                this.job5.Name = view.CreateJobName;
+                this.job5.PathSource = view.CreateJobSource;
+                this.job5.PathDestination = view.CreateJobDestination;
+                if (view.CreateJobType)
+                {
+                    this.job5.TypeSave = true;
+                }
+                else
+                {
+                    this.job5.TypeSave = false;
+                }
+            }
+
+            updateHeader(); //Update the header
+        }
         #endregion
     }
 }

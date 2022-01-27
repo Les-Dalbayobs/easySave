@@ -122,7 +122,7 @@ namespace easySave.Models
 
                     confirmSave = true; //Validate the backup
                 }
-                else //Diferential
+                else //Differential
                 {
                     copyDifferential(source, destination); //Launch backup
 
