@@ -220,7 +220,7 @@ namespace easySave.Models
             {
                 //Creates a sub-folder and saves this information in a DirectoryInfo
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
-
+                22001
                 //Start saving the new folder
                 copyComplete(subFolder, destinationSubFolder);
             }
@@ -333,7 +333,15 @@ namespace easySave.Models
                 }
                 
             }
+
+
         }
+            public int deleteJob(int jobNumber)
+            {
+                return 0;
+            }
+
+        
 
         #endregion
 

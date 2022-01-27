@@ -58,7 +58,7 @@ namespace easySave.ViewModel
 
             do
             {
-                 menu = view.displayMenu();
+                menu = view.displayMenu();
 
                 switch (menu)
                 {
@@ -83,13 +83,29 @@ namespace easySave.ViewModel
                             view.finishCreate();
                             break;
                         }
-                        
+
+                    // Delete menu choice   
                     case 2:
-                        view.chooseDelete();
+                        {
+                            int nbJob = view.chooseDelete(); // Initialize Job number variable
+                            if (nbJob == 6)
+                            {
+                                break;
+                            }
+
+                            int valid = view.confirmDelete();
+                            if (valid == 2)
+                            {
+                                break;
+                            }
+
+                            deleteJob(nbJob);
+                        }
                         view.confirmDelete();
+
                         view.finishDelete();
                         break;
-                    
+
                     case 3:
                         view.chooseSave();
                         view.confirmSave();
@@ -106,7 +122,7 @@ namespace easySave.ViewModel
 
                 } //end switch
 
-            } while (menu != 5);   
+            } while (menu != 5);
         }
 
         /// <summary>
@@ -222,7 +238,21 @@ namespace easySave.ViewModel
                 }
             }
 
+
             updateHeader(); //Update the header
+        }
+
+        public void deleteJob(int numberJob)
+        {
+            if (numberJob == 1)
+            {
+                this.job1.Name = "Empty";
+                this.job1.PathSource = String.Empty;
+                this.job1.PathDestination = String.Empty;
+
+                updateHeader(); //Update the job list
+            }
+
         }
         #endregion
     }
