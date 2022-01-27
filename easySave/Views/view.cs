@@ -304,12 +304,6 @@ namespace easySave.Views
 
             //Displaying the menu
             Console.WriteLine(" ----------SAVE JOB---------");
-            Console.WriteLine(" 1.XX");
-            Console.WriteLine(" 2.XX");
-            Console.WriteLine(" 3.Empty");
-            Console.WriteLine(" 4.Empty");
-            Console.WriteLine(" 5.XX");
-            Console.WriteLine(" 6.Exit");
 
             Console.Write(" Choose job number and press enter : ");
             //End of menu display
