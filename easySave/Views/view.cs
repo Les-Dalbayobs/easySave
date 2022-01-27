@@ -31,6 +31,9 @@ namespace easySave.Views
         string createJobDestination; //Storing the destination of the job the user wants to create 
         bool createJobType; //Storing the type of the job the user wants to create 
 
+        int jobNumber; // Initialize Job number variable
+
+
         #endregion
 
         #region properties
@@ -79,6 +82,11 @@ namespace easySave.Views
         /// Getter setter of the type entered by the user
         /// </summary>
         public bool CreateJobType { get => createJobType; set => createJobType = value; }
+
+        /// <summary>
+        /// Getter setter of the job number entered by the user
+        /// </summary>
+        public int JobNumber { get => jobNumber; set => jobNumber = value; }
 
         #endregion
 
