@@ -567,6 +567,10 @@ namespace easySave.Views
             Console.ReadLine(); //Waits for the user to press enter
         }
 
+        /// <summary>
+        /// Method to display language menu
+        /// </summary>
+        /// <returns></returns>
         public int changeLanguage()
         {
             int language; // Initialize language variable
@@ -640,11 +644,11 @@ namespace easySave.Views
             }
 
             if (validation == 1) {
-                return language;
+                return language; // Return the value of choosed language
             }
             else
             {
-                int returnMenu = changeLanguage();
+                int returnMenu = changeLanguage(); // Return to menu (no validation)
                 return returnMenu;
             }
         }
