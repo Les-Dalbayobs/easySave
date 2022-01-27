@@ -574,7 +574,7 @@ namespace easySave.Views
             Console.WriteLine(" 1. Français");
             Console.WriteLine(" 2. English");
             Console.WriteLine("");
-            Console.WriteLine(" 5. Exit");
+            Console.WriteLine(" 6. Exit");
             Console.WriteLine("");
             Console.Write(" Choose number and press enter : ");
             // End of menu display
@@ -586,7 +586,7 @@ namespace easySave.Views
                 language = Convert.ToInt32(Console.ReadLine());
 
                 // If - to handle typing errors
-                if (language > 2 || language < 1)
+                if ((language > 2 || language < 1) || language != 6)
                 {
                     errorMenu(); // Launch the error window
                     int menuError = changeLanguage(); // Restarts the menu display and saves the return value
