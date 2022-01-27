@@ -567,6 +567,44 @@ namespace easySave.Views
             Console.ReadLine(); //Waits for the user to press enter
         }
 
+        public int changeLanguage()
+        {
+            int language; // Initialize language variable
+            Console.WriteLine(" ------CHANGE LANGUAGE------");
+            Console.WriteLine(" 1. Français");
+            Console.WriteLine(" 2. English");
+            Console.WriteLine("");
+            Console.WriteLine(" 5. Exit");
+            Console.WriteLine("");
+            Console.Write(" Choose number and press enter : ");
+            // End of menu display
+
+            // Try catch to manage typing errors
+            try
+            {
+                // Retrieves the value entered by the user and converts it to int
+                language = Convert.ToInt32(Console.ReadLine());
+
+                // If - to handle typing errors
+                if (language > 2 || language < 1)
+                {
+                    errorMenu(); // Launch the error window
+                    int menuError = changeLanguage(); // Restarts the menu display and saves the return value
+
+                    return menuError; // Returns the menu choice
+                }
+            }
+            catch
+            {
+                errorMenu(); // Launch the error window
+                int menuError = changeLanguage(); // Restarts the menu display and saves the return value
+
+                return menuError; // Returns the menu choice
+            }
+
+            return language;
+        }
+
         #endregion
     }
 }
