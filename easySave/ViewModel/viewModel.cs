@@ -50,14 +50,11 @@ namespace easySave.ViewModel
         public viewModel()
         {
             serializer = new JsonSerializer();
-            //updateHeader();
-            //menu();
-            serializeJob();
-            deserialize();
-            //export();
-            import();
+            importConfig();
+            copyImportConfig();
 
-            Console.WriteLine(this.job1.ToString());
+            updateHeader();
+            menu();
         }
 
         #endregion
@@ -238,22 +235,13 @@ namespace easySave.ViewModel
             }
 
             updateHeader(); //Update the header
+
+            serializeJob();
+            exportConfig();
         }
 
         public void serializeJob()
         {
-            this.job1.Name = "Test 1";
-            this.job2.Name = "Test 2";
-            this.job3.Name = "Test 3";
-            this.job4.Name = "Test 4";
-            this.job5.Name = "Test 5";
-
-            this.job1.PathSource = "Test 1";
-            this.job2.PathSource = "Test 2";
-            this.job3.PathSource = "Test 3";
-            this.job4.PathSource = "Test 4";
-            this.job5.PathSource = "Test 5";
-
             this.jobs = new List<Models.job>();
 
             this.jobs.Add(this.job1);
@@ -263,21 +251,19 @@ namespace easySave.ViewModel
             this.jobs.Add(this.job5);
 
             jsonString = JsonConvert.SerializeObject(jobs, Formatting.Indented);
-            
-            Console.WriteLine(jsonString);
         }
 
-        public void deserialize()
+        public void deserializeJob()
         {
             var listJob = JsonConvert.DeserializeObject<List<Models.job>>(jsonString);
 
-            foreach (var job in listJob)
+            /*foreach (var job in listJob)
             {
                 Console.WriteLine(job.ToString());
-            }
+            }*/
         }
 
-        public void export()
+        public void exportConfig()
         {
             if (!Directory.Exists(pathFilesEasySave))
             {
@@ -295,21 +281,29 @@ namespace easySave.ViewModel
             }
         }
 
-        public void import()
+        public void importConfig()
         {
             using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
             {
                 using (var jsonReader = new JsonTextReader(streamReader))
                 {
-                    var listJob = serializer.Deserialize<List<Models.job>>(jsonReader);
-                    foreach (var job in listJob)
+                    jobs = serializer.Deserialize<List<Models.job>>(jsonReader);
+                    /*foreach (var job in jobs)
                     {
                         Console.WriteLine(job.ToString());
-                    }
+                    }*/
                 }
             }
         }
 
+        public void copyImportConfig()
+        {
+            this.job1 = jobs[0];
+            this.job2 = jobs[1];
+            this.job3 = jobs[2];
+            this.job4 = jobs[3];
+            this.job5 = jobs[4];
+        }
         #endregion
     }
 }
