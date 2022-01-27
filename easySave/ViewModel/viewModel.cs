@@ -1,4 +1,4 @@
-﻿/// \file viewModel.cs
+/// \file viewModel.cs
 /// \author Sheridan SHABANI
 /// \author Steven LUCAS
 /// \author Ahmed EL HARIRI
@@ -84,14 +84,16 @@ namespace easySave.ViewModel
                             break;
                         }
                         
-
                     case 2:
                         view.chooseDelete();
                         view.confirmDelete();
                         view.finishDelete();
                         break;
-
+                    
                     case 3:
+                        view.chooseSave();
+                        view.confirmSave();
+                        view.completedSave();
                         break;
 
                     case 4:
