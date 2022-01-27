@@ -276,7 +276,7 @@ namespace easySave.ViewModel
                 {
                     jsonWriter.Formatting = Formatting.Indented;
                     serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonString));
-                    Console.WriteLine("Export Ok");
+                    //Console.WriteLine("Export Ok");
                 }
             }
         }
@@ -287,7 +287,11 @@ namespace easySave.ViewModel
             {
                 Directory.CreateDirectory(pathFilesEasySave);
             }
-
+            if (!File.Exists(pathFilesEasySave + @"\configJob.json"))
+            {
+                serializeJob();
+                exportConfig();
+            }
             using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
             {
                 using (var jsonReader = new JsonTextReader(streamReader))
