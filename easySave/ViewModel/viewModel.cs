@@ -54,7 +54,10 @@ namespace easySave.ViewModel
             //menu();
             serializeJob();
             deserialize();
-            export();
+            //export();
+            import();
+
+            Console.WriteLine(this.job1.ToString());
         }
 
         #endregion
@@ -288,6 +291,21 @@ namespace easySave.ViewModel
                     jsonWriter.Formatting = Formatting.Indented;
                     serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonString));
                     Console.WriteLine("Export Ok");
+                }
+            }
+        }
+
+        public void import()
+        {
+            using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
+            {
+                using (var jsonReader = new JsonTextReader(streamReader))
+                {
+                    var listJob = serializer.Deserialize<List<Models.job>>(jsonReader);
+                    foreach (var job in listJob)
+                    {
+                        Console.WriteLine(job.ToString());
+                    }
                 }
             }
         }

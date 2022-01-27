@@ -335,6 +335,13 @@ namespace easySave.Models
             }
         }
 
+        public override string ToString()
+        {
+            return $"Name : {this.name}\n" +
+                $"Source : {this.pathSource}\n" +
+                $"Destination : {this.pathDestination}\n" +
+                $"Type : {this.typeSave}\n";
+        }
         #endregion
 
     }
