@@ -246,7 +246,7 @@ namespace easySave.ViewModel
         {
             if (numberJob == 1)
             {
-                this.job1.Name = "Empty";
+                this.job1.Name = String.Empty;
                 this.job1.PathSource = String.Empty;
                 this.job1.PathDestination = String.Empty;
 
