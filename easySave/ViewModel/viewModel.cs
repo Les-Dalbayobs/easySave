@@ -48,6 +48,7 @@ namespace easySave.ViewModel
             //updateHeader();
             //menu();
             serializeJob();
+            deserialize();
         }
 
         #endregion
@@ -257,7 +258,15 @@ namespace easySave.ViewModel
             Console.WriteLine(jsonString);
         }
 
+        public void deserialize()
+        {
+            var listJob = JsonConvert.DeserializeObject<List<Models.job>>(jsonString);
 
+            foreach (var job in listJob)
+            {
+                Console.WriteLine(job.ToString());
+            }
+        }
 
         
 
