@@ -63,11 +63,18 @@ namespace easySave.ViewModel
                 switch (menu)
                 {
                     case 1:
-                        view.chooseCreate();
-                        view.create();
-                        view.confirmCreate();
-                        view.finishCreate();
-                        break;
+                        {
+                            int nbJob = view.chooseCreate();
+                            if (nbJob == 6)
+                            {
+                                break;
+                            }
+                            view.create();
+                            view.confirmCreate();
+                            view.finishCreate();
+                            break;
+                        }
+                        
 
                     case 2:
                         view.chooseDelete();

@@ -149,8 +149,30 @@ namespace easySave.Views
             Console.Write(" Choose job number and press enter : ");
             //End of menu display
 
-            //Retrieves the value entered by the user and converts it to int
-            int job = Convert.ToInt32(Console.ReadLine());
+            int job;
+
+            try
+            {
+                //Retrieves the value entered by the user and converts it to int
+                job = Convert.ToInt32(Console.ReadLine());
+
+                //if - to handle typing errors
+                if (job > 6 || job <= 0)
+                {
+                    errorMenu(); //Launch the error window
+                    int menuError = chooseCreate(); //Restarts the menu display and saves the return value
+
+                    return menuError; //Returns the menu choice
+                }
+            }
+            catch
+            {
+                errorMenu(); //Launch the error window
+                int menuError = confirmCreate(); //Restarts the menu display and saves the return value
+
+                return menuError; //Returns the menu choice
+            }
+            
 
             return job; //Returns the menu choice
         }
