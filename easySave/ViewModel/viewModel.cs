@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using Newtonsoft.Json;
 
 /// <summary>
 /// ViewModel namespace
@@ -23,12 +24,15 @@ namespace easySave.ViewModel
         #region attributes
 
         Views.view view = new Views.view();
+
+        List<Models.job> jobs;
         Models.job job1 = new Models.job();
         Models.job job2 = new Models.job();
         Models.job job3 = new Models.job();
         Models.job job4 = new Models.job();
         Models.job job5 = new Models.job();
 
+        string jsonString;
         #endregion
 
         #region properties
@@ -41,8 +45,9 @@ namespace easySave.ViewModel
         /// </summary>
         public viewModel()
         {
-            updateHeader();
-            menu();
+            //updateHeader();
+            //menu();
+            serializeJob();
         }
 
         #endregion
@@ -224,6 +229,38 @@ namespace easySave.ViewModel
 
             updateHeader(); //Update the header
         }
+
+        public void serializeJob()
+        {
+            this.job1.Name = "Test 1";
+            this.job2.Name = "Test 2";
+            this.job3.Name = "Test 3";
+            this.job4.Name = "Test 4";
+            this.job5.Name = "Test 5";
+
+            this.job1.PathSource = "Test 1";
+            this.job2.PathSource = "Test 2";
+            this.job3.PathSource = "Test 3";
+            this.job4.PathSource = "Test 4";
+            this.job5.PathSource = "Test 5";
+
+            this.jobs = new List<Models.job>();
+
+            this.jobs.Add(this.job1);
+            this.jobs.Add(this.job2);
+            this.jobs.Add(this.job3);
+            this.jobs.Add(this.job4);
+            this.jobs.Add(this.job5);
+
+            jsonString = JsonConvert.SerializeObject(jobs, Formatting.Indented);
+            
+            Console.WriteLine(jsonString);
+        }
+
+
+
+        
+
         #endregion
     }
 }
