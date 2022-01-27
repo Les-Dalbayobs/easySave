@@ -570,6 +570,9 @@ namespace easySave.Views
         public int changeLanguage()
         {
             int language; // Initialize language variable
+
+            Console.Clear();
+
             Console.WriteLine(" ------CHANGE LANGUAGE------");
             Console.WriteLine(" 1. Français");
             Console.WriteLine(" 2. English \n");
@@ -600,6 +603,8 @@ namespace easySave.Views
 
                 return menuError; // Returns the menu choice
             }
+
+            Console.Clear();
 
             Console.WriteLine(" ---------VALIDATION--------");
             Console.WriteLine("Are you sure ?");
