@@ -1,4 +1,4 @@
-﻿/// \file viewModel.cs
+/// \file viewModel.cs
 /// \author Sheridan SHABANI
 /// \author Steven LUCAS
 /// \author Ahmed EL HARIRI
@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 /// <summary>
 /// ViewModel namespace
@@ -20,60 +21,109 @@ namespace easySave.ViewModel
     class viewModel
     {
         #region attributes
+
         Views.view view = new Views.view();
+        Models.job job1 = new Models.job();
+        Models.job job2 = new Models.job();
+        Models.job job3 = new Models.job();
+        Models.job job4 = new Models.job();
+        Models.job job5 = new Models.job();
+
         #endregion
 
         #region properties
         #endregion
 
         #region constructor
+
+        /// <summary>
+        /// Constructor of the view class (without parameters)
+        /// </summary>
         public viewModel()
         {
+            updateHeader();
             menu();
         }
+
         #endregion
 
         #region methods
+
         /// <summary>
         /// Main program loop
         /// </summary>
         public void menu()
         {
-            int menu; 
-                
-            menu = view.displayMenu();
+            int menu = 0;
 
-            switch (menu)
+            do
             {
-                case 1:
-                    view.chooseCreate();
-                    view.create();
-                    view.confirmCreate();
-                    view.finishCreate();
-                    break;
+                 menu = view.displayMenu();
 
-                case 2:
-                    view.chooseDelete();
-                    view.confirmDelete();
-                    view.finishDelete();
-                    break;
+                switch (menu)
+                {
+                    case 1:
+                        view.chooseCreate();
+                        view.create();
+                        view.confirmCreate();
+                        view.finishCreate();
+                        break;
+                    
+                    case 2:
+                        view.chooseDelete();
+                        view.confirmDelete();
+                        view.finishDelete();
+                        break;
+                    
+                    case 3:
+                        view.chooseSave();
+                        view.confirmSave();
+                        view.completedSave();
+                        break;
 
-                case 3:
-                    view.chooseSave();
-                    view.confirmSave();
-                    view.completedSave();
-                    break;
+                    case 4:
+                        break;
 
-                case 4:
-                    break;
+                    default:
+                        break;
 
-                default:
-                    break;
-            } //end switch
+                } //end switch
 
+            } while (menu != 5);   
         }
+
+        /// <summary>
+        /// Method to test the creation of a job and the backups 
+        /// </summary>
+        public void testCreateJob()
+        {
+            Models.job job1 = new Models.job("TEST 1", @"\\PC-SHERIDAN\c$\Users\Sheridan\Desktop\test doc", @"\\PC-SHERIDAN\c$\Users\Sheridan\Desktop\test doc1", false);
+            Console.WriteLine(job1.Name);
+            Console.WriteLine(job1.PathSource);
+            Console.WriteLine(job1.PathDestination);
+            Console.WriteLine(job1.TypeSave);
+
+            Console.WriteLine(job1.verifExist(job1.PathSource));
+
+            Console.WriteLine(job1.calculNbFiles(job1.PathSource));
+
+            Console.WriteLine(job1.calculSize(job1.PathSource));
+
+            Console.WriteLine(job1.copy());
+        }
+
+        /// <summary>
+        /// Method to update job names in the header
+        /// </summary>
+        public void updateHeader()
+        {
+            view.Job1Name = this.job1.Name;
+            view.Job2Name = this.job2.Name;
+            view.Job3Name = this.job3.Name;
+            view.Job4Name = this.job4.Name;
+            view.Job5Name = this.job5.Name;
+        }
+
         #endregion
     }
-
-
 }

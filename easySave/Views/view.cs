@@ -1,8 +1,8 @@
-﻿/// \file view.cs
+/// \file view.cs
 /// \author Sheridan SHABANI
 /// \author Steven LUCAS
 /// \author Ahmed EL HARIRI
-/// \version 0.1
+/// \version 0.4
 /// \date 23/01/2022
 
 using System;
@@ -21,9 +21,41 @@ namespace easySave.Views
     {
 
         #region attributes
+        string job1Name; //Stored the name of the job1
+        string job2Name; //Stored the name of the job2
+        string job3Name; //Stored the name of the job3
+        string job4Name; //Stored the name of the job4
+        string job5Name; //Stored the name of the job5
+
         #endregion
 
         #region properties
+
+        /// <summary>
+        /// Getter setter of job1 name
+        /// </summary>
+        public string Job1Name { get => job1Name; set => job1Name = value; }
+
+        /// <summary>
+        /// Getter setter of job2 name
+        /// </summary>
+        public string Job2Name { get => job2Name; set => job2Name = value; }
+
+        /// <summary>
+        /// Getter setter of job3 name
+        /// </summary>
+        public string Job3Name { get => job3Name; set => job3Name = value; }
+
+        /// <summary>
+        /// Getter setter of job4 name
+        /// </summary>
+        public string Job4Name { get => job4Name; set => job4Name = value; }
+
+        /// <summary>
+        /// Getter setter of job5 name
+        /// </summary>
+        public string Job5Name { get => job5Name; set => job5Name = value; }
+
         #endregion
 
         #region constructor
@@ -37,6 +69,20 @@ namespace easySave.Views
 
         #region methods
 
+        public void header()
+        {
+            Console.Clear(); //Clean console
+
+            //Displaying the menu
+            Console.WriteLine(" ----------EASYSAVE---------");
+            Console.WriteLine(" Job n°1 : " + this.job1Name);
+            Console.WriteLine(" Job n°2 : " + this.job2Name);
+            Console.WriteLine(" Job n°3 : " + this.job3Name);
+            Console.WriteLine(" Job n°4 : " + this.job4Name);
+            Console.WriteLine(" Job n°5 : " + this.job5Name);
+            //End of menu display
+        }
+
         /// <summary>
         /// Basic application menu
         /// </summary>
@@ -44,6 +90,8 @@ namespace easySave.Views
         public int displayMenu()
         {
             int menu = 10; //Choice of menu
+
+            header(); //Display header
 
             //Displaying the menu
             Console.WriteLine(" ------------MENU-----------");
@@ -92,6 +140,8 @@ namespace easySave.Views
         /// <returns>Job chosen for creation</returns>
         public int chooseCreate()
         {
+            header(); //Display header
+
             //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" 6.Exit");
@@ -110,6 +160,8 @@ namespace easySave.Views
         /// </summary>
         public void create()
         {
+            header(); //Display header
+
             //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" Fill in the fields");
@@ -132,7 +184,6 @@ namespace easySave.Views
             //End of menu display
         }
 
-
         /// <summary>
         /// Method to validate job information
         /// </summary>
@@ -140,6 +191,8 @@ namespace easySave.Views
         public int confirmCreate()
         {
             int valid = 10; //Choice of menu
+
+            header(); //Display header
 
             //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
@@ -192,6 +245,8 @@ namespace easySave.Views
         /// </summary>
         public void finishCreate()
         {
+            header(); //Display header
+
             //Displaying the menu
             Console.WriteLine(" ---------CREATE JOB--------");
 
@@ -225,6 +280,8 @@ namespace easySave.Views
         /// <returns>Selected job for deletion</returns>
         public int chooseDelete()
         {
+            header(); //Display header
+
             //Displaying the menu
             Console.WriteLine(" ---------DELETE JOB--------");
             Console.WriteLine(" 6.Exit");
@@ -245,6 +302,8 @@ namespace easySave.Views
         public int confirmDelete()
         {
             int valid; //Choice of menu
+
+            header(); //Display header
 
             //Display of the error message
             Console.WriteLine(" ---------DELETE JOB--------");
@@ -289,6 +348,8 @@ namespace easySave.Views
         /// </summary>
         public void finishDelete()
         {
+            header(); //Display header
+
             //Display of the error message
             Console.WriteLine(" ---------DELETE JOB--------");
             Console.WriteLine(" Job n°.. deleted");
@@ -330,7 +391,7 @@ namespace easySave.Views
 
                 return menuError; //Returns the menu choice
             }
-
+          
             return job;
         }
 
