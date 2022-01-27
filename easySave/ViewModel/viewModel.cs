@@ -33,6 +33,10 @@ namespace easySave.ViewModel
         Models.job job5 = new Models.job();
 
         string jsonString;
+        JsonSerializer serializer;
+
+        string pathFilesEasySave = @"c:\EasySave";
+
         #endregion
 
         #region properties
@@ -45,10 +49,12 @@ namespace easySave.ViewModel
         /// </summary>
         public viewModel()
         {
+            serializer = new JsonSerializer();
             //updateHeader();
             //menu();
             serializeJob();
             deserialize();
+            export();
         }
 
         #endregion
@@ -268,7 +274,23 @@ namespace easySave.ViewModel
             }
         }
 
-        
+        public void export()
+        {
+            if (!Directory.Exists(pathFilesEasySave))
+            {
+                Directory.CreateDirectory(pathFilesEasySave);
+            }
+
+            using (var streamWriter = new StreamWriter(pathFilesEasySave + @"\configJob.json"))
+            {
+                using (var jsonWriter = new JsonTextWriter(streamWriter))
+                {
+                    jsonWriter.Formatting = Formatting.Indented;
+                    serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonString));
+                    Console.WriteLine("Export Ok");
+                }
+            }
+        }
 
         #endregion
     }
