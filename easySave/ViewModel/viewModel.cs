@@ -93,18 +93,18 @@ namespace easySave.ViewModel
                                 break;
                             }
 
-                            int valid = view.confirmDelete();
+                            int valid = view.confirmDelete(nbJob);
                             if (valid == 2)
                             {
                                 break;
                             }
 
                             deleteJob(nbJob);
-                        }
-                        view.confirmDelete();
+                        view.confirmDelete(nbJob);
 
-                        view.finishDelete();
+                        view.finishDelete(nbJob);
                         break;
+                        }
 
                     case 3:
                         view.chooseSave();
@@ -250,8 +250,36 @@ namespace easySave.ViewModel
                 this.job1.PathSource = String.Empty;
                 this.job1.PathDestination = String.Empty;
 
-                updateHeader(); //Update the job list
             }
+            if (numberJob == 2)
+            {
+                this.job1.Name = String.Empty;
+                this.job1.PathSource = String.Empty;
+                this.job1.PathDestination = String.Empty;
+
+            }
+            if (numberJob == 3)
+            {
+                this.job1.Name = String.Empty;
+                this.job1.PathSource = String.Empty;
+                this.job1.PathDestination = String.Empty;
+
+            }
+            if (numberJob == 4)
+            {
+                this.job1.Name = String.Empty;
+                this.job1.PathSource = String.Empty;
+                this.job1.PathDestination = String.Empty;
+
+            }
+            if (numberJob == 5)
+            {
+                this.job1.Name = String.Empty;
+                this.job1.PathSource = String.Empty;
+                this.job1.PathDestination = String.Empty;
+
+            }
+            updateHeader(); //Update the job list
 
         }
         #endregion

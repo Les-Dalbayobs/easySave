@@ -418,7 +418,7 @@ namespace easySave.Views
         /// Method for validating the chosen job
         /// </summary>
         /// <returns>Returns if the information entered is correct</returns>
-        public int confirmDelete()
+        public int confirmDelete(int jobNumber)
         {
             int valid; //Choice of menu
 
@@ -426,7 +426,7 @@ namespace easySave.Views
 
             //Display of the error message
             Console.WriteLine(" ---------DELETE JOB--------");
-            Console.WriteLine(" Do you really want to delete the job n°.");
+            Console.WriteLine(" Do you really want to delete the job n°" + jobNumber);
 
             Console.WriteLine(" ---------VALIDATION--------");
             Console.WriteLine(" 1.Yes");
@@ -446,7 +446,7 @@ namespace easySave.Views
                 if (valid > 2)
                 {
                     errorMenu(); //Launch the error window
-                    int menuError = confirmDelete(); //Restarts the menu display and saves the return value
+                    int menuError = confirmDelete(jobNumber); //Restarts the menu display and saves the return value
 
                     return menuError; //Returns the menu choice
                 }
@@ -454,7 +454,7 @@ namespace easySave.Views
             catch
             {
                 errorMenu(); //Launch the error window
-                int menuError = confirmDelete(); //Restarts the menu display and saves the return value
+                int menuError = confirmDelete(jobNumber); //Restarts the menu display and saves the return value
 
                 return menuError; //Returns the menu choice
             }
@@ -465,13 +465,13 @@ namespace easySave.Views
         /// <summary>
         /// Method to confirm job deletion
         /// </summary>
-        public void finishDelete()
+        public void finishDelete(int jobNumber)
         {
             header(); //Display header
 
             //Display of the error message
             Console.WriteLine(" ---------DELETE JOB--------");
-            Console.WriteLine(" Job n°.. deleted");
+            Console.WriteLine(" Job n°" + jobNumber + " deleted");
             Console.Write(" Press enter to continue");
             //End display
 
