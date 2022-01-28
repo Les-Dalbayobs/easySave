@@ -239,6 +239,8 @@ namespace easySave.Models
             //Create the destination directory
             Directory.CreateDirectory(destination.FullName);
 
+            compareDelete(source.FullName, destination.FullName);
+
             //Copy iteration for all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {

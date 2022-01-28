@@ -125,83 +125,40 @@ namespace easySave.ViewModel
                         break;
                     
                     case 3:
-                        int nbjob = view.chooseSave();
+                        {
+                            int nbjob = view.chooseSave();
 
-                        valid= view.confirmSave(nbjob);
-                        if (valid == 2)
-                        {
-                            break;
-                        }
+                            valid = view.confirmSave(nbjob);
+                            if (valid == 2)
+                            {
+                                break;
+                            }
 
-                        if (nbjob == 6)
-                        {
-                            if (!job1.verifExist(this.job1.PathSource))
-                            {
-                                view.errorSave(1, true);
-                                break;
-                            }
-                            else if (!job2.verifExist(this.job2.PathSource))
-                            {
-                                view.errorSave(2, true);
-                                break;
-                            }
-                            else if (!job3.verifExist(this.job3.PathSource))
-                            {
-                                view.errorSave(3, true);
-                                break;
-                            }
-                            else if (!job4.verifExist(this.job4.PathSource))
-                            {
-                                view.errorSave(4, true);
-                                break;
-                            }
-                            else if (!job5.verifExist(this.job5.PathSource))
-                            {
-                                view.errorSave(5, true);
-                                break;
-                            }
-                            else if (!job1.verifCreateDestination())
-                            {
-                                view.errorSave(1, false);
-                                break;
-                            }
-                            else if (!job2.verifCreateDestination())
-                            {
-                                view.errorSave(2, false);
-                                break;
-                            }
-                            else if (!job3.verifCreateDestination())
-                            {
-                                view.errorSave(3, false);
-                                break;
-                            }
-                            else if (!job4.verifCreateDestination())
-                            {
-                                view.errorSave(4, false);
-                                break;
-                            }
-                            else if (!job5.verifCreateDestination())
-                            {
-                                view.errorSave(5, false);
-                                break;
-                            }
-                            else
-                            {
-                                job1.copy();
-                                job2.copy();
-                                job3.copy();
-                                job4.copy();
-                                job5.copy();
-                            }
-                           
-                        }
-                        else
-                        {
-                            if (nbjob == 1)
+                            if (nbjob == 6)
                             {
                                 if (!job1.verifExist(this.job1.PathSource))
                                 {
                                     view.errorSave(1, true);
+                                    break;
+                                }
+                                else if (!job2.verifExist(this.job2.PathSource))
+                                {
+                                    view.errorSave(2, true);
+                                    break;
+                                }
+                                else if (!job3.verifExist(this.job3.PathSource))
+                                {
+                                    view.errorSave(3, true);
+                                    break;
+                                }
+                                else if (!job4.verifExist(this.job4.PathSource))
+                                {
+                                    view.errorSave(4, true);
+                                    break;
+                                }
+                                else if (!job5.verifExist(this.job5.PathSource))
+                                {
+                                    view.errorSave(5, true);
                                     break;
                                 }
                                 else if (!job1.verifCreateDestination())
@@ -209,33 +166,9 @@ namespace easySave.ViewModel
                                     view.errorSave(1, false);
                                     break;
                                 }
-                                else
-                                {
-                                    job1.copy();
-                                }
-                            }
-                            else if (nbjob == 2)
-                            {
-                                if (!job2.verifExist(this.job2.PathSource))
-                                {
-                                    view.errorSave(2, true);
-                                    break;
-                                }
                                 else if (!job2.verifCreateDestination())
                                 {
                                     view.errorSave(2, false);
-                                    break;
-                                }
-                                else
-                                {
-                                    job2.copy();
-                                }
-                            }
-                            else if (nbjob == 3)
-                            {
-                                if (!job3.verifExist(this.job3.PathSource))
-                                {
-                                    view.errorSave(3, true);
                                     break;
                                 }
                                 else if (!job3.verifCreateDestination())
@@ -243,33 +176,9 @@ namespace easySave.ViewModel
                                     view.errorSave(3, false);
                                     break;
                                 }
-                                else
-                                {
-                                    job3.copy();
-                                }
-                            }
-                            else if (nbjob == 4)
-                            {
-                                if (!job4.verifExist(this.job4.PathSource))
-                                {
-                                    view.errorSave(4, true);
-                                    break;
-                                }
-                                else if (!job2.verifCreateDestination())
+                                else if (!job4.verifCreateDestination())
                                 {
                                     view.errorSave(4, false);
-                                    break;
-                                }
-                                else
-                                {
-                                    job4.copy();
-                                }
-                            }
-                            else if (nbjob == 5)
-                            {
-                                if (!job5.verifExist(this.job5.PathSource))
-                                {
-                                    view.errorSave(5, true);
                                     break;
                                 }
                                 else if (!job5.verifCreateDestination())
@@ -279,16 +188,108 @@ namespace easySave.ViewModel
                                 }
                                 else
                                 {
+                                    job1.copy();
+                                    job2.copy();
+                                    job3.copy();
+                                    job4.copy();
                                     job5.copy();
                                 }
+
+                            }
+                            else
+                            {
+                                if (nbjob == 1)
+                                {
+                                    if (!job1.verifExist(this.job1.PathSource))
+                                    {
+                                        view.errorSave(1, true);
+                                        break;
+                                    }
+                                    else if (!job1.verifCreateDestination())
+                                    {
+                                        view.errorSave(1, false);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        job1.copy();
+                                    }
+                                }
+                                else if (nbjob == 2)
+                                {
+                                    if (!job2.verifExist(this.job2.PathSource))
+                                    {
+                                        view.errorSave(2, true);
+                                        break;
+                                    }
+                                    else if (!job2.verifCreateDestination())
+                                    {
+                                        view.errorSave(2, false);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        job2.copy();
+                                    }
+                                }
+                                else if (nbjob == 3)
+                                {
+                                    if (!job3.verifExist(this.job3.PathSource))
+                                    {
+                                        view.errorSave(3, true);
+                                        break;
+                                    }
+                                    else if (!job3.verifCreateDestination())
+                                    {
+                                        view.errorSave(3, false);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        job3.copy();
+                                    }
+                                }
+                                else if (nbjob == 4)
+                                {
+                                    if (!job4.verifExist(this.job4.PathSource))
+                                    {
+                                        view.errorSave(4, true);
+                                        break;
+                                    }
+                                    else if (!job2.verifCreateDestination())
+                                    {
+                                        view.errorSave(4, false);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        job4.copy();
+                                    }
+                                }
+                                else if (nbjob == 5)
+                                {
+                                    if (!job5.verifExist(this.job5.PathSource))
+                                    {
+                                        view.errorSave(5, true);
+                                        break;
+                                    }
+                                    else if (!job5.verifCreateDestination())
+                                    {
+                                        view.errorSave(5, false);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        job5.copy();
+                                    }
+                                }
+
                             }
 
+                            view.completedSave(nbjob);
+
+                            break;
                         }
-
-                        view.completedSave(nbjob);
-
-                        break;
-
                     case 4:
                         view.changeLanguage();
 
