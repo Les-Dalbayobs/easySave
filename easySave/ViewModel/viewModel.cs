@@ -88,7 +88,6 @@ namespace easySave.ViewModel
         public void menu()
         {
             int menu = 0;
-            int valid = 0;
 
             do
             {
@@ -106,7 +105,7 @@ namespace easySave.ViewModel
 
                             view.create(false);
 
-                            valid = view.confirmCreate();
+                            int valid = view.confirmCreate();
                             if (valid == 2)
                             {
                                 break;
@@ -144,7 +143,7 @@ namespace easySave.ViewModel
                         {
                             int nbjob = view.chooseSave();
 
-                            valid = view.confirmSave(nbjob);
+                            int valid = view.confirmSave(nbjob);
                             if (valid == 2)
                             {
                                 break;

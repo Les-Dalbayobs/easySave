@@ -338,12 +338,6 @@ namespace easySave.Models
 
 
         }
-            public int deleteJob(int jobNumber)
-            {
-                return 0;
-            }
-
-        
 
         public override string ToString()
         {
