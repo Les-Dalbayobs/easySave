@@ -333,7 +333,7 @@ namespace easySave.ViewModel
 
             Console.WriteLine(job1.calculNbFiles(job1.PathSource));
 
-            Console.WriteLine(job1.calculSize(job1.PathSource));
+            Console.WriteLine(job1.calculSizeFolder(job1.PathSource));
 
             Console.WriteLine(job1.copy());
         }

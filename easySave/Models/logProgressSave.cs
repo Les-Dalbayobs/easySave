@@ -14,7 +14,6 @@ namespace easySave.Models
         string fileSize;
         string fileTransfertTime;
         string time;
-
         #endregion
 
         #region properties
@@ -24,15 +23,28 @@ namespace easySave.Models
         public string DestPath { get => destPath; set => destPath = value; }
         public string FileSize { get => fileSize; set => fileSize = value; }
         public string FileTransfertTime { get => fileTransfertTime; set => fileTransfertTime = value; }
-        public string Time { get => time; set => time = value; }
+        public string GetTime()
+        {
+            return time;
+        }
+
+        public void SetTime()
+        {
+            this.time = DateTime.Now.ToString("F");
+        }
 
         #endregion
 
         #region constructor
-
+        public logProgressSave()
+        {
+            
+        }
         #endregion
 
         #region methodes
+
+
 
         #endregion
     }

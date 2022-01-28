@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 /// <summary>
 /// Models namespace
@@ -22,6 +23,11 @@ namespace easySave.Models
     class job
     {
         #region attributes
+
+        logProgressSave logProgress = new logProgressSave();
+        string jsonStringLogProgress;
+        string pathFileLogProgress;
+
         /// <summary>
         /// Stores the job name 
         /// </summary>
@@ -43,6 +49,9 @@ namespace easySave.Models
         /// False = Differential
         /// </summary>
         bool typeSave;
+
+
+
         #endregion
 
         #region properties
@@ -65,6 +74,16 @@ namespace easySave.Models
         /// Getter setter of the pathSource attribute
         /// </summary>
         public string PathDestination { get => pathDestination; set => pathDestination = value; }
+
+        public string GetPathFileLogProgress()
+        {
+            return pathFileLogProgress;
+        }
+
+        public void SetPathFileLogProgress(string folderLog)
+        {
+            pathFileLogProgress = folderLog + @"\logProgressSave.json";
+        }
         #endregion
 
         #region constructors
@@ -74,7 +93,7 @@ namespace easySave.Models
         /// </summary>
         public job()
         {
-
+            logProgress.Name = this.Name;
         }
 
         /// <summary>
@@ -176,7 +195,7 @@ namespace easySave.Models
         /// </summary>
         /// <param name="pathSource">Directory path</param>
         /// <returns>Size in bytes</returns>
-        public Int64 calculSize(string pathSource)
+        public Int64 calculSizeFolder(string pathSource)
         {
             Int64 size = 0; //Intialisation size of the repertory = 0
 
@@ -189,7 +208,7 @@ namespace easySave.Models
 
             foreach (DirectoryInfo dir in folder.GetDirectories()) //Keep all folders
             {
-                size += calculSize(dir.FullName);// Restart calculSize of the repertory
+                size += calculSizeFolder(dir.FullName);// Restart calculSize of the repertory
             }
 
             return size; //Return total of the size
@@ -211,8 +230,28 @@ namespace easySave.Models
             //Copy all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {
+                logProgress.FileSource = file.FullName;
+                logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
+                logProgress.DestPath = destination.FullName;
+                logProgress.FileSize = file.Length.ToString();
+                
+                DateTime transferDelay = DateTime.Now;
+
                 //Copy the file to the target folder
                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+
+                TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                logProgress.FileTransfertTime = timeSpan.ToString();
+
+                logProgress.SetTime();
+
+                jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+                using (StreamWriter writer = new StreamWriter(pathFileLogProgress))
+                {
+                    writer.WriteLine(jsonStringLogProgress);
+                }
             }
 
             //Search and enter the subfolders of the current folder
