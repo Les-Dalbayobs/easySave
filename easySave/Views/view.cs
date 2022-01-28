@@ -399,6 +399,8 @@ namespace easySave.Views
         /// <returns>Selected job for deletion</returns>
         public int chooseDelete()
         {
+            int job; // Job number choosed
+
             header(); //Display header
 
             //Displaying the menu
@@ -408,10 +410,31 @@ namespace easySave.Views
             Console.Write(" Choose job number and press enter : ");
             //End of menu display
 
-            //Retrieves the value entered by the user and converts it to int
-            int job = Convert.ToInt32(Console.ReadLine());
+            //Try catch to manage typing errors
+            try
+            {
+                //Retrieves the value entered by the user and converts it to int
+                job = Convert.ToInt32(Console.ReadLine());
 
-            return job; //Returns the menu choice
+                //if - to handle typing errors
+                if (job < 1 || job > 6)
+                {
+                    errorMenu(); //Launch the error window
+                    int menuError = chooseDelete(); //Restarts the menu display and saves the return value
+
+                    return menuError; //Returns the menu choice
+                }
+            }
+            catch
+            {
+                errorMenu(); //Launch the error window
+                int menuError = chooseDelete(); //Restarts the menu display
+
+                return menuError; //Returns the choice menu
+            }
+
+            return job; //Returns the job choosed
+
         }
 
         /// <summary>
@@ -456,7 +479,7 @@ namespace easySave.Views
                 errorMenu(); //Launch the error window
                 int menuError = confirmDelete(jobNumber); //Restarts the menu display and saves the return value
 
-                return menuError; //Returns the menu choice
+                return menuError; //Returns the choice menu
             }
 
             return valid; //Returns the menu choice

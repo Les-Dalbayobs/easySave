@@ -98,12 +98,12 @@ namespace easySave.ViewModel
                             {
                                 break;
                             }
-
-                            deleteJob(nbJob);
-                        view.confirmDelete(nbJob);
-
-                        view.finishDelete(nbJob);
-                        break;
+                            else
+                            {
+                                deleteJob(nbJob);
+                                view.finishDelete(nbJob);
+                                break;
+                            }
                         }
 
                     case 3:
@@ -253,30 +253,30 @@ namespace easySave.ViewModel
             }
             if (numberJob == 2)
             {
-                this.job1.Name = String.Empty;
-                this.job1.PathSource = String.Empty;
-                this.job1.PathDestination = String.Empty;
+                this.job2.Name = String.Empty;
+                this.job2.PathSource = String.Empty;
+                this.job2.PathDestination = String.Empty;
 
             }
             if (numberJob == 3)
             {
-                this.job1.Name = String.Empty;
-                this.job1.PathSource = String.Empty;
-                this.job1.PathDestination = String.Empty;
+                this.job3.Name = String.Empty;
+                this.job3.PathSource = String.Empty;
+                this.job3.PathDestination = String.Empty;
 
             }
             if (numberJob == 4)
             {
-                this.job1.Name = String.Empty;
-                this.job1.PathSource = String.Empty;
-                this.job1.PathDestination = String.Empty;
+                this.job4.Name = String.Empty;
+                this.job4.PathSource = String.Empty;
+                this.job4.PathDestination = String.Empty;
 
             }
             if (numberJob == 5)
             {
-                this.job1.Name = String.Empty;
-                this.job1.PathSource = String.Empty;
-                this.job1.PathDestination = String.Empty;
+                this.job5.Name = String.Empty;
+                this.job5.PathSource = String.Empty;
+                this.job5.PathDestination = String.Empty;
 
             }
             updateHeader(); //Update the job list
