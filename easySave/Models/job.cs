@@ -294,25 +294,69 @@ namespace easySave.Models
                     {
                         //Console.WriteLine("Copy : " + file.Name); //Test
 
+                        
+
                         //Try catch which will allow error handling if needed
                         try
                         {
+                            logProgress.Name = this.Name;
+                            logProgress.FileSource = file.FullName;
+                            logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
+                            logProgress.DestPath = destination.FullName;
+                            logProgress.FileSize = file.Length.ToString();
+
+                            DateTime transferDelay = DateTime.Now;
+
                             //Copy the file to the target folder
                             file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+
+                            TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                            logProgress.FileTransfertTime = timeSpan.ToString();
+
+                            logProgress.SetTime();
+
+                            jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+                            using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                            {
+                                writer.WriteLine(jsonStringLogProgress);
+                            }
                         }
                         catch (Exception e)
                         {
                             //Console.WriteLine("The process failed : " + e.ToString()); //Displays the error
                         }
 
+                        
                     }
                 }
 
                 //Try catch which will allow error handling if needed
                 try
                 {
+                    logProgress.Name = this.Name;
+                    logProgress.FileSource = file.FullName;
+                    logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
+                    logProgress.DestPath = destination.FullName;
+                    logProgress.FileSize = file.Length.ToString();
+
+                    DateTime transferDelay = DateTime.Now;
                     //Copy the file to the target folder only if it does not exist
                     file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
+
+                    TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                    logProgress.FileTransfertTime = timeSpan.ToString();
+
+                    logProgress.SetTime();
+
+                    jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+                    using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                    {
+                        writer.WriteLine(jsonStringLogProgress);
+                    }
                 }
                 catch (Exception e)
                 {
