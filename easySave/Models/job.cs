@@ -239,6 +239,8 @@ namespace easySave.Models
             //Create the destination directory
             Directory.CreateDirectory(destination.FullName);
 
+            compareDelete(source.FullName, destination.FullName);
+
             //Copy iteration for all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {
@@ -341,6 +343,28 @@ namespace easySave.Models
                 $"Source : {this.pathSource}\n" +
                 $"Destination : {this.pathDestination}\n" +
                 $"Type : {this.typeSave}\n";
+        }
+
+        public bool verifCreateDestination()
+        {
+            bool verif = false;
+
+            try
+            {
+                DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
+                Directory.CreateDirectory(destination.FullName);
+
+                if (destination.Exists)
+                {
+                    verif = true;
+                }
+            }
+            catch 
+            {
+                verif = false;
+            }
+
+            return verif;
         }
         #endregion
 
