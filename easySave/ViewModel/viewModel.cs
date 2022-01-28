@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using Newtonsoft.Json;
 
 /// <summary>
 /// ViewModel namespace
@@ -22,12 +23,40 @@ namespace easySave.ViewModel
     {
         #region attributes
 
+        /// <summary>
+        /// Creation of the view
+        /// </summary>
         Views.view view = new Views.view();
+
+        /// <summary>
+        /// Job table
+        /// </summary>
+        List<Models.job> jobs;
+
+        /// <summary>
+        /// Creation of job objects
+        /// </summary>
         Models.job job1 = new Models.job();
         Models.job job2 = new Models.job();
         Models.job job3 = new Models.job();
         Models.job job4 = new Models.job();
         Models.job job5 = new Models.job();
+
+        /// <summary>
+        /// Store the string in json
+        /// </summary>
+        string jsonString;
+
+        /// <summary>
+        /// Creation serialize JsonSerializer to serialize objects or value types into JSON,
+        /// and to deserialize JSON into objects or value types.
+        /// </summary>
+        JsonSerializer serializer;
+
+        /// <summary>
+        /// Program file path
+        /// </summary>
+        string pathFilesEasySave = @"c:\EasySave";
 
         #endregion
 
@@ -41,6 +70,10 @@ namespace easySave.ViewModel
         /// </summary>
         public viewModel()
         {
+            serializer = new JsonSerializer();
+            importConfig();
+            copyImportConfig();
+
             updateHeader();
             menu();
         }
@@ -223,6 +256,113 @@ namespace easySave.ViewModel
             }
 
             updateHeader(); //Update the header
+
+            serializeJob(); //Serialization jobs 
+            exportConfig(); //Export jobs
+        }
+
+        /// <summary>
+        /// Method to serialize jobs
+        /// </summary>
+        public void serializeJob()
+        {
+            //Create or reset the job table
+            this.jobs = new List<Models.job>();
+
+            //Add the jobs in the table
+            this.jobs.Add(this.job1);
+            this.jobs.Add(this.job2);
+            this.jobs.Add(this.job3);
+            this.jobs.Add(this.job4);
+            this.jobs.Add(this.job5);
+
+            //Convert the table to suit the json format (in string)
+            jsonString = JsonConvert.SerializeObject(jobs, Formatting.Indented);
+        }
+
+        /// <summary>
+        /// Method to deserialize the json string
+        /// </summary>
+        public void deserializeJob()
+        {
+            var listJob = JsonConvert.DeserializeObject<List<Models.job>>(jsonString);
+
+            /*foreach (var job in listJob)
+            {
+                Console.WriteLine(job.ToString());
+            }*/
+        }
+
+        /// <summary>
+        /// Method to export the json
+        /// </summary>
+        public void exportConfig()
+        {
+            //Check if the folder exists
+            if (!Directory.Exists(pathFilesEasySave))
+            {
+                //If it does not exist we create it
+                Directory.CreateDirectory(pathFilesEasySave);
+            }
+
+            //Write each directory name to a file.
+            using (var streamWriter = new StreamWriter(pathFilesEasySave + @"\configJob.json"))
+            {
+                //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
+                using (var jsonWriter = new JsonTextWriter(streamWriter))
+                {
+                    jsonWriter.Formatting = Formatting.Indented;
+                    serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonString));
+                    //Console.WriteLine("Export Ok");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method to import the json
+        /// </summary>
+        public void importConfig()
+        {
+            //Check if the folder exists
+            if (!Directory.Exists(pathFilesEasySave))
+            {
+                //If it does not exist we create it
+                Directory.CreateDirectory(pathFilesEasySave);
+            }
+
+            //If the file does not exist we create it
+            if (!File.Exists(pathFilesEasySave + @"\configJob.json"))
+            {
+
+                serializeJob(); //Serialization jobs 
+                exportConfig(); //Export jobs
+            }
+
+            //StreamReader instance to read text from a file
+            using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
+            {
+                using (var jsonReader = new JsonTextReader(streamReader))
+                {
+                    //Deserialization and import into the job table
+                    jobs = serializer.Deserialize<List<Models.job>>(jsonReader);
+                    /*foreach (var job in jobs)
+                    {
+                        Console.WriteLine(job.ToString());
+                    }*/
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method to copy the import of json into jobs
+        /// </summary>
+        public void copyImportConfig()
+        {
+            this.job1 = jobs[0];
+            this.job2 = jobs[1];
+            this.job3 = jobs[2];
+            this.job4 = jobs[3];
+            this.job5 = jobs[4];
         }
         #endregion
     }
