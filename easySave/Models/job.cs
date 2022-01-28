@@ -342,6 +342,28 @@ namespace easySave.Models
                 $"Destination : {this.pathDestination}\n" +
                 $"Type : {this.typeSave}\n";
         }
+
+        public bool verifCreateDestination()
+        {
+            bool verif = false;
+
+            try
+            {
+                DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
+                Directory.CreateDirectory(destination.FullName);
+
+                if (destination.Exists)
+                {
+                    verif = true;
+                }
+            }
+            catch 
+            {
+                verif = false;
+            }
+
+            return verif;
+        }
         #endregion
 
     }

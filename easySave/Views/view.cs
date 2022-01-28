@@ -474,6 +474,8 @@ namespace easySave.Views
         {
             int job; //Choice of menu
 
+            header();  
+
             //Displaying the menu
             Console.WriteLine(" ----------SAVE JOB---------");
 
@@ -510,13 +512,22 @@ namespace easySave.Views
         /// Method to confirm the job to save
         /// </summary>
         /// <returns>Selected job for save</returns>
-        public int confirmSave() 
+        public int confirmSave(int nbjob) 
         {
-            int job; //Choice of menu
+            int menu; //Choice of menu
+
+            header();
 
             //Display of the error message
             Console.WriteLine(" ----------SAVE JOB---------");
-            Console.WriteLine("You selected job number _ . Are you sure ?");
+            if (nbjob == 6)
+            {
+                Console.WriteLine("You have selected all jobs, Are you sure ?");
+            }
+            else
+            {
+                Console.WriteLine("You selected job number " + nbjob + ", Are you sure ?");
+            }
 
             Console.WriteLine(" ---------VALIDATION--------");
             Console.WriteLine(" 1.Yes");
@@ -530,13 +541,13 @@ namespace easySave.Views
             try
             {
                 //Retrieves the value entered by the user and converts it to int
-                job = Convert.ToInt32(Console.ReadLine());
+                menu = Convert.ToInt32(Console.ReadLine());
 
                 //if - to handle typing errors
-                if (job > 2 || job < 1)
+                if (menu > 2 || menu < 1)
                 {
                     errorMenu(); //Launch the error window
-                    int menuError = confirmSave(); //Restarts the menu display and saves the return value
+                    int menuError = confirmSave(nbjob); //Restarts the menu display and saves the return value
 
                     return menuError; //Returns the menu choice
                 }
@@ -544,23 +555,34 @@ namespace easySave.Views
             catch
             {
                 errorMenu(); //Launch the error window
-                int menuError = confirmSave(); //Restarts the menu display and saves the return value
+                int menuError = confirmSave(nbjob); //Restarts the menu display and saves the return value
 
                 return menuError; //Returns the menu choice
             }
 
-            return job;
+            return menu;
         }
 
         /// <summary>
         /// Method to show progress of saving, and then exit
         /// </summary>
         /// <returns>Nothing</returns>
-        public void completedSave()
+        public void completedSave(int nbjob)
         {
             //Display of the confirmation message
+
+            header();
+
             Console.WriteLine(" ----------SAVE JOB---------");
-            Console.WriteLine(" Job n°.. successfully saved");
+            if (nbjob == 6)
+            {
+                Console.WriteLine("All jobs were saved");
+            }
+            else
+            {
+                Console.WriteLine(" Job n°" + nbjob + " successfully saved");
+            }
+        
             Console.Write(" Press enter to continue");
             //End of display
 
@@ -653,6 +675,27 @@ namespace easySave.Views
             }
         }
 
+        public void errorSave(int nbJob, bool sourceOrDestination)
+        {
+            header();
+
+            Console.WriteLine(" ---------ERROR SAVE--------");
+            Console.WriteLine(" No backup executed");
+            if (sourceOrDestination)
+            {
+                Console.WriteLine(" Error in the source path of job n°" + nbJob);
+            }
+            else
+            {
+                Console.WriteLine(" Error in the destination path of job n°" + nbJob);
+            }
+
+            Console.Write(" Press enter to continue");
+            //End display
+
+            Console.ReadLine();
+
+        }
         #endregion
     }
 }
