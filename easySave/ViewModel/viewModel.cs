@@ -23,18 +23,38 @@ namespace easySave.ViewModel
     {
         #region attributes
 
+        /// <summary>
+        /// 
+        /// </summary>
         Views.view view = new Views.view();
 
+        /// <summary>
+        /// 
+        /// </summary>
         List<Models.job> jobs;
+
+        /// <summary>
+        /// 
+        /// </summary>
         Models.job job1 = new Models.job();
         Models.job job2 = new Models.job();
         Models.job job3 = new Models.job();
         Models.job job4 = new Models.job();
         Models.job job5 = new Models.job();
 
+        /// <summary>
+        /// 
+        /// </summary>
         string jsonString;
+
+        /// <summary>
+        /// 
+        /// </summary>
         JsonSerializer serializer;
 
+        /// <summary>
+        /// 
+        /// </summary>
         string pathFilesEasySave = @"c:\EasySave";
 
         #endregion
@@ -240,19 +260,28 @@ namespace easySave.ViewModel
             exportConfig();
         }
 
+        /// <summary>
+        /// Method to serialize jobs
+        /// </summary>
         public void serializeJob()
         {
+            //Create or reset the job table
             this.jobs = new List<Models.job>();
 
+            //Add the jobs in the table
             this.jobs.Add(this.job1);
             this.jobs.Add(this.job2);
             this.jobs.Add(this.job3);
             this.jobs.Add(this.job4);
             this.jobs.Add(this.job5);
 
+            //Convert the table to suit the json format (in string)
             jsonString = JsonConvert.SerializeObject(jobs, Formatting.Indented);
         }
 
+        /// <summary>
+        /// Method to deserialize the json string
+        /// </summary>
         public void deserializeJob()
         {
             var listJob = JsonConvert.DeserializeObject<List<Models.job>>(jsonString);
@@ -263,6 +292,9 @@ namespace easySave.ViewModel
             }*/
         }
 
+        /// <summary>
+        /// Method to export the json
+        /// </summary>
         public void exportConfig()
         {
             if (!Directory.Exists(pathFilesEasySave))
@@ -281,6 +313,9 @@ namespace easySave.ViewModel
             }
         }
 
+        /// <summary>
+        /// Method to import the json
+        /// </summary>
         public void importConfig()
         {
             if (!Directory.Exists(pathFilesEasySave))
@@ -305,6 +340,9 @@ namespace easySave.ViewModel
             }
         }
 
+        /// <summary>
+        /// Method to copy the import of json into jobs
+        /// </summary>
         public void copyImportConfig()
         {
             this.job1 = jobs[0];
