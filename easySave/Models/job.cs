@@ -2,7 +2,7 @@
 /// \author Sheridan SHABANI
 /// \author Steven LUCAS
 /// \author Ahmed EL HARIRI
-/// \version 0.1
+/// \version 1
 /// \date 25/01/2022
 
 using System;

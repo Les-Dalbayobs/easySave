@@ -2,7 +2,7 @@
 /// \author Sheridan SHABANI
 /// \author Steven LUCAS
 /// \author Ahmed EL HARIRI
-/// \version 0.4
+/// \version 1
 /// \date 23/01/2022
 
 using System;
@@ -125,7 +125,7 @@ namespace easySave.Views
             Console.WriteLine(" 1.Create");
             Console.WriteLine(" 2.Delete");
             Console.WriteLine(" 3.Save");
-            Console.WriteLine(" 4.Language");
+            Console.WriteLine(" 4.Language - Work in progress");
             Console.WriteLine(" 5.Exit");
 
             Console.WriteLine(" ---------------------------");

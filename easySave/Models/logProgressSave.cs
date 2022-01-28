@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// \file logProgressSave
+/// \author Sheridan SHABANI
+/// \author Steven LUCAS
+/// \author Ahmed EL HARIRI
+/// \version 1
+/// \date 28/01/2022
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -44,7 +51,7 @@ namespace easySave.Models
         }
         #endregion
 
-        #region methodes
+        #region methods
 
 
 
