@@ -27,7 +27,7 @@ namespace easySave.Models
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
         string pathFileLogProgress;
-
+        string pathfolderLog;
         /// <summary>
         /// Stores the job name 
         /// </summary>
@@ -82,7 +82,8 @@ namespace easySave.Models
 
         public void SetPathFileLogProgress(string folderLog)
         {
-            pathFileLogProgress = folderLog + @"\logProgressSave.json";
+            this.pathfolderLog = folderLog;
+            this.pathFileLogProgress = this.pathfolderLog + @"\logProgressSave.json";
         }
         #endregion
 
@@ -93,7 +94,7 @@ namespace easySave.Models
         /// </summary>
         public job()
         {
-            logProgress.Name = this.Name;
+       
         }
 
         /// <summary>
@@ -230,6 +231,7 @@ namespace easySave.Models
             //Copy all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {
+                logProgress.Name = this.Name;
                 logProgress.FileSource = file.FullName;
                 logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
                 logProgress.DestPath = destination.FullName;
@@ -248,7 +250,7 @@ namespace easySave.Models
 
                 jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
 
-                using (StreamWriter writer = new StreamWriter(pathFileLogProgress))
+                using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                 {
                     writer.WriteLine(jsonStringLogProgress);
                 }

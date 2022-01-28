@@ -71,8 +71,26 @@ namespace easySave.ViewModel
         public viewModel()
         {
             serializer = new JsonSerializer();
+
             importConfig();
             copyImportConfig();
+            string pathLogFolder = pathFilesEasySave + @"\Log";
+            string pathLogProgressSave = pathLogFolder + @"\logProgressSave.json";
+
+            job1.SetPathFileLogProgress(pathLogFolder);
+            job2.SetPathFileLogProgress(pathLogFolder);
+            job3.SetPathFileLogProgress(pathLogFolder);
+            job4.SetPathFileLogProgress(pathLogFolder);
+            job5.SetPathFileLogProgress(pathLogFolder);
+
+            if (!File.Exists(pathLogProgressSave))
+            {
+                if (!Directory.Exists(pathLogFolder))
+                {
+                    Directory.CreateDirectory(pathLogFolder);
+                }
+                File.Create(pathLogProgressSave).Close();
+            }
 
             updateHeader();
             menu();

@@ -23,6 +23,8 @@ namespace easySave.Models
         public string DestPath { get => destPath; set => destPath = value; }
         public string FileSize { get => fileSize; set => fileSize = value; }
         public string FileTransfertTime { get => fileTransfertTime; set => fileTransfertTime = value; }
+        public string Time { get => time; set => time = value; }
+
         public string GetTime()
         {
             return time;
