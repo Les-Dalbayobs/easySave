@@ -92,7 +92,7 @@ namespace easySave.ViewModel
 
             do
             {
-                 menu = view.displayMenu();
+                menu = view.displayMenu();
 
                 switch (menu)
                 {
@@ -117,13 +117,29 @@ namespace easySave.ViewModel
                             view.finishCreate();
                             break;
                         }
-                        
+
+                    // Delete menu choice   
                     case 2:
-                        view.chooseDelete();
-                        view.confirmDelete();
-                        view.finishDelete();
-                        break;
-                    
+                        {
+                            int nbJob = view.chooseDelete(); // Initialize Job number variable
+                            if (nbJob == 6)
+                            {
+                                break;
+                            }
+
+                            int valid = view.confirmDelete(nbJob);
+                            if (valid == 2)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                deleteJob(nbJob);
+                                view.finishDelete(nbJob);
+                                break;
+                            }
+                        }
+
                     case 3:
                         {
                             int nbjob = view.chooseSave();
@@ -300,7 +316,7 @@ namespace easySave.ViewModel
 
                 } //end switch
 
-            } while (menu != 5);   
+            } while (menu != 5);
         }
 
         /// <summary>
@@ -416,6 +432,7 @@ namespace easySave.ViewModel
                 }
             }
 
+
             updateHeader(); //Update the header
 
             serializeJob(); //Serialization jobs 
@@ -524,6 +541,47 @@ namespace easySave.ViewModel
             this.job3 = jobs[2];
             this.job4 = jobs[3];
             this.job5 = jobs[4];
+        }
+
+        public void deleteJob(int numberJob)
+        {
+            if (numberJob == 1)
+            {
+                this.job1.Name = String.Empty;
+                this.job1.PathSource = String.Empty;
+                this.job1.PathDestination = String.Empty;
+
+            }
+            if (numberJob == 2)
+            {
+                this.job2.Name = String.Empty;
+                this.job2.PathSource = String.Empty;
+                this.job2.PathDestination = String.Empty;
+
+            }
+            if (numberJob == 3)
+            {
+                this.job3.Name = String.Empty;
+                this.job3.PathSource = String.Empty;
+                this.job3.PathDestination = String.Empty;
+
+            }
+            if (numberJob == 4)
+            {
+                this.job4.Name = String.Empty;
+                this.job4.PathSource = String.Empty;
+                this.job4.PathDestination = String.Empty;
+
+            }
+            if (numberJob == 5)
+            {
+                this.job5.Name = String.Empty;
+                this.job5.PathSource = String.Empty;
+                this.job5.PathDestination = String.Empty;
+
+            }
+            updateHeader(); //Update the job list
+
         }
         #endregion
     }
