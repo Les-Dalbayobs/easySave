@@ -24,17 +24,17 @@ namespace easySave.ViewModel
         #region attributes
 
         /// <summary>
-        /// 
+        /// Creation of the view
         /// </summary>
         Views.view view = new Views.view();
 
         /// <summary>
-        /// 
+        /// Job table
         /// </summary>
         List<Models.job> jobs;
 
         /// <summary>
-        /// 
+        /// Creation of job objects
         /// </summary>
         Models.job job1 = new Models.job();
         Models.job job2 = new Models.job();
@@ -43,17 +43,18 @@ namespace easySave.ViewModel
         Models.job job5 = new Models.job();
 
         /// <summary>
-        /// 
+        /// Store the string in json
         /// </summary>
         string jsonString;
 
         /// <summary>
-        /// 
+        /// Creation serialize JsonSerializer to serialize objects or value types into JSON,
+        /// and to deserialize JSON into objects or value types.
         /// </summary>
         JsonSerializer serializer;
 
         /// <summary>
-        /// 
+        /// Program file path
         /// </summary>
         string pathFilesEasySave = @"c:\EasySave";
 
@@ -256,8 +257,8 @@ namespace easySave.ViewModel
 
             updateHeader(); //Update the header
 
-            serializeJob();
-            exportConfig();
+            serializeJob(); //Serialization jobs 
+            exportConfig(); //Export jobs
         }
 
         /// <summary>
@@ -297,13 +298,17 @@ namespace easySave.ViewModel
         /// </summary>
         public void exportConfig()
         {
+            //Check if the folder exists
             if (!Directory.Exists(pathFilesEasySave))
             {
+                //If it does not exist we create it
                 Directory.CreateDirectory(pathFilesEasySave);
             }
 
+            //Write each directory name to a file.
             using (var streamWriter = new StreamWriter(pathFilesEasySave + @"\configJob.json"))
             {
+                //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
                 using (var jsonWriter = new JsonTextWriter(streamWriter))
                 {
                     jsonWriter.Formatting = Formatting.Indented;
@@ -318,19 +323,27 @@ namespace easySave.ViewModel
         /// </summary>
         public void importConfig()
         {
+            //Check if the folder exists
             if (!Directory.Exists(pathFilesEasySave))
             {
+                //If it does not exist we create it
                 Directory.CreateDirectory(pathFilesEasySave);
             }
+
+            //If the file does not exist we create it
             if (!File.Exists(pathFilesEasySave + @"\configJob.json"))
             {
-                serializeJob();
-                exportConfig();
+
+                serializeJob(); //Serialization jobs 
+                exportConfig(); //Export jobs
             }
+
+            //StreamReader instance to read text from a file
             using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
             {
                 using (var jsonReader = new JsonTextReader(streamReader))
                 {
+                    //Deserialization and import into the job table
                     jobs = serializer.Deserialize<List<Models.job>>(jsonReader);
                     /*foreach (var job in jobs)
                     {
