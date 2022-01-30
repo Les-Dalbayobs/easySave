@@ -172,6 +172,7 @@ namespace easySave.ViewModel
                             {
                                 deleteJob(nbJob);
                                 view.finishDelete(nbJob);
+
                                 break;
                             }
                         }
@@ -250,7 +251,22 @@ namespace easySave.ViewModel
                             }
                             else
                             {
-                                if (nbjob == 1)
+                                if (!this.jobs[nbjob -1].verifExist(this.jobs[nbjob -1].PathSource))
+                                {
+                                    view.errorSave(nbjob, true);
+                                    break;
+                                }
+                                else if (!this.jobs[nbjob -1].verifCreateDestination())
+                                {
+                                    view.errorSave(nbjob, false);
+                                    break;
+                                }
+                                else
+                                {
+                                    this.jobs[nbjob - 1].copy();
+                                }
+
+                                /*if (nbjob == 1)
                                 {
                                     if (!job1.verifExist(this.job1.PathSource))
                                     {
@@ -334,7 +350,7 @@ namespace easySave.ViewModel
                                     {
                                         job5.copy();
                                     }
-                                }
+                                }*/
 
                             }
 
@@ -605,7 +621,12 @@ namespace easySave.ViewModel
 
         public void deleteJob(int numberJob)
         {
-            if (numberJob == 1)
+            this.jobs[numberJob - 1].Name = null;
+            this.jobs[numberJob - 1].PathSource = null;
+            this.jobs[numberJob - 1].PathDestination = null;
+            this.jobs[numberJob - 1].TypeSave = false;
+
+            /*if (numberJob == 1)
             {
                 this.job1.Name = String.Empty;
                 this.job1.PathSource = String.Empty;
@@ -639,9 +660,12 @@ namespace easySave.ViewModel
                 this.job5.PathSource = String.Empty;
                 this.job5.PathDestination = String.Empty;
 
-            }
+            }*/
+
             updateHeader(); //Update the job list
 
+            serializeJob(); //Serialization jobs 
+            exportConfig(); //Export jobs
         }
         #endregion
     }
