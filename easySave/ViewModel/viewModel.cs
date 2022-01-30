@@ -33,6 +33,7 @@ namespace easySave.ViewModel
         /// </summary>
         List<Models.job> jobs;
 
+        int nbJobMax;
         /// <summary>
         /// Creation of job objects
         /// </summary>
@@ -72,16 +73,34 @@ namespace easySave.ViewModel
         {
             serializer = new JsonSerializer();
 
+            nbJobMax = 5;
+
+            //Create or reset the job table
+            this.jobs = new List<Models.job>();
+
+            for (int i = 0; i < nbJobMax; i++)
+            {
+                Models.job addJob = new Models.job();
+
+                this.jobs.Add(addJob);
+            }
+
             importConfig();
-            copyImportConfig();
+            //copyImportConfig();
+
             string pathLogFolder = pathFilesEasySave + @"\Log";
             string pathLogProgressSave = pathLogFolder + @"\logProgressSave.json";
 
-            job1.SetPathFileLogProgress(pathLogFolder);
+            for (int i = 0; i < nbJobMax; i++)
+            {
+                this.jobs[i].SetPathFileLogProgress(pathLogFolder);
+            }
+            
+            /*job1.SetPathFileLogProgress(pathLogFolder);
             job2.SetPathFileLogProgress(pathLogFolder);
             job3.SetPathFileLogProgress(pathLogFolder);
             job4.SetPathFileLogProgress(pathLogFolder);
-            job5.SetPathFileLogProgress(pathLogFolder);
+            job5.SetPathFileLogProgress(pathLogFolder);*/
 
             if (!File.Exists(pathLogProgressSave))
             {
@@ -361,11 +380,20 @@ namespace easySave.ViewModel
         /// </summary>
         public void updateHeader()
         {
-            view.Job1Name = this.job1.Name;
+            view.JobsName = new List<string>();
+
+            for (int i = 0; i < nbJobMax; i++)
+            {
+                string name = this.jobs[i].Name;
+
+                view.JobsName.Add(name);
+            }
+
+            /*view.Job1Name = this.job1.Name;
             view.Job2Name = this.job2.Name;
             view.Job3Name = this.job3.Name;
             view.Job4Name = this.job4.Name;
-            view.Job5Name = this.job5.Name;
+            view.Job5Name = this.job5.Name;*/
         }
 
         /// <summary>
@@ -374,7 +402,20 @@ namespace easySave.ViewModel
         /// <param name="numberJob">Number of the job</param>
         public void createJob(int numberJob)
         {
-            if (numberJob == 1)
+            this.jobs[numberJob - 1].Name = view.CreateJobName;
+            this.jobs[numberJob - 1].PathSource = view.CreateJobSource;
+            this.jobs[numberJob - 1].PathDestination = view.CreateJobDestination;
+
+            if (view.CreateJobType)
+            {
+                this.jobs[numberJob - 1].TypeSave = true;
+            }
+            else
+            {
+                this.jobs[numberJob - 1].TypeSave = false;
+            }
+
+            /*if (numberJob == 1)
             {
                 this.job1.Name = view.CreateJobName;
                 this.job1.PathSource = view.CreateJobSource;
@@ -447,7 +488,7 @@ namespace easySave.ViewModel
                 {
                     this.job5.TypeSave = false;
                 }
-            }
+            }*/
 
 
             updateHeader(); //Update the header
@@ -461,7 +502,7 @@ namespace easySave.ViewModel
         /// </summary>
         public void serializeJob()
         {
-            //Create or reset the job table
+            /*//Create or reset the job table
             this.jobs = new List<Models.job>();
 
             //Add the jobs in the table
@@ -469,7 +510,7 @@ namespace easySave.ViewModel
             this.jobs.Add(this.job2);
             this.jobs.Add(this.job3);
             this.jobs.Add(this.job4);
-            this.jobs.Add(this.job5);
+            this.jobs.Add(this.job5);*/
 
             //Convert the table to suit the json format (in string)
             jsonString = JsonConvert.SerializeObject(jobs, Formatting.Indented);
@@ -532,18 +573,20 @@ namespace easySave.ViewModel
                 serializeJob(); //Serialization jobs 
                 exportConfig(); //Export jobs
             }
-
-            //StreamReader instance to read text from a file
-            using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
+            else
             {
-                using (var jsonReader = new JsonTextReader(streamReader))
+                //StreamReader instance to read text from a file
+                using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
                 {
-                    //Deserialization and import into the job table
-                    jobs = serializer.Deserialize<List<Models.job>>(jsonReader);
-                    /*foreach (var job in jobs)
+                    using (var jsonReader = new JsonTextReader(streamReader))
                     {
-                        Console.WriteLine(job.ToString());
-                    }*/
+                        //Deserialization and import into the job table
+                        jobs = serializer.Deserialize<List<Models.job>>(jsonReader);
+                        /*foreach (var job in jobs)
+                        {
+                            Console.WriteLine(job.ToString());
+                        }*/
+                    }
                 }
             }
         }

@@ -20,6 +20,8 @@ namespace easySave.Views
     class view
     {
         #region attributes
+        List<string> jobsName;
+
         string job1Name; //Stored the name of the job1
         string job2Name; //Stored the name of the job2
         string job3Name; //Stored the name of the job3
@@ -78,6 +80,7 @@ namespace easySave.Views
         /// Getter setter of the type entered by the user
         /// </summary>
         public bool CreateJobType { get => createJobType; set => createJobType = value; }
+        public List<string> JobsName { get => jobsName; set => jobsName = value; }
 
         #endregion
 
@@ -87,6 +90,7 @@ namespace easySave.Views
         /// </summary>
         public view()
         {
+
         }
         #endregion
 
@@ -99,13 +103,22 @@ namespace easySave.Views
         {
             Console.Clear(); //Clean console
 
+            int nbJobs = 1;
+
             //Displaying the menu
             Console.WriteLine(" ----------EASYSAVE---------");
-            Console.WriteLine(" Job n°1 : " + this.job1Name);
+
+            foreach (string job in jobsName)
+            {
+                Console.WriteLine(" Job n°" + nbJobs.ToString() +": " + job);
+                nbJobs++;
+            }
+
+            /*Console.WriteLine(" Job n°1 : " + this.job1Name);
             Console.WriteLine(" Job n°2 : " + this.job2Name);
             Console.WriteLine(" Job n°3 : " + this.job3Name);
             Console.WriteLine(" Job n°4 : " + this.job4Name);
-            Console.WriteLine(" Job n°5 : " + this.job5Name);
+            Console.WriteLine(" Job n°5 : " + this.job5Name);*/
             //End of menu display
         }
 
