@@ -20,13 +20,8 @@ namespace easySave.Views
     class view
     {
         #region attributes
-        List<string> jobsName;
 
-        string job1Name; //Stored the name of the job1
-        string job2Name; //Stored the name of the job2
-        string job3Name; //Stored the name of the job3
-        string job4Name; //Stored the name of the job4
-        string job5Name; //Stored the name of the job5
+        List<string> jobsName;
 
         string createJobName; //Storing the name of the job the user wants to create 
         string createJobSource; //Storing the source of the job the user wants to create 
@@ -35,31 +30,6 @@ namespace easySave.Views
         #endregion
 
         #region properties
-
-        /// <summary>
-        /// Getter setter of job1 name
-        /// </summary>
-        public string Job1Name { get => job1Name; set => job1Name = value; }
-
-        /// <summary>
-        /// Getter setter of job2 name
-        /// </summary>
-        public string Job2Name { get => job2Name; set => job2Name = value; }
-
-        /// <summary>
-        /// Getter setter of job3 name
-        /// </summary>
-        public string Job3Name { get => job3Name; set => job3Name = value; }
-
-        /// <summary>
-        /// Getter setter of job4 name
-        /// </summary>
-        public string Job4Name { get => job4Name; set => job4Name = value; }
-
-        /// <summary>
-        /// Getter setter of job5 name
-        /// </summary>
-        public string Job5Name { get => job5Name; set => job5Name = value; }
 
         /// <summary>
         /// Getter setter of the name entered by the user
@@ -80,6 +50,8 @@ namespace easySave.Views
         /// Getter setter of the type entered by the user
         /// </summary>
         public bool CreateJobType { get => createJobType; set => createJobType = value; }
+
+
         public List<string> JobsName { get => jobsName; set => jobsName = value; }
 
         #endregion
@@ -113,13 +85,6 @@ namespace easySave.Views
                 Console.WriteLine(" Job n°" + nbJobs.ToString() +": " + job);
                 nbJobs++;
             }
-
-            /*Console.WriteLine(" Job n°1 : " + this.job1Name);
-            Console.WriteLine(" Job n°2 : " + this.job2Name);
-            Console.WriteLine(" Job n°3 : " + this.job3Name);
-            Console.WriteLine(" Job n°4 : " + this.job4Name);
-            Console.WriteLine(" Job n°5 : " + this.job5Name);*/
-            //End of menu display
         }
 
         /// <summary>
@@ -557,11 +522,11 @@ namespace easySave.Views
             Console.WriteLine(" ----------SAVE JOB---------");
             if (nbjob == 6)
             {
-                Console.WriteLine("You have selected all jobs, Are you sure ?");
+                Console.WriteLine(" You have selected all jobs, Are you sure ?");
             }
             else
             {
-                Console.WriteLine("You selected job number " + nbjob + ", Are you sure ?");
+                Console.WriteLine(" You selected job number " + nbjob + ", Are you sure ?");
             }
 
             Console.WriteLine(" ---------VALIDATION--------");
