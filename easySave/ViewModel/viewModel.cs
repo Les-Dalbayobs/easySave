@@ -33,6 +33,7 @@ namespace easySave.ViewModel
         /// </summary>
         List<Models.job> jobs;
 
+        int nbJobMax;
         /// <summary>
         /// Creation of job objects
         /// </summary>
@@ -72,16 +73,27 @@ namespace easySave.ViewModel
         {
             serializer = new JsonSerializer();
 
+            nbJobMax = 5;
+
+            //Create or reset the job table
+            this.jobs = new List<Models.job>();
+
+            for (int i = 0; i < nbJobMax; i++)
+            {
+                Models.job addJob = new Models.job();
+
+                this.jobs.Add(addJob);
+            }
+
             importConfig();
-            copyImportConfig();
+
             string pathLogFolder = pathFilesEasySave + @"\Log";
             string pathLogProgressSave = pathLogFolder + @"\logProgressSave.json";
 
-            job1.SetPathFileLogProgress(pathLogFolder);
-            job2.SetPathFileLogProgress(pathLogFolder);
-            job3.SetPathFileLogProgress(pathLogFolder);
-            job4.SetPathFileLogProgress(pathLogFolder);
-            job5.SetPathFileLogProgress(pathLogFolder);
+            for (int i = 0; i < nbJobMax; i++)
+            {
+                this.jobs[i].SetPathFileLogProgress(pathLogFolder);
+            }
 
             if (!File.Exists(pathLogProgressSave))
             {
@@ -153,6 +165,7 @@ namespace easySave.ViewModel
                             {
                                 deleteJob(nbJob);
                                 view.finishDelete(nbJob);
+
                                 break;
                             }
                         }
@@ -169,154 +182,59 @@ namespace easySave.ViewModel
 
                             if (nbjob == 6)
                             {
-                                if (!job1.verifExist(this.job1.PathSource))
+                                int numberJob = 1;
+                                bool error = false;
+
+                                foreach (var job in jobs)
                                 {
-                                    view.errorSave(1, true);
+                                    if (job.PathSource != null || job.PathDestination != null)
+                                    {
+                                        if (!job.verifExist(job.PathSource))
+                                        {
+                                            view.errorSave(numberJob, true);
+                                            error = true;
+                                            break;
+                                        }
+                                        if (!job.verifCreateDestination())
+                                        {
+                                            view.errorSave(numberJob, false);
+                                            error = true;
+                                            break;
+                                        }
+                                    }
+                                    numberJob++;
+                                }
+                                if (!error)
+                                {
+                                    foreach (var job in jobs)
+                                    {
+                                        if (job.PathSource != null || job.PathDestination != null)
+                                        {
+                                            job.copy();
+                                        }
+                                    }
+                                }
+                                else
+                                {
                                     break;
                                 }
-                                else if (!job2.verifExist(this.job2.PathSource))
+                            }
+                            else
+                            {
+                                if (!this.jobs[nbjob - 1].verifExist(this.jobs[nbjob - 1].PathSource))
                                 {
-                                    view.errorSave(2, true);
+                                    view.errorSave(nbjob, true);
                                     break;
                                 }
-                                else if (!job3.verifExist(this.job3.PathSource))
+                                else if (!this.jobs[nbjob - 1].verifCreateDestination())
                                 {
-                                    view.errorSave(3, true);
-                                    break;
-                                }
-                                else if (!job4.verifExist(this.job4.PathSource))
-                                {
-                                    view.errorSave(4, true);
-                                    break;
-                                }
-                                else if (!job5.verifExist(this.job5.PathSource))
-                                {
-                                    view.errorSave(5, true);
-                                    break;
-                                }
-                                else if (!job1.verifCreateDestination())
-                                {
-                                    view.errorSave(1, false);
-                                    break;
-                                }
-                                else if (!job2.verifCreateDestination())
-                                {
-                                    view.errorSave(2, false);
-                                    break;
-                                }
-                                else if (!job3.verifCreateDestination())
-                                {
-                                    view.errorSave(3, false);
-                                    break;
-                                }
-                                else if (!job4.verifCreateDestination())
-                                {
-                                    view.errorSave(4, false);
-                                    break;
-                                }
-                                else if (!job5.verifCreateDestination())
-                                {
-                                    view.errorSave(5, false);
+                                    view.errorSave(nbjob, false);
                                     break;
                                 }
                                 else
                                 {
-                                    job1.copy();
-                                    job2.copy();
-                                    job3.copy();
-                                    job4.copy();
-                                    job5.copy();
+                                    this.jobs[nbjob - 1].copy();
                                 }
-
-                            }
-                            else
-                            {
-                                if (nbjob == 1)
-                                {
-                                    if (!job1.verifExist(this.job1.PathSource))
-                                    {
-                                        view.errorSave(1, true);
-                                        break;
-                                    }
-                                    else if (!job1.verifCreateDestination())
-                                    {
-                                        view.errorSave(1, false);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        job1.copy();
-                                    }
-                                }
-                                else if (nbjob == 2)
-                                {
-                                    if (!job2.verifExist(this.job2.PathSource))
-                                    {
-                                        view.errorSave(2, true);
-                                        break;
-                                    }
-                                    else if (!job2.verifCreateDestination())
-                                    {
-                                        view.errorSave(2, false);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        job2.copy();
-                                    }
-                                }
-                                else if (nbjob == 3)
-                                {
-                                    if (!job3.verifExist(this.job3.PathSource))
-                                    {
-                                        view.errorSave(3, true);
-                                        break;
-                                    }
-                                    else if (!job3.verifCreateDestination())
-                                    {
-                                        view.errorSave(3, false);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        job3.copy();
-                                    }
-                                }
-                                else if (nbjob == 4)
-                                {
-                                    if (!job4.verifExist(this.job4.PathSource))
-                                    {
-                                        view.errorSave(4, true);
-                                        break;
-                                    }
-                                    else if (!job2.verifCreateDestination())
-                                    {
-                                        view.errorSave(4, false);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        job4.copy();
-                                    }
-                                }
-                                else if (nbjob == 5)
-                                {
-                                    if (!job5.verifExist(this.job5.PathSource))
-                                    {
-                                        view.errorSave(5, true);
-                                        break;
-                                    }
-                                    else if (!job5.verifCreateDestination())
-                                    {
-                                        view.errorSave(5, false);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        job5.copy();
-                                    }
-                                }
-
                             }
 
                             view.completedSave(nbjob);
@@ -361,11 +279,14 @@ namespace easySave.ViewModel
         /// </summary>
         public void updateHeader()
         {
-            view.Job1Name = this.job1.Name;
-            view.Job2Name = this.job2.Name;
-            view.Job3Name = this.job3.Name;
-            view.Job4Name = this.job4.Name;
-            view.Job5Name = this.job5.Name;
+            view.JobsName = new List<string>();
+
+            for (int i = 0; i < nbJobMax; i++)
+            {
+                string name = this.jobs[i].Name;
+
+                view.JobsName.Add(name);
+            }
         }
 
         /// <summary>
@@ -374,81 +295,18 @@ namespace easySave.ViewModel
         /// <param name="numberJob">Number of the job</param>
         public void createJob(int numberJob)
         {
-            if (numberJob == 1)
-            {
-                this.job1.Name = view.CreateJobName;
-                this.job1.PathSource = view.CreateJobSource;
-                this.job1.PathDestination = view.CreateJobDestination;
-                if (view.CreateJobType)
-                {
-                    this.job1.TypeSave = true;
-                }
-                else
-                {
-                    this.job1.TypeSave = false;
-                }
-            }
+            this.jobs[numberJob - 1].Name = view.CreateJobName;
+            this.jobs[numberJob - 1].PathSource = view.CreateJobSource;
+            this.jobs[numberJob - 1].PathDestination = view.CreateJobDestination;
 
-            if (numberJob == 2)
+            if (view.CreateJobType)
             {
-                this.job2.Name = view.CreateJobName;
-                this.job2.PathSource = view.CreateJobSource;
-                this.job2.PathDestination = view.CreateJobDestination;
-                if (view.CreateJobType)
-                {
-                    this.job2.TypeSave = true;
-                }
-                else
-                {
-                    this.job2.TypeSave = false;
-                }
+                this.jobs[numberJob - 1].TypeSave = true;
             }
-
-            if (numberJob == 3)
+            else
             {
-                this.job3.Name = view.CreateJobName;
-                this.job3.PathSource = view.CreateJobSource;
-                this.job3.PathDestination = view.CreateJobDestination;
-                if (view.CreateJobType)
-                {
-                    this.job3.TypeSave = true;
-                }
-                else
-                {
-                    this.job3.TypeSave = false;
-                }
+                this.jobs[numberJob - 1].TypeSave = false;
             }
-
-            if (numberJob == 4)
-            {
-                this.job4.Name = view.CreateJobName;
-                this.job4.PathSource = view.CreateJobSource;
-                this.job4.PathDestination = view.CreateJobDestination;
-                if (view.CreateJobType)
-                {
-                    this.job4.TypeSave = true;
-                }
-                else
-                {
-                    this.job4.TypeSave = false;
-                }
-            }
-
-            if (numberJob == 5)
-            {
-                this.job5.Name = view.CreateJobName;
-                this.job5.PathSource = view.CreateJobSource;
-                this.job5.PathDestination = view.CreateJobDestination;
-                if (view.CreateJobType)
-                {
-                    this.job5.TypeSave = true;
-                }
-                else
-                {
-                    this.job5.TypeSave = false;
-                }
-            }
-
 
             updateHeader(); //Update the header
 
@@ -461,16 +319,6 @@ namespace easySave.ViewModel
         /// </summary>
         public void serializeJob()
         {
-            //Create or reset the job table
-            this.jobs = new List<Models.job>();
-
-            //Add the jobs in the table
-            this.jobs.Add(this.job1);
-            this.jobs.Add(this.job2);
-            this.jobs.Add(this.job3);
-            this.jobs.Add(this.job4);
-            this.jobs.Add(this.job5);
-
             //Convert the table to suit the json format (in string)
             jsonString = JsonConvert.SerializeObject(jobs, Formatting.Indented);
         }
@@ -481,11 +329,6 @@ namespace easySave.ViewModel
         public void deserializeJob()
         {
             var listJob = JsonConvert.DeserializeObject<List<Models.job>>(jsonString);
-
-            /*foreach (var job in listJob)
-            {
-                Console.WriteLine(job.ToString());
-            }*/
         }
 
         /// <summary>
@@ -508,7 +351,6 @@ namespace easySave.ViewModel
                 {
                     jsonWriter.Formatting = Formatting.Indented;
                     serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonString));
-                    //Console.WriteLine("Export Ok");
                 }
             }
         }
@@ -532,18 +374,16 @@ namespace easySave.ViewModel
                 serializeJob(); //Serialization jobs 
                 exportConfig(); //Export jobs
             }
-
-            //StreamReader instance to read text from a file
-            using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
+            else
             {
-                using (var jsonReader = new JsonTextReader(streamReader))
+                //StreamReader instance to read text from a file
+                using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJob.json"))
                 {
-                    //Deserialization and import into the job table
-                    jobs = serializer.Deserialize<List<Models.job>>(jsonReader);
-                    /*foreach (var job in jobs)
+                    using (var jsonReader = new JsonTextReader(streamReader))
                     {
-                        Console.WriteLine(job.ToString());
-                    }*/
+                        //Deserialization and import into the job table
+                        jobs = serializer.Deserialize<List<Models.job>>(jsonReader);
+                    }
                 }
             }
         }
@@ -562,43 +402,15 @@ namespace easySave.ViewModel
 
         public void deleteJob(int numberJob)
         {
-            if (numberJob == 1)
-            {
-                this.job1.Name = String.Empty;
-                this.job1.PathSource = String.Empty;
-                this.job1.PathDestination = String.Empty;
+            this.jobs[numberJob - 1].Name = null;
+            this.jobs[numberJob - 1].PathSource = null;
+            this.jobs[numberJob - 1].PathDestination = null;
+            this.jobs[numberJob - 1].TypeSave = false;
 
-            }
-            if (numberJob == 2)
-            {
-                this.job2.Name = String.Empty;
-                this.job2.PathSource = String.Empty;
-                this.job2.PathDestination = String.Empty;
-
-            }
-            if (numberJob == 3)
-            {
-                this.job3.Name = String.Empty;
-                this.job3.PathSource = String.Empty;
-                this.job3.PathDestination = String.Empty;
-
-            }
-            if (numberJob == 4)
-            {
-                this.job4.Name = String.Empty;
-                this.job4.PathSource = String.Empty;
-                this.job4.PathDestination = String.Empty;
-
-            }
-            if (numberJob == 5)
-            {
-                this.job5.Name = String.Empty;
-                this.job5.PathSource = String.Empty;
-                this.job5.PathDestination = String.Empty;
-
-            }
             updateHeader(); //Update the job list
 
+            serializeJob(); //Serialization jobs 
+            exportConfig(); //Export jobs
         }
         #endregion
     }
