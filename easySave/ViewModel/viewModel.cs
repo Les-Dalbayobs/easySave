@@ -189,6 +189,46 @@ namespace easySave.ViewModel
 
                             if (nbjob == 6)
                             {
+                                int numberJob = 1;
+                                bool error = false;
+
+                                foreach (var job in jobs)
+                                {
+                                    if (job.PathSource != null || job.PathDestination != null)
+                                    {
+                                        if (!job.verifExist(job.PathSource))
+                                        {
+                                            view.errorSave(numberJob, true);
+                                            error = true;
+                                            break;
+                                        }
+                                        if (!job.verifCreateDestination())
+                                        {
+                                            view.errorSave(numberJob, false);
+                                            error = true;
+                                            break;
+                                        }
+                                    }
+                                    numberJob++;
+                                }
+                                if (!error)
+                                {
+                                    foreach (var job in jobs)
+                                    {
+                                        if (job.PathSource != null || job.PathDestination != null)
+                                        {
+                                            job.copy();
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+
+                            /*if (nbjob == 6)
+                            {
                                 if (!job1.verifExist(this.job1.PathSource))
                                 {
                                     view.errorSave(1, true);
@@ -246,9 +286,7 @@ namespace easySave.ViewModel
                                     job3.copy();
                                     job4.copy();
                                     job5.copy();
-                                }
-
-                            }
+                                }*/
                             else
                             {
                                 if (!this.jobs[nbjob -1].verifExist(this.jobs[nbjob -1].PathSource))
