@@ -474,6 +474,7 @@ namespace easySave.Views
         {
             int job; //Choice of menu
 
+            Console.Clear();
             header();  // Display the list of jobs
             Console.WriteLine("6. Save all \n");
             Console.WriteLine("7. Exit\n");
@@ -517,7 +518,7 @@ namespace easySave.Views
         public int confirmSave(int nbjob) 
         {
             int menu; //Choice of menu
-
+            Console.Clear();
             header();
 
             //Display of the error message
@@ -572,6 +573,7 @@ namespace easySave.Views
         public void completedSave(int nbjob)
         {
             //Display of the confirmation message
+            Console.Clear();
 
             header();
 
