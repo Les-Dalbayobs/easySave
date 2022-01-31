@@ -98,15 +98,15 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ------------MENU-----------");
+            Console.WriteLine(" ------------MENU-----------\n");
 
             Console.WriteLine(" 1.Create");
             Console.WriteLine(" 2.Delete");
             Console.WriteLine(" 3.Save");
-            Console.WriteLine(" 4.Language - Work in progress");
-            Console.WriteLine(" 5.Exit");
+            Console.WriteLine(" 4.Language - Work in progress\n");
+            Console.WriteLine(" 5.Exit\n");
 
-            Console.WriteLine(" ---------------------------");
+            Console.WriteLine(" ---------------------------\n");
 
             Console.Write(" Choose number and press enter : ");
             //End of menu display
@@ -353,7 +353,7 @@ namespace easySave.Views
             Console.Clear(); //Clean console
 
             //Display of the error message
-            Console.WriteLine(" Error, please try again");
+            Console.WriteLine(" Error, please enter a valid choice");
             Console.Write(" Press enter to continue");
             //End display
 
@@ -474,10 +474,12 @@ namespace easySave.Views
         {
             int job; //Choice of menu
 
-            header();  
+            header();  // Display the list of jobs
+            Console.WriteLine("6. Save all \n");
+            Console.WriteLine("7. Exit\n");
 
             //Displaying the menu
-            Console.WriteLine(" ----------SAVE JOB---------");
+            Console.WriteLine(" ----------SAVE JOB---------\n");
 
             Console.Write(" Choose job number and press enter : ");
             //End of menu display
@@ -489,7 +491,7 @@ namespace easySave.Views
                 job = Convert.ToInt32(Console.ReadLine());
 
                 //if - to handle typing errors
-                if (job > 6 || job < 1)
+                if (job > 7 || job < 1)
                 {
                     errorMenu(); //Launch the error window
                     int menuError = chooseSave(); //Restarts the menu display and saves the return value
