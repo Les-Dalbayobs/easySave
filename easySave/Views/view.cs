@@ -606,8 +606,7 @@ namespace easySave.Views
             Console.WriteLine(" ------CHANGE LANGUAGE------");
             Console.WriteLine(" 1. Français");
             Console.WriteLine(" 2. English \n");
-            Console.WriteLine(" 6. Exit");
-            Console.WriteLine("");
+            Console.WriteLine(" 6. Exit\n");
             Console.Write(" Choose number and press enter : ");
             // End of menu display
 
@@ -637,7 +636,7 @@ namespace easySave.Views
             Console.Clear();
 
             Console.WriteLine(" ---------VALIDATION--------");
-            Console.WriteLine("Are you sure ?");
+            Console.WriteLine(" Are you sure ?");
             Console.WriteLine(" 1.Yes");
             Console.WriteLine(" 2.No \n");
 
