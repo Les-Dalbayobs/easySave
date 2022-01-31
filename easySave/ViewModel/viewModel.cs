@@ -221,20 +221,29 @@ namespace easySave.ViewModel
                             }
                             else
                             {
-                                if (!this.jobs[nbjob - 1].verifExist(this.jobs[nbjob - 1].PathSource))
+                                if (this.jobs[nbjob - 1].PathSource != null || this.jobs[nbjob -1 ].PathDestination != null)
                                 {
-                                    view.errorSave(nbjob, true);
-                                    break;
-                                }
-                                else if (!this.jobs[nbjob - 1].verifCreateDestination())
-                                {
-                                    view.errorSave(nbjob, false);
-                                    break;
+                                    if (!this.jobs[nbjob - 1].verifExist(this.jobs[nbjob - 1].PathSource))
+                                    {
+                                        view.errorSave(nbjob, true);
+                                        break;
+                                    }
+                                    else if (!this.jobs[nbjob - 1].verifCreateDestination())
+                                    {
+                                        view.errorSave(nbjob, false);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        this.jobs[nbjob - 1].copy();
+                                    }
                                 }
                                 else
                                 {
-                                    this.jobs[nbjob - 1].copy();
+                                    view.errorMenu();
+                                    break;
                                 }
+                                
                             }
 
                             view.completedSave(nbjob);
