@@ -353,7 +353,7 @@ namespace easySave.Views
             Console.Clear(); //Clean console
 
             //Display of the error message
-            Console.WriteLine(" Error, please try again");
+            Console.WriteLine(" Error, please enter a valid choice");
             Console.Write(" Press enter to continue");
             //End display
 
@@ -474,10 +474,13 @@ namespace easySave.Views
         {
             int job; //Choice of menu
 
-            header();  
+            Console.Clear();
+            header();  // Display the list of jobs
 
             //Displaying the menu
             Console.WriteLine(" ----------SAVE JOB---------");
+            Console.WriteLine(" 6. Save all ");
+            Console.WriteLine(" 7. Exit\n");
 
             Console.Write(" Choose job number and press enter : ");
             //End of menu display
@@ -489,7 +492,7 @@ namespace easySave.Views
                 job = Convert.ToInt32(Console.ReadLine());
 
                 //if - to handle typing errors
-                if (job > 6 || job < 1)
+                if (job > 7 || job < 1)
                 {
                     errorMenu(); //Launch the error window
                     int menuError = chooseSave(); //Restarts the menu display and saves the return value
@@ -515,23 +518,23 @@ namespace easySave.Views
         public int confirmSave(int nbjob) 
         {
             int menu; //Choice of menu
-
+            Console.Clear();
             header();
 
             //Display of the error message
             Console.WriteLine(" ----------SAVE JOB---------");
             if (nbjob == 6)
             {
-                Console.WriteLine(" You have selected all jobs, Are you sure ?");
+                Console.WriteLine(" You have selected all jobs, Are you sure ?\n");
             }
             else
             {
-                Console.WriteLine(" You selected job number " + nbjob + ", Are you sure ?");
+                Console.WriteLine(" You selected job number " + nbjob + ", are you sure ?\n");
             }
 
             Console.WriteLine(" ---------VALIDATION--------");
-            Console.WriteLine(" 1.Yes");
-            Console.WriteLine(" 2.No");
+            Console.WriteLine(" 1. Yes");
+            Console.WriteLine(" 2. No");
 
 
             Console.Write(" Choose number and press enter : ");
@@ -570,13 +573,14 @@ namespace easySave.Views
         public void completedSave(int nbjob)
         {
             //Display of the confirmation message
+            Console.Clear();
 
             header();
 
             Console.WriteLine(" ----------SAVE JOB---------");
             if (nbjob == 6)
             {
-                Console.WriteLine("All jobs were saved");
+                Console.WriteLine("All jobs successfully saved");
             }
             else
             {

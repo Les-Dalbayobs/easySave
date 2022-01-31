@@ -174,6 +174,11 @@ namespace easySave.ViewModel
                         {
                             int nbjob = view.chooseSave();
 
+                            if (nbjob == 7)
+                            {
+                                break;
+                            }
+
                             int valid = view.confirmSave(nbjob);
                             if (valid == 2)
                             {
