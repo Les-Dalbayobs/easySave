@@ -524,16 +524,16 @@ namespace easySave.Views
             Console.WriteLine(" ----------SAVE JOB---------");
             if (nbjob == 6)
             {
-                Console.WriteLine(" You have selected all jobs, Are you sure ?");
+                Console.WriteLine(" You have selected all jobs, Are you sure ?\n");
             }
             else
             {
-                Console.WriteLine(" You selected job number " + nbjob + ", Are you sure ?");
+                Console.WriteLine(" You selected job number " + nbjob + ", are you sure ?\n");
             }
 
             Console.WriteLine(" ---------VALIDATION--------");
-            Console.WriteLine(" 1.Yes");
-            Console.WriteLine(" 2.No");
+            Console.WriteLine(" 1. Yes");
+            Console.WriteLine(" 2. No");
 
 
             Console.Write(" Choose number and press enter : ");
@@ -578,7 +578,7 @@ namespace easySave.Views
             Console.WriteLine(" ----------SAVE JOB---------");
             if (nbjob == 6)
             {
-                Console.WriteLine("All jobs were saved");
+                Console.WriteLine("All jobs successfully saved");
             }
             else
             {
