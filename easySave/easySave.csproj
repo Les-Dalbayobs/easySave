@@ -10,26 +10,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Ressources\strings_en.Designer.cs">
+    <Compile Update="Resources\strings.en.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>strings_en.resx</DependentUpon>
+      <DependentUpon>strings.en.resx</DependentUpon>
     </Compile>
-    <Compile Update="Ressources\strings_fr.Designer.cs">
+    <Compile Update="Resources\strings.fr.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>strings_fr.resx</DependentUpon>
+      <DependentUpon>strings.fr.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Ressources\strings_en.resx">
+    <EmbeddedResource Update="Resources\strings.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>strings_en.Designer.cs</LastGenOutput>
+      <LastGenOutput>strings.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Ressources\strings_fr.resx">
+    <EmbeddedResource Update="Resources\strings.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>strings_fr.Designer.cs</LastGenOutput>
+      <LastGenOutput>strings.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

@@ -7,7 +7,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
 using System.Text;
+using System.Threading;
 
 /// <summary>
 /// View namespace
@@ -27,6 +31,8 @@ namespace easySave.Views
         string createJobSource; //Storing the source of the job the user wants to create 
         string createJobDestination; //Storing the destination of the job the user wants to create 
         bool createJobType; //Storing the type of the job the user wants to create 
+
+        ResourceManager rm;
         #endregion
 
         #region properties
@@ -62,7 +68,8 @@ namespace easySave.Views
         /// </summary>
         public view()
         {
-
+           rm = new ResourceManager("easySave.Resources.strings", Assembly.GetExecutingAssembly());
+           //Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
         }
         #endregion
 
@@ -78,7 +85,7 @@ namespace easySave.Views
             int nbJobs = 1;
 
             //Displaying the menu
-            Console.WriteLine(" ----------EASYSAVE---------");
+            Console.WriteLine(rm.GetString("easySave"));
 
             foreach (string job in jobsName)
             {
@@ -98,7 +105,7 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ------------MENU-----------");
+            /*Console.WriteLine(" ------------MENU-----------");
 
             Console.WriteLine(" 1.Create");
             Console.WriteLine(" 2.Delete");
@@ -108,7 +115,8 @@ namespace easySave.Views
 
             Console.WriteLine(" ---------------------------");
 
-            Console.Write(" Choose number and press enter : ");
+            Console.Write(" Choose number and press enter : ");*/
+            Console.Write(rm.GetString("menu"));
             //End of menu display
 
             //Try catch to manage typing errors
@@ -147,10 +155,11 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ---------CREATE JOB--------");
+            /*Console.WriteLine(" ---------CREATE JOB--------");
             Console.WriteLine(" 6.Exit");
 
-            Console.Write(" Choose job number and press enter : ");
+            Console.Write(" Choose job number and press enter : ");*/
+            Console.Write(rm.GetString("menuCreate"));
             //End of menu display
 
             int job;

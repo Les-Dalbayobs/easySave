@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace easySave.Ressources {
+namespace easySave.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace easySave.Ressources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class strings_en {
+    internal class strings_fr {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal strings_en() {
+        internal strings_fr() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace easySave.Ressources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("easySave.Ressources.strings_en", typeof(strings_en).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("easySave.Resources.strings_fr", typeof(strings_fr).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,22 @@ namespace easySave.Ressources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ----------------------MENU----------------------
+        /// 1. Créer
+        /// 2. Supprimer
+        /// 3. Sauvegarder
+        /// 4. Langue
+        /// 5. Quitter
+        /// --------------------------------------------------
+        /// Choissisez un chiffre et appuyez sur entrer : .
+        /// </summary>
+        internal static string menu {
+            get {
+                return ResourceManager.GetString("menu", resourceCulture);
             }
         }
     }
