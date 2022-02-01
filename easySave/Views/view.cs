@@ -69,7 +69,7 @@ namespace easySave.Views
         public view()
         {
            rm = new ResourceManager("easySave.Resources.strings", Assembly.GetExecutingAssembly());
-           Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
+           //Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
         }
         #endregion
 
