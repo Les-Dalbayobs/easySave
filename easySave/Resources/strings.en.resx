@@ -117,8 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="complete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
   <data name="createDestination" xml:space="preserve">
     <value> Destination path : </value>
+  </data>
+  <data name="createFinish" xml:space="preserve">
+    <value> ------------CREATE JOB------------
+ Job created
+ Press enter to continue</value>
   </data>
   <data name="createName" xml:space="preserve">
     <value> -------------CREATE JOB------------
@@ -129,16 +137,58 @@
     <value> Source path : </value>
   </data>
   <data name="createType" xml:space="preserve">
-    <value> ------------------TYPE----------------
+    <value> ----------------TYPE---------------
  1. Complete
  2. Differential
  Type : </value>
   </data>
   <data name="createValidation" xml:space="preserve">
-    <value />
+    <value> -------------CREATE JOB------------
+ Checking the information
+ Job name : </value>
+  </data>
+  <data name="deleteConfirm" xml:space="preserve">
+    <value> ---------------DELETE--------------
+ Do you really want to delete the job n°</value>
+  </data>
+  <data name="deleteFinish" xml:space="preserve">
+    <value> ---------------DELETE--------------
+ Job n°</value>
+  </data>
+  <data name="deleteFinish2" xml:space="preserve">
+    <value> deleted
+ Press enter to continue</value>
+  </data>
+  <data name="differential" xml:space="preserve">
+    <value>Differential</value>
   </data>
   <data name="easySave" xml:space="preserve">
     <value> --------------EASYSAVE-------------</value>
+  </data>
+  <data name="errorMenu" xml:space="preserve">
+    <value> ---------------ERROR---------------- 
+ Error, please try again
+ Press enter to continue</value>
+  </data>
+  <data name="errorSave" xml:space="preserve">
+    <value> ------------ERROR SAVE------------
+ No backup executed</value>
+  </data>
+  <data name="errorSaveDestination" xml:space="preserve">
+    <value> Error in the destination path of job n°</value>
+  </data>
+  <data name="errorSaveSource" xml:space="preserve">
+    <value> Error in the source path of job n°</value>
+  </data>
+  <data name="header" xml:space="preserve">
+    <value> Job n°</value>
+  </data>
+  <data name="languageMenu" xml:space="preserve">
+    <value> --------CHANGE LANGUAGE-------
+ 1. French
+ 2. English
+ 3. Exit
+ Choose number and press enter : </value>
   </data>
   <data name="menu" xml:space="preserve">
     <value> ----------------MENU---------------
@@ -154,5 +204,49 @@
     <value> -------------CREATE JOB------------
  6. Exit
  Choose job number and press enter : </value>
+  </data>
+  <data name="menuDelete" xml:space="preserve">
+    <value> ---------------DELETE--------------
+ 6. Exit
+ Choose job number and press enter : </value>
+  </data>
+  <data name="menuSave" xml:space="preserve">
+    <value> --------------SAVE JOB-------------
+ 6. Save all
+ 7. Exit
+ Choose job number and press enter : </value>
+  </data>
+  <data name="pressEnter" xml:space="preserve">
+    <value> Press enter to continue</value>
+  </data>
+  <data name="saveAll" xml:space="preserve">
+    <value> --------------SAVE JOB------------- 
+ You have selected all jobs, are you sure ?</value>
+  </data>
+  <data name="saveFinishAll" xml:space="preserve">
+    <value> --------------SAVE JOB-------------
+ All jobs successfully saved
+ Press enter to continue</value>
+  </data>
+  <data name="saveFinishOne" xml:space="preserve">
+    <value> --------------SAVE JOB-------------
+ Job n°</value>
+  </data>
+  <data name="saveFinishOne2" xml:space="preserve">
+    <value> successfully saved
+ Press enter to continue</value>
+  </data>
+  <data name="saveOne" xml:space="preserve">
+    <value> --------------SAVE JOB------------- 
+ You selected job number </value>
+  </data>
+  <data name="saveOne2" xml:space="preserve">
+    <value>, are you sure ?</value>
+  </data>
+  <data name="validation" xml:space="preserve">
+    <value> ------------VALIDATION------------
+ 1. Yes
+ 2. No
+ Choose number and press enter :</value>
   </data>
 </root>
