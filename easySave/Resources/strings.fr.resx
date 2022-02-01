@@ -117,8 +117,84 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="complete" xml:space="preserve">
+    <value> Complète</value>
+  </data>
+  <data name="createDestination" xml:space="preserve">
+    <value> Chemin de destination :</value>
+  </data>
+  <data name="createFinish" xml:space="preserve">
+    <value> ----------CREATION D'UNE SAUVEGARDE---------
+
+Sauvegarde créée avec succès
+Appuyez sur entrer pour continuer</value>
+  </data>
+  <data name="createName" xml:space="preserve">
+    <value> ----------CREATION D'UNE SAUVEGARDE---------
+
+ Remplissez les champs vides
+ Choissisez un chiffre et appuyez sur entrer :</value>
+  </data>
+  <data name="createSource" xml:space="preserve">
+    <value> Chemin source :</value>
+  </data>
+  <data name="createType" xml:space="preserve">
+    <value> -----------------------TYPE------------------------
+
+ 1. Complète
+ 2. Différentielle
+
+Type :</value>
+  </data>
+  <data name="createValidation" xml:space="preserve">
+    <value> ----------CREATION D'UNE SAUVEGARDE---------
+
+ Vérifiez l'exactitude de vos informations
+ Nom de la sauvegarde : </value>
+  </data>
+  <data name="deleteConfirm" xml:space="preserve">
+    <value> --------------------SUPPRESSION-------------------
+ Voulez-vous réeellement supprimer la sauvegarde n°</value>
+  </data>
+  <data name="deleteFinish" xml:space="preserve">
+    <value> --------------------SUPPRESSION-------------------
+ Sauvegarde n°</value>
+  </data>
+  <data name="deleteFinish2" xml:space="preserve">
+    <value>supprimée avec succès
+ Appuyez sur entrer pour continuer</value>
+  </data>
+  <data name="differential" xml:space="preserve">
+    <value> Différentielle</value>
+  </data>
   <data name="easySave" xml:space="preserve">
     <value> ---------------------EASYSAVE---------------------</value>
+  </data>
+  <data name="errorMenu" xml:space="preserve">
+    <value> -----------------------ERREUR----------------------
+ Il y a une erreur. Rééssayez.</value>
+  </data>
+  <data name="errorSave" xml:space="preserve">
+    <value> ---------------ERREUR SAUVEGARDE--------------
+ Aucune sauvegarde effectuée</value>
+  </data>
+  <data name="errorSaveDestination" xml:space="preserve">
+    <value> Erreur dans le chemin destination de la sauvegarde n°</value>
+  </data>
+  <data name="errorSaveSource" xml:space="preserve">
+    <value> Erreur dans le chemin source de la sauvegarde n°</value>
+  </data>
+  <data name="header" xml:space="preserve">
+    <value> Sauvegarde n°</value>
+  </data>
+  <data name="languageMenu" xml:space="preserve">
+    <value> -----------------------LANGUE---------------------
+ Changer la langue
+ 1. Français
+ 2. Anglais
+ 3. Quitter
+ 
+ Choisissez un nombre et faites entrer :</value>
   </data>
   <data name="menu" xml:space="preserve">
     <value> -----------------------MENU-----------------------
@@ -131,8 +207,54 @@
  Choissisez un chiffre et appuyez sur entrer : </value>
   </data>
   <data name="menuCreate" xml:space="preserve">
-    <value> ----------------CREATION D'UN JOB----------------
+    <value> ----------CREATION D'UNE SAUVEGARDE---------
  6. Sortir
  Choissisez un chiffre et appuyez sur entrer : </value>
+  </data>
+  <data name="menuDelete" xml:space="preserve">
+    <value> --------------------SUPPRESSION-------------------
+ 6. Quitter
+
+ Entrez un chiffre et appuyez sur entrer : </value>
+  </data>
+  <data name="menuSave" xml:space="preserve">
+    <value> --------------------SAUVEGARDER------------------
+ 6. Tout sauvegarder
+ 7. Quitter
+
+ Choississez un chiffre et appuyez sur entrer :</value>
+  </data>
+  <data name="pressEnter" xml:space="preserve">
+    <value> Appuyez sur entrer pour continuer</value>
+  </data>
+  <data name="saveAll" xml:space="preserve">
+    <value> --------------------SAUVEGARDER------------------
+ Vous avez choisi de tout sauvegarder. êtes-vous sûr ?</value>
+  </data>
+  <data name="saveFinishAll" xml:space="preserve">
+    <value> --------------------SAUVEGARDER------------------
+ Toutes les sauvegardes ont correctement été effectuées.</value>
+  </data>
+  <data name="saveFinishOne" xml:space="preserve">
+    <value>  --------------------SAUVEGARDER-----------------
+  Sauvegarde n°</value>
+  </data>
+  <data name="saveFinishOne2" xml:space="preserve">
+    <value>effectuée avec succès
+
+ Appuyez sur entrer pour continuer</value>
+  </data>
+  <data name="saveOne" xml:space="preserve">
+    <value> Vous avez sélectionné la sauvegarde n°</value>
+  </data>
+  <data name="saveOne2" xml:space="preserve">
+    <value>, êtes-vous sûr ?</value>
+  </data>
+  <data name="validation" xml:space="preserve">
+    <value> --------------------VALIDATION--------------------
+ 1. Oui
+ 2. Non
+
+Êtes-vous sûr ?</value>
   </data>
 </root>
