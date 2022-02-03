@@ -7,7 +7,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
 using System.Text;
+using System.Threading;
 
 /// <summary>
 /// View namespace
@@ -27,6 +31,8 @@ namespace easySave.Views
         string createJobSource; //Storing the source of the job the user wants to create 
         string createJobDestination; //Storing the destination of the job the user wants to create 
         bool createJobType; //Storing the type of the job the user wants to create 
+
+        ResourceManager rm;
         #endregion
 
         #region properties
@@ -62,7 +68,8 @@ namespace easySave.Views
         /// </summary>
         public view()
         {
-
+           rm = new ResourceManager("easySave.Resources.strings", Assembly.GetExecutingAssembly());
+           Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
         }
         #endregion
 
@@ -78,11 +85,11 @@ namespace easySave.Views
             int nbJobs = 1;
 
             //Displaying the menu
-            Console.WriteLine(" ----------EASYSAVE---------");
+            Console.WriteLine(rm.GetString("easySave"));
 
             foreach (string job in jobsName)
             {
-                Console.WriteLine(" Job n°" + nbJobs.ToString() +": " + job);
+                Console.WriteLine(rm.GetString("header") + nbJobs.ToString() +" : " + job);
                 nbJobs++;
             }
         }
@@ -98,17 +105,7 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ------------MENU-----------");
-
-            Console.WriteLine(" 1.Create");
-            Console.WriteLine(" 2.Delete");
-            Console.WriteLine(" 3.Save");
-            Console.WriteLine(" 4.Language - Work in progress");
-            Console.WriteLine(" 5.Exit");
-
-            Console.WriteLine(" ---------------------------");
-
-            Console.Write(" Choose number and press enter : ");
+            Console.Write(rm.GetString("menu"));
             //End of menu display
 
             //Try catch to manage typing errors
@@ -134,7 +131,6 @@ namespace easySave.Views
                 return menuError; //Returns the menu choice
             }
 
-
             return menu; //Returns the menu choice
         }
 
@@ -147,10 +143,7 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ---------CREATE JOB--------");
-            Console.WriteLine(" 6.Exit");
-
-            Console.Write(" Choose job number and press enter : ");
+            Console.Write(rm.GetString("menuCreate"));
             //End of menu display
 
             int job;
@@ -189,10 +182,7 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ---------CREATE JOB--------");
-            Console.WriteLine(" Fill in the fields");
-
-            Console.Write(" Job name : ");
+            Console.Write(rm.GetString("createName"));
             //Checks if the information already filled in should be displayed
             if (infoDisplay) 
             {
@@ -203,9 +193,9 @@ namespace easySave.Views
             {
                 this.createJobName = Console.ReadLine();
             }
-            
 
-            Console.Write(" Source path : ");
+
+            Console.Write(rm.GetString("createSource"));
             //Checks if the information already filled in should be displayed
             if (infoDisplay)
             {
@@ -218,7 +208,7 @@ namespace easySave.Views
             }
             
 
-            Console.Write(" Destination path : ");
+            Console.Write(rm.GetString("createDestination"));
             //Checks if the information already filled in should be displayed
             if (infoDisplay)
             {
@@ -230,11 +220,7 @@ namespace easySave.Views
                 this.createJobDestination = Console.ReadLine();
             }
 
-            Console.WriteLine(" -----------TYPE----------");
-            Console.WriteLine(" Choose the type :");
-            Console.WriteLine(" 1.Complete");
-            Console.WriteLine(" 2.Differential");
-            Console.Write(" Type : ");
+            Console.Write(rm.GetString("createType"));
 
             string type = Console.ReadLine();
 
@@ -268,18 +254,15 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ---------CREATE JOB--------");
-            Console.WriteLine(" Checking the information");
-
-            Console.Write(" Job name : ");
+            Console.Write(rm.GetString("createValidation"));
             //Displays the value entered by the user
             Console.WriteLine(this.createJobName);
 
-            Console.Write(" Source path : ");
+            Console.Write(rm.GetString("createSource"));
             //Displays the value entered by the user
             Console.WriteLine(this.createJobSource);
 
-            Console.Write(" Destination path : ");
+            Console.Write(rm.GetString("createDestination"));
             //Displays the value entered by the user
             Console.WriteLine(this.createJobDestination);
 
@@ -287,19 +270,14 @@ namespace easySave.Views
             //Check if the user has chosen differential or complete
             if (this.createJobType)
             {
-                Console.WriteLine("Complete");
+                Console.WriteLine(rm.GetString("complete"));
             }
             else
             {
-                Console.WriteLine("Differential");
+                Console.WriteLine(rm.GetString("differential"));
             }
 
-            Console.WriteLine(" ---------VALIDATION--------");
-            Console.WriteLine(" 1.Yes");
-            Console.WriteLine(" 2.No");
-
-
-            Console.Write(" Choose number and press enter : ");
+            Console.Write(rm.GetString("validation"));
             //End of menu display
 
             //Try catch to manage typing errors
@@ -336,10 +314,7 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ---------CREATE JOB--------");
-
-            Console.WriteLine(" Job created");
-            Console.Write(" Press enter to continue");
+            Console.Write(rm.GetString("createFinish"));
             //End display
 
             Console.ReadLine(); //Waits for the user to press enter
@@ -353,8 +328,7 @@ namespace easySave.Views
             Console.Clear(); //Clean console
 
             //Display of the error message
-            Console.WriteLine(" Error, please enter a valid choice");
-            Console.Write(" Press enter to continue");
+            Console.Write(rm.GetString("errorMenu"));
             //End display
 
             Console.ReadLine(); //Waits for the user to press enter
@@ -373,10 +347,7 @@ namespace easySave.Views
             header(); //Display header
 
             //Displaying the menu
-            Console.WriteLine(" ---------DELETE JOB--------");
-            Console.WriteLine(" 6.Exit");
-
-            Console.Write(" Choose job number and press enter : ");
+            Console.Write(rm.GetString("menuDelete"));
             //End of menu display
 
             //Try catch to manage typing errors
@@ -417,15 +388,9 @@ namespace easySave.Views
             header(); //Display header
 
             //Display of the error message
-            Console.WriteLine(" ---------DELETE JOB--------");
-            Console.WriteLine(" Do you really want to delete the job n°" + jobNumber);
+            Console.WriteLine(rm.GetString("deleteConfirm") + jobNumber);
 
-            Console.WriteLine(" ---------VALIDATION--------");
-            Console.WriteLine(" 1.Yes");
-            Console.WriteLine(" 2.No");
-
-
-            Console.Write(" Choose number and press enter : ");
+            Console.Write(rm.GetString("validation"));
             //End of menu display
 
             //Try catch to manage typing errors
@@ -462,9 +427,7 @@ namespace easySave.Views
             header(); //Display header
 
             //Display of the error message
-            Console.WriteLine(" ---------DELETE JOB--------");
-            Console.WriteLine(" Job n°" + jobNumber + " deleted");
-            Console.Write(" Press enter to continue");
+            Console.WriteLine(rm.GetString("deleteFinish") + jobNumber + rm.GetString("deleteFinish2"));        
             //End display
 
             Console.ReadLine(); //Waits for the user to press enter
@@ -477,12 +440,7 @@ namespace easySave.Views
             Console.Clear();
             header();  // Display the list of jobs
 
-            //Displaying the menu
-            Console.WriteLine(" ----------SAVE JOB---------");
-            Console.WriteLine(" 6. Save all ");
-            Console.WriteLine(" 7. Exit\n");
-
-            Console.Write(" Choose job number and press enter : ");
+            Console.Write(rm.GetString("menuSave"));
             //End of menu display
 
             //Try catch to manage typing errors
@@ -518,26 +476,20 @@ namespace easySave.Views
         public int confirmSave(int nbjob) 
         {
             int menu; //Choice of menu
-            Console.Clear();
+
             header();
 
             //Display of the error message
-            Console.WriteLine(" ----------SAVE JOB---------");
             if (nbjob == 6)
             {
-                Console.WriteLine(" You have selected all jobs, Are you sure ?\n");
+                Console.WriteLine(rm.GetString("saveAll"));
             }
             else
             {
-                Console.WriteLine(" You selected job number " + nbjob + ", are you sure ?\n");
+                Console.WriteLine(rm.GetString("saveOne") + nbjob + rm.GetString("saveOne2"));
             }
 
-            Console.WriteLine(" ---------VALIDATION--------");
-            Console.WriteLine(" 1. Yes");
-            Console.WriteLine(" 2. No");
-
-
-            Console.Write(" Choose number and press enter : ");
+            Console.Write(rm.GetString("validation"));
             //End of menu display
 
             //Try catch to manage typing errors
@@ -577,17 +529,14 @@ namespace easySave.Views
 
             header();
 
-            Console.WriteLine(" ----------SAVE JOB---------");
             if (nbjob == 6)
             {
-                Console.WriteLine("All jobs successfully saved");
+                Console.WriteLine(rm.GetString("saveFinishAll"));
             }
             else
             {
-                Console.WriteLine(" Job n°" + nbjob + " successfully saved");
+                Console.WriteLine(rm.GetString("saveFinishOne") + nbjob + rm.GetString("saveFinishOne2"));
             }
-        
-            Console.Write(" Press enter to continue");
             //End of display
 
             Console.ReadLine(); //Waits for the user to press enter
@@ -603,11 +552,7 @@ namespace easySave.Views
 
             Console.Clear();
 
-            Console.WriteLine(" ------CHANGE LANGUAGE------");
-            Console.WriteLine(" 1. Français");
-            Console.WriteLine(" 2. English \n");
-            Console.WriteLine(" 6. Exit\n");
-            Console.Write(" Choose number and press enter : ");
+            Console.Write(rm.GetString("languageMenu"));
             // End of menu display
 
             // Try catch to manage typing errors
@@ -617,7 +562,7 @@ namespace easySave.Views
                 language = Convert.ToInt32(Console.ReadLine());
 
                 // If - to handle typing errors
-                if ((language > 2 || language < 1) && language != 6)
+                if ((language > 2 || language < 1) && language != 3)
                 {
                     errorMenu(); // Launch the error window
                     int menuError = changeLanguage(); // Restarts the menu display and saves the return value
@@ -633,71 +578,28 @@ namespace easySave.Views
                 return menuError; // Returns the menu choice
             }
 
-            Console.Clear();
-
-            Console.WriteLine(" ---------VALIDATION--------");
-            Console.WriteLine(" Are you sure ?");
-            Console.WriteLine(" 1.Yes");
-            Console.WriteLine(" 2.No \n");
-
-
-            Console.Write(" Choose number and press enter : ");
+            return language;
             //End of menu display
-
-            int validation; // Initialize validation variable
-            //Try catch to manage typing errors
-            try
-            {
-                //Retrieves the value entered by the user and converts it to int
-                validation = Convert.ToInt32(Console.ReadLine());
-
-                //if - to handle typing errors
-                if (validation > 2 || validation < 1)
-                {
-                    errorMenu(); //Launch the error window
-                    int menuError = changeLanguage(); //Restarts the menu display and saves the return value
-
-                    return menuError; //Returns the menu choice
-                }
-            }
-            catch
-            {
-                errorMenu(); //Launch the error window
-                int menuError = changeLanguage(); //Restarts the menu display and saves the return value
-
-                return menuError; //Returns the menu choice
-            }
-
-            if (validation == 1) {
-                return language; // Return the value of choosed language
-            }
-            else
-            {
-                int returnMenu = changeLanguage(); // Return to menu (no validation)
-                return returnMenu;
-            }
         }
 
         public void errorSave(int nbJob, bool sourceOrDestination)
         {
             header();
 
-            Console.WriteLine(" ---------ERROR SAVE--------");
-            Console.WriteLine(" No backup executed");
+            Console.WriteLine(rm.GetString("errorSave"));
             if (sourceOrDestination)
             {
-                Console.WriteLine(" Error in the source path of job n°" + nbJob);
+                Console.WriteLine(rm.GetString("errorSaveSource") + nbJob);
             }
             else
             {
-                Console.WriteLine(" Error in the destination path of job n°" + nbJob);
+                Console.WriteLine(rm.GetString("errorSaveDestination") + nbJob);
             }
 
-            Console.Write(" Press enter to continue");
+            Console.WriteLine(rm.GetString("pressEnter"));
             //End display
 
             Console.ReadLine();
-
         }
         #endregion
     }

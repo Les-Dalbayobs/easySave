@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Globalization;
 
 /// <summary>
 /// ViewModel namespace
@@ -256,10 +258,18 @@ namespace easySave.ViewModel
                             break;
                         }
                     case 4:
-                        view.changeLanguage();
-
-                        break;
-
+                        {
+                            int language = view.changeLanguage();
+                            if (language == 1)
+                            {
+                                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr");
+                            }
+                            else if (language == 2)
+                            {
+                                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
+                            }
+                            break;
+                        }
                     default:
                         break;
 
