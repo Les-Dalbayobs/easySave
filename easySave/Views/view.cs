@@ -601,6 +601,17 @@ namespace easySave.Views
 
             Console.ReadLine();
         }
+
+        public void Title()
+        {
+            Console.WriteLine(@"        ______                    _____                      ");
+            Console.WriteLine(@"       / ____/____ _ _____ __  __/ ___/ ____ _ _   __ ___     ");
+            Console.WriteLine(@"      / __/  / __ `// ___// / / /\__ \ / __ `/| | / // _ \   ");
+            Console.WriteLine(@"     / /___ / /_/ /(__  )/ /_/ /___/ // /_/ / | |/ //  __/  ");
+            Console.WriteLine(@"    /_____/ \__,_//____/ \__, //____/ \__,_/  |___/ \___/    ");
+            Console.WriteLine(@"                        /____/                                  ");
+        }
+
         #endregion
     }
 }
