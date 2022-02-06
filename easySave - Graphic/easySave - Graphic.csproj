@@ -13,4 +13,8 @@
     <Folder Include="ViewModel\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\easySave\easySave.csproj" />
+  </ItemGroup>
+
 </Project>
