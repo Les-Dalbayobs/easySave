@@ -33,12 +33,7 @@ namespace easySave___Graphic
 
             ViewModel.MainWindowsViewsModel mainWindowsViewsModel = new ViewModel.MainWindowsViewsModel();
 
-            this.DataContext = mainWindowsViewsModel;      
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
+            this.DataContext = mainWindowsViewsModel;
         }
 
         private void buttonLanguage_Click(object sender, RoutedEventArgs e)

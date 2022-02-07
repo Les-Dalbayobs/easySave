@@ -87,13 +87,13 @@
         <Button Content="{x:Static language:Resources.save}" HorizontalAlignment="Left" Margin="481,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
         <Button x:Name="ButtonExit" Content="{x:Static language:Resources.exit}" HorizontalAlignment="Left" Margin="830,183,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="ButtonExit_Click"/>
         <Button x:Name="buttonLanguage" Content="{x:Static language:Resources.language}" HorizontalAlignment="Left" Margin="673,183,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="buttonLanguage_Click"/>
-        <ListView Margin="0,146,0,130" HorizontalAlignment="Center" Width="944" Grid.RowSpan="2" BorderBrush="#FF020202" >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid x:Name="listJob"
+                  ItemsSource="{Binding Jobs}"
+                  Margin="0,146,0,130" 
+                  HorizontalAlignment="Center" 
+                  Width="944" Grid.RowSpan="2" 
+                  BorderBrush="#FF020202">
+        </DataGrid>
 
     </Grid>
 </Window>
