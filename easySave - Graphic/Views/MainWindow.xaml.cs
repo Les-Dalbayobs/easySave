@@ -29,10 +29,9 @@ namespace easySave___Graphic
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Views.WindowLang lang = new Views.WindowLang();
-            lang.ShowDialog();
+            
         }
     }
 }
