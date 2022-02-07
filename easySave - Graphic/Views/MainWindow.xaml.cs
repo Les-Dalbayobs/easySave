@@ -30,7 +30,10 @@ namespace easySave___Graphic
                 new System.Globalization.CultureInfo(language);
 
             InitializeComponent();
-            
+
+            ViewModel.MainWindowsViewsModel mainWindowsViewsModel = new ViewModel.MainWindowsViewsModel();
+
+            this.DataContext = mainWindowsViewsModel;      
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
