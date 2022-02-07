@@ -9,5 +9,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Label Content="{x:Static language:Resources.destination}"></Label>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="686,217,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+
     </Grid>
 </Window>

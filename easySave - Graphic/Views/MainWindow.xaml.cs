@@ -28,5 +28,11 @@ namespace easySave___Graphic
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Views.WindowLang lang = new Views.WindowLang();
+            lang.ShowDialog();
+        }
     }
 }
