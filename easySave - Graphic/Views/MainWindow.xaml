@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic"
         mc:Ignorable="d"
-        Title="MainWindow" Height="570" Width="1004">
+        xmlns:language="clr-namespace:easySave___Graphic.Properties"
+        Title="EasySave" Height="570" Width="1004">
     <!--#region STYLE-->
     <Window.Resources>
         <Style x:Key="FocusVisual">
@@ -71,21 +72,21 @@
             <RowDefinition Height="142*"/>
             <RowDefinition Height="135*"/>
         </Grid.RowDefinitions>
-        <Rectangle Height="130" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1008" Stroke="White" Fill="#FF333333"/>
+        <Rectangle Height="130" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1008" Stroke="White" Fill="#FF333333" StrokeThickness="0"/>
         <Label Content="EasySave" HorizontalAlignment="Left" Margin="52,31,0,0" VerticalAlignment="Top" Height="56" Width="164" FontSize="34" FontFamily="Bahnschrift" FontWeight="Bold" Foreground="#FFAC00E7"/>
         <Label Content="by DALBAYOBS" HorizontalAlignment="Left" Margin="216,66,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFAC00E7" Height="32" Width="131"/>
         <Image HorizontalAlignment="Left" Height="104" Margin="868,10,0,0" VerticalAlignment="Top" Width="86" Source="/Views/dalbayos logo$.png"/>
 
-        <Button Style="{DynamicResource RoundedBorderButtonStyle}"  Content="Create Job" HorizontalAlignment="Left" Margin="31,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" RenderTransformOrigin="0,0" BorderThickness="1,1,1,1" AutomationProperties.IsOffscreenBehavior="Default" Grid.Row="1">
+        <Button x:Name="ButtonCreate" Style="{DynamicResource RoundedBorderButtonStyle}"  Content="{x:Static language:Resources.create}" HorizontalAlignment="Left" Margin="31,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" RenderTransformOrigin="0,0" BorderThickness="1,1,1,1" AutomationProperties.IsOffscreenBehavior="Default" Grid.Row="1" Click="ButtonCreate_Click">
             <Button.Background>
                 <SolidColorBrush Color="#AC00E7"/>
             </Button.Background>
         </Button>
-        <Button Content="Delete Job" HorizontalAlignment="Left" Margin="181,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
-        <Button Content="Edit" HorizontalAlignment="Left" Margin="331,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="481,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
-        <Button Content="Exit" HorizontalAlignment="Left" Margin="830,183,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
-        <Button Content="Language" HorizontalAlignment="Left" Margin="673,183,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <Button Content="{x:Static language:Resources.delete}" HorizontalAlignment="Left" Margin="181,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <Button Content="{x:Static language:Resources.edit}" HorizontalAlignment="Left" Margin="331,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <Button Content="{x:Static language:Resources.save}" HorizontalAlignment="Left" Margin="481,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <Button x:Name="ButtonExit" Content="{x:Static language:Resources.exit}" HorizontalAlignment="Left" Margin="830,183,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="ButtonExit_Click"/>
+        <Button x:Name="buttonLanguage" Content="{x:Static language:Resources.language}" HorizontalAlignment="Left" Margin="673,183,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="buttonLanguage_Click"/>
         <ListView Margin="0,146,0,130" HorizontalAlignment="Center" Width="944" Grid.RowSpan="2" BorderBrush="#FF020202" >
             <ListView.View>
                 <GridView>
