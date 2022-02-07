@@ -17,6 +17,7 @@ namespace easySave___Graphic
         protected override void OnStartup(StartupEventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+
             base.OnStartup(e);
         }
     }
