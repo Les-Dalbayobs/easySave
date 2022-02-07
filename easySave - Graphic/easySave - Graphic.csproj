@@ -38,9 +38,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  
-   <ItemGroup>
-     <Resource Include="Views\dalbayos logo$.png" />
-   </ItemGroup
+
+  <ItemGroup>
+    <Resource Include="Views\dalbayos logo$.png" />
+  </ItemGroup>
 
 </Project>
