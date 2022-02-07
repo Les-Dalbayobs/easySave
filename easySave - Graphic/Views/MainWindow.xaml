@@ -1,12 +1,98 @@
-﻿<Window x:Class="easySave___Graphic.MainWindow"
+﻿<Window ResizeMode="CanMinimize" x:Class="easySave___Graphic.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        
+        Title="MainWindow" Height="570" Width="1004">
+    <!--#region STYLE-->
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="RoundedBorderButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
+    <!--#endregion-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="275*"/>
+            <RowDefinition Height="243*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Height="129" VerticalAlignment="Top" Fill="#FF62929E" HorizontalAlignment="Right" Width="1004"/>
+        <Label Content="EasySave" HorizontalAlignment="Left" Margin="52,31,0,0" VerticalAlignment="Top" Height="56" Width="164" FontSize="34" FontFamily="Bahnschrift" FontWeight="Bold" Foreground="#FFFDFDFF"/>
+        <Label Content="by DALBAYOBS" HorizontalAlignment="Left" Margin="216,66,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFFDFDFF"/>
+        <Image HorizontalAlignment="Left" Height="104" Margin="868,10,0,0" VerticalAlignment="Top" Width="86" Source="/Views/dalbayos logo$.png"/>
+
+        <Button Style="{DynamicResource RoundedBorderButtonStyle}"  Content="Create Job" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" RenderTransformOrigin="0,0" BorderThickness="1,1,1,1" AutomationProperties.IsOffscreenBehavior="Default" Grid.Row="1">
+            <Button.Background>
+                <SolidColorBrush Color="DimGray"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Delete Job" HorizontalAlignment="Left" Margin="182,151,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="DimGray" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="336,151,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="DimGray" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="496,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="DimGray" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="830,183,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="DimGray" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <Button Content="Language" HorizontalAlignment="Left" Margin="673,183,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="DimGray" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+        <ListView Margin="0,146,0,130" HorizontalAlignment="Center" Width="944" Grid.RowSpan="2" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
