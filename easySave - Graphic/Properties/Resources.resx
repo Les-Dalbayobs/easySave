@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="create" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -132,10 +138,16 @@
   <data name="en" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="english" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="exit" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="fr" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="french" xml:space="preserve">
     <value>French</value>
   </data>
   <data name="id" xml:space="preserve">
@@ -155,5 +167,8 @@
   </data>
   <data name="type" xml:space="preserve">
     <value>Type of backup</value>
+  </data>
+  <data name="WindowLangTitle" xml:space="preserve">
+    <value>Application language</value>
   </data>
 </root>

@@ -23,15 +23,44 @@ namespace easySave___Graphic
     /// </summary>
     public partial class MainWindow : Window
     {
-        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
         public MainWindow()
         {
+            string language = Properties.Settings.Default.lang;
+            Thread.CurrentThread.CurrentUICulture =
+                new System.Globalization.CultureInfo(language);
+
             InitializeComponent();
+            
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void buttonLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            Views.WindowLang lang = new Views.WindowLang();
+
+            lang.ShowDialog();
+
+            MainWindow main = new MainWindow();
+
+            Application.Current.MainWindow = main;
+
+            main.Show();
+
+            this.Close();
+        }
+
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ButtonCreate_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
