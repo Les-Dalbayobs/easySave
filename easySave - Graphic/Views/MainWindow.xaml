@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic"
         mc:Ignorable="d"
+        xmlns:language="clr-namespace:easySave___Graphic.Properties"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Label Content="{x:Static language:Resources.destination}"></Label>
     </Grid>
 </Window>
