@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic"
         mc:Ignorable="d"
-        
         Title="MainWindow" Height="570" Width="1004">
     <!--#region STYLE-->
     <Window.Resources>
@@ -94,5 +93,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
     </Grid>
 </Window>
