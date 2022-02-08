@@ -35,6 +35,12 @@ namespace easySave.Models
         logSaveAdvancement logSave = new logSaveAdvancement();
         string jsonStringLogSave;
         string pathFileLogSave;
+        // int logSaveIndex = .FindIndex(logSave.Name == name);
+
+        /// <summary>
+        /// Initialize variable which stores number of files already copied
+        /// </summary>
+        int nbFilesCopied = 0;
 
         /// <summary>
         /// Stores the job name 
@@ -57,14 +63,6 @@ namespace easySave.Models
         /// False = Differential
         /// </summary>
         bool typeSave;
-
-        /// <summary>
-        /// Variables for logSaveAdvancement
-        /// </summary>
-        int TotalFilesToCopy;
-        float TotalFilesSize;
-        int NbFilesLeftToDo;
-
 
         #endregion
 
@@ -142,7 +140,6 @@ namespace easySave.Models
         /// <returns>Return if the backup is well done</returns>
         public bool copy()
         {
-            logSave.State = "ACTIVE";
             logSave.Name = this.Name;
             logSave.SourceFilePath = this.pathSource;
             logSave.TargetFilePath = this.pathDestination;
@@ -183,7 +180,6 @@ namespace easySave.Models
             {
                 confirmSave = false; //Backup not performed
             }
-            logSave.State = "END";
 
             return confirmSave; //Returns whether the backup was performed
         }
@@ -272,9 +268,12 @@ namespace easySave.Models
                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
                 // Calculate number of files left to copy
                 logSave.NbFilesLeftToDo--;
+                // Calculate number of files copied;
+                nbFilesCopied++;
                 // Calculate progression of copy
-                logSave.Progression = 100 - (logSave.NbFilesLeftToDo / logSave.TotalFilesSize * 100);
-
+                logSave.Progression = nbFilesCopied / logSave.TotalFilesToCopy * 100;
+                // Determine current state
+                logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
 
                 TimeSpan timeSpan = DateTime.Now - transferDelay;
 
@@ -349,8 +348,12 @@ namespace easySave.Models
 
                             //Copy the file to the target folder
                             file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                            // Calculate number of files left to copy
                             logSave.NbFilesLeftToDo--;
-                            logSave.Progression = 100 - (logSave.NbFilesLeftToDo / logSave.TotalFilesSize * 100);
+                            // Calculate progression of the processus
+                            logSave.Progression = (logSave.NbFilesLeftToDo / logSave.TotalFilesToCopy * 100);
+                            // Determine current state
+                            logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
 
                             TimeSpan timeSpan = DateTime.Now - transferDelay;
 
@@ -365,7 +368,7 @@ namespace easySave.Models
                             {
                                 writer.WriteLine(jsonStringLogProgress);
                             }
-                            using (StreamWriter writer = new StreamWriter(pathFileLogSave, true))
+                            using (StreamWriter writer = new StreamWriter(pathFileLogSave, false))
                             {
                                 writer.WriteLine(jsonStringLogSave);
                             }
