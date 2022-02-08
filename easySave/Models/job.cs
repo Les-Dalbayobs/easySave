@@ -253,6 +253,7 @@ namespace easySave.Models
             //Copy all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {
+                // Create progress log
                 logProgress.Name = this.Name;
                 logProgress.FileSource = file.FullName;
                 logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
@@ -263,22 +264,30 @@ namespace easySave.Models
 
                 //Copy the file to the target folder
                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                // Calculate number of files left to copy
                 logSave.NbFilesLeftToDo--;
+                // Calculate progression of copy
                 logSave.Progression = 100 - (logSave.NbFilesLeftToDo / logSave.TotalFilesSize * 100);
 
 
                 TimeSpan timeSpan = DateTime.Now - transferDelay;
 
+                // Calculate transfert Time
                 logProgress.FileTransfertTime = timeSpan.ToString();
 
-
+                // Add time to logProgress
                 logProgress.SetTime();
 
+                jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
                 jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
 
                 using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                 {
                     writer.WriteLine(jsonStringLogProgress);
+                }
+                using (StreamWriter writer = new StreamWriter(pathFileLogSave, true))
+                {
+                    writer.WriteLine(jsonStringLogSave);
                 }
             }
 
@@ -320,8 +329,6 @@ namespace easySave.Models
                     {
                         //Console.WriteLine("Copy : " + file.Name); //Test
 
-                        
-
                         //Try catch which will allow error handling if needed
                         try
                         {
@@ -356,8 +363,6 @@ namespace easySave.Models
                         {
                             //Console.WriteLine("The process failed : " + e.ToString()); //Displays the error
                         }
-
-                        
                     }
                 }
 
@@ -449,10 +454,7 @@ namespace easySave.Models
                 {
                     //Console.WriteLine("The process failed : " + e.ToString());
                 }
-                
             }
-
-
         }
 
         public override string ToString()
@@ -483,12 +485,6 @@ namespace easySave.Models
             }
 
             return verif;
-        }
-
-        public void logSaveAdvancement()
-        {
-            
-            
         }
 
         #endregion
