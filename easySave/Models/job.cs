@@ -98,6 +98,12 @@ namespace easySave.Models
         {
             this.pathfolderLog = folderLog;
             this.pathFileLogProgress = this.pathfolderLog + @"\logProgressSave.json";
+            this.pathFileLogSave = this.pathfolderLog + @"\logSaveAdvancement.json";
+
+            if (!File.Exists(this.pathFileLogSave))
+            {
+                File.Create(this.pathFileLogSave).Close();
+            }
         }
         #endregion
 

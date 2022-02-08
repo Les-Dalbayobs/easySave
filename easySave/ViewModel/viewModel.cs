@@ -92,11 +92,6 @@ namespace easySave.ViewModel
             string pathLogFolder = pathFilesEasySave + @"\Log";
             string pathLogProgressSave = pathLogFolder + @"\logProgressSave.json";
 
-            for (int i = 0; i < nbJobMax; i++)
-            {
-                this.jobs[i].SetPathFileLogProgress(pathLogFolder);
-            }
-
             if (!File.Exists(pathLogProgressSave))
             {
                 if (!Directory.Exists(pathLogFolder))
@@ -104,6 +99,11 @@ namespace easySave.ViewModel
                     Directory.CreateDirectory(pathLogFolder);
                 }
                 File.Create(pathLogProgressSave).Close();
+            }
+
+            for (int i = 0; i < nbJobMax; i++)
+            {
+                this.jobs[i].SetPathFileLogProgress(pathLogFolder);
             }
 
             updateHeader();
