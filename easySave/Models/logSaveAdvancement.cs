@@ -17,7 +17,7 @@ namespace easySave.Models
         string name;
         string sourceFilePath;
         string targetFilePath;
-        bool state;
+        string state;
         int totalFilesToCopy;
         float totalFilesSize;
         int nbFilesLeftToDo;
@@ -29,7 +29,7 @@ namespace easySave.Models
         public string Name { get => name; set => name = value; }
         public string SourceFilePath { get => sourceFilePath; set => sourceFilePath = value; }
         public string TargetFilePath { get => targetFilePath; set => targetFilePath = value; }
-        public bool State { get => state; set => state = value; }
+        public string State { get => state; set => state = value; }
         public int TotalFilesToCopy { get => totalFilesToCopy; set => totalFilesToCopy = value; }
         public float TotalFilesSize { get => totalFilesSize; set => totalFilesSize = value; }
         public int NbFilesLeftToDo { get => nbFilesLeftToDo; set => nbFilesLeftToDo = value; }

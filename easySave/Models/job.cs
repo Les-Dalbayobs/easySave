@@ -11,9 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("easySave - Graphic")]
 
 /// <summary>
 /// Models namespace
@@ -31,6 +28,14 @@ namespace easySave.Models
         string jsonStringLogProgress;
         string pathFileLogProgress;
         string pathfolderLog;
+
+        /// <summary>
+        /// Create a new instance from logSaveAdvancement, named logSave
+        /// </summary>
+        logSaveAdvancement logSave = new logSaveAdvancement();
+        string jsonStringLogSave;
+        string pathFileLogSave;
+
         /// <summary>
         /// Stores the job name 
         /// </summary>
@@ -53,6 +58,12 @@ namespace easySave.Models
         /// </summary>
         bool typeSave;
 
+        /// <summary>
+        /// Variables for logSaveAdvancement
+        /// </summary>
+        int TotalFilesToCopy;
+        float TotalFilesSize;
+        int NbFilesLeftToDo;
 
 
         #endregion
@@ -125,6 +136,14 @@ namespace easySave.Models
         /// <returns>Return if the backup is well done</returns>
         public bool copy()
         {
+            logSave.State = "ACTIVE";
+            logSave.Name = this.Name;
+            logSave.SourceFilePath = this.pathSource;
+            logSave.TargetFilePath = this.pathDestination;
+            logSave.TotalFilesToCopy = calculNbFiles(this.pathSource);
+            logSave.TotalFilesSize = calculSizeFolder(this.pathSource);
+            logSave.NbFilesLeftToDo = logSave.TotalFilesToCopy;
+
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
             DirectoryInfo source = new DirectoryInfo(this.pathSource); //Create the DirectoryInfo of the source
@@ -158,7 +177,7 @@ namespace easySave.Models
             {
                 confirmSave = false; //Backup not performed
             }
-
+            logSave.State = "END";
 
             return confirmSave; //Returns whether the backup was performed
         }
@@ -244,10 +263,14 @@ namespace easySave.Models
 
                 //Copy the file to the target folder
                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                logSave.NbFilesLeftToDo--;
+                logSave.Progression = 100 - (logSave.NbFilesLeftToDo / logSave.TotalFilesSize * 100);
+
 
                 TimeSpan timeSpan = DateTime.Now - transferDelay;
 
                 logProgress.FileTransfertTime = timeSpan.ToString();
+
 
                 logProgress.SetTime();
 
@@ -308,10 +331,13 @@ namespace easySave.Models
                             logProgress.DestPath = destination.FullName;
                             logProgress.FileSize = file.Length.ToString();
 
+
                             DateTime transferDelay = DateTime.Now;
 
                             //Copy the file to the target folder
                             file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                            logSave.NbFilesLeftToDo--;
+                            logSave.Progression = 100 - (logSave.NbFilesLeftToDo / logSave.TotalFilesSize * 100);
 
                             TimeSpan timeSpan = DateTime.Now - transferDelay;
 
@@ -335,7 +361,7 @@ namespace easySave.Models
                     }
                 }
 
-                //Try catch which will allow error handling if needed
+                //Try catch which allow error handling if needed
                 try
                 {
                     logProgress.Name = this.Name;
@@ -347,6 +373,8 @@ namespace easySave.Models
                     DateTime transferDelay = DateTime.Now;
                     //Copy the file to the target folder only if it does not exist
                     file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
+                    logSave.NbFilesLeftToDo--;
+                    logSave.Progression = 100 - (logSave.NbFilesLeftToDo / logSave.TotalFilesSize * 100);
 
                     TimeSpan timeSpan = DateTime.Now - transferDelay;
 
@@ -456,6 +484,13 @@ namespace easySave.Models
 
             return verif;
         }
+
+        public void logSaveAdvancement()
+        {
+            
+            
+        }
+
         #endregion
 
     }
