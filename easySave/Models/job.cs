@@ -350,8 +350,10 @@ namespace easySave.Models
                             file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
                             // Calculate number of files left to copy
                             logSave.NbFilesLeftToDo--;
-                            // Calculate progression of the processus
-                            logSave.Progression = (logSave.NbFilesLeftToDo / logSave.TotalFilesToCopy * 100);
+                            // Calculate number of files copied;
+                            nbFilesCopied++;
+                            // Calculate progression of copy
+                            logSave.Progression = nbFilesCopied / logSave.TotalFilesToCopy * 100;
                             // Determine current state
                             logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
 
@@ -392,8 +394,14 @@ namespace easySave.Models
                     DateTime transferDelay = DateTime.Now;
                     //Copy the file to the target folder only if it does not exist
                     file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
+                    // Calculate number of files left to copy
                     logSave.NbFilesLeftToDo--;
-                    logSave.Progression = 100 - (logSave.NbFilesLeftToDo / logSave.TotalFilesSize * 100);
+                    // Calculate number of files copied;
+                    nbFilesCopied++;
+                    // Calculate progression of copy
+                    logSave.Progression = nbFilesCopied / logSave.TotalFilesToCopy * 100;
+                    // Determine current state
+                    logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
 
                     TimeSpan timeSpan = DateTime.Now - transferDelay;
 
