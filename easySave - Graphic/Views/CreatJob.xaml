@@ -29,11 +29,14 @@
 
         <!--#region Zone input-->
         <TextBox HorizontalAlignment="Left" Margin="147,147,0,0" TextWrapping="Wrap" 
-                 VerticalAlignment="Top" Width="144" Height="38"/>
+                 VerticalAlignment="Top" Width="144" Height="38"
+                 Text="{Binding PathDestination}"/>
         <TextBox HorizontalAlignment="Left" Margin="147,78,0,0" TextWrapping="Wrap" 
-                 VerticalAlignment="Top" Width="144" Height="38"/>
+                 VerticalAlignment="Top" Width="144" Height="38"
+                 Text="{Binding PathSource}"/>
         <TextBox HorizontalAlignment="Left" Margin="147,11,0,0" TextWrapping="Wrap" 
-                 VerticalAlignment="Top" Width="144" Height="39"/>
+                 VerticalAlignment="Top" Width="144" Height="39"
+                 Text="{Binding Name}"/>
         <!--#endregion-->
 
         <!--#region Image icone-->
@@ -63,7 +66,7 @@
             Background="#AC00E7" 
             FontFamily="Bahnschrift" 
             FontWeight="Normal" 
-            FontSize="16"
+            FontSize="16" Click="Cancel_Click"
                />
 
         <Button x:Name="Ok" Content=" Ok " 
@@ -75,7 +78,7 @@
             Background="#AC00E7" 
             FontFamily="Bahnschrift" 
             FontWeight="Normal" 
-            FontSize="16" />
+            FontSize="16" Click="Ok_Click" />
 
 
 

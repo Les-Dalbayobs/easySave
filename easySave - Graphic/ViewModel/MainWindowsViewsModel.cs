@@ -1,6 +1,7 @@
 ﻿using easySave.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 
@@ -10,21 +11,21 @@ namespace easySave___Graphic.ViewModel
     {
 
         #region atributes
-        List<job> jobs;
+        ObservableCollection<job> jobs;
 
         string pathFilesEasySave = @"c:\EasySave";
 
         #endregion
 
         #region properties
-        public List<job> Jobs { get => jobs; set => jobs = value; }
-
+        //public List<job> Jobs { get => jobs; set => jobs = value; }
+        public ObservableCollection<job> Jobs { get => jobs; set => jobs = value; }
         #endregion
 
         #region contructor
         public MainWindowsViewsModel()
         {
-            this.jobs = new List<job>();
+            this.jobs = new ObservableCollection<job>();
 
             for (int i = 0; i < 3; i++)
             {

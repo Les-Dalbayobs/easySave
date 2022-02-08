@@ -77,7 +77,14 @@
         <Label Content="by DALBAYOBS" HorizontalAlignment="Left" Margin="216,66,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Bahnschrift" Foreground="#FFAC00E7" Height="32" Width="131"/>
         <Image HorizontalAlignment="Left" Height="104" Margin="868,10,0,0" VerticalAlignment="Top" Width="86" Source="/Views/dalbayos logo$.png"/>
 
-        <Button x:Name="ButtonCreate" Style="{DynamicResource RoundedBorderButtonStyle}"  Content="{x:Static language:Resources.create}" HorizontalAlignment="Left" Margin="31,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" RenderTransformOrigin="0,0" BorderThickness="1,1,1,1" AutomationProperties.IsOffscreenBehavior="Default" Grid.Row="1" Click="ButtonCreate_Click">
+        <Button x:Name="ButtonCreate" Style="{DynamicResource RoundedBorderButtonStyle}"  
+                Content="{x:Static language:Resources.create}" 
+                HorizontalAlignment="Left" Margin="31,155,0,0" VerticalAlignment="Top" 
+                Height="50" Width="120" 
+                BorderBrush="#FFD8D8D8" Foreground="White" 
+                FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
+                RenderTransformOrigin="0,0" BorderThickness="1,1,1,1" AutomationProperties.IsOffscreenBehavior="Default" 
+                Grid.Row="1" Click="ButtonCreate_Click">
             <Button.Background>
                 <SolidColorBrush Color="#AC00E7"/>
             </Button.Background>

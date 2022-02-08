@@ -58,8 +58,17 @@ namespace easySave___Graphic
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
+            easySave.Models.job newJob = new easySave.Models.job();
+
             Views.CreatJob creatJob = new Views.CreatJob();
-            creatJob.ShowDialog();
+
+            creatJob.DataContext = newJob;
+
+            if (creatJob.ShowDialog() == true)
+            {
+                ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+                mainW.Jobs.Add(newJob);
+            }
         }
     }
 }
