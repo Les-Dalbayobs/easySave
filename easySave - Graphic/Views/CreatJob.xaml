@@ -1,0 +1,83 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:easySave___Graphic.Views"
+        xmlns:Properties="clr-namespace:easySave___Graphic.Properties" x:Class="easySave___Graphic.Views.CreatJob"
+        mc:Ignorable="d"
+        Title="CreatJob" Height="370" Width="395"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" 
+        
+        UseLayoutRounding="True">
+    <Grid >
+
+
+
+        <!--#region Label Name-->
+        <Label Content="Name" HorizontalAlignment="Left" Margin="61,11,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" 
+               FontSize="17" Height="39" Width="73"/>
+        <Label Content="Source" HorizontalAlignment="Left" Margin="61,78,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" 
+               FontSize="17" Height="38" Width="86"/>
+        <Label Content="Destination" HorizontalAlignment="Left" Margin="21,147,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="17" 
+               Height="38" Width="131"/>
+        <!--#endregion-->
+
+        <!--#region Zone input-->
+        <TextBox HorizontalAlignment="Left" Margin="147,147,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="144" Height="38"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,78,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="144" Height="38"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,11,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="144" Height="39"/>
+        <!--#endregion-->
+
+        <!--#region Image icone-->
+        <Image HorizontalAlignment="Left" Height="40" Margin="315,78,0,0" VerticalAlignment="Top"
+               Width="50" Source="/Views/icons8-dossier-ouvert.png"/>
+        <Image HorizontalAlignment="Left" Height="40" Margin="315,146,0,0" VerticalAlignment="Top" 
+               Width="50" Source="/Views/icons8-dossier-ouvert.png"/>
+        <!--#endregion-->
+
+        <!--#region Radio Button -->
+        <RadioButton Content="Complete" HorizontalAlignment="Left" Margin="66,211,0,0" 
+                     VerticalAlignment="Top" Height="25" Width="104" FontSize="18" ClickMode="Press" 
+                     FontWeight="Bold"/>
+        <RadioButton Content="Differential" HorizontalAlignment="Left" Margin="197,211,0,0" 
+                     VerticalAlignment="Top" Height="25" Width="124" FontSize="18" ClickMode="Press"
+                     FontWeight="Bold"/>
+
+        <!--#endregion-->
+
+        <!--#region Button-->
+        <Button x:Name="Cancel" Content="Cancel" 
+            Margin="250,274,10,0" 
+            VerticalAlignment="Top" 
+            Height="50" 
+            BorderBrush="#FFD8D8D8" 
+            Foreground="White"
+            Background="#AC00E7" 
+            FontFamily="Bahnschrift" 
+            FontWeight="Normal" 
+            FontSize="16" 
+               />
+
+        <Button x:Name="Ok" Content=" Ok " 
+            Margin="98,274,162,0" 
+            VerticalAlignment="Top" 
+            Height="50" 
+            BorderBrush="#FFD8D8D8" 
+            Foreground="White"
+            Background="#AC00E7" 
+            FontFamily="Bahnschrift" 
+            FontWeight="Normal" 
+            FontSize="16" />
+
+
+
+    </Grid>
+</Window>

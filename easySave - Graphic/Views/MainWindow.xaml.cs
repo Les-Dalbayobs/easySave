@@ -60,7 +60,8 @@ namespace easySave___Graphic
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            Views.CreatJob creatJob = new Views.CreatJob();
+            creatJob.ShowDialog();
         }
     }
 }

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Views\dalbayos logo%24.png" />
+    <None Remove="Views\icons8-dossier-ouvert.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +54,7 @@
 
   <ItemGroup>
     <Resource Include="Views\dalbayos logo$.png" />
+    <Resource Include="Views\icons8-dossier-ouvert.png" />
   </ItemGroup>
 
 </Project>
