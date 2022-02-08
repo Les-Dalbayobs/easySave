@@ -12,6 +12,9 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Globalization;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("easySave - Graphic")]
 
 /// <summary>
 /// ViewModel namespace
@@ -64,6 +67,7 @@ namespace easySave.ViewModel
         #endregion
 
         #region properties
+
         #endregion
 
         #region constructor
