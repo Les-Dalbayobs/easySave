@@ -12,45 +12,47 @@
         
         UseLayoutRounding="True">
     <Grid >
-
-
-
         <!--#region Label Name-->
-        <Label Content="Name" HorizontalAlignment="Left" Margin="61,11,0,0" 
+        <Label Content="Name" HorizontalAlignment="Left" Margin="74,11,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift" 
-               FontSize="17" Height="39" Width="73"/>
-        <Label Content="Source" HorizontalAlignment="Left" Margin="61,78,0,0" 
+               FontSize="17" Height="29" Width="57"/>
+        <Label Content="Source" HorizontalAlignment="Left" Margin="66,74,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift" 
-               FontSize="17" Height="38" Width="86"/>
-        <Label Content="Destination" HorizontalAlignment="Left" Margin="21,147,0,0" 
+               FontSize="17" Height="28" Width="64"/>
+        <Label Content="Destination" HorizontalAlignment="Left" Margin="33,142,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="17" 
-               Height="38" Width="131"/>
+               Height="29" Width="97"/>
         <!--#endregion-->
 
         <!--#region Zone input-->
-        <TextBox HorizontalAlignment="Left" Margin="147,147,0,0" TextWrapping="Wrap" 
-                 VerticalAlignment="Top" Width="144" Height="38"
+        <TextBox x:Name="TextBoxDestination" HorizontalAlignment="Left" Margin="147,147,0,0" TextWrapping="NoWrap" 
+                 VerticalAlignment="Top" Width="144" Height="19"
                  Text="{Binding PathDestination}"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,78,0,0" TextWrapping="Wrap" 
-                 VerticalAlignment="Top" Width="144" Height="38"
+        <TextBox x:Name="TextBoxSource" HorizontalAlignment="Left" Margin="147,78,0,0" TextWrapping="NoWrap" 
+                 VerticalAlignment="Top" Width="144" Height="19"
                  Text="{Binding PathSource}"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,11,0,0" TextWrapping="Wrap" 
-                 VerticalAlignment="Top" Width="144" Height="39"
+        <TextBox HorizontalAlignment="Left" Margin="147,16,0,0" TextWrapping="NoWrap" 
+                 VerticalAlignment="Top" Width="144" Height="19"
                  Text="{Binding Name}"/>
         <!--#endregion-->
 
         <!--#region Image icone-->
-        <Image HorizontalAlignment="Left" Height="40" Margin="315,78,0,0" VerticalAlignment="Top"
-               Width="50" Source="/Views/icons8-dossier-ouvert.png"/>
-        <Image HorizontalAlignment="Left" Height="40" Margin="315,146,0,0" VerticalAlignment="Top" 
-               Width="50" Source="/Views/icons8-dossier-ouvert.png"/>
+        <Button x:Name="ButtonSource" Margin="296,78,52,235" Click="ButtonSource_Click">
+            <Image x:Name="ImgFolderSource"
+            Source="/Views/icons8-dossier-ouvert.png"/>
+        </Button>
+        <Button x:Name="ButtonDestination" Margin="296,147,52,166" Click="ButtonDestination_Click">
+            <Image x:Name="ImgFolderDestination"
+            Source="/Views/icons8-dossier-ouvert.png"/>
+        </Button>
         <!--#endregion-->
 
         <!--#region Radio Button -->
-        <RadioButton Content="Complete" HorizontalAlignment="Left" Margin="66,211,0,0" 
+        <RadioButton x:Name="RadioComplete" Content="Complete" HorizontalAlignment="Left" Margin="66,211,0,0" 
                      VerticalAlignment="Top" Height="25" Width="104" FontSize="18" ClickMode="Press" 
+                     IsChecked="True"
                      FontWeight="Bold"/>
-        <RadioButton Content="Differential" HorizontalAlignment="Left" Margin="197,211,0,0" 
+        <RadioButton x:Name="RadioDifferential" Content="Differential" HorizontalAlignment="Left" Margin="197,211,0,0" 
                      VerticalAlignment="Top" Height="25" Width="124" FontSize="18" ClickMode="Press"
                      FontWeight="Bold"/>
 

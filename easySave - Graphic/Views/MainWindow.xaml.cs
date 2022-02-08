@@ -67,6 +67,18 @@ namespace easySave___Graphic
             if (creatJob.ShowDialog() == true)
             {
                 ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+                
+                if (newJob.PathSource == null)
+                    newJob.PathSource = creatJob.TextBoxSource.Text;
+
+                if (newJob.PathDestination == null)
+                    newJob.PathDestination = creatJob.TextBoxDestination.Text;
+
+                if (creatJob.RadioComplete.IsChecked == true)
+                    newJob.TypeSave = true;
+                else
+                    newJob.TypeSave = false;
+
                 mainW.Jobs.Add(newJob);
             }
         }
