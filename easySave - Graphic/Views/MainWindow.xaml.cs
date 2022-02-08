@@ -58,8 +58,29 @@ namespace easySave___Graphic
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
+            easySave.Models.job newJob = new easySave.Models.job();
+
             Views.CreatJob creatJob = new Views.CreatJob();
-            creatJob.ShowDialog();
+
+            creatJob.DataContext = newJob;
+
+            if (creatJob.ShowDialog() == true)
+            {
+                ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+                
+                if (newJob.PathSource == null)
+                    newJob.PathSource = creatJob.TextBoxSource.Text;
+
+                if (newJob.PathDestination == null)
+                    newJob.PathDestination = creatJob.TextBoxDestination.Text;
+
+                if (creatJob.RadioComplete.IsChecked == true)
+                    newJob.TypeSave = true;
+                else
+                    newJob.TypeSave = false;
+
+                mainW.Jobs.Add(newJob);
+            }
         }
     }
 }
