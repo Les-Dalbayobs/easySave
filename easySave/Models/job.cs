@@ -359,10 +359,15 @@ namespace easySave.Models
                             logProgress.SetTime();
 
                             jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+                            jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
 
                             using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                             {
                                 writer.WriteLine(jsonStringLogProgress);
+                            }
+                            using (StreamWriter writer = new StreamWriter(pathFileLogSave, true))
+                            {
+                                writer.WriteLine(jsonStringLogSave);
                             }
                         }
                         catch (Exception e)
@@ -394,10 +399,16 @@ namespace easySave.Models
                     logProgress.SetTime();
 
                     jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+                    jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
+
 
                     using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                     {
                         writer.WriteLine(jsonStringLogProgress);
+                    }
+                    using (StreamWriter writer = new StreamWriter(pathFileLogSave, false))
+                    {
+                        writer.WriteLine(jsonStringLogSave);
                     }
                 }
                 catch (Exception e)
