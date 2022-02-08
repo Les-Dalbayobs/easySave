@@ -61,6 +61,9 @@ namespace easySave.ViewModel
         /// </summary>
         string pathFilesEasySave = @"c:\EasySave";
 
+        // Create list to store strings of log save file
+        List<string> logSaveList = new List<string>();
+
         #endregion
 
         #region properties
@@ -436,6 +439,7 @@ namespace easySave.ViewModel
             serializeJob(); //Serialization jobs 
             exportConfig(); //Export jobs
         }
+
         #endregion
     }
 }

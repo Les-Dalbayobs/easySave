@@ -33,9 +33,13 @@ namespace easySave.Models
         /// Create a new instance from logSaveAdvancement, named logSave
         /// </summary>
         logSaveAdvancement logSave = new logSaveAdvancement();
+        // Create variable which stores json String for the Save Log
         string jsonStringLogSave;
+        // Create variable which stores the path for the log save file
         string pathFileLogSave;
-        // int logSaveIndex = .FindIndex(logSave.Name == name);
+
+        
+
 
         /// <summary>
         /// Initialize variable which stores number of files already copied
@@ -271,7 +275,7 @@ namespace easySave.Models
                 // Calculate number of files copied;
                 nbFilesCopied++;
                 // Calculate progression of copy
-                logSave.Progression = nbFilesCopied / logSave.TotalFilesToCopy * 100;
+                logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
                 // Determine current state
                 logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
 
@@ -332,8 +336,6 @@ namespace easySave.Models
                     //as well as the date of modification of the source file superior to the destination file then it is copied.
                     if (file.Name == fileDestination.Name && file.LastWriteTime > fileDestination.LastWriteTime)
                     {
-                        //Console.WriteLine("Copy : " + file.Name); //Test
-
                         //Try catch which will allow error handling if needed
                         try
                         {
@@ -353,7 +355,7 @@ namespace easySave.Models
                             // Calculate number of files copied;
                             nbFilesCopied++;
                             // Calculate progression of copy
-                            logSave.Progression = nbFilesCopied / logSave.TotalFilesToCopy * 100;
+                            logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
                             // Determine current state
                             logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
 
@@ -399,7 +401,7 @@ namespace easySave.Models
                     // Calculate number of files copied;
                     nbFilesCopied++;
                     // Calculate progression of copy
-                    logSave.Progression = nbFilesCopied / logSave.TotalFilesToCopy * 100;
+                    logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
                     // Determine current state
                     logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
 

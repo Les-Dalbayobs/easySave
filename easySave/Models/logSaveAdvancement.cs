@@ -21,7 +21,7 @@ namespace easySave.Models
         int totalFilesToCopy;
         float totalFilesSize;
         int nbFilesLeftToDo;
-        int progression;
+        double progression;
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace easySave.Models
         public int TotalFilesToCopy { get => totalFilesToCopy; set => totalFilesToCopy = value; }
         public float TotalFilesSize { get => totalFilesSize; set => totalFilesSize = value; }
         public int NbFilesLeftToDo { get => nbFilesLeftToDo; set => nbFilesLeftToDo = value; }
-        public int Progression { get => progression; set => progression = value; }
+        public double Progression { get => progression; set => progression = value; }
 
         #endregion
 
