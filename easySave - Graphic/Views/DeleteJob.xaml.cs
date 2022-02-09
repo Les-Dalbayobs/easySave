@@ -22,9 +22,14 @@ namespace easySave___Graphic.Views
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void No_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
+        }
 
+        private void Yes_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace easySave___Graphic.ViewModel
         //public List<job> Jobs { get => jobs; set => jobs = value; }
         public ObservableCollection<job> Jobs { get => jobs; set => jobs = value; }
         
-        public job SelectedJob { get => selectedJob; set => selectedJob = value }
+        public job SelectedJob { get => selectedJob; set => selectedJob = value; }
         #endregion
 
         #region contructor

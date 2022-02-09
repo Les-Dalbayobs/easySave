@@ -82,5 +82,30 @@ namespace easySave___Graphic
                 mainW.Jobs.Add(newJob);
             }
         }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+        
+        }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
+            if (mainW.SelectedJob != null)
+            {
+                Views.DeleteJob delete = new Views.DeleteJob();
+
+                if (delete.ShowDialog() == true)
+                {
+                    mainW.Jobs.Remove(mainW.SelectedJob);
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Please select job");
+            }
+        }
     }
 }
