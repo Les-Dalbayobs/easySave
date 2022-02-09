@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic.Views"
         mc:Ignorable="d"
-        Title="DeleteJob" Height="160" Width="500">
+        Title="DeleteJob" Height="168" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" SnapsToDevicePixels="True">
     <Grid>
         <!--#region Text Box-->
         <Label HorizontalAlignment="Center" Content="Do you want to Delete this Job ?" 
                  VerticalAlignment="Top" Width="292"  Visibility="Visible" 
-                 FontWeight="Bold" Height="46" FontSize="18" Grid.Column="1" Margin="0,26,0,0" 
+                 FontWeight="Bold" Height="46" FontSize="18" Margin="0,26,0,0" 
                  BorderBrush="White"/>
-        
+
         <!--#region Button-->
         <Button x:Name="No" Content="NO" 
             Margin="272,91,102,0" 
@@ -24,7 +24,7 @@
             FontFamily="Bahnschrift" 
             FontWeight="Normal" 
             FontSize="16"
-            Grid.Column="1" Click="No_Click"/>
+            Click="No_Click"/>
         <Button x:Name="Yes" Content="YES" 
             Margin="102,91,272,0" 
             VerticalAlignment="Top" 
@@ -35,13 +35,12 @@
             FontFamily="Bahnschrift" 
             FontWeight="Normal" 
             FontSize="16"
-            Grid.Column="1" Click="Yes_Click"
-               />
+            Click="Yes_Click"/>
         <!--#endregion-->
-        
+
         <!--#region Image-->
-        <Image Grid.Column="1" HorizontalAlignment="Left" Height="73"
-               Margin="10,0,0,0" VerticalAlignment="Center" Width="63" 
+        <Image Height="73"
+               Margin="21,40,416,39" Width="63" 
                Source="/Views/icons8-warning-48.png"/>
         <!--#endregion-->
     </Grid>
