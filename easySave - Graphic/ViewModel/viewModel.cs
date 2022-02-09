@@ -4,12 +4,4 @@ using System.Text;
 
 namespace easySave___Graphic.ViewModel
 {
-    class viewModel
-    {
-
-
-
-
-
-    }
 }

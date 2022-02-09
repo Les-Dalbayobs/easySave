@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 
 namespace easySave___Graphic.ViewModel
@@ -14,6 +16,7 @@ namespace easySave___Graphic.ViewModel
         ObservableCollection<job> jobs;
 
         string pathFilesEasySave = @"c:\EasySave";
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
         #endregion
 

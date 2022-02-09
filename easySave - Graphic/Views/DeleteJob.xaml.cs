@@ -21,10 +21,5 @@ namespace easySave___Graphic.Views
         {
             InitializeComponent();
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

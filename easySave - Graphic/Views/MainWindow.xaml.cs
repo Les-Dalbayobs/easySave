@@ -21,7 +21,7 @@ namespace easySave___Graphic
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
@@ -67,7 +67,7 @@ namespace easySave___Graphic
             if (creatJob.ShowDialog() == true)
             {
                 ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
-                
+
                 if (newJob.PathSource == null)
                     newJob.PathSource = creatJob.TextBoxSource.Text;
 
