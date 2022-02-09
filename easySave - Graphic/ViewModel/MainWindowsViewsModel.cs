@@ -13,6 +13,8 @@ namespace easySave___Graphic.ViewModel
         #region atributes
         ObservableCollection<job> jobs;
 
+        job selectedJob;
+
         string pathFilesEasySave = @"c:\EasySave";
 
         #endregion
@@ -20,6 +22,8 @@ namespace easySave___Graphic.ViewModel
         #region properties
         //public List<job> Jobs { get => jobs; set => jobs = value; }
         public ObservableCollection<job> Jobs { get => jobs; set => jobs = value; }
+        
+        public job SelectedJob { get => selectedJob; set => selectedJob = value; }
         #endregion
 
         #region contructor
