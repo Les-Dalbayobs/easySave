@@ -29,7 +29,7 @@ namespace easySave.Models
 
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
-        string pathFileLogProgress;
+        string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
         string pathfolderLog;
         /// <summary>
         /// Stores the job name 

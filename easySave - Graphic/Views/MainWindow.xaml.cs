@@ -122,9 +122,30 @@ namespace easySave___Graphic
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
             Views.saveMenu SaveMenu = new Views.saveMenu();
 
-            SaveMenu.ShowDialog();
+            SaveMenu.DataContext = mainW;
+
+
+            if (mainW.SelectedJob != null)
+            {
+
+                SaveMenu.RadioOneJob.Content = "Saving the job: " + mainW.SelectedJob.Name;
+                SaveMenu.RadioOneJob.IsChecked = true;
+
+                SaveMenu.ShowDialog();
+            }
+            else
+            {
+                SaveMenu.RadioOneJob.Content = "No job selected in the main menu";
+                SaveMenu.RadioOneJob.IsEnabled = false;
+                SaveMenu.RadioAllJob.IsChecked = true;
+                SaveMenu.RadioAllJob.IsEnabled = false;
+
+                SaveMenu.ShowDialog();
+            }
         }
     }
 }
