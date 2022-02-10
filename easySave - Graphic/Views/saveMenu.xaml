@@ -15,7 +15,7 @@
         <Label Content="Save menu" HorizontalAlignment="Center" Margin="0,10,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift" 
                FontSize="20" Height="29" Width="110" FontWeight="Bold"/>
-        <Label Content="Make your choice :" HorizontalAlignment="Left" Margin="66,93,0,0" 
+        <Label Content="Make your choice :" HorizontalAlignment="Left" Margin="66,52,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift" 
                FontSize="17" Height="28" Width="167" FontWeight="Bold"/>
         <!--#endregion-->
@@ -27,12 +27,12 @@
         <!--#endregion-->
 
         <!--#region Radio Button -->
-        <RadioButton x:Name="RadioComplete" Content="Save selected choice (job n°...)" HorizontalAlignment="Left" Margin="66,152,0,0" 
+        <RadioButton x:Name="RadioComplete" Content="Save selected choice (job n°...)" HorizontalAlignment="Left" Margin="66,85,0,0" 
                      VerticalAlignment="Top" Height="25" Width="291" FontSize="18" ClickMode="Press" 
                      IsChecked="True"
                      FontWeight="Normal"/>
-        <RadioButton x:Name="RadioDifferential" Content="Save all jobs" HorizontalAlignment="Left" Margin="66,197,0,0" 
-                     VerticalAlignment="Top" Height="25" Width="146" FontSize="18" ClickMode="Press"
+        <RadioButton x:Name="RadioDifferential" Content="Save all jobs" HorizontalAlignment="Left" Margin="66,115,0,0" 
+                     VerticalAlignment="Top" Height="26" Width="146" FontSize="18" ClickMode="Press"
                      FontWeight="Normal"/>
 
         <!--#endregion-->
@@ -61,6 +61,23 @@
             FontWeight="Normal" 
             FontSize="16" Click="Ok_Click"
             />
+        <ProgressBar HorizontalAlignment="Center" Height="20" Margin="0,169,0,0" VerticalAlignment="Top" Width="355"/>
+        <Label Content="Progression (...%)" HorizontalAlignment="Left" Margin="148,146,0,0" VerticalAlignment="Top" FontSize="10" IsEnabled="False"/>
+        <Button x:Name="ButtonPlay" Content="PLAY" Margin="87,200,245,106">
+            <!--<Image x:Name="ImgPlayPause"
+            Source="../Pictures/playpause.png"/>
+            -->
+        </Button>
+        <Button x:Name="ButtonStop" Content="STOP" Margin="238,200,104,106">
+            <!-- <Image x:Name="ImgStop"
+                Source="../Pictures/stop.png"/>
+            -->
+        </Button>
+        <Button x:Name="ButtonPause" Content="PAUSE" Margin="166,200,174,106">
+            <!--<Image x:Name="ImgPlayPause"
+            Source="../Pictures/playpause.png"/>
+            -->
+        </Button>
 
 
 
