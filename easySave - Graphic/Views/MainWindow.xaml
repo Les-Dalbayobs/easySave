@@ -120,10 +120,10 @@
                 FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" 
                 Click="ButtonEdit_Click"/>
         
-        <Button Content="{x:Static language:Resources.save}" HorizontalAlignment="Left" Margin="481,155,0,0"
+        <Button x:Name="ButtonSave" Content="{x:Static language:Resources.save}" HorizontalAlignment="Left" Margin="481,155,0,0"
                 VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" 
                 Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
-                Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1"/>
+                Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="ButtonSave_Click"/>
        
         <Button x:Name="ButtonExit" Content="{x:Static language:Resources.exit}" HorizontalAlignment="Left" 
                 Margin="854,215,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" 
