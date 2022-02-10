@@ -23,14 +23,16 @@ namespace easySave___Graphic.Views
             InitializeComponent();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
         public void Cancel_Click (object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
+        private void Style_DpiChanged(object sender, DpiChangedEventArgs e)
+        {
+
         }
+    }
 
 }
