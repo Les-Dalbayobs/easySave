@@ -119,5 +119,12 @@ namespace easySave___Graphic
                 MessageBox.Show("Please select job");
             }
         }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            Views.saveMenu SaveMenu = new Views.saveMenu();
+
+            SaveMenu.ShowDialog();
+        }
     }
 }
