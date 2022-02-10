@@ -79,7 +79,7 @@ namespace easySave___Graphic
                 else
                     newJob.TypeSave = false;
 
-                mainW.Jobs.Add(newJob);
+                mainW.addJob(newJob);
             }
         }
 
@@ -111,7 +111,7 @@ namespace easySave___Graphic
 
                 if (delete.ShowDialog() == true)
                 {
-                    mainW.Jobs.Remove(mainW.SelectedJob);
+                    mainW.deleteJob(mainW.SelectedJob);
                 }
             }
             else
