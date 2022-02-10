@@ -36,11 +36,12 @@ namespace easySave___Graphic.ViewModel
         #region contructor
         public MainWindowsViewsModel()
         {
-            this.jobs = new ObservableCollection<job>();
+            
 
             serializer = new JsonSerializer();
 
             importConfig();
+
 
             //for (int i = 0; i < 3; i++)
             //{
@@ -80,6 +81,14 @@ namespace easySave___Graphic.ViewModel
         {
 
         }
+
+        public void addJob(job jobAdd)
+        {
+            this.jobs.Add(jobAdd);
+            serializeJob();
+            exportConfig();
+        }
+
         public void serializeJob()
         {
             //Convert the table to suit the json format (in string)
@@ -148,6 +157,10 @@ namespace easySave___Graphic.ViewModel
                         this.jobs = serializer.Deserialize<ObservableCollection<job>>(jsonReader);
                     }
                 }
+            }
+            if (jobs == null)
+            {
+                this.jobs = new ObservableCollection<job>();
             }
         }
         #endregion

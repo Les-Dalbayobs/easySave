@@ -79,7 +79,7 @@ namespace easySave___Graphic
                 else
                     newJob.TypeSave = false;
 
-                mainW.Jobs.Add(newJob);
+                mainW.addJob(newJob);
             }
         }
 
