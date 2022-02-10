@@ -79,7 +79,7 @@ namespace easySave___Graphic
                 else
                     newJob.TypeSave = false;
 
-                mainW.Jobs.Add(newJob);
+                mainW.addJob(newJob);
             }
         }
 
@@ -111,7 +111,7 @@ namespace easySave___Graphic
 
                 if (delete.ShowDialog() == true)
                 {
-                    mainW.Jobs.Remove(mainW.SelectedJob);
+                    mainW.deleteJob(mainW.SelectedJob);
                 }
             }
             else
@@ -119,7 +119,35 @@ namespace easySave___Graphic
                 MessageBox.Show("Please select job");
             }
         }
+        
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
+            Views.saveMenu SaveMenu = new Views.saveMenu();
+
+            SaveMenu.DataContext = mainW;
+
+
+            if (mainW.SelectedJob != null)
+            {
+
+                SaveMenu.RadioOneJob.Content = "Saving the job: " + mainW.SelectedJob.Name;
+                SaveMenu.RadioOneJob.IsChecked = true;
+
+                SaveMenu.ShowDialog();
+            }
+            else
+            {
+                SaveMenu.RadioOneJob.Content = "No job selected in the main menu";
+                SaveMenu.RadioOneJob.IsEnabled = false;
+                SaveMenu.RadioAllJob.IsChecked = true;
+                SaveMenu.RadioAllJob.IsEnabled = false;
+
+                SaveMenu.ShowDialog();
+            }
+        }
+        
         public void ButtonEncryption_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
@@ -127,6 +155,6 @@ namespace easySave___Graphic
             Views.EncryptionWindow encryptionWindow = new Views.EncryptionWindow();
             encryptionWindow.ShowDialog();
         }
-        
+
     }
 }

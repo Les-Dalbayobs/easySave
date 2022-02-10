@@ -72,6 +72,17 @@
             <RowDefinition Height="142*"/>
             <RowDefinition Height="135*"/>
         </Grid.RowDefinitions>
+     
+     <DataGrid x:Name="listJob"
+                  IsReadOnly="true"
+                  SelectedItem="{Binding SelectedJob}"
+                  ItemsSource="{Binding Jobs}"
+                  Margin="0,146,0,130" 
+                  HorizontalAlignment="Center" 
+                  Width="944" Grid.RowSpan="2" 
+                  BorderBrush="#FF020202">
+        </DataGrid>
+     
         <Rectangle Height="130" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1008" Stroke="White"
                    Fill="#FF333333" StrokeThickness="0"/>
         <Label Content="EasySave" HorizontalAlignment="Left" Margin="52,31,0,0" VerticalAlignment="Top"
@@ -99,7 +110,7 @@
         <Button x:Name="ButtonDelete" Content="{x:Static language:Resources.delete}" 
                 HorizontalAlignment="Left" Margin="181,155,0,0" VerticalAlignment="Top" 
                 Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" 
-                Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" 
+                Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal"
                 FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" 
                 Click="ButtonDelete_Click"/>
        
@@ -125,16 +136,6 @@
                 Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" 
                 FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
                 Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="buttonLanguage_Click"/>
-       
-        <DataGrid x:Name="listJob"
-                  IsReadOnly="true"
-                  SelectedItem="{Binding SelectedJob}"
-                  ItemsSource="{Binding Jobs}"
-                  Margin="0,146,0,130" 
-                  HorizontalAlignment="Center" 
-                  Width="944" Grid.RowSpan="2" 
-                  BorderBrush="#FF020202">
-        </DataGrid>
        
         <Button Content="Encryption" HorizontalAlignment="Left" Margin="574,215,0,0" VerticalAlignment="Top" 
                 Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7"
