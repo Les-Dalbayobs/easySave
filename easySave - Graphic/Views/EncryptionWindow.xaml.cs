@@ -28,11 +28,6 @@ namespace easySave___Graphic.Views
         {
             this.Close();
         }
-
-        private void Style_DpiChanged(object sender, DpiChangedEventArgs e)
-        {
-
-        }
     }
 
 }
