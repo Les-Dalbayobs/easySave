@@ -12,10 +12,19 @@ namespace easySave___Graphic.ViewModel
     {
 
         #region atributes
+        /// <summary>
+        /// Observable collection with all jobs
+        /// </summary>
         ObservableCollection<job> jobs;
 
+        /// <summary>
+        /// Job selected in the DataGrid
+        /// </summary>
         job selectedJob;
 
+        /// <summary>
+        /// easySave folder path
+        /// </summary>
         string pathFilesEasySave = @"c:\EasySave";
 
         /// <summary>
@@ -23,60 +32,40 @@ namespace easySave___Graphic.ViewModel
         /// and to deserialize JSON into objects or value types.
         /// </summary>
         JsonSerializer serializer;
+
+        /// <summary>
+        /// Save the json
+        /// </summary>
         string jsonString;
         #endregion
 
         #region properties
-        //public List<job> Jobs { get => jobs; set => jobs = value; }
+        /// <summary>
+        /// Getter - Setter of the jobs attribute
+        /// </summary>
         public ObservableCollection<job> Jobs { get => jobs; set => jobs = value; }
-        
+
+        /// <summary>
+        /// Getter Setter of the SelectedJob attribute
+        /// </summary>
         public job SelectedJob { get => selectedJob; set => selectedJob = value; }
         #endregion
 
         #region contructor
         public MainWindowsViewsModel()
         {
-            
-
             serializer = new JsonSerializer();
 
             importConfig();
-
-
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    job Job = new job();
-
-            //    Job.Name = "Test";
-            //    Job.PathDestination = "test";
-            //    Job.PathSource = "Test" + i.ToString();
-            //    Job.TypeSave = false;
-
-            //    this.jobs.Add(Job);
-            //}
-
-            //string pathLogFolder = pathFilesEasySave + @"\Log";
-            //string pathLogProgressSave = pathLogFolder + @"\logProgressSave.json";
-
-            //for (int i = 0; i < jobs.Count; i++)
-            //{
-            //    this.jobs[i].SetPathFileLogProgress(pathLogFolder);
-            //}
-
-            //if (!File.Exists(pathLogProgressSave))
-            //{
-            //    if (!Directory.Exists(pathLogFolder))
-            //    {
-            //        Directory.CreateDirectory(pathLogFolder);
-            //    }
-            //    File.Create(pathLogProgressSave).Close();
-            //}
-
         }
 
         #endregion
 
         #region methods
+        /// <summary>
+        ///  Method to remove a job to the list and export the config
+        /// </summary>
+        /// <param name="jobDelete">Job to remove in the list</param>
         public void deleteJob(job jobDelete)
         {
             this.jobs.Remove(jobDelete);
@@ -84,6 +73,10 @@ namespace easySave___Graphic.ViewModel
             exportConfig();
         }
 
+        /// <summary>
+        /// Method to add a job to the list and export the config
+        /// </summary>
+        /// <param name="jobAdd">Job to add in the list</param>
         public void addJob(job jobAdd)
         {
             this.jobs.Add(jobAdd);
@@ -91,6 +84,9 @@ namespace easySave___Graphic.ViewModel
             exportConfig();
         }
 
+        /// <summary>
+        /// Method to serialize jobs
+        /// </summary>
         public void serializeJob()
         {
             //Convert the table to suit the json format (in string)
@@ -160,6 +156,7 @@ namespace easySave___Graphic.ViewModel
                     }
                 }
             }
+            // If nothing has been imported, initialize the list
             if (jobs == null)
             {
                 this.jobs = new ObservableCollection<job>();
