@@ -4,17 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic.Views"
+        xmlns:language="clr-namespace:easySave___Graphic.Properties"
         mc:Ignorable="d"
         Title="DeleteJob" Height="168" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" SnapsToDevicePixels="True">
     <Grid>
         <!--#region Text Box-->
-        <Label HorizontalAlignment="Center" Content="Do you want to Delete this Job ?" 
+        <Label HorizontalAlignment="Center" Content="{x:Static language:Resources.wantDelete}" 
                  VerticalAlignment="Top" Width="292"  Visibility="Visible" 
                  FontWeight="Bold" Height="46" FontSize="18" Margin="0,26,0,0" 
                  BorderBrush="White"/>
 
         <!--#region Button-->
-        <Button x:Name="No" Content="NO" 
+        <Button x:Name="No" Content="{x:Static language:Resources.no}" 
             Margin="272,91,102,0" 
             VerticalAlignment="Top" 
             Height="43" 
@@ -25,7 +26,7 @@
             FontWeight="Normal" 
             FontSize="16"
             Click="No_Click"/>
-        <Button x:Name="Yes" Content="YES" 
+        <Button x:Name="Yes" Content="{x:Static language:Resources.yes}" 
             Margin="102,91,272,0" 
             VerticalAlignment="Top" 
             Height="43" 

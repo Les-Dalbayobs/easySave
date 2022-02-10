@@ -124,6 +124,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Encryption.
+        /// </summary>
+        public static string encryption {
+            get {
+                return ResourceManager.GetString("encryption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à English.
         /// </summary>
         public static string english {
@@ -187,11 +196,38 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Non.
+        /// </summary>
+        public static string no {
+            get {
+                return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No job selected in the main menu.
+        /// </summary>
+        public static string noSelectJob {
+            get {
+                return ResourceManager.GetString("noSelectJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Save.
         /// </summary>
         public static string save {
             get {
                 return ResourceManager.GetString("save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Saving the job:.
+        /// </summary>
+        public static string saveOneJob {
+            get {
+                return ResourceManager.GetString("saveOneJob", resourceCulture);
             }
         }
         
@@ -214,11 +250,38 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Type of extension file.
+        /// </summary>
+        public static string typeExtension {
+            get {
+                return ResourceManager.GetString("typeExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to Delete this Job ?.
+        /// </summary>
+        public static string wantDelete {
+            get {
+                return ResourceManager.GetString("wantDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Application language.
         /// </summary>
         public static string WindowLangTitle {
             get {
                 return ResourceManager.GetString("WindowLangTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Yes.
+        /// </summary>
+        public static string yes {
+            get {
+                return ResourceManager.GetString("yes", resourceCulture);
             }
         }
     }
