@@ -79,7 +79,9 @@ namespace easySave___Graphic.ViewModel
         #region methods
         public void deleteJob(job jobDelete)
         {
-
+            this.jobs.Remove(jobDelete);
+            serializeJob();
+            exportConfig();
         }
 
         public void addJob(job jobAdd)

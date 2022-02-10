@@ -111,7 +111,7 @@ namespace easySave___Graphic
 
                 if (delete.ShowDialog() == true)
                 {
-                    mainW.Jobs.Remove(mainW.SelectedJob);
+                    mainW.deleteJob(mainW.SelectedJob);
                 }
             }
             else
