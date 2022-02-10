@@ -23,6 +23,8 @@ namespace easySave___Graphic
     /// </summary>
     public partial class MainWindow : Window
     {
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
+
         public MainWindow()
         {
             string language = Properties.Settings.Default.lang;
@@ -132,14 +134,14 @@ namespace easySave___Graphic
             if (mainW.SelectedJob != null)
             {
 
-                SaveMenu.RadioOneJob.Content = "Saving the job: " + mainW.SelectedJob.Name;
+                SaveMenu.RadioOneJob.Content = resource.GetString("saveOneJob") + mainW.SelectedJob.Name;
                 SaveMenu.RadioOneJob.IsChecked = true;
 
                 SaveMenu.ShowDialog();
             }
             else
             {
-                SaveMenu.RadioOneJob.Content = "No job selected in the main menu";
+                SaveMenu.RadioOneJob.Content = resource.GetString("noSelectJob");
                 SaveMenu.RadioOneJob.IsEnabled = false;
                 SaveMenu.RadioAllJob.IsChecked = true;
                 SaveMenu.RadioAllJob.IsEnabled = false;

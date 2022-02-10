@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic.Views"
+        xmlns:language="clr-namespace:easySave___Graphic.Properties"
         mc:Ignorable="d"
-        Title="EncryptionWindow" Height="255" Width="400">
+        Title="EncryptionWindow" Height="255" Width="400" WindowStyle="None">
 
     <Grid>
         <!--#region Title-->
-        <Label Content="Type of extension file" HorizontalAlignment="Left" Margin="101,10,0,0" 
+        <Label Content="{x:Static language:Resources.typeExtension}" HorizontalAlignment="Center" Margin="0,10,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="20"/>
         <!--#endregion-->
 
@@ -35,7 +36,7 @@
             <ComboBoxItem>INI</ComboBoxItem>
         </ComboBox>
         <!--#endregion-->
-        
+
         <!--#region Button-->
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="276,165,0,0" 
                 VerticalAlignment="Top" Height="39" Width="78" Background="#FFAC00E7" 
@@ -46,12 +47,12 @@
                 Foreground="White" FontFamily="Bahnschrift" FontSize="18" Height="39" Width="78
                 "/>
         <!--#endregion-->
-        
+
         <!--#region Label-->
         <Label Content="Input your extend type" HorizontalAlignment="Left" Margin="10,119,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift"/>
         <!--#endregion-->
-        
+
         <!--#region TextBox-->
         <TextBox HorizontalAlignment="Left" Margin="146,117,0,0"  TextWrapping="NoWrap" 
                  VerticalAlignment="Top" Width="174" Height="29" RenderTransformOrigin="0.642,0.484"/>

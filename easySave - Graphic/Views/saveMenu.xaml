@@ -9,7 +9,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
         
-        UseLayoutRounding="True">
+        UseLayoutRounding="True" WindowStyle="None">
     <Grid>
         <!--#region Label Name-->
         <Label Content="Save menu" HorizontalAlignment="Center" Margin="0,10,0,0" 
