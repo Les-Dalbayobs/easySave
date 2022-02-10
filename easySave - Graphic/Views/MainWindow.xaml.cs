@@ -119,5 +119,14 @@ namespace easySave___Graphic
                 MessageBox.Show("Please select job");
             }
         }
+
+        public void ButtonEncryption_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
+            Views.EncryptionWindow encryptionWindow = new Views.EncryptionWindow();
+            encryptionWindow.ShowDialog();
+        }
+        
     }
 }
