@@ -29,7 +29,30 @@ namespace easySave___Graphic.Views
 
             if (this.RadioAllJob.IsChecked == true)
             {
-
+                bool error = false;
+                foreach (var oneJob in mainW.Jobs)
+                {
+                    if (!mainW.SelectedJob.verifExist(mainW.SelectedJob.PathSource))
+                    {
+                        MessageBox.Show("Source path error of the job: " + oneJob.Name);
+                        error = true;
+                        break;
+                    }
+                    if (!mainW.SelectedJob.verifCreateDestination())
+                    {
+                        MessageBox.Show("Destination path error of the job: " + oneJob.Name);
+                        error = true;
+                        break;
+                    }
+                    
+                }
+                if (!error)
+                {
+                    foreach (var oneJob in mainW.Jobs)
+                    {
+                        oneJob.copy();
+                    }
+                }
             }
             else
             {
