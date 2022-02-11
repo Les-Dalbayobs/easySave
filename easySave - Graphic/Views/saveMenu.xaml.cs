@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +19,7 @@ namespace easySave___Graphic.Views
     /// </summary>
     public partial class saveMenu : Window
     {
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
         public saveMenu()
         {
             InitializeComponent();
@@ -34,13 +37,13 @@ namespace easySave___Graphic.Views
                 {
                     if (!oneJob.verifExist(oneJob.PathSource))
                     {
-                        MessageBox.Show("Source path error of the job: " + oneJob.Name);
+                        MessageBox.Show(resource.GetString("sourcePathError") + oneJob.PathSource);
                         error = true;
                         break;
                     }
                     if (!oneJob.verifCreateDestination())
                     {
-                        MessageBox.Show("Destination path error of the job: " + oneJob.Name);
+                        MessageBox.Show(resource.GetString("destPathError") + oneJob.PathDestination);
                         error = true;
                         break;
                     }
@@ -58,11 +61,11 @@ namespace easySave___Graphic.Views
             {
                 if (!mainW.SelectedJob.verifExist(mainW.SelectedJob.PathSource))
                 {
-                    MessageBox.Show("Source path error");
+                    MessageBox.Show(resource.GetString("sourcePathError") + mainW.SelectedJob.PathSource);
                 }
                 else if (!mainW.SelectedJob.verifCreateDestination())
                 {
-                    MessageBox.Show("Destination path error");
+                    MessageBox.Show(resource.GetString("destPathError") + mainW.SelectedJob.PathDestination);
                 }
                 else
                 {

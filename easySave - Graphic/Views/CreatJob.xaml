@@ -48,12 +48,12 @@
         <!--#endregion-->
 
         <!--#region Radio Button -->
-        <RadioButton x:Name="RadioComplete" Content="Complete" HorizontalAlignment="Left" Margin="66,211,0,0" 
+        <RadioButton x:Name="RadioComplete" Content="{x:Static language:Resources.complete}" HorizontalAlignment="Left" Margin="66,211,0,0" 
                      VerticalAlignment="Top" Height="25" Width="104" FontSize="18" ClickMode="Press" 
                      IsChecked="True"
                      FontWeight="Bold"/>
-        <RadioButton x:Name="RadioDifferential" Content="Differential" HorizontalAlignment="Left" Margin="197,211,0,0" 
-                     VerticalAlignment="Top" Height="25" Width="124" FontSize="18" ClickMode="Press"
+        <RadioButton x:Name="RadioDifferential" Content="{x:Static language:Resources.differential}" HorizontalAlignment="Left" Margin="197,211,0,0" 
+                     VerticalAlignment="Top" Height="25" Width="154" FontSize="18" ClickMode="Press"
                      FontWeight="Bold"/>
 
         <!--#endregion-->
@@ -70,7 +70,7 @@
             FontWeight="Normal" 
             FontSize="16" Click="Cancel_Click"/>
 
-        <Button x:Name="Ok" Content="{x:Static language:Resources.apply}" 
+        <Button x:Name="Ok" Content="{x:Static language:Resources.apply}"
             Margin="98,274,162,0" 
             VerticalAlignment="Top" 
             Height="50" 

@@ -110,6 +110,7 @@ namespace easySave___Graphic
             if (mainW.SelectedJob != null)
             {
                 Views.DeleteJob delete = new Views.DeleteJob();
+                delete.DeleteAlert.Content = resource.GetString("wantDelete") + mainW.SelectedJob.Name + " ?";
 
                 if (delete.ShowDialog() == true)
                 {
@@ -118,7 +119,7 @@ namespace easySave___Graphic
             }
             else
             {
-                MessageBox.Show("Please select job");
+                MessageBox.Show("No job selected");
             }
         }
         
