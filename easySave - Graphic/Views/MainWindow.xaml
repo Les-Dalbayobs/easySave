@@ -135,7 +135,7 @@
                 HorizontalAlignment="Left" Margin="715,215,0,0" VerticalAlignment="Top" Height="50" 
                 Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" 
                 FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
-                Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="buttonLanguage_Click" IsEnabled="False"/>
+                Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="buttonLanguage_Click"/>
        
         <Button Content="{x:Static language:Resources.encryption}" HorizontalAlignment="Left" Margin="574,215,0,0" VerticalAlignment="Top" 
                 Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7"
