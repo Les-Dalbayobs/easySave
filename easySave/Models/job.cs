@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 [assembly: InternalsVisibleTo("easySave - Graphic")]
 
@@ -66,8 +67,14 @@ namespace easySave.Models
         /// <summary>
         /// Getter setter of the type attribute 
         /// </summary>
-        public bool TypeSave { get => typeSave; set => typeSave = value; }
+        /// 
+        public bool Complete { get => typeSave; set => typeSave = value; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonIgnore]
+        public bool Differential { get => !typeSave; set => typeSave = !value; }
         /// <summary>
         /// Getter setter of the pathSource attribute
         /// </summary>
