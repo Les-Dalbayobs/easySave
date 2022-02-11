@@ -114,7 +114,7 @@ namespace easySave___Graphic.ViewModel
             }
 
             //Write each directory name to a file.
-            using (var streamWriter = new StreamWriter(pathFilesEasySave + @"\configJobGraphical.json"))
+            using (var streamWriter = new StreamWriter(pathFilesEasySave + @"\configJobsGraphical.json"))
             {
                 //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
                 using (var jsonWriter = new JsonTextWriter(streamWriter))
@@ -138,7 +138,7 @@ namespace easySave___Graphic.ViewModel
             }
 
             //If the file does not exist we create it
-            if (!File.Exists(pathFilesEasySave + @"\configJobGraphical.json"))
+            if (!File.Exists(pathFilesEasySave + @"\configJobsGraphical.json"))
             {
 
                 serializeJob(); //Serialization jobs 
@@ -147,7 +147,7 @@ namespace easySave___Graphic.ViewModel
             else
             {
                 //StreamReader instance to read text from a file
-                using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJobGraphical.json"))
+                using (var streamReader = new StreamReader(pathFilesEasySave + @"\configJobsGraphical.json"))
                 {
                     using (var jsonReader = new JsonTextReader(streamReader))
                     {
