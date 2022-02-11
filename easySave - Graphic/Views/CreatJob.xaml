@@ -50,11 +50,12 @@
         <!--#region Radio Button -->
         <RadioButton x:Name="RadioComplete" Content="{x:Static language:Resources.complete}" HorizontalAlignment="Left" Margin="66,211,0,0" 
                      VerticalAlignment="Top" Height="25" Width="104" FontSize="18" ClickMode="Press" 
-                     IsChecked="True"
+                     IsChecked="{Binding Complete}"
                      FontWeight="Bold"/>
         <RadioButton x:Name="RadioDifferential" Content="{x:Static language:Resources.differential}" HorizontalAlignment="Left" Margin="197,211,0,0" 
                      VerticalAlignment="Top" Height="25" Width="154" FontSize="18" ClickMode="Press"
-                     FontWeight="Bold"/>
+                     FontWeight="Bold"
+                     IsChecked="{Binding Differential}"/>
 
         <!--#endregion-->
 
