@@ -85,6 +85,8 @@ namespace easySave___Graphic
                 editJob.DataContext = mainW.SelectedJob;
 
                 editJob.ShowDialog();
+
+                mainW.editJob();
             }
             else
             {
