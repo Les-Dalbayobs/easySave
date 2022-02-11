@@ -169,6 +169,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Encryption.
+        /// </summary>
+        public static string encryptionMenu {
+            get {
+                return ResourceManager.GetString("encryptionMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string english {
@@ -187,7 +196,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter file extensions.
+        ///   Looks up a localized string similar to Enter file extension (if not in the list).
         /// </summary>
         public static string fileExtension {
             get {

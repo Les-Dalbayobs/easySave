@@ -6,18 +6,18 @@
         xmlns:local="clr-namespace:easySave___Graphic.Views"
         xmlns:language="clr-namespace:easySave___Graphic.Properties"
         mc:Ignorable="d"
-        Title="EncryptionWindow" Height="255" Width="400" WindowStyle="None">
+        Title="EncryptionWindow" Height="297" Width="400" WindowStyle="None">
 
     <Grid>
         <!--#region Title-->
-        <Label Content="{x:Static language:Resources.typeExtension}" HorizontalAlignment="Center" Margin="0,10,0,0" 
-               VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="18"/>
+        <Label Content="{x:Static language:Resources.typeExtension}" HorizontalAlignment="Left" Margin="10,68,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift"/>
         <!--#endregion-->
 
         <!--#region List of extends files-->
-        <ComboBox HorizontalAlignment="Center" Margin="0,49,0,0"
+        <ComboBox HorizontalAlignment="Left" Margin="10,95,0,0"
                   VerticalAlignment="Top" 
-                  Width="240" Height="43"  >
+                  Width="240" Height="28"  >
             <ComboBoxItem>TXT</ComboBoxItem>
             <ComboBoxItem>DOC</ComboBoxItem>
             <ComboBoxItem>EXE</ComboBoxItem>
@@ -38,24 +38,24 @@
         <!--#endregion-->
 
         <!--#region Button-->
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="273,206,0,0" 
-                VerticalAlignment="Top" Height="39" Width="78" Background="#FFAC00E7" 
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="243,226,0,0" 
+                VerticalAlignment="Top" Height="40" Width="99" Background="#FFAC00E7" 
                 FontFamily="Bahnschrift" FontSize="18" Foreground="White" x:Name="Cancel" 
                 Click="Cancel_Click" />
-        <Button Content="Ok" HorizontalAlignment="Center" Margin="0,206,0,0" 
+        <Button Content="Ok" HorizontalAlignment="Left" Margin="122,226,0,0" 
                 VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
-                Foreground="White" FontFamily="Bahnschrift" FontSize="18" Height="39" Width="78
-                "/>
+                Foreground="White" FontFamily="Bahnschrift" FontSize="18" Height="40" Width="93"/>
         <!--#endregion-->
 
         <!--#region Label-->
-        <Label Content="{x:Static language:Resources.fileExtension}" HorizontalAlignment="Left" Margin="10,0,0,0" 
-               VerticalAlignment="Center" FontFamily="Bahnschrift"/>
+        <Label Content="{x:Static language:Resources.fileExtension}" HorizontalAlignment="Center" Margin="0,133,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" Width="381"/>
         <!--#endregion-->
 
         <!--#region TextBox-->
-        <TextBox HorizontalAlignment="Center" Margin="0,145,0,0"  TextWrapping="NoWrap" 
+        <TextBox HorizontalContentAlignment="Center" Margin="10,162,10,0"  TextWrapping="NoWrap" 
                  VerticalAlignment="Top" Width="380" Height="29" RenderTransformOrigin="0.642,0.484"/>
+        <Label Content="{x:Static language:Resources.encryptionMenu}" HorizontalContentAlignment="Center" Margin="10,17,10,0" VerticalAlignment="Top" Width="380" FontSize="20" FontWeight="Bold"/>
         <!--#endregion-->
     </Grid>
 </Window>

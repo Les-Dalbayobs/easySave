@@ -153,6 +153,9 @@
   <data name="encryption" xml:space="preserve">
     <value>Encryption</value>
   </data>
+  <data name="encryptionMenu" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>English</value>
   </data>
@@ -160,7 +163,7 @@
     <value>Exit</value>
   </data>
   <data name="fileExtension" xml:space="preserve">
-    <value>Enter file extensions</value>
+    <value>Enter file extension (if not in the list)</value>
   </data>
   <data name="fr" xml:space="preserve">
     <value>French</value>

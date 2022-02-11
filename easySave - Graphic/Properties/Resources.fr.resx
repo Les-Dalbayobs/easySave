@@ -153,6 +153,9 @@
   <data name="encryption" xml:space="preserve">
     <value>Chiffrement</value>
   </data>
+  <data name="encryptionMenu" xml:space="preserve">
+    <value>Chiffrement</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>Anglais</value>
   </data>
@@ -160,7 +163,7 @@
     <value>Quitter</value>
   </data>
   <data name="fileExtension" xml:space="preserve">
-    <value>Entrez les extensions de fichiers désirées</value>
+    <value>Entrez l'extension de fichiers désirée (si pas dans la liste)</value>
   </data>
   <data name="fr" xml:space="preserve">
     <value>Français</value>
