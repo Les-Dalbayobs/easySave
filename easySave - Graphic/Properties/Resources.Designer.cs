@@ -115,6 +115,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error ! Incorrect destination path : .
+        /// </summary>
+        public static string destPathError {
+            get {
+                return ResourceManager.GetString("destPathError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Differential.
         /// </summary>
         public static string differential {
@@ -300,6 +309,15 @@ namespace easySave___Graphic.Properties {
         public static string source {
             get {
                 return ResourceManager.GetString("source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error ! Incorrect source path : .
+        /// </summary>
+        public static string sourcePathError {
+            get {
+                return ResourceManager.GetString("sourcePathError", resourceCulture);
             }
         }
         

@@ -135,6 +135,9 @@
   <data name="destination" xml:space="preserve">
     <value>Chemin de la destination</value>
   </data>
+  <data name="destPathError" xml:space="preserve">
+    <value>Erreur ! Chemin de destination incorrect : </value>
+  </data>
   <data name="differential" xml:space="preserve">
     <value>Différentielle</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="source" xml:space="preserve">
     <value>Chemin de la source</value>
+  </data>
+  <data name="sourcePathError" xml:space="preserve">
+    <value>Erreur ! Chemin source incorrect : </value>
   </data>
   <data name="type" xml:space="preserve">
     <value>Type de sauvegarde</value>

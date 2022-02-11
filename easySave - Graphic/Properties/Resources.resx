@@ -135,6 +135,9 @@
   <data name="destination" xml:space="preserve">
     <value>Path of the destination</value>
   </data>
+  <data name="destPathError" xml:space="preserve">
+    <value>Error ! Incorrect destination path : </value>
+  </data>
   <data name="differential" xml:space="preserve">
     <value>Differential</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="source" xml:space="preserve">
     <value>Path of the source</value>
+  </data>
+  <data name="sourcePathError" xml:space="preserve">
+    <value>Error ! Incorrect source path : </value>
   </data>
   <data name="type" xml:space="preserve">
     <value>Type of backup</value>
