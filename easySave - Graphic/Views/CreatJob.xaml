@@ -4,16 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic.Views"
-        xmlns:Properties="clr-namespace:easySave___Graphic.Properties" x:Class="easySave___Graphic.Views.CreatJob"
+        x:Class="easySave___Graphic.Views.CreatJob"
         mc:Ignorable="d"
-        Title="CreatJob" Height="370" Width="395"
+        xmlns:language="clr-namespace:easySave___Graphic.Properties"
+        Title="CreatJob" Height="339" Width="395"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
-        
-        UseLayoutRounding="True">
+        UseLayoutRounding="True" WindowStyle="None">
     <Grid >
         <!--#region Label Name-->
-        <Label Content="Name" HorizontalAlignment="Left" Margin="74,11,0,0" 
+        <Label Content="{x:Static language:Resources.name}" HorizontalAlignment="Left" Margin="74,11,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift" 
                FontSize="17" Height="29" Width="57"/>
         <Label Content="Source" HorizontalAlignment="Left" Margin="66,74,0,0" 
@@ -37,11 +37,11 @@
         <!--#endregion-->
 
         <!--#region Image icone-->
-        <Button x:Name="ButtonSource" Margin="296,78,52,235" Click="ButtonSource_Click">
+        <Button x:Name="ButtonSource" Margin="296,78,74,273" Click="ButtonSource_Click">
             <Image x:Name="ImgFolderSource"
             Source="/Views/icons8-dossier-ouvert.png"/>
         </Button>
-        <Button x:Name="ButtonDestination" Margin="296,147,52,166" Click="ButtonDestination_Click">
+        <Button x:Name="ButtonDestination" Margin="296,147,75,204" Click="ButtonDestination_Click">
             <Image x:Name="ImgFolderDestination"
             Source="/Views/icons8-dossier-ouvert.png"/>
         </Button>
@@ -59,7 +59,7 @@
         <!--#endregion-->
 
         <!--#region Button-->
-        <Button x:Name="Cancel" Content="Cancel" 
+        <Button x:Name="Cancel" Content="{x:Static language:Resources.cancel}" 
             Margin="250,274,10,0" 
             VerticalAlignment="Top" 
             Height="50" 
@@ -68,10 +68,9 @@
             Background="#AC00E7" 
             FontFamily="Bahnschrift" 
             FontWeight="Normal" 
-            FontSize="16" Click="Cancel_Click"
-               />
+            FontSize="16" Click="Cancel_Click"/>
 
-        <Button x:Name="Ok" Content=" Ok " 
+        <Button x:Name="Ok" Content="{x:Static language:Resources.apply}" 
             Margin="98,274,162,0" 
             VerticalAlignment="Top" 
             Height="50" 
@@ -81,8 +80,5 @@
             FontFamily="Bahnschrift" 
             FontWeight="Normal" 
             FontSize="16" Click="Ok_Click" />
-
-
-
     </Grid>
 </Window>

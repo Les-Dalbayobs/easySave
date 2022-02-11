@@ -4,18 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:easySave___Graphic.Views"
+        xmlns:language="clr-namespace:easySave___Graphic.Properties"
         mc:Ignorable="d"
-        Title="DeleteJob" Height="160" Width="500">
+        Title="DeleteJob" Height="168" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" SnapsToDevicePixels="True">
     <Grid>
         <!--#region Text Box-->
-        <TextBox HorizontalAlignment="Center" Text="Do you want to Delete  this Job ?" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" Width="292" 
-                 TextChanged="TextBox_TextChanged" SelectionOpacity="-3" Visibility="Visible" 
-                 FontWeight="Bold" Height="46" FontSize="18" Grid.Column="1" Margin="0,26,0,0" 
+        <Label HorizontalAlignment="Center" Content="{x:Static language:Resources.wantDelete}" 
+                 VerticalAlignment="Top" Width="292"  Visibility="Visible" 
+                 FontWeight="Bold" Height="46" FontSize="18" Margin="0,26,0,0" 
                  BorderBrush="White"/>
-        
+
         <!--#region Button-->
-        <Button x:Name="Cancel" Content="NO" 
+        <Button x:Name="No" Content="{x:Static language:Resources.no}" 
             Margin="272,91,102,0" 
             VerticalAlignment="Top" 
             Height="43" 
@@ -25,9 +25,8 @@
             FontFamily="Bahnschrift" 
             FontWeight="Normal" 
             FontSize="16"
-               Grid.Column="1"
-               />
-        <Button x:Name="Cancel_Copy" Content="YES" 
+            Click="No_Click"/>
+        <Button x:Name="Yes" Content="{x:Static language:Resources.yes}" 
             Margin="102,91,272,0" 
             VerticalAlignment="Top" 
             Height="43" 
@@ -37,13 +36,12 @@
             FontFamily="Bahnschrift" 
             FontWeight="Normal" 
             FontSize="16"
-            Grid.Column="1"
-               />
+            Click="Yes_Click"/>
         <!--#endregion-->
-        
+
         <!--#region Image-->
-        <Image Grid.Column="1" HorizontalAlignment="Left" Height="73"
-               Margin="10,0,0,0" VerticalAlignment="Center" Width="63" 
+        <Image Height="73"
+               Margin="21,40,416,39" Width="63" 
                Source="/Views/icons8-warning-48.png"/>
         <!--#endregion-->
     </Grid>

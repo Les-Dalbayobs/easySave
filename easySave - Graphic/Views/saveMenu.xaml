@@ -1,0 +1,84 @@
+﻿<Window x:Class="easySave___Graphic.Views.saveMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:easySave___Graphic.Views"
+        mc:Ignorable="d"
+        Title="saveMenu" Height="370" Width="395"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" 
+        
+        UseLayoutRounding="True" WindowStyle="None">
+    <Grid>
+        <!--#region Label Name-->
+        <Label Content="Save menu" HorizontalAlignment="Center" Margin="0,10,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" 
+               FontSize="20" Height="29" Width="110" FontWeight="Bold"/>
+        <Label Content="Make your choice :" HorizontalAlignment="Left" Margin="66,52,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" 
+               FontSize="17" Height="28" Width="167" FontWeight="Bold"/>
+        <!--#endregion-->
+
+        <!--#region Zone input-->
+        <!--#endregion-->
+
+        <!--#region Image icone-->
+        <!--#endregion-->
+
+        <!--#region Radio Button -->
+        <RadioButton x:Name="RadioOneJob" Content="Save selected choice (job n°...)" HorizontalAlignment="Left" Margin="66,85,0,0" 
+                     VerticalAlignment="Top" Height="25" Width="291" FontSize="18" ClickMode="Press" 
+                     FontWeight="Normal"/>
+        <RadioButton x:Name="RadioAllJob" Content="Save all jobs" HorizontalAlignment="Left" Margin="66,115,0,0" 
+                     VerticalAlignment="Top" Height="26" Width="146" FontSize="18" ClickMode="Press"
+                     FontWeight="Normal"/>
+
+        <!--#endregion-->
+
+        <!--#region Button-->
+        <Button x:Name="Cancel" Content="Cancel" 
+            Margin="250,274,10,0" 
+            VerticalAlignment="Top" 
+            Height="50" 
+            BorderBrush="#FFD8D8D8" 
+            Foreground="White"
+            Background="#AC00E7" 
+            FontFamily="Bahnschrift" 
+            FontWeight="Normal" 
+            FontSize="16" Click="Cancel_Click"
+               />
+
+        <Button x:Name="Ok" Content=" Ok " 
+            Margin="98,274,162,0" 
+            VerticalAlignment="Top" 
+            Height="50" 
+            BorderBrush="#FFD8D8D8" 
+            Foreground="White"
+            Background="#AC00E7" 
+            FontFamily="Bahnschrift" 
+            FontWeight="Normal" 
+            FontSize="16" Click="Ok_Click"
+            />
+        <ProgressBar HorizontalAlignment="Center" Height="20" Margin="0,169,0,0" VerticalAlignment="Top" Width="355"/>
+        <Label Content="Progression (...%)" HorizontalAlignment="Left" Margin="148,146,0,0" VerticalAlignment="Top" FontSize="10" IsEnabled="False"/>
+        <Button x:Name="ButtonPlay" Content="PLAY" Margin="87,200,245,106">
+            <!--<Image x:Name="ImgPlayPause"
+            Source="../Pictures/playpause.png"/>
+            -->
+        </Button>
+        <Button x:Name="ButtonStop" Content="STOP" Margin="238,200,104,106">
+            <!-- <Image x:Name="ImgStop"
+                Source="../Pictures/stop.png"/>
+            -->
+        </Button>
+        <Button x:Name="ButtonPause" Content="PAUSE" Margin="166,200,174,106">
+            <!--<Image x:Name="ImgPlayPause"
+            Source="../Pictures/playpause.png"/>
+            -->
+        </Button>
+
+
+
+    </Grid>
+</Window>

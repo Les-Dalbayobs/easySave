@@ -13,23 +13,21 @@ using System.Windows.Shapes;
 namespace easySave___Graphic.Views
 {
     /// <summary>
-    /// Logique d'interaction pour DeleteJob.xaml
+    /// Logique d'interaction pour EncryptionWindow.xaml
     /// </summary>
-    public partial class DeleteJob : Window
+    public partial class EncryptionWindow : Window
     {
-        public DeleteJob()
+
+        public EncryptionWindow()
         {
             InitializeComponent();
         }
 
-        private void No_Click(object sender, RoutedEventArgs e)
+       
+        public void Cancel_Click (object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
-        }
-
-        private void Yes_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
+            this.Close();
         }
     }
+
 }

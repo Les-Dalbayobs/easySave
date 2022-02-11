@@ -138,6 +138,9 @@
   <data name="en" xml:space="preserve">
     <value>Anglais</value>
   </data>
+  <data name="encryption" xml:space="preserve">
+    <value>Chiffrement</value>
+  </data>
   <data name="english" xml:space="preserve">
     <value>Anglais</value>
   </data>
@@ -159,8 +162,17 @@
   <data name="name" xml:space="preserve">
     <value>Nom</value>
   </data>
+  <data name="no" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="noSelectJob" xml:space="preserve">
+    <value>Pas de job sélectionné dans le menu principal</value>
+  </data>
   <data name="save" xml:space="preserve">
     <value>Sauvegarder</value>
+  </data>
+  <data name="saveOneJob" xml:space="preserve">
+    <value>Sauvegarde du job :</value>
   </data>
   <data name="source" xml:space="preserve">
     <value>Chemin de la source</value>
@@ -168,7 +180,16 @@
   <data name="type" xml:space="preserve">
     <value>Type de sauvegarde</value>
   </data>
+  <data name="typeExtension" xml:space="preserve">
+    <value>Type de l'extension du fichier</value>
+  </data>
+  <data name="wantDelete" xml:space="preserve">
+    <value>Voulez-vous supprimer ce job ?</value>
+  </data>
   <data name="WindowLangTitle" xml:space="preserve">
     <value>Langue de l'application</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Oui</value>
   </data>
 </root>

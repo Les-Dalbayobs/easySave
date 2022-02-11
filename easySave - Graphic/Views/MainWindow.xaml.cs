@@ -23,6 +23,8 @@ namespace easySave___Graphic
     /// </summary>
     public partial class MainWindow
     {
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
+
         public MainWindow()
         {
             string language = Properties.Settings.Default.lang;
@@ -79,8 +81,82 @@ namespace easySave___Graphic
                 else
                     newJob.TypeSave = false;
 
-                mainW.Jobs.Add(newJob);
+                mainW.addJob(newJob);
             }
         }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
+            if (mainW.SelectedJob != null)
+            {
+                Views.CreatJob editJob = new Views.CreatJob();
+
+                editJob.DataContext = mainW.SelectedJob;
+
+                editJob.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a job");
+            }
+        }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
+            if (mainW.SelectedJob != null)
+            {
+                Views.DeleteJob delete = new Views.DeleteJob();
+
+                if (delete.ShowDialog() == true)
+                {
+                    mainW.deleteJob(mainW.SelectedJob);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select job");
+            }
+        }
+        
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
+            Views.saveMenu SaveMenu = new Views.saveMenu();
+
+            SaveMenu.DataContext = mainW;
+
+
+            if (mainW.SelectedJob != null)
+            {
+
+                SaveMenu.RadioOneJob.Content = resource.GetString("saveOneJob") + mainW.SelectedJob.Name;
+                SaveMenu.RadioOneJob.IsChecked = true;
+
+                SaveMenu.ShowDialog();
+            }
+            else
+            {
+                SaveMenu.RadioOneJob.Content = resource.GetString("noSelectJob");
+                SaveMenu.RadioOneJob.IsEnabled = false;
+                SaveMenu.RadioAllJob.IsChecked = true;
+                SaveMenu.RadioAllJob.IsEnabled = false;
+
+                SaveMenu.ShowDialog();
+            }
+        }
+        
+        public void ButtonEncryption_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
+            Views.EncryptionWindow encryptionWindow = new Views.EncryptionWindow();
+            encryptionWindow.ShowDialog();
+        }
+
     }
 }
