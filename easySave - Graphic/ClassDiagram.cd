@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="easySave___Graphic.Properties.Resources">
-    <Position X="19.5" Y="3" Width="1.75" />
+    <Position X="14.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIBAEAACAACAAAoAAAgBEQAAQQAFAAQAAABABiAAAoA=</HashCode>
+      <HashCode>AIBAEAACAACAAAoAkAgBMUAAQQAFAAQAAAFCBiBAAoA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="easySave___Graphic.Properties.Settings">
-    <Position X="13.75" Y="0.75" Width="2.25" />
+    <Position X="12.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAIAAAAAABAAAAAAAAAAQACAA=</HashCode>
       <FileName>Settings.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="easySave___Graphic.ViewModel.MainWindowsViewsModel">
-    <Position X="8.75" Y="6.75" Width="2.25" />
+    <Position X="7.5" Y="3.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACAAAEAAAABAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>AQCAAAAAIAAAACEAAEAAAABACAAAAAAAAEgAAABQBAA=</HashCode>
       <FileName>ViewModel\MainWindowsViewsModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="easySave___Graphic.Views.CreatJob" BaseTypeListCollapsed="true">
-    <Position X="5.25" Y="0.5" Width="2" />
+    <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIQAACAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\CreatJob.xaml.cs</FileName>
@@ -29,15 +29,31 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="easySave___Graphic.Views.DeleteJob" BaseTypeListCollapsed="true">
-    <Position X="3.25" Y="3" Width="2" />
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\DeleteJob.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="easySave___Graphic.Views.EncryptionWindow" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\EncryptionWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="easySave___Graphic.Views.saveMenu" BaseTypeListCollapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\saveMenu.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
   <Class Name="easySave___Graphic.Views.WindowLang" BaseTypeListCollapsed="true">
-    <Position X="3.25" Y="0.5" Width="1.5" />
+    <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAACAAAAAAAQIAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\WindowLang.xaml.cs</FileName>
@@ -45,34 +61,19 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="easySave___Graphic.MainWindow" BaseTypeListCollapsed="true">
-    <Position X="1" Y="0.5" Width="2" />
+    <Position X="0.75" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAQ=</HashCode>
+      <HashCode>AAQAEAAAEAAAACAAQAAAAAAAAAAABAAAAAAAAAAQAAQ=</HashCode>
       <FileName>Views\MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.1" Collapsed="true" />
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="easySave___Graphic.App">
-    <Position X="1.5" Y="7.25" Width="1.5" />
+    <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="System.Object" Collapsed="true">
-    <Position X="10.5" Y="4" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="easySave___Graphic.serialize">
-    <Position X="15.25" Y="6.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>serialize.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="System.Windows.Window" Collapsed="true">
-    <Position X="9.25" Y="1.5" Width="1.5" />
-    <TypeIdentifier />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
