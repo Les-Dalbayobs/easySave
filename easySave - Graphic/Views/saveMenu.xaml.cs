@@ -32,13 +32,13 @@ namespace easySave___Graphic.Views
                 bool error = false;
                 foreach (var oneJob in mainW.Jobs)
                 {
-                    if (!mainW.SelectedJob.verifExist(mainW.SelectedJob.PathSource))
+                    if (!oneJob.verifExist(oneJob.PathSource))
                     {
                         MessageBox.Show("Source path error of the job: " + oneJob.Name);
                         error = true;
                         break;
                     }
-                    if (!mainW.SelectedJob.verifCreateDestination())
+                    if (!oneJob.verifCreateDestination())
                     {
                         MessageBox.Show("Destination path error of the job: " + oneJob.Name);
                         error = true;
