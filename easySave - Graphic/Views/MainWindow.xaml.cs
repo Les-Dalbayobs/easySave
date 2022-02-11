@@ -96,6 +96,15 @@ namespace easySave___Graphic
                 editJob.DataContext = mainW.SelectedJob;
 
                 editJob.ShowDialog();
+
+                mainW.SelectedJob.PathSource = editJob.TextBoxSource.Text;
+
+                mainW.SelectedJob.PathDestination = editJob.TextBoxDestination.Text;
+
+                if (editJob.RadioComplete.IsChecked == true)
+                    mainW.SelectedJob.TypeSave = true;
+                else
+                    mainW.SelectedJob.TypeSave = false;
             }
             else
             {
