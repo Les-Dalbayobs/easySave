@@ -61,6 +61,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This action is irreversible.
+        /// </summary>
+        public static string advertisement {
+            get {
+                return ResourceManager.GetString("advertisement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
         public static string apply {
@@ -106,7 +115,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path of the destination.
+        ///   Looks up a localized string similar to Destination path.
         /// </summary>
         public static string destination {
             get {
@@ -178,6 +187,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter file extensions.
+        /// </summary>
+        public static string fileExtension {
+            get {
+                return ResourceManager.GetString("fileExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to French.
         /// </summary>
         public static string fr {
@@ -232,7 +250,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non.
+        ///   Looks up a localized string similar to No.
         /// </summary>
         public static string no {
             get {
@@ -295,7 +313,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saving the job:.
+        ///   Looks up a localized string similar to Saving the job : .
         /// </summary>
         public static string saveOneJob {
             get {
@@ -304,7 +322,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Path of the source.
+        ///   Looks up a localized string similar to Source path.
         /// </summary>
         public static string source {
             get {
@@ -322,7 +340,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type of backup.
+        ///   Looks up a localized string similar to Backup type.
         /// </summary>
         public static string type {
             get {
@@ -331,7 +349,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type of extension file.
+        ///   Looks up a localized string similar to Choose file extension.
         /// </summary>
         public static string typeExtension {
             get {
@@ -340,7 +358,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to Delete this Job ?.
+        ///   Looks up a localized string similar to Do you really want to delete this job : .
         /// </summary>
         public static string wantDelete {
             get {

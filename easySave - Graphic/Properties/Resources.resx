@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="advertisement" xml:space="preserve">
+    <value>This action is irreversible</value>
+  </data>
   <data name="apply" xml:space="preserve">
     <value>Apply</value>
   </data>
@@ -133,7 +136,7 @@
     <value>Delete</value>
   </data>
   <data name="destination" xml:space="preserve">
-    <value>Path of the destination</value>
+    <value>Destination path</value>
   </data>
   <data name="destPathError" xml:space="preserve">
     <value>Error ! Incorrect destination path : </value>
@@ -156,6 +159,9 @@
   <data name="exit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="fileExtension" xml:space="preserve">
+    <value>Enter file extensions</value>
+  </data>
   <data name="fr" xml:space="preserve">
     <value>French</value>
   </data>
@@ -175,7 +181,7 @@
     <value>Name</value>
   </data>
   <data name="no" xml:space="preserve">
-    <value>Non</value>
+    <value>No</value>
   </data>
   <data name="noSelectJob" xml:space="preserve">
     <value>No job selected in the main menu</value>
@@ -196,22 +202,22 @@
     <value>Save menu</value>
   </data>
   <data name="saveOneJob" xml:space="preserve">
-    <value>Saving the job:</value>
+    <value>Saving the job : </value>
   </data>
   <data name="source" xml:space="preserve">
-    <value>Path of the source</value>
+    <value>Source path</value>
   </data>
   <data name="sourcePathError" xml:space="preserve">
     <value>Error ! Incorrect source path : </value>
   </data>
   <data name="type" xml:space="preserve">
-    <value>Type of backup</value>
+    <value>Backup type</value>
   </data>
   <data name="typeExtension" xml:space="preserve">
-    <value>Type of extension file</value>
+    <value>Choose file extension</value>
   </data>
   <data name="wantDelete" xml:space="preserve">
-    <value>Do you want to Delete this Job ?</value>
+    <value>Do you really want to delete this job : </value>
   </data>
   <data name="WindowLangTitle" xml:space="preserve">
     <value>Application language</value>

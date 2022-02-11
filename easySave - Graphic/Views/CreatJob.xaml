@@ -70,7 +70,7 @@
             FontWeight="Normal" 
             FontSize="16" Click="Cancel_Click"/>
 
-        <Button x:Name="Ok" Content="{x:Static language:Resources.apply}" 
+        <Button x:Name="Ok" Content="{x:Static language:Resources.apply}"
             Margin="98,274,162,0" 
             VerticalAlignment="Top" 
             Height="50" 
