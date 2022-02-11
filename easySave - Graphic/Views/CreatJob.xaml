@@ -37,11 +37,11 @@
         <!--#endregion-->
 
         <!--#region Image icone-->
-        <Button x:Name="ButtonSource" Margin="296,78,74,273" Click="ButtonSource_Click">
+        <Button x:Name="ButtonSource" Margin="296,78,74,242" Click="ButtonSource_Click">
             <Image x:Name="ImgFolderSource"
             Source="/Views/icons8-dossier-ouvert.png"/>
         </Button>
-        <Button x:Name="ButtonDestination" Margin="296,147,75,204" Click="ButtonDestination_Click">
+        <Button x:Name="ButtonDestination" Margin="296,147,75,173" Click="ButtonDestination_Click">
             <Image x:Name="ImgFolderDestination"
             Source="/Views/icons8-dossier-ouvert.png"/>
         </Button>
