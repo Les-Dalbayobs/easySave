@@ -30,6 +30,7 @@ namespace easySave___Graphic.Views
             {
                 string pathSource = dialog.SelectedPath;
                 this.TextBoxSource.Text = pathSource;
+                this.TextBoxSource.Focus();
             }
         }
 
@@ -41,6 +42,7 @@ namespace easySave___Graphic.Views
             {
                 string pathDestination= dialog.SelectedPath;
                 this.TextBoxDestination.Text = pathDestination;
+                this.TextBoxDestination.Focus();
             }
         }
     }

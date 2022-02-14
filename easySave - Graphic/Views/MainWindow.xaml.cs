@@ -56,17 +56,6 @@ namespace easySave___Graphic
             if (creatJob.ShowDialog() == true)
             {
                 ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
-                
-                if (newJob.PathSource == null)
-                    newJob.PathSource = creatJob.TextBoxSource.Text;
-
-                if (newJob.PathDestination == null)
-                    newJob.PathDestination = creatJob.TextBoxDestination.Text;
-
-                if (creatJob.RadioComplete.IsChecked == true)
-                    newJob.TypeSave = true;
-                else
-                    newJob.TypeSave = false;
 
                 mainW.addJob(newJob);
             }
@@ -83,6 +72,8 @@ namespace easySave___Graphic
                 editJob.DataContext = mainW.SelectedJob;
 
                 editJob.ShowDialog();
+
+                mainW.editJob();
             }
             else
             {
@@ -97,6 +88,7 @@ namespace easySave___Graphic
             if (mainW.SelectedJob != null)
             {
                 Views.DeleteJob delete = new Views.DeleteJob();
+                delete.DeleteAlert.Content = resource.GetString("wantDelete") + mainW.SelectedJob.Name + " ?";
 
                 if (delete.ShowDialog() == true)
                 {
@@ -105,7 +97,7 @@ namespace easySave___Graphic
             }
             else
             {
-                MessageBox.Show("Please select job");
+                MessageBox.Show("No job selected");
             }
         }
         

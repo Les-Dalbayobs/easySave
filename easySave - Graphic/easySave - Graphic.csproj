@@ -6,16 +6,17 @@
     <RootNamespace>easySave___Graphic</RootNamespace>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
+	<ApplicationIcon>Pictures\sansDalba.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Views\dalbayos logo%24.png" />
     <None Remove="Views\icons8-dossier-ouvert.png" />
+    <None Remove="Views\icons8-warning-48.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Pictures\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +56,7 @@
   <ItemGroup>
     <Resource Include="Views\dalbayos logo$.png" />
     <Resource Include="Views\icons8-dossier-ouvert.png" />
+    <Resource Include="Views\icons8-warning-48.png" />
   </ItemGroup>
 
 </Project>
