@@ -33,6 +33,7 @@ namespace easySave.Models
         string jsonStringLogProgress;
         string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
         string pathfolderLog;
+
         /// <summary>
         /// Stores the job name 
         /// </summary>
@@ -56,7 +57,7 @@ namespace easySave.Models
         bool typeSave;
 
 
-
+        string encryptionExtension;
         #endregion
 
         #region properties
@@ -85,6 +86,12 @@ namespace easySave.Models
         /// Getter setter of the pathSource attribute
         /// </summary>
         public string PathDestination { get => pathDestination; set => pathDestination = value; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonIgnore]
+        public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
 
         public string GetPathFileLogProgress()
         {
