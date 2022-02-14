@@ -12,7 +12,8 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
+
+[assembly: InternalsVisibleTo("easySave - Graphic")]
 
 /// <summary>
 /// Models namespace
@@ -523,6 +524,11 @@ namespace easySave.Models
             }
 
             return verif;
+        }
+
+        public void logSave()
+        {
+
         }
 
         #endregion
