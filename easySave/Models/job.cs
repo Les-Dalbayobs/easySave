@@ -338,11 +338,11 @@ namespace easySave.Models
                             {
                                 //Copy the file to the target folder
                                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+
+                                TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                                logProgress.FileTransfertTime = timeSpan.ToString();
                             }
-
-                            TimeSpan timeSpan = DateTime.Now - transferDelay;
-
-                            logProgress.FileTransfertTime = timeSpan.ToString();
 
                             logProgress.SetTime();
 
