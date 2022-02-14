@@ -13,6 +13,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 [assembly: InternalsVisibleTo("easySave - Graphic")]
 
@@ -249,12 +250,21 @@ namespace easySave.Models
                 
                 DateTime transferDelay = DateTime.Now;
 
-                //Copy the file to the target folder
-                file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                if (file.Extension == ".txt")
+                {
+                    int delayEncryption = encryption(file, destination);
 
-                TimeSpan timeSpan = DateTime.Now - transferDelay;
+                    logProgress.Encyptiontime = delayEncryption.ToString();
+                }
+                else
+                {
+                    //Copy the file to the target folder
+                    file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
 
-                logProgress.FileTransfertTime = timeSpan.ToString();
+                    TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                    logProgress.FileTransfertTime = timeSpan.ToString();
+                }
 
                 logProgress.SetTime();
 
@@ -317,8 +327,18 @@ namespace easySave.Models
 
                             DateTime transferDelay = DateTime.Now;
 
-                            //Copy the file to the target folder
-                            file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                            if (file.Extension == ".txt")
+                            {
+                                int delayEncryption = encryption(file, destination);
+
+                                logProgress.Encyptiontime = delayEncryption.ToString();
+
+                            }
+                            else
+                            {
+                                //Copy the file to the target folder
+                                file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                            }
 
                             TimeSpan timeSpan = DateTime.Now - transferDelay;
 
@@ -352,12 +372,23 @@ namespace easySave.Models
                     logProgress.FileSize = file.Length.ToString();
 
                     DateTime transferDelay = DateTime.Now;
-                    //Copy the file to the target folder only if it does not exist
-                    file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
 
-                    TimeSpan timeSpan = DateTime.Now - transferDelay;
+                    if (file.Extension == ".txt")
+                    {
+                        int delayEncryption = encryption(file, destination);
 
-                    logProgress.FileTransfertTime = timeSpan.ToString();
+                        logProgress.Encyptiontime = delayEncryption.ToString();
+                    }
+                    else
+                    {
+                        //Copy the file to the target folder
+                        file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+
+                        TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                        logProgress.FileTransfertTime = timeSpan.ToString();
+                    }
+
 
                     logProgress.SetTime();
 
@@ -462,6 +493,21 @@ namespace easySave.Models
             }
 
             return verif;
+        }
+
+        public int encryption(FileInfo fileSource, DirectoryInfo destination)
+        {
+            string pathCryptoSoft = @"C:\Program Files (x86)\CryptoSoft\CryptoSoft.exe";
+
+            string path = destination.FullName + @"\" + Path.GetFileNameWithoutExtension(fileSource.FullName) + ".cry";
+
+            var e = Process.Start(pathCryptoSoft, "\"" + fileSource.FullName + "\"" + " " + "\"" + path + "\"");
+
+            e.WaitForExit();
+
+            int returnEncryption = e.ExitCode;
+
+            return returnEncryption;
         }
         #endregion
 
