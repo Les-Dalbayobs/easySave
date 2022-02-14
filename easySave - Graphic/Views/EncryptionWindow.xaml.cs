@@ -7,13 +7,10 @@ namespace easySave___Graphic.Views
     /// </summary>
     public partial class EncryptionWindow : Window
     {
-
         public EncryptionWindow()
         {
             InitializeComponent();
         }
-
-       
         public void Cancel_Click (object sender, RoutedEventArgs e)
         {
             this.Close();
