@@ -11,6 +11,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 /// <summary>
 /// Models namespace
@@ -26,7 +28,7 @@ namespace easySave.Models
 
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
-        string pathFileLogProgress;
+        string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
         string pathfolderLog;
 
         /// <summary>
@@ -79,8 +81,14 @@ namespace easySave.Models
         /// <summary>
         /// Getter setter of the type attribute 
         /// </summary>
-        public bool TypeSave { get => typeSave; set => typeSave = value; }
+        /// 
+        public bool Complete { get => typeSave; set => typeSave = value; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonIgnore]
+        public bool Differential { get => !typeSave; set => typeSave = !value; }
         /// <summary>
         /// Getter setter of the pathSource attribute
         /// </summary>
