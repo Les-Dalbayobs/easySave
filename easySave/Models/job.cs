@@ -526,11 +526,6 @@ namespace easySave.Models
             return verif;
         }
 
-        public void logSave()
-        {
-
-        }
-
         #endregion
 
     }
