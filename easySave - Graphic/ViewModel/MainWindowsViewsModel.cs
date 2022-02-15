@@ -5,6 +5,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
+using System.Configuration;
+using System.Collections.Specialized;
+using System.Windows;
 
 namespace easySave___Graphic.ViewModel
 {
@@ -37,6 +40,8 @@ namespace easySave___Graphic.ViewModel
         /// Save the json
         /// </summary>
         string jsonString;
+
+        string encryptionExtension;
         #endregion
 
         #region properties
@@ -49,12 +54,17 @@ namespace easySave___Graphic.ViewModel
         /// Getter Setter of the SelectedJob attribute
         /// </summary>
         public job SelectedJob { get => selectedJob; set => selectedJob = value; }
+
+        public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
+
         #endregion
 
         #region contructor
         public MainWindowsViewsModel()
         {
             serializer = new JsonSerializer();
+
+            encryptionExtension = Properties.Settings.Default.encryption;
 
             importConfig();
         }
@@ -167,6 +177,17 @@ namespace easySave___Graphic.ViewModel
             {
                 this.jobs = new ObservableCollection<job>();
             }
+        }
+
+        public void newEncryption()
+        {
+            Properties.Settings.Default.encryption = encryptionExtension;
+            Properties.Settings.Default.Save();
+        }
+
+        public void readEncryption()
+        {
+            encryptionExtension = Properties.Settings.Default.encryption;
         }
         #endregion
     }
