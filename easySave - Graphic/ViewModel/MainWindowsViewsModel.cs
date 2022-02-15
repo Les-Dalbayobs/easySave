@@ -37,6 +37,8 @@ namespace easySave___Graphic.ViewModel
         /// Save the json
         /// </summary>
         string jsonString;
+
+        string encryptionExtension;
         #endregion
 
         #region properties
@@ -49,6 +51,8 @@ namespace easySave___Graphic.ViewModel
         /// Getter Setter of the SelectedJob attribute
         /// </summary>
         public job SelectedJob { get => selectedJob; set => selectedJob = value; }
+
+        public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
         #endregion
 
         #region contructor
