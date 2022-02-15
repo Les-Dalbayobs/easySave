@@ -12,6 +12,9 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Globalization;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("easySave - Graphic")]
 
 /// <summary>
 /// ViewModel namespace
@@ -67,6 +70,7 @@ namespace easySave.ViewModel
         #endregion
 
         #region properties
+
         #endregion
 
         #region constructor
@@ -290,7 +294,7 @@ namespace easySave.ViewModel
             Console.WriteLine(job1.Name);
             Console.WriteLine(job1.PathSource);
             Console.WriteLine(job1.PathDestination);
-            Console.WriteLine(job1.TypeSave);
+            Console.WriteLine(job1.Complete);
 
             Console.WriteLine(job1.verifExist(job1.PathSource));
 
@@ -328,11 +332,11 @@ namespace easySave.ViewModel
 
             if (view.CreateJobType)
             {
-                this.jobs[numberJob - 1].TypeSave = true;
+                this.jobs[numberJob - 1].Complete = true;
             }
             else
             {
-                this.jobs[numberJob - 1].TypeSave = false;
+                this.jobs[numberJob - 1].Complete = false;
             }
 
             updateHeader(); //Update the header
@@ -432,7 +436,7 @@ namespace easySave.ViewModel
             this.jobs[numberJob - 1].Name = null;
             this.jobs[numberJob - 1].PathSource = null;
             this.jobs[numberJob - 1].PathDestination = null;
-            this.jobs[numberJob - 1].TypeSave = false;
+            this.jobs[numberJob - 1].Complete = false;
 
             updateHeader(); //Update the job list
 

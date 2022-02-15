@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="advertisement" xml:space="preserve">
+    <value>This action is irreversible</value>
+  </data>
+  <data name="apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="complete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
   <data name="create" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -124,7 +136,13 @@
     <value>Delete</value>
   </data>
   <data name="destination" xml:space="preserve">
-    <value>Path of the destination</value>
+    <value>Destination path</value>
+  </data>
+  <data name="destPathError" xml:space="preserve">
+    <value>Error ! Incorrect destination path : </value>
+  </data>
+  <data name="differential" xml:space="preserve">
+    <value>Differential</value>
   </data>
   <data name="edit" xml:space="preserve">
     <value>Edit</value>
@@ -132,10 +150,25 @@
   <data name="en" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="encryption" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
+  <data name="encryptionMenu" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
+  <data name="english" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="exit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="fileExtension" xml:space="preserve">
+    <value>Enter file extension (if not in the list)</value>
+  </data>
   <data name="fr" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="french" xml:space="preserve">
     <value>French</value>
   </data>
   <data name="id" xml:space="preserve">
@@ -144,16 +177,55 @@
   <data name="language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="makeChoice" xml:space="preserve">
+    <value>Make your choice : </value>
+  </data>
   <data name="name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="noSelectJob" xml:space="preserve">
+    <value>No job selected in the main menu</value>
+  </data>
+  <data name="progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="replay" xml:space="preserve">
+    <value>Resume</value>
   </data>
   <data name="save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="saveAllJobs" xml:space="preserve">
+    <value>Save all jobs</value>
+  </data>
+  <data name="saveMenu" xml:space="preserve">
+    <value>Save menu</value>
+  </data>
+  <data name="saveOneJob" xml:space="preserve">
+    <value>Saving the job : </value>
+  </data>
   <data name="source" xml:space="preserve">
-    <value>Path of the source</value>
+    <value>Source path</value>
+  </data>
+  <data name="sourcePathError" xml:space="preserve">
+    <value>Error ! Incorrect source path : </value>
   </data>
   <data name="type" xml:space="preserve">
-    <value>Type of backup</value>
+    <value>Backup type</value>
+  </data>
+  <data name="typeExtension" xml:space="preserve">
+    <value>Choose file extension</value>
+  </data>
+  <data name="wantDelete" xml:space="preserve">
+    <value>Do you really want to delete this job : </value>
+  </data>
+  <data name="WindowLangTitle" xml:space="preserve">
+    <value>Application language</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>
