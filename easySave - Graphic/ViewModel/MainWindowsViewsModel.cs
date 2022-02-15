@@ -53,6 +53,7 @@ namespace easySave___Graphic.ViewModel
         public job SelectedJob { get => selectedJob; set => selectedJob = value; }
 
         public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
+
         #endregion
 
         #region contructor
@@ -92,11 +93,6 @@ namespace easySave___Graphic.ViewModel
         {
             serializeJob();
             exportConfig();
-        }
-
-        public void changeExtension()
-        {
-
         }
 
         /// <summary>
@@ -177,6 +173,8 @@ namespace easySave___Graphic.ViewModel
                 this.jobs = new ObservableCollection<job>();
             }
         }
+
+
         #endregion
     }
 }

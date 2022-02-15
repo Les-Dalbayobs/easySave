@@ -47,13 +47,12 @@ namespace easySave___Graphic.Views
                         error = true;
                         break;
                     }
-                    
                 }
                 if (!error)
                 {
                     foreach (var oneJob in mainW.Jobs)
                     {
-                        oneJob.copy();
+                        oneJob.copy("." + mainW.EncryptionExtension);
                     }
                 }
             }
@@ -69,7 +68,7 @@ namespace easySave___Graphic.Views
                 }
                 else
                 {
-                    mainW.SelectedJob.copy();
+                    mainW.SelectedJob.copy("." + mainW.EncryptionExtension);
                 }
             }
         }

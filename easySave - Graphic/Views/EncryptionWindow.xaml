@@ -15,25 +15,25 @@
         <!--#endregion-->
 
         <!--#region List of extends files-->
-        <ComboBox HorizontalAlignment="Left" Margin="10,95,0,0"
+        <ComboBox x:Name="ComboBoxExtension" HorizontalAlignment="Left" Margin="10,95,0,0"
                   VerticalAlignment="Top" 
-                  Width="240" Height="28">
-            <ComboBoxItem>TXT</ComboBoxItem>
-            <ComboBoxItem>DOC</ComboBoxItem>
-            <ComboBoxItem>EXE</ComboBoxItem>
-            <ComboBoxItem>XML</ComboBoxItem>
-            <ComboBoxItem>JS</ComboBoxItem>
-            <ComboBoxItem>JSON</ComboBoxItem>
-            <ComboBoxItem>DAT</ComboBoxItem>
-            <ComboBoxItem>CFG</ComboBoxItem>
-            <ComboBoxItem>INF</ComboBoxItem>
-            <ComboBoxItem>LOG</ComboBoxItem>
-            <ComboBoxItem>ODC</ComboBoxItem>
-            <ComboBoxItem>BIN</ComboBoxItem>
-            <ComboBoxItem>ENV</ComboBoxItem>
-            <ComboBoxItem>MP3</ComboBoxItem>
-            <ComboBoxItem>CAB</ComboBoxItem>
-            <ComboBoxItem>INI</ComboBoxItem>
+                  Width="240" Height="28" SelectionChanged="ComboBoxExtension_SelectionChanged">
+            <ComboBoxItem>txt</ComboBoxItem>
+            <ComboBoxItem>doc</ComboBoxItem>
+            <ComboBoxItem>exe</ComboBoxItem>
+            <ComboBoxItem>xml</ComboBoxItem>
+            <ComboBoxItem>js</ComboBoxItem>
+            <ComboBoxItem>json</ComboBoxItem>
+            <ComboBoxItem>dat</ComboBoxItem>
+            <ComboBoxItem>cfd</ComboBoxItem>
+            <ComboBoxItem>inf</ComboBoxItem>
+            <ComboBoxItem>log</ComboBoxItem>
+            <ComboBoxItem>odc</ComboBoxItem>
+            <ComboBoxItem>bin</ComboBoxItem>
+            <ComboBoxItem>env</ComboBoxItem>
+            <ComboBoxItem>mp3</ComboBoxItem>
+            <ComboBoxItem>cab</ComboBoxItem>
+            <ComboBoxItem>ini</ComboBoxItem>
         </ComboBox>
         <!--#endregion-->
 
@@ -53,8 +53,9 @@
         <!--#endregion-->
 
         <!--#region TextBox-->
-        <TextBox HorizontalContentAlignment="Center" Margin="10,162,10,0"  TextWrapping="NoWrap" 
-                 VerticalAlignment="Top" Width="380" Height="29" RenderTransformOrigin="0.642,0.484"/>
+        <TextBox x:Name="TextBoxEncryption" HorizontalContentAlignment="Center" Margin="10,162,10,0"  TextWrapping="NoWrap" 
+                 VerticalAlignment="Top" Width="380" Height="29" RenderTransformOrigin="0.642,0.484"
+                 Text="{Binding EncryptionExtension}"/>
         <Label Content="{x:Static language:Resources.encryptionMenu}" HorizontalContentAlignment="Center" Margin="10,17,10,0" VerticalAlignment="Top" Width="380" FontSize="20" FontWeight="Bold"/>
         <!--#endregion-->
     </Grid>

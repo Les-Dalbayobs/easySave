@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,6 +29,13 @@ namespace easySave___Graphic.Views
         {
             this.Close();
         }
-    }
 
+        private void ComboBoxExtension_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string text = (e.AddedItems[0] as ComboBoxItem).Content as string;
+
+            this.TextBoxEncryption.Text = text;
+            this.TextBoxEncryption.Focus();
+        }
+    }
 }
