@@ -472,7 +472,6 @@ namespace easySave.Models
                     if (!file.Contains(".cry"))
                     {
                         File.Delete(Path.Combine(destination, file));
-
                     }
                     //Console.WriteLine("File delete : " + file);
 
