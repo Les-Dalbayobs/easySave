@@ -10,7 +10,6 @@ namespace easySave___Graphic.ViewModel
 {
     class MainWindowsViewsModel
     {
-
         #region atributes
         /// <summary>
         /// Observable collection with all jobs
@@ -69,13 +68,6 @@ namespace easySave___Graphic.ViewModel
                     Directory.CreateDirectory(pathLogFolder);
                 }
                 File.Create(pathLogProgressSave).Close();
-            }
-
-            string pathFileLogSave = pathLogFolder + @"\logSaveAdvancement.json";
-
-            if (!File.Exists(pathFileLogSave))
-            {
-                File.Create(pathFileLogSave).Close();
             }
         }
 

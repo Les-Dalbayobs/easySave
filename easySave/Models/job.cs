@@ -21,6 +21,11 @@ using Newtonsoft.Json;
 /// </summary>
 namespace easySave.Models
 {
+    public static class Global
+    {
+        public static List<logSaveAdvancement> listSaveAdvancement;
+    }
+
     /// <summary>
     /// Class allowing the creation of jobs
     /// </summary>
@@ -72,6 +77,12 @@ namespace easySave.Models
         /// </summary>
         bool typeSave;
 
+        /// <summary>
+        /// Creation serialize JsonSerializer to serialize objects or value types into JSON,
+        /// and to deserialize JSON into objects or value types.
+        /// </summary>
+        JsonSerializer serializer = new JsonSerializer();
+
         #endregion
 
         #region properties
@@ -121,7 +132,6 @@ namespace easySave.Models
         /// </summary>
         public job()
         {
-       
         }
 
         /// <summary>
@@ -155,6 +165,7 @@ namespace easySave.Models
             logSave.TotalFilesToCopy = calculNbFiles(this.pathSource);
             logSave.TotalFilesSize = calculSizeFolder(this.pathSource);
             logSave.NbFilesLeftToDo = logSave.TotalFilesToCopy;
+            nbFilesCopied = 0;
 
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
@@ -185,7 +196,7 @@ namespace easySave.Models
                     confirmSave = true;
                 }
             }
-            catch
+            catch (Exception e)
             {
                 confirmSave = false; //Backup not performed
             }
@@ -292,17 +303,16 @@ namespace easySave.Models
                 // Add time to logProgress
                 logProgress.SetTime();
 
-                jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
                 jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
 
                 using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                 {
                     writer.WriteLine(jsonStringLogProgress);
                 }
-                using (StreamWriter writer = new StreamWriter(pathFileLogSave, false))
-                {
-                    writer.WriteLine(jsonStringLogSave);
-                }
+
+                readLogAdvancement();
+                searchLogAdvancement();
+                writeLogAdvancement();
             }
 
             //Search and enter the subfolders of the current folder
@@ -315,6 +325,59 @@ namespace easySave.Models
                 copyComplete(subFolder, destinationSubFolder);
             }
         }
+
+        public void searchLogAdvancement()
+        {
+            int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
+
+            if (index >= 0)
+                Global.listSaveAdvancement[index] = logSave;
+            else    
+                Global.listSaveAdvancement.Add(logSave);
+        }
+
+        public void writeLogAdvancement()
+        {
+            jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
+
+            using (var streamWriter = new StreamWriter(pathFileLogSave))
+            {
+                //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
+                using (var jsonWriter = new JsonTextWriter(streamWriter))
+                {
+                    jsonWriter.Formatting = Formatting.Indented;
+                    serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonStringLogSave));
+                }
+            }
+        }
+
+        public void readLogAdvancement()
+        {
+            if (!File.Exists(pathFileLogSave))
+            {
+                File.Create(pathFileLogSave).Close();
+            }
+
+            if (File.Exists(pathFileLogSave))
+            {
+                easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
+
+                //StreamReader instance to read text from a file
+                using (var streamReader = new StreamReader(pathFileLogSave))
+                {
+                    using (var jsonReader = new JsonTextReader(streamReader))
+                    {
+                        Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                    }
+                }
+            }
+
+            if (easySave.Models.Global.listSaveAdvancement == null)
+            {
+                easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
+            }
+        }
+
 
         /// <summary>
         /// Method for making a differential backup
