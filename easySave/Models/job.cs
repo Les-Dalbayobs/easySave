@@ -57,7 +57,7 @@ namespace easySave.Models
         bool typeSave;
 
 
-        string encryptionExtension;
+        ///string encryptionExtension;
         #endregion
 
         #region properties
@@ -90,8 +90,8 @@ namespace easySave.Models
         /// <summary>
         /// 
         /// </summary>
-        [JsonIgnore]
-        public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
+        ///[JsonIgnore]
+        ///public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
 
         public string GetPathFileLogProgress()
         {
@@ -138,7 +138,7 @@ namespace easySave.Models
         /// Method to start a backup
         /// </summary>
         /// <returns>Return if the backup is well done</returns>
-        public bool copy()
+        public bool copy(string encryptionExtenstion = null)
         {
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
@@ -156,13 +156,13 @@ namespace easySave.Models
                         destination.Delete(true); //Delete the directory
                     }
 
-                    copyComplete(source, destination); //Launch backup
+                    copyComplete(source, destination, encryptionExtenstion); //Launch backup
 
                     confirmSave = true; //Validate the backup
                 }
                 else //Differential
                 {
-                    copyDifferential(source, destination); //Launch backup
+                    copyDifferential(source, destination, encryptionExtenstion); //Launch backup
 
                     compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
 
@@ -238,7 +238,7 @@ namespace easySave.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Destination DirectoryInfo</param>
-        public void copyComplete(DirectoryInfo source, DirectoryInfo destination)
+        public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtenstion = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories(); 
@@ -257,7 +257,7 @@ namespace easySave.Models
                 
                 DateTime transferDelay = DateTime.Now;
 
-                if (file.Extension == ".txt")
+                if (encryptionExtenstion != null && file.Extension == encryptionExtenstion)
                 {
                     int delayEncryption = encryption(file, destination);
 
@@ -267,11 +267,11 @@ namespace easySave.Models
                 {
                     //Copy the file to the target folder
                     file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
-
-                    TimeSpan timeSpan = DateTime.Now - transferDelay;
-
-                    logProgress.FileTransfertTime = timeSpan.ToString();
                 }
+
+                TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                logProgress.FileTransfertTime = timeSpan.ToString();
 
                 logProgress.SetTime();
 
@@ -299,7 +299,7 @@ namespace easySave.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Source DirectoryInfo</param>
-        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination)
+        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtenstion = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
@@ -334,7 +334,7 @@ namespace easySave.Models
 
                             DateTime transferDelay = DateTime.Now;
 
-                            if (file.Extension == ".txt")
+                            if (encryptionExtenstion != null && file.Extension == encryptionExtenstion)
                             {
                                 int delayEncryption = encryption(file, destination);
 
@@ -345,11 +345,11 @@ namespace easySave.Models
                             {
                                 //Copy the file to the target folder
                                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
-
-                                TimeSpan timeSpan = DateTime.Now - transferDelay;
-
-                                logProgress.FileTransfertTime = timeSpan.ToString();
                             }
+
+                            TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                            logProgress.FileTransfertTime = timeSpan.ToString();
 
                             logProgress.SetTime();
 
@@ -380,7 +380,7 @@ namespace easySave.Models
 
                     DateTime transferDelay = DateTime.Now;
 
-                    if (file.Extension == ".txt")
+                    if (encryptionExtenstion != null && file.Extension == encryptionExtenstion)
                     {
                         int delayEncryption = encryption(file, destination);
 
@@ -390,12 +390,11 @@ namespace easySave.Models
                     {
                         //Copy the file to the target folder
                         file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
-
-                        TimeSpan timeSpan = DateTime.Now - transferDelay;
-
-                        logProgress.FileTransfertTime = timeSpan.ToString();
                     }
 
+                    TimeSpan timeSpan = DateTime.Now - transferDelay;
+
+                    logProgress.FileTransfertTime = timeSpan.ToString();
 
                     logProgress.SetTime();
 

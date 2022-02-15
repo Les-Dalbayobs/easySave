@@ -141,7 +141,7 @@
                 Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7"
                 FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
                 Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="ButtonEncryption_Click" 
-                x:Name="Encrption" IsEnabled="False"/>
+                x:Name="Encrption"/>
 
     </Grid>
 </Window>
