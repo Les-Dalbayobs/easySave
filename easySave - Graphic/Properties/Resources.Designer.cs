@@ -331,6 +331,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select a job.
+        /// </summary>
+        public static string selectJob {
+            get {
+                return ResourceManager.GetString("selectJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source path.
         /// </summary>
         public static string source {

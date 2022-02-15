@@ -90,7 +90,7 @@ namespace easySave___Graphic
             }
             else
             {
-                MessageBox.Show("Please select a job");
+                MessageBox.Show(resource.GetString("selectJob"));
             }
         }
 
@@ -110,7 +110,7 @@ namespace easySave___Graphic
             }
             else
             {
-                MessageBox.Show("No job selected");
+                MessageBox.Show(resource.GetString("selectJob"));
             }
         }
         
