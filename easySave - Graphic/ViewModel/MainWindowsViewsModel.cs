@@ -5,6 +5,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
+using System.Configuration;
+using System.Collections.Specialized;
+using System.Windows;
 
 namespace easySave___Graphic.ViewModel
 {
@@ -60,6 +63,8 @@ namespace easySave___Graphic.ViewModel
         public MainWindowsViewsModel()
         {
             serializer = new JsonSerializer();
+
+            encryptionExtension = Properties.Settings.Default.encryption;
 
             importConfig();
         }
@@ -174,7 +179,16 @@ namespace easySave___Graphic.ViewModel
             }
         }
 
+        public void newEncryption()
+        {
+            Properties.Settings.Default.encryption = encryptionExtension;
+            Properties.Settings.Default.Save();
+        }
 
+        public void readEncryption()
+        {
+            encryptionExtension = Properties.Settings.Default.encryption;
+        }
         #endregion
     }
 }

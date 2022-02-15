@@ -151,6 +151,8 @@ namespace easySave___Graphic
             encryptionWindow.DataContext = mainW;
 
             encryptionWindow.ShowDialog();
+
+            mainW.newEncryption();
         }
 
     }
