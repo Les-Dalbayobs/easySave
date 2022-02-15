@@ -15,7 +15,6 @@ using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 [assembly: InternalsVisibleTo("easySave - Graphic")]
->>>>>>>>> Temporary merge branch 2
 
 /// <summary>
 /// Models namespace
