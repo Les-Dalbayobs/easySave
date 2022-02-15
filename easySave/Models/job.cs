@@ -263,8 +263,7 @@ namespace easySave.Models
 
                     logProgress.EncryptionTime = delayEncryption.ToString();
 
-                    logProgress.DestPath = Path.GetFileNameWithoutExtension(destination.FullName) + ".cry";
-
+                    logProgress.FileTarget = Path.Combine(destination.FullName, Path.GetFileNameWithoutExtension(destination.FullName) + ".cry");
                 }
                 else
                 {
@@ -345,7 +344,7 @@ namespace easySave.Models
 
                                 logProgress.EncryptionTime = delayEncryption.ToString();
 
-                                logProgress.DestPath = Path.GetFileNameWithoutExtension(destination.FullName) + ".cry";
+                                logProgress.FileTarget = Path.Combine(destination.FullName, Path.GetFileNameWithoutExtension(destination.FullName) + ".cry");
 
                             }
                             else
@@ -395,7 +394,7 @@ namespace easySave.Models
 
                         logProgress.EncryptionTime = delayEncryption.ToString();
 
-                        logProgress.DestPath = Path.GetFileNameWithoutExtension(destination.FullName) + ".cry";
+                        logProgress.FileTarget = Path.Combine(destination.FullName, Path.GetFileNameWithoutExtension(destination.FullName) + ".cry");
                     }
                     else
                     {
@@ -470,7 +469,11 @@ namespace easySave.Models
                 //Try catch which will allow error handling if needed
                 try
                 {
-                    File.Delete(Path.Combine(destination, file));
+                    if (!file.Contains(".cry"))
+                    {
+                        File.Delete(Path.Combine(destination, file));
+
+                    }
                     //Console.WriteLine("File delete : " + file);
 
                 }
