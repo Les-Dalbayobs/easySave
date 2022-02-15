@@ -94,6 +94,11 @@ namespace easySave___Graphic.ViewModel
             exportConfig();
         }
 
+        public void changeExtension()
+        {
+
+        }
+
         /// <summary>
         /// Method to serialize jobs
         /// </summary>
