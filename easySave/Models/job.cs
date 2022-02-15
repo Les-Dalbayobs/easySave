@@ -138,7 +138,7 @@ namespace easySave.Models
         /// Method to start a backup
         /// </summary>
         /// <returns>Return if the backup is well done</returns>
-        public bool copy(string encryptionExtenstion = null)
+        public bool copy(string encryptionExtension = null)
         {
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
@@ -156,13 +156,13 @@ namespace easySave.Models
                         destination.Delete(true); //Delete the directory
                     }
 
-                    copyComplete(source, destination, encryptionExtenstion); //Launch backup
+                    copyComplete(source, destination, encryptionExtension); //Launch backup
 
                     confirmSave = true; //Validate the backup
                 }
                 else //Differential
                 {
-                    copyDifferential(source, destination, encryptionExtenstion); //Launch backup
+                    copyDifferential(source, destination, encryptionExtension); //Launch backup
 
                     compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
 
@@ -238,7 +238,7 @@ namespace easySave.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Destination DirectoryInfo</param>
-        public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtenstion = null)
+        public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories(); 
@@ -257,7 +257,7 @@ namespace easySave.Models
                 
                 DateTime transferDelay = DateTime.Now;
 
-                if (encryptionExtenstion != null && file.Extension == encryptionExtenstion)
+                if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
                 {
                     int delayEncryption = encryption(file, destination);
 
@@ -299,7 +299,7 @@ namespace easySave.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Source DirectoryInfo</param>
-        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtenstion = null)
+        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
@@ -334,7 +334,7 @@ namespace easySave.Models
 
                             DateTime transferDelay = DateTime.Now;
 
-                            if (encryptionExtenstion != null && file.Extension == encryptionExtenstion)
+                            if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
                             {
                                 int delayEncryption = encryption(file, destination);
 
@@ -380,7 +380,7 @@ namespace easySave.Models
 
                     DateTime transferDelay = DateTime.Now;
 
-                    if (encryptionExtenstion != null && file.Extension == encryptionExtenstion)
+                    if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
                     {
                         int delayEncryption = encryption(file, destination);
 

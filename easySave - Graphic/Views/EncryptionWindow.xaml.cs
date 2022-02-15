@@ -24,18 +24,17 @@ namespace easySave___Graphic.Views
             InitializeComponent();
         }
 
-       
-        public void Cancel_Click (object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void ComboBoxExtension_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string text = (e.AddedItems[0] as ComboBoxItem).Content as string;
 
             this.TextBoxEncryption.Text = text;
             this.TextBoxEncryption.Focus();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

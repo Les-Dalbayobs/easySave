@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:easySave___Graphic.Views"
         xmlns:language="clr-namespace:easySave___Graphic.Properties"
         mc:Ignorable="d"
-        Title="EncryptionWindow" Height="297" Width="400" WindowStyle="None">
+        Title="EncryptionWindow" Height="297" Width="400" WindowStyle="None" ResizeMode="NoResize" MinWidth="400" MinHeight="297">
 
     <Grid>
         <!--#region Title-->
@@ -38,13 +38,9 @@
         <!--#endregion-->
 
         <!--#region Button-->
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="243,226,0,0" 
-                VerticalAlignment="Top" Height="40" Width="99" Background="#FFAC00E7" 
-                FontFamily="Bahnschrift" FontSize="18" Foreground="White" x:Name="Cancel" 
-                Click="Cancel_Click" />
-        <Button Content="Ok" HorizontalAlignment="Left" Margin="122,226,0,0" 
+        <Button Content="Ok"  Margin="153,226,153,0" 
                 VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
-                Foreground="White" FontFamily="Bahnschrift" FontSize="18" Height="40" Width="93"/>
+                Foreground="White" FontFamily="Bahnschrift" FontSize="18" Height="40" Width="94" Click="Button_Click"/>
         <!--#endregion-->
 
         <!--#region Label-->
