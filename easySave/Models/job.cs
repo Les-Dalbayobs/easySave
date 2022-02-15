@@ -40,7 +40,7 @@ namespace easySave.Models
         // Create variable which stores json String for the Save Log
         string jsonStringLogSave;
         // Create variable which stores the path for the log save file
-        string pathFileLogSave;
+        string pathFileLogSave = @"C:\EasySave\Log\logSaveAdvancement.json";
 
         
 
@@ -111,11 +111,6 @@ namespace easySave.Models
             this.pathfolderLog = folderLog;
             this.pathFileLogProgress = this.pathfolderLog + @"\logProgressSave.json";
             this.pathFileLogSave = this.pathfolderLog + @"\logSaveAdvancement.json";
-
-            if (!File.Exists(this.pathFileLogSave))
-            {
-                File.Create(this.pathFileLogSave).Close();
-            }
         }
         #endregion
 
@@ -304,7 +299,7 @@ namespace easySave.Models
                 {
                     writer.WriteLine(jsonStringLogProgress);
                 }
-                using (StreamWriter writer = new StreamWriter(pathFileLogSave, true))
+                using (StreamWriter writer = new StreamWriter(pathFileLogSave, false))
                 {
                     writer.WriteLine(jsonStringLogSave);
                 }

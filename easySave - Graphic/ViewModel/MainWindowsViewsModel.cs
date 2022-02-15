@@ -57,6 +57,26 @@ namespace easySave___Graphic.ViewModel
             serializer = new JsonSerializer();
 
             importConfig();
+
+            string pathLogFolder = pathFilesEasySave + @"\Log";
+
+            string pathLogProgressSave = pathLogFolder + @"\logProgressSave.json";
+
+            if (!File.Exists(pathLogProgressSave))
+            {
+                if (!Directory.Exists(pathLogFolder))
+                {
+                    Directory.CreateDirectory(pathLogFolder);
+                }
+                File.Create(pathLogProgressSave).Close();
+            }
+
+            string pathFileLogSave = pathLogFolder + @"\logSaveAdvancement.json";
+
+            if (!File.Exists(pathFileLogSave))
+            {
+                File.Create(pathFileLogSave).Close();
+            }
         }
 
         #endregion
