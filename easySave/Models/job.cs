@@ -262,6 +262,9 @@ namespace easySave.Models
                     int delayEncryption = encryption(file, destination);
 
                     logProgress.EncryptionTime = delayEncryption.ToString();
+
+                    logProgress.DestPath = Path.GetFileNameWithoutExtension(destination.FullName) + ".cry";
+
                 }
                 else
                 {
@@ -342,6 +345,8 @@ namespace easySave.Models
 
                                 logProgress.EncryptionTime = delayEncryption.ToString();
 
+                                logProgress.DestPath = Path.GetFileNameWithoutExtension(destination.FullName) + ".cry";
+
                             }
                             else
                             {
@@ -389,6 +394,8 @@ namespace easySave.Models
                         int delayEncryption = encryption(file, destination);
 
                         logProgress.EncryptionTime = delayEncryption.ToString();
+
+                        logProgress.DestPath = Path.GetFileNameWithoutExtension(destination.FullName) + ".cry";
                     }
                     else
                     {
