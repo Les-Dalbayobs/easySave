@@ -261,12 +261,14 @@ namespace easySave.Models
                 {
                     int delayEncryption = encryption(file, destination);
 
-                    logProgress.Encyptiontime = delayEncryption.ToString();
+                    logProgress.EncryptionTime = delayEncryption.ToString();
                 }
                 else
                 {
                     //Copy the file to the target folder
                     file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+
+                    logProgress.EncryptionTime = "0";
                 }
 
                 TimeSpan timeSpan = DateTime.Now - transferDelay;
@@ -338,13 +340,15 @@ namespace easySave.Models
                             {
                                 int delayEncryption = encryption(file, destination);
 
-                                logProgress.Encyptiontime = delayEncryption.ToString();
+                                logProgress.EncryptionTime = delayEncryption.ToString();
 
                             }
                             else
                             {
                                 //Copy the file to the target folder
                                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+
+                                logProgress.EncryptionTime = "0";
                             }
 
                             TimeSpan timeSpan = DateTime.Now - transferDelay;
@@ -384,12 +388,14 @@ namespace easySave.Models
                     {
                         int delayEncryption = encryption(file, destination);
 
-                        logProgress.Encyptiontime = delayEncryption.ToString();
+                        logProgress.EncryptionTime = delayEncryption.ToString();
                     }
                     else
                     {
                         //Copy the file to the target folder
                         file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+
+                        logProgress.EncryptionTime = "0";
                     }
 
                     TimeSpan timeSpan = DateTime.Now - transferDelay;

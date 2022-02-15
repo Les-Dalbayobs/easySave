@@ -20,7 +20,7 @@ namespace easySave.Models
         string destPath;
         string fileSize;
         string fileTransfertTime;
-        string encyptiontime;
+        string encryptionTime;
         string time;
         #endregion
 
@@ -32,7 +32,7 @@ namespace easySave.Models
         public string FileSize { get => fileSize; set => fileSize = value; }
         public string FileTransfertTime { get => fileTransfertTime; set => fileTransfertTime = value; }
         public string Time { get => time; set => time = value; }
-        public string Encyptiontime { get => encyptiontime; set => encyptiontime = value; }
+        public string EncryptionTime { get => encryptionTime; set => encryptionTime = value; }
 
         public string GetTime()
         {
