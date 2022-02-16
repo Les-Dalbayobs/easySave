@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -16,10 +17,10 @@ namespace easySave___Graphic.Views
     /// <summary>
     /// Logique d'interaction pour EncryptionWindow.xaml
     /// </summary>
-    public partial class EncryptionWindow : Window
+    public partial class settings : Window
     {
 
-        public EncryptionWindow()
+        public settings()
         {
             InitializeComponent();
         }
@@ -35,6 +36,15 @@ namespace easySave___Graphic.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void ComboBoxProcess_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string text = e.AddedItems[0].ToString();
+
+            this.TextBoxProcess.Text = text;
+            this.TextBoxProcess.Focus();
+
         }
     }
 }

@@ -146,14 +146,16 @@ namespace easySave___Graphic
         {
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
-            Views.EncryptionWindow encryptionWindow = new Views.EncryptionWindow();
+            mainW.updateProcess();
 
-            encryptionWindow.DataContext = mainW;
+            Views.settings Settings = new Views.settings();
 
-            encryptionWindow.ShowDialog();
+            Settings.DataContext = mainW;
+
+            Settings.ShowDialog();
 
             mainW.newEncryption();
+            mainW.newProcess();
         }
-
     }
 }
