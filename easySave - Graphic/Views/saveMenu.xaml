@@ -63,23 +63,8 @@
             />
         <ProgressBar HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355"/>
         <Label Content="{x:Static language:Resources.progress}" HorizontalAlignment="Left" Margin="148,185,0,0" VerticalAlignment="Top" FontSize="10" IsEnabled="False"/>
-        <Button x:Name="ButtonPlay" Content="{x:Static language:Resources.replay}" Margin="68,233,248,105">
-            <!--<Image x:Name="ImgPlayPause"
-            Source="../Pictures/playpause.png"/>
-            -->
-        </Button>
-        <Button x:Name="ButtonStop" Content="Stop" Margin="266,233,63,105">
-            <!-- <Image x:Name="ImgStop"
-                Source="../Pictures/stop.png"/>
-            -->
-        </Button>
-        <Button x:Name="ButtonPause" Content="Pause" Margin="152,233,160,105">
-            <!--<Image x:Name="ImgPlayPause"
-            Source="../Pictures/playpause.png"/>
-            -->
-        </Button>
-
-
-
+        <Image Name="Play" HorizontalAlignment="Left" Height="56" Margin="88,233,0,0" VerticalAlignment="Top" Width="46" Source="../Pictures/play.png"/>
+        <Image Name="Pause" HorizontalAlignment="Left" Height="57" Margin="178,233,0,0" VerticalAlignment="Top" Width="46" Source="../Pictures/pause.png"/>
+        <Image Name="Stop" HorizontalAlignment="Left" Height="55" Margin="272,233,0,0" VerticalAlignment="Top" Width="46" Source="../Pictures/stop.png" RenderTransformOrigin="-0.022,0.455"/>
     </Grid>
 </Window>

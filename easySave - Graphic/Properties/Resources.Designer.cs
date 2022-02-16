@@ -277,7 +277,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Progress.
+        ///   Looks up a localized string similar to Progress : .
         /// </summary>
         public static string progress {
             get {

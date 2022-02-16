@@ -78,5 +78,10 @@ namespace easySave___Graphic.Views
             this.DialogResult = false;
             this.Close();
         }
+
+        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

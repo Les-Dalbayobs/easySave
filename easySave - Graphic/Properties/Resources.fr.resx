@@ -190,7 +190,7 @@
     <value>Pas de job sélectionné</value>
   </data>
   <data name="progress" xml:space="preserve">
-    <value>Progression</value>
+    <value>Progression : </value>
   </data>
   <data name="replay" xml:space="preserve">
     <value>Reprendre</value>
