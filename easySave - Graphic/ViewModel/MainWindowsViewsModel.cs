@@ -203,7 +203,7 @@ namespace easySave___Graphic.ViewModel
             int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == selectedJob.Name);
 
             // Replace old name by the new name of the job in the state log
-            Global.listSaveAdvancement[index].Name = null;
+            Global.listSaveAdvancement[index] = null;
         }
 
 
