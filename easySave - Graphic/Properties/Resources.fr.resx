@@ -162,6 +162,9 @@
   <data name="english" xml:space="preserve">
     <value>Anglais</value>
   </data>
+  <data name="errorProcessRunning" xml:space="preserve">
+    <value>Arrêt des copies car le logiciel métier est en cours d'utilisation</value>
+  </data>
   <data name="exit" xml:space="preserve">
     <value>Quitter</value>
   </data>
@@ -191,6 +194,9 @@
   </data>
   <data name="no" xml:space="preserve">
     <value>Non</value>
+  </data>
+  <data name="noLaunchSave" xml:space="preserve">
+    <value>Impossible d'éxecuter les backups car le logiciel métier est lancé</value>
   </data>
   <data name="noSelectJob" xml:space="preserve">
     <value>Pas de job sélectionné</value>

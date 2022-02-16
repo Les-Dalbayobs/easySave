@@ -8,7 +8,7 @@
     <Setting Name="encryption" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="businessSoftware" Type="System.String" Scope="User">
+    <Setting Name="processUser" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

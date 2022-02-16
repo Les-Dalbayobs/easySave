@@ -50,12 +50,12 @@ namespace easySave___Graphic.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string businessSoftware {
+        public string processUser {
             get {
-                return ((string)(this["businessSoftware"]));
+                return ((string)(this["processUser"]));
             }
             set {
-                this["businessSoftware"] = value;
+                this["processUser"] = value;
             }
         }
     }

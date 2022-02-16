@@ -45,6 +45,8 @@ namespace easySave___Graphic.ViewModel
         string encryptionExtension;
 
         List<string> currentProcess;
+
+        string selectedProcess;
         #endregion
 
         #region properties
@@ -60,6 +62,7 @@ namespace easySave___Graphic.ViewModel
 
         public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
         public List<string> CurrentProcess { get => currentProcess; set => currentProcess = value; }
+        public string SelectedProcess { get => selectedProcess; set => selectedProcess = value; }
 
         #endregion
 
@@ -69,6 +72,7 @@ namespace easySave___Graphic.ViewModel
             serializer = new JsonSerializer();
 
             encryptionExtension = Properties.Settings.Default.encryption;
+            readProcess();
 
             importConfig();
         }
@@ -204,6 +208,32 @@ namespace easySave___Graphic.ViewModel
             {
                 currentProcess.Add(oneProcess.ProcessName);
             }
+        }
+
+        public void newProcess()
+        {
+            Properties.Settings.Default.processUser = this.selectedProcess;
+            Properties.Settings.Default.Save();
+        }
+
+        public void readProcess()
+        {
+            this.selectedProcess = Properties.Settings.Default.processUser;
+        }
+
+        public bool checkProcess()
+        {
+            if (this.selectedProcess != null && this.selectedProcess != "")
+            {
+                updateProcess();
+
+                if (currentProcess.Contains(selectedProcess))
+                {
+                    return true;
+                }
+            }
+            
+            return false;
         }
         #endregion
     }

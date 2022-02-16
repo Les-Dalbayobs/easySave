@@ -33,7 +33,7 @@
 
         <ComboBox x:Name="ComboBoxProcess" HorizontalAlignment="Left" Margin="10,260,0,0"
                   VerticalAlignment="Top" 
-                  Width="240" Height="28" ItemsSource="{Binding CurrentProcess}"></ComboBox>
+                  Width="240" Height="28" ItemsSource="{Binding CurrentProcess}" SelectionChanged="ComboBoxProcess_SelectionChanged"></ComboBox>
         <!--#endregion-->
 
         <!--#region Button-->
@@ -60,9 +60,9 @@
         <TextBox x:Name="TextBoxEncryption" HorizontalContentAlignment="Center" Margin="10,139,10,0"  TextWrapping="NoWrap" 
                  VerticalAlignment="Top" Width="380" Height="29" RenderTransformOrigin="0.642,0.484"
                  Text="{Binding EncryptionExtension}"/>
-        <TextBox HorizontalContentAlignment="Center" Margin="10,317,10,0"  TextWrapping="NoWrap" 
+        <TextBox x:Name="TextBoxProcess" HorizontalContentAlignment="Center" Margin="10,317,10,0"  TextWrapping="NoWrap" 
                  VerticalAlignment="Top" Width="380" Height="29" RenderTransformOrigin="0.642,0.484"
-                 Text="{Binding EncryptionExtension}"/>
+                 Text="{Binding SelectedProcess}"/>
         <!--#endregion-->
     </Grid>
 </Window>

@@ -162,6 +162,9 @@
   <data name="english" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="errorProcessRunning" xml:space="preserve">
+    <value>Stop copying because the business software is running</value>
+  </data>
   <data name="exit" xml:space="preserve">
     <value>Exit</value>
   </data>
@@ -191,6 +194,9 @@
   </data>
   <data name="no" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="noLaunchSave" xml:space="preserve">
+    <value>Impossible to run backups because the business software is running</value>
   </data>
   <data name="noSelectJob" xml:space="preserve">
     <value>No job selected in the main menu</value>

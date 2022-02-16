@@ -155,6 +155,7 @@ namespace easySave___Graphic
             Settings.ShowDialog();
 
             mainW.newEncryption();
+            mainW.newProcess();
         }
     }
 }

@@ -196,6 +196,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stop copying because the business software is running.
+        /// </summary>
+        public static string errorProcessRunning {
+            get {
+                return ResourceManager.GetString("errorProcessRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Exit.
         /// </summary>
         public static string exit {
@@ -282,6 +291,15 @@ namespace easySave___Graphic.Properties {
         public static string no {
             get {
                 return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Impossible to run backups because the business software is running.
+        /// </summary>
+        public static string noLaunchSave {
+            get {
+                return ResourceManager.GetString("noLaunchSave", resourceCulture);
             }
         }
         
