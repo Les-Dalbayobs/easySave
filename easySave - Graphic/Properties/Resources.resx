@@ -153,9 +153,6 @@
   <data name="en" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="encryption" xml:space="preserve">
-    <value>Encryption</value>
-  </data>
   <data name="encryptionMenu" xml:space="preserve">
     <value>Encryption</value>
   </data>
@@ -181,7 +178,7 @@
     <value>ID</value>
   </data>
   <data name="language" xml:space="preserve">
-    <value>Language</value>
+    <value>Languages</value>
   </data>
   <data name="listProcess" xml:space="preserve">
     <value>List of current processes</value>
@@ -224,6 +221,9 @@
   </data>
   <data name="selectJob" xml:space="preserve">
     <value>Please select a job</value>
+  </data>
+  <data name="setting" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="source" xml:space="preserve">
     <value>Source path</value>

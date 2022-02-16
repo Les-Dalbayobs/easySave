@@ -171,15 +171,6 @@ namespace easySave___Graphic.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Encryption.
         /// </summary>
-        public static string encryption {
-            get {
-                return ResourceManager.GetString("encryption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Encryption.
-        /// </summary>
         public static string encryptionMenu {
             get {
                 return ResourceManager.GetString("encryptionMenu", resourceCulture);
@@ -250,7 +241,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Language.
+        ///   Recherche une chaîne localisée semblable à Languages.
         /// </summary>
         public static string language {
             get {
@@ -381,6 +372,15 @@ namespace easySave___Graphic.Properties {
         public static string selectJob {
             get {
                 return ResourceManager.GetString("selectJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Settings.
+        /// </summary>
+        public static string setting {
+            get {
+                return ResourceManager.GetString("setting", resourceCulture);
             }
         }
         
