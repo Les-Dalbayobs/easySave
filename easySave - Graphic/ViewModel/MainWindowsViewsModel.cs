@@ -96,8 +96,9 @@ namespace easySave___Graphic.ViewModel
             exportConfig();
         }
 
-        public void editJob()
+        public void editJob(string oldName)
         {
+            updateLog(oldName);
             serializeJob();
             exportConfig();
         }
@@ -180,6 +181,32 @@ namespace easySave___Graphic.ViewModel
                 this.jobs = new ObservableCollection<job>();
             }
         }
+
+        /// <summary>
+        /// Method which change the name of the job in the log when updating it
+        /// </summary>
+        public void updateLog(string oldName)
+        {
+            // Search index in state log list
+            int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == selectedJob.Name);
+
+            // Replace old name by the new name of the job in the state log
+            Global.listSaveAdvancement[index].Name = oldName;
+        }
+
+        /// <summary>
+        /// Method which delete the the job from the log when deleting it globally
+        /// </summary>
+        public void deleteLog()
+        {
+            // Search index in state log list
+            int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == selectedJob.Name);
+
+            // Replace old name by the new name of the job in the state log
+            Global.listSaveAdvancement[index].Name = null;
+        }
+
+
         #endregion
     }
 }

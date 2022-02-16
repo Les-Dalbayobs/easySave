@@ -440,10 +440,10 @@ namespace easySave.Models
                             {
                                 writer.WriteLine(jsonStringLogProgress);
                             }
-                            using (StreamWriter writer = new StreamWriter(pathFileLogSave, false))
-                            {
-                                writer.WriteLine(jsonStringLogSave);
-                            }
+
+                            readLogAdvancement();
+                            searchLogAdvancement();
+                            writeLogAdvancement();
                         }
                         catch (Exception e)
                         {
@@ -487,10 +487,10 @@ namespace easySave.Models
                     {
                         writer.WriteLine(jsonStringLogProgress);
                     }
-                    using (StreamWriter writer = new StreamWriter(pathFileLogSave, false))
-                    {
-                        writer.WriteLine(jsonStringLogSave);
-                    }
+
+                    readLogAdvancement();
+                    searchLogAdvancement();
+                    writeLogAdvancement();
                 }
                 catch (Exception e)
                 {
