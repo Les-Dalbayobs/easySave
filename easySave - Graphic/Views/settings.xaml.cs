@@ -16,10 +16,10 @@ namespace easySave___Graphic.Views
     /// <summary>
     /// Logique d'interaction pour EncryptionWindow.xaml
     /// </summary>
-    public partial class EncryptionWindow : Window
+    public partial class settings : Window
     {
 
-        public EncryptionWindow()
+        public settings()
         {
             InitializeComponent();
         }

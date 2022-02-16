@@ -126,6 +126,9 @@
   <data name="cancel" xml:space="preserve">
     <value>Annuler</value>
   </data>
+  <data name="chooseProcess" xml:space="preserve">
+    <value>Entrez le nom du processus (si pas en cours d'utilisation)</value>
+  </data>
   <data name="complete" xml:space="preserve">
     <value>Complète</value>
   </data>
@@ -177,6 +180,9 @@
   <data name="language" xml:space="preserve">
     <value>Langue</value>
   </data>
+  <data name="listProcess" xml:space="preserve">
+    <value>Liste des processus en cours</value>
+  </data>
   <data name="makeChoice" xml:space="preserve">
     <value>Faites votre choix : </value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="progress" xml:space="preserve">
     <value>Progression</value>
+  </data>
+  <data name="proSoftware" xml:space="preserve">
+    <value>Logiciel metier</value>
   </data>
   <data name="replay" xml:space="preserve">
     <value>Reprendre</value>

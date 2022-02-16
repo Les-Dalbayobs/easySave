@@ -46,5 +46,17 @@ namespace easySave___Graphic.Properties {
                 this["encryption"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string businessSoftware {
+            get {
+                return ((string)(this["businessSoftware"]));
+            }
+            set {
+                this["businessSoftware"] = value;
+            }
+        }
     }
 }
