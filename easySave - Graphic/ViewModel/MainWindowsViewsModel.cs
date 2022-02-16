@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Windows;
+using System.Diagnostics;
 
 namespace easySave___Graphic.ViewModel
 {
@@ -42,6 +43,8 @@ namespace easySave___Graphic.ViewModel
         string jsonString;
 
         string encryptionExtension;
+
+        List<string> currentProcess;
         #endregion
 
         #region properties
@@ -56,6 +59,7 @@ namespace easySave___Graphic.ViewModel
         public job SelectedJob { get => selectedJob; set => selectedJob = value; }
 
         public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
+        public List<string> CurrentProcess { get => currentProcess; set => currentProcess = value; }
 
         #endregion
 
@@ -188,6 +192,18 @@ namespace easySave___Graphic.ViewModel
         public void readEncryption()
         {
             encryptionExtension = Properties.Settings.Default.encryption;
+        }
+
+        public void updateProcess()
+        {
+            currentProcess = new List<string>();
+
+            Process[] allProcess = Process.GetProcesses();
+
+            foreach (Process oneProcess in allProcess)
+            {
+                currentProcess.Add(oneProcess.ProcessName);
+            }
         }
         #endregion
     }

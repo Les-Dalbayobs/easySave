@@ -146,6 +146,8 @@ namespace easySave___Graphic
         {
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
+            mainW.updateProcess();
+
             Views.settings Settings = new Views.settings();
 
             Settings.DataContext = mainW;
