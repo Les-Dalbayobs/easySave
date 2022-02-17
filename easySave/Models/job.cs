@@ -22,6 +22,11 @@ using System.Diagnostics;
 /// </summary>
 namespace easySave.Models
 {
+    public static class Global
+    {
+        public static List<logSaveAdvancement> listSaveAdvancement;
+    }
+
     /// <summary>
     /// Class allowing the creation of jobs
     /// </summary>
@@ -34,6 +39,20 @@ namespace easySave.Models
         string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
         string pathfolderLog;
 
+        /// <summary>
+        /// Create a new instance from logSaveAdvancement, named logSave
+        /// </summary>
+        logSaveAdvancement logSave = new logSaveAdvancement();
+        // Create variable which stores json String for the Save Log
+        string jsonStringLogSave;
+        // Create variable which stores the path for the log save file
+        string pathFileLogSave = @"C:\EasySave\Log\logSaveAdvancement.json";
+
+        /// <summary>
+        /// Initialize variable which stores number of files already copied
+        /// </summary>
+        int nbFilesCopied = 0;
+      
         /// <summary>
         /// Stores the job name 
         /// </summary>
@@ -56,8 +75,12 @@ namespace easySave.Models
         /// </summary>
         bool typeSave;
 
+        /// <summary>
+        /// Creation serialize JsonSerializer to serialize objects or value types into JSON,
+        /// and to deserialize JSON into objects or value types.
+        /// </summary>
+        JsonSerializer serializer = new JsonSerializer();
 
-        ///string encryptionExtension;
         #endregion
 
         #region properties
@@ -102,6 +125,7 @@ namespace easySave.Models
         {
             this.pathfolderLog = folderLog;
             this.pathFileLogProgress = this.pathfolderLog + @"\logProgressSave.json";
+            this.pathFileLogSave = this.pathfolderLog + @"\logSaveAdvancement.json";
         }
         #endregion
 
@@ -112,7 +136,7 @@ namespace easySave.Models
         /// </summary>
         public job()
         {
-       
+            readLogAdvancement();
         }
 
         /// <summary>
@@ -140,6 +164,14 @@ namespace easySave.Models
         /// <returns>Return if the backup is well done</returns>
         public bool copy(string encryptionExtension = null)
         {
+            logSave.Name = this.Name;
+            logSave.SourceFilePath = this.pathSource;
+            logSave.TargetFilePath = this.pathDestination;
+            logSave.TotalFilesToCopy = calculNbFiles(this.pathSource);
+            logSave.TotalFilesSize = calculSizeFolder(this.pathSource);
+            logSave.NbFilesLeftToDo = logSave.TotalFilesToCopy;
+            nbFilesCopied = 0;
+
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
             DirectoryInfo source = new DirectoryInfo(this.pathSource); //Create the DirectoryInfo of the source
@@ -169,11 +201,10 @@ namespace easySave.Models
                     confirmSave = true;
                 }
             }
-            catch
+            catch (Exception e)
             {
                 confirmSave = false; //Backup not performed
             }
-
 
             return confirmSave; //Returns whether the backup was performed
         }
@@ -249,6 +280,7 @@ namespace easySave.Models
             //Copy all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {
+                // Create progress log
                 logProgress.Name = this.Name;
                 logProgress.FileSource = file.FullName;
                 logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
@@ -273,10 +305,21 @@ namespace easySave.Models
                     logProgress.EncryptionTime = "0";
                 }
 
+                // Calculate number of files left to copy
+                logSave.NbFilesLeftToDo--;
+                // Calculate number of files copied;
+                nbFilesCopied++;
+                // Calculate progression of copy
+                logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
+                // Determine current state
+                logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
+
                 TimeSpan timeSpan = DateTime.Now - transferDelay;
 
+                // Calculate transfert Time
                 logProgress.FileTransfertTime = timeSpan.ToString();
 
+                // Add time to logProgress
                 logProgress.SetTime();
 
                 jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
@@ -285,6 +328,10 @@ namespace easySave.Models
                 {
                     writer.WriteLine(jsonStringLogProgress);
                 }
+
+                readLogAdvancement();
+                searchLogAdvancement();
+                writeLogAdvancement();
             }
 
             //Search and enter the subfolders of the current folder
@@ -297,6 +344,59 @@ namespace easySave.Models
                 copyComplete(subFolder, destinationSubFolder);
             }
         }
+
+        public void searchLogAdvancement()
+        {
+            int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
+
+            if (index >= 0)
+                Global.listSaveAdvancement[index] = logSave;
+            else
+                Global.listSaveAdvancement.Add(logSave);
+        }
+
+        public void writeLogAdvancement()
+        {
+            jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
+
+            using (var streamWriter = new StreamWriter(pathFileLogSave))
+            {
+                //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
+                using (var jsonWriter = new JsonTextWriter(streamWriter))
+                {
+                    jsonWriter.Formatting = Formatting.Indented;
+                    serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonStringLogSave));
+                }
+            }
+        }
+
+        public void readLogAdvancement()
+        {
+            if (!File.Exists(pathFileLogSave))
+            {
+                File.Create(pathFileLogSave).Close();
+            }
+
+            if (File.Exists(pathFileLogSave))
+            {
+                easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
+
+                //StreamReader instance to read text from a file
+                using (var streamReader = new StreamReader(pathFileLogSave))
+                {
+                    using (var jsonReader = new JsonTextReader(streamReader))
+                    {
+                        Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                    }
+                }
+            }
+
+            if (easySave.Models.Global.listSaveAdvancement == null)
+            {
+                easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
+            }
+        }
+
 
         /// <summary>
         /// Method for making a differential backup
@@ -323,10 +423,6 @@ namespace easySave.Models
                     //as well as the date of modification of the source file superior to the destination file then it is copied.
                     if (file.Name == fileDestination.Name && file.LastWriteTime > fileDestination.LastWriteTime)
                     {
-                        //Console.WriteLine("Copy : " + file.Name); //Test
-
-                        
-
                         //Try catch which will allow error handling if needed
                         try
                         {
@@ -355,6 +451,16 @@ namespace easySave.Models
                                 logProgress.EncryptionTime = "0";
                             }
 
+                            //Copy the file to the target folder
+                            file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                            // Calculate number of files left to copy
+                            logSave.NbFilesLeftToDo--;
+                            // Calculate number of files copied;
+                            nbFilesCopied++;
+                            // Calculate progression of copy
+                            logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
+                            // Determine current state
+                            logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
                             TimeSpan timeSpan = DateTime.Now - transferDelay;
 
                             logProgress.FileTransfertTime = timeSpan.ToString();
@@ -362,22 +468,25 @@ namespace easySave.Models
                             logProgress.SetTime();
 
                             jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+                            jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
 
                             using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                             {
                                 writer.WriteLine(jsonStringLogProgress);
                             }
+
+                            readLogAdvancement();
+                            searchLogAdvancement();
+                            writeLogAdvancement();
                         }
                         catch (Exception e)
                         {
                             //Console.WriteLine("The process failed : " + e.ToString()); //Displays the error
                         }
-
-                        
                     }
                 }
 
-                //Try catch which will allow error handling if needed
+                //Try catch which allow error handling if needed
                 try
                 {
                     logProgress.Name = this.Name;
@@ -403,7 +512,17 @@ namespace easySave.Models
 
                         logProgress.EncryptionTime = "0";
                     }
-
+                  
+                    //Copy the file to the target folder only if it does not exist
+                    file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
+                    // Calculate number of files left to copy
+                    logSave.NbFilesLeftToDo--;
+                    // Calculate number of files copied;
+                    nbFilesCopied++;
+                    // Calculate progression of copy
+                    logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
+                    // Determine current state
+                    logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
                     TimeSpan timeSpan = DateTime.Now - transferDelay;
 
                     logProgress.FileTransfertTime = timeSpan.ToString();
@@ -411,11 +530,17 @@ namespace easySave.Models
                     logProgress.SetTime();
 
                     jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+                    jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
+
 
                     using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                     {
                         writer.WriteLine(jsonStringLogProgress);
                     }
+
+                    readLogAdvancement();
+                    searchLogAdvancement();
+                    writeLogAdvancement();
                 }
                 catch (Exception e)
                 {
@@ -480,10 +605,7 @@ namespace easySave.Models
                 {
                     //Console.WriteLine("The process failed : " + e.ToString());
                 }
-                
             }
-
-
         }
 
         public override string ToString()

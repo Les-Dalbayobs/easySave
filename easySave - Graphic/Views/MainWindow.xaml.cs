@@ -25,6 +25,8 @@ namespace easySave___Graphic
     {
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
+        public object SelectedJob { get; private set; }
+
         public MainWindow()
         {
             string language = Properties.Settings.Default.lang;
@@ -80,13 +82,16 @@ namespace easySave___Graphic
 
             if (mainW.SelectedJob != null)
             {
+                // Store the old name of the job
+                string oldName = mainW.SelectedJob.Name;
+
                 Views.CreatJob editJob = new Views.CreatJob();
 
                 editJob.DataContext = mainW.SelectedJob;
 
                 editJob.ShowDialog();
 
-                mainW.editJob();
+                mainW.editJob(oldName);
             }
             else
             {
@@ -105,6 +110,7 @@ namespace easySave___Graphic
 
                 if (delete.ShowDialog() == true)
                 {
+                    mainW.deleteLog();
                     mainW.deleteJob(mainW.SelectedJob);
                 }
             }

@@ -14,7 +14,6 @@ namespace easySave___Graphic.ViewModel
 {
     class MainWindowsViewsModel
     {
-
         #region atributes
         /// <summary>
         /// Observable collection with all jobs
@@ -75,6 +74,19 @@ namespace easySave___Graphic.ViewModel
             readProcess();
 
             importConfig();
+
+            string pathLogFolder = pathFilesEasySave + @"\Log";
+
+            string pathLogProgressSave = pathLogFolder + @"\logProgressSave.json";
+
+            if (!File.Exists(pathLogProgressSave))
+            {
+                if (!Directory.Exists(pathLogFolder))
+                {
+                    Directory.CreateDirectory(pathLogFolder);
+                }
+                File.Create(pathLogProgressSave).Close();
+            }
         }
 
         #endregion
@@ -102,8 +114,9 @@ namespace easySave___Graphic.ViewModel
             exportConfig();
         }
 
-        public void editJob()
+        public void editJob(string oldName)
         {
+            updateLog(oldName);
             serializeJob();
             exportConfig();
         }
@@ -187,6 +200,36 @@ namespace easySave___Graphic.ViewModel
             }
         }
 
+        /// <summary>
+        /// Method which change the name of the job in the log when updating it
+        /// </summary>
+        public void updateLog(string oldName)
+        {
+            // Search index in state log list
+            int index = Global.listSaveAdvancement.FindIndex(item => item.Name == oldName);
+
+            // Replace old name by the new name of the job in the state log
+            if (index >= 0)
+            {
+                Global.listSaveAdvancement[index].Name = selectedJob.Name;
+                selectedJob.writeLogAdvancement();
+            }
+        }
+
+        /// <summary>
+        /// Method which delete the the job from the log when deleting it globally
+        /// </summary>
+        public void deleteLog()
+        {
+            // Search index in state log list
+            int index = Global.listSaveAdvancement.FindIndex(item => item.Name == selectedJob.Name);
+
+            if (index >= 0)
+            {
+                Global.listSaveAdvancement.RemoveAt(index);
+                selectedJob.writeLogAdvancement();
+            }            
+          
         public void newEncryption()
         {
             Properties.Settings.Default.encryption = encryptionExtension;
