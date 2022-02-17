@@ -132,6 +132,7 @@ namespace easySave.Models
         /// </summary>
         public job()
         {
+            readLogAdvancement();
         }
 
         /// <summary>
@@ -286,6 +287,7 @@ namespace easySave.Models
 
                 //Copy the file to the target folder
                 file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+
                 // Calculate number of files left to copy
                 logSave.NbFilesLeftToDo--;
                 // Calculate number of files copied;
@@ -332,7 +334,7 @@ namespace easySave.Models
 
             if (index >= 0)
                 Global.listSaveAdvancement[index] = logSave;
-            else    
+            else
                 Global.listSaveAdvancement.Add(logSave);
         }
 

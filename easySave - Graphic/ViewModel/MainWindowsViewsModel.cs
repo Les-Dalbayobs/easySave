@@ -188,10 +188,14 @@ namespace easySave___Graphic.ViewModel
         public void updateLog(string oldName)
         {
             // Search index in state log list
-            int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == selectedJob.Name);
+            int index = Global.listSaveAdvancement.FindIndex(item => item.Name == oldName);
 
             // Replace old name by the new name of the job in the state log
-            Global.listSaveAdvancement[index].Name = oldName;
+            if (index >= 0)
+            {
+                Global.listSaveAdvancement[index].Name = selectedJob.Name;
+                selectedJob.writeLogAdvancement();
+            }
         }
 
         /// <summary>
@@ -200,13 +204,14 @@ namespace easySave___Graphic.ViewModel
         public void deleteLog()
         {
             // Search index in state log list
-            int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == selectedJob.Name);
+            int index = Global.listSaveAdvancement.FindIndex(item => item.Name == selectedJob.Name);
 
-            // Replace old name by the new name of the job in the state log
-            Global.listSaveAdvancement[index] = null;
+            if (index >= 0)
+            {
+                Global.listSaveAdvancement.RemoveAt(index);
+                selectedJob.writeLogAdvancement();
+            }            
         }
-
-
         #endregion
     }
 }

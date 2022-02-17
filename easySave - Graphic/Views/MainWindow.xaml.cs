@@ -110,6 +110,7 @@ namespace easySave___Graphic
 
                 if (delete.ShowDialog() == true)
                 {
+                    mainW.deleteLog();
                     mainW.deleteJob(mainW.SelectedJob);
                 }
             }
