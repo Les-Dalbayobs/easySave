@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace easySave___Graphic.Models
 {
@@ -148,7 +150,7 @@ namespace easySave___Graphic.Models
         /// Method to start a backup
         /// </summary>
         /// <returns>Return if the backup is well done</returns>
-        public bool copy(string encryptionExtension = null)
+        public bool copy(string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
             logSave.Name = this.Name;
             logSave.SourceFilePath = this.pathSource;
@@ -157,6 +159,8 @@ namespace easySave___Graphic.Models
             logSave.TotalFilesSize = calculSizeFolder(this.pathSource);
             logSave.NbFilesLeftToDo = logSave.TotalFilesToCopy;
             nbFilesCopied = 0;
+
+            progressBar.Value = 0;
 
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
@@ -174,13 +178,13 @@ namespace easySave___Graphic.Models
                         destination.Delete(true); //Delete the directory
                     }
 
-                    copyComplete(source, destination, encryptionExtension); //Launch backup
+                    copyComplete(source, destination, encryptionExtension, progressBar); //Launch backup
 
                     confirmSave = true; //Validate the backup
                 }
                 else //Differential
                 {
-                    copyDifferential(source, destination, encryptionExtension); //Launch backup
+                    copyDifferential(source, destination, encryptionExtension, progressBar); //Launch backup
 
                     compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
 
@@ -191,6 +195,8 @@ namespace easySave___Graphic.Models
             {
                 confirmSave = false; //Backup not performed
             }
+
+            ViewModel.MainWindowsViewsModel.progressJob = 0;
 
             return confirmSave; //Returns whether the backup was performed
         }
@@ -255,7 +261,7 @@ namespace easySave___Graphic.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Destination DirectoryInfo</param>
-        public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null)
+        public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
@@ -297,6 +303,8 @@ namespace easySave___Graphic.Models
                 nbFilesCopied++;
                 // Calculate progression of copy
                 logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
+                progressBar.Value = logSave.Progression;
+                Application.DoEvents();
                 // Determine current state
                 logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
 
@@ -327,7 +335,7 @@ namespace easySave___Graphic.Models
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
 
                 //Start saving the new folder
-                copyComplete(subFolder, destinationSubFolder);
+                copyComplete(subFolder, destinationSubFolder,encryptionExtension, progressBar);
             }
         }
 
@@ -389,7 +397,7 @@ namespace easySave___Graphic.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Source DirectoryInfo</param>
-        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null)
+        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
@@ -445,6 +453,8 @@ namespace easySave___Graphic.Models
                             nbFilesCopied++;
                             // Calculate progression of copy
                             logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
+                            progressBar.Value = logSave.Progression;
+                            Application.DoEvents();
                             // Determine current state
                             logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
                             TimeSpan timeSpan = DateTime.Now - transferDelay;
@@ -507,6 +517,8 @@ namespace easySave___Graphic.Models
                     nbFilesCopied++;
                     // Calculate progression of copy
                     logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
+                    progressBar.Value = logSave.Progression;
+                    Application.DoEvents();
                     // Determine current state
                     logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
                     TimeSpan timeSpan = DateTime.Now - transferDelay;
@@ -542,7 +554,7 @@ namespace easySave___Graphic.Models
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
 
                 //Start saving the new folder
-                copyDifferential(subFolder, destinationSubFolder);
+                copyDifferential(subFolder, destinationSubFolder, encryptionExtension, progressBar);
             }
         }
 
