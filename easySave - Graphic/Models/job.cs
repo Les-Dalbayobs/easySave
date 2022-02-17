@@ -503,14 +503,18 @@ namespace easySave___Graphic.Models
                     }
                     else
                     {
-                        //Copy the file to the target folder
-                        file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+                        try
+                        {
+                            //Copy the file to the target folder
+                            file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
+                        }
+                        catch
+                        {
+                        }
 
                         logProgress.EncryptionTime = "0";
                     }
 
-                    //Copy the file to the target folder only if it does not exist
-                    file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
                     // Calculate number of files left to copy
                     logSave.NbFilesLeftToDo--;
                     // Calculate number of files copied;
