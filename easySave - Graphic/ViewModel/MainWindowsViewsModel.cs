@@ -228,8 +228,9 @@ namespace easySave___Graphic.ViewModel
             {
                 Global.listSaveAdvancement.RemoveAt(index);
                 selectedJob.writeLogAdvancement();
-            }            
-          
+            }
+        }
+
         public void newEncryption()
         {
             Properties.Settings.Default.encryption = encryptionExtension;
