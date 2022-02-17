@@ -29,47 +29,61 @@ namespace easySave___Graphic.Views
         {
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
-
-            if (this.RadioAllJob.IsChecked == true)
+            if (mainW.checkProcess())
             {
-                bool error = false;
-                foreach (var oneJob in mainW.Jobs)
-                {
-                    if (!oneJob.verifExist(oneJob.PathSource))
-                    {
-                        MessageBox.Show(resource.GetString("sourcePathError") + oneJob.PathSource);
-                        error = true;
-                        break;
-                    }
-                    if (!oneJob.verifCreateDestination())
-                    {
-                        MessageBox.Show(resource.GetString("destPathError") + oneJob.PathDestination);
-                        error = true;
-                        break;
-                    }
-                    
-                }
-                if (!error)
-                {
-                    foreach (var oneJob in mainW.Jobs)
-                    {
-                        oneJob.copy();
-                    }
-                }
+                MessageBox.Show(resource.GetString("noLaunchSave"));
             }
             else
             {
-                if (!mainW.SelectedJob.verifExist(mainW.SelectedJob.PathSource))
+                if (this.RadioAllJob.IsChecked == true)
                 {
-                    MessageBox.Show(resource.GetString("sourcePathError") + mainW.SelectedJob.PathSource);
-                }
-                else if (!mainW.SelectedJob.verifCreateDestination())
-                {
-                    MessageBox.Show(resource.GetString("destPathError") + mainW.SelectedJob.PathDestination);
+                    bool error = false;
+                    foreach (var oneJob in mainW.Jobs)
+                    {
+                        if (!oneJob.verifExist(oneJob.PathSource))
+                        {
+                            MessageBox.Show(resource.GetString("sourcePathError") + oneJob.PathSource);
+                            error = true;
+                            break;
+                        }
+                        if (!oneJob.verifCreateDestination())
+                        {
+                            MessageBox.Show(resource.GetString("destPathError") + oneJob.PathDestination);
+                            error = true;
+                            break;
+                        }
+                    }
+                    if (!error)
+                    {
+                        foreach (var oneJob in mainW.Jobs)
+                        {
+                            if (mainW.checkProcess())
+                            {
+                                MessageBox.Show(resource.GetString("errorProcessRunning"));
+                                break;
+                            }
+                            else
+                            {
+                                oneJob.copy("." + mainW.EncryptionExtension);
+                            }
+
+                        }
+                    }
                 }
                 else
                 {
-                    mainW.SelectedJob.copy();
+                    if (!mainW.SelectedJob.verifExist(mainW.SelectedJob.PathSource))
+                    {
+                        MessageBox.Show(resource.GetString("sourcePathError") + mainW.SelectedJob.PathSource);
+                    }
+                    else if (!mainW.SelectedJob.verifCreateDestination())
+                    {
+                        MessageBox.Show(resource.GetString("destPathError") + mainW.SelectedJob.PathDestination);
+                    }
+                    else
+                    {
+                        mainW.SelectedJob.copy("." + mainW.EncryptionExtension);
+                    }
                 }
             }
         }

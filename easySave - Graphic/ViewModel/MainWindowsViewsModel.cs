@@ -5,6 +5,10 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
+using System.Configuration;
+using System.Collections.Specialized;
+using System.Windows;
+using System.Diagnostics;
 
 namespace easySave___Graphic.ViewModel
 {
@@ -36,6 +40,12 @@ namespace easySave___Graphic.ViewModel
         /// Save the json
         /// </summary>
         string jsonString;
+
+        string encryptionExtension;
+
+        List<string> currentProcess;
+
+        string selectedProcess;
         #endregion
 
         #region properties
@@ -48,12 +58,20 @@ namespace easySave___Graphic.ViewModel
         /// Getter Setter of the SelectedJob attribute
         /// </summary>
         public job SelectedJob { get => selectedJob; set => selectedJob = value; }
+
+        public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
+        public List<string> CurrentProcess { get => currentProcess; set => currentProcess = value; }
+        public string SelectedProcess { get => selectedProcess; set => selectedProcess = value; }
+
         #endregion
 
         #region contructor
         public MainWindowsViewsModel()
         {
             serializer = new JsonSerializer();
+
+            encryptionExtension = Properties.Settings.Default.encryption;
+            readProcess();
 
             importConfig();
 
@@ -211,6 +229,54 @@ namespace easySave___Graphic.ViewModel
                 Global.listSaveAdvancement.RemoveAt(index);
                 selectedJob.writeLogAdvancement();
             }            
+          
+        public void newEncryption()
+        {
+            Properties.Settings.Default.encryption = encryptionExtension;
+            Properties.Settings.Default.Save();
+        }
+
+        public void readEncryption()
+        {
+            encryptionExtension = Properties.Settings.Default.encryption;
+        }
+
+        public void updateProcess()
+        {
+            currentProcess = new List<string>();
+
+            Process[] allProcess = Process.GetProcesses();
+
+            foreach (Process oneProcess in allProcess)
+            {
+                currentProcess.Add(oneProcess.ProcessName);
+            }
+        }
+
+        public void newProcess()
+        {
+            Properties.Settings.Default.processUser = this.selectedProcess;
+            Properties.Settings.Default.Save();
+        }
+
+        public void readProcess()
+        {
+            this.selectedProcess = Properties.Settings.Default.processUser;
+        }
+
+        public bool checkProcess()
+        {
+            if (this.selectedProcess != null && this.selectedProcess != "")
+            {
+                updateProcess();
+
+                if (currentProcess.Contains(selectedProcess))
+                {
+                    return true;
+                }
+            }
+            
+            return false;
         }
         #endregion
     }
