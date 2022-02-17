@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace easySave___Graphic.Models
 {
@@ -365,7 +365,7 @@ namespace easySave___Graphic.Models
 
             if (File.Exists(pathFileLogSave))
             {
-                easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
+                Global.listSaveAdvancement = new List<logSaveAdvancement>();
 
                 //StreamReader instance to read text from a file
                 using (var streamReader = new StreamReader(pathFileLogSave))
@@ -377,9 +377,9 @@ namespace easySave___Graphic.Models
                 }
             }
 
-            if (easySave.Models.Global.listSaveAdvancement == null)
+            if (Global.listSaveAdvancement == null)
             {
-                easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
+                Global.listSaveAdvancement = new List<logSaveAdvancement>();
             }
         }
 

@@ -11,11 +11,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
 using System.Diagnostics;
 
-[assembly: InternalsVisibleTo("easySave - Graphic")]
 
 /// <summary>
 /// Models namespace

@@ -1,5 +1,4 @@
-﻿using easySave.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -18,12 +17,12 @@ namespace easySave___Graphic.ViewModel
         /// <summary>
         /// Observable collection with all jobs
         /// </summary>
-        ObservableCollection<job> jobs;
+        ObservableCollection<easySave___Graphic.Models.job> jobs;
 
         /// <summary>
         /// Job selected in the DataGrid
         /// </summary>
-        job selectedJob;
+        easySave___Graphic.Models.job selectedJob;
 
         /// <summary>
         /// easySave folder path
@@ -52,12 +51,12 @@ namespace easySave___Graphic.ViewModel
         /// <summary>
         /// Getter - Setter of the jobs attribute
         /// </summary>
-        public ObservableCollection<job> Jobs { get => jobs; set => jobs = value; }
+        public ObservableCollection<easySave___Graphic.Models.job> Jobs { get => jobs; set => jobs = value; }
 
         /// <summary>
         /// Getter Setter of the SelectedJob attribute
         /// </summary>
-        public job SelectedJob { get => selectedJob; set => selectedJob = value; }
+        public easySave___Graphic.Models.job SelectedJob { get => selectedJob; set => selectedJob = value; }
 
         public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
         public List<string> CurrentProcess { get => currentProcess; set => currentProcess = value; }
@@ -96,7 +95,7 @@ namespace easySave___Graphic.ViewModel
         ///  Method to remove a job to the list and export the config
         /// </summary>
         /// <param name="jobDelete">Job to remove in the list</param>
-        public void deleteJob(job jobDelete)
+        public void deleteJob(easySave___Graphic.Models.job jobDelete)
         {
             this.jobs.Remove(jobDelete);
             serializeJob();
@@ -107,7 +106,7 @@ namespace easySave___Graphic.ViewModel
         /// Method to add a job to the list and export the config
         /// </summary>
         /// <param name="jobAdd">Job to add in the list</param>
-        public void addJob(job jobAdd)
+        public void addJob(easySave___Graphic.Models.job jobAdd)
         {
             this.jobs.Add(jobAdd);
             serializeJob();
@@ -135,7 +134,7 @@ namespace easySave___Graphic.ViewModel
         /// </summary>
         public void deserializeJob()
         {
-            var listJob = JsonConvert.DeserializeObject<ObservableCollection<job>>(jsonString);
+            var listJob = JsonConvert.DeserializeObject<ObservableCollection<easySave___Graphic.Models.job>>(jsonString);
         }
 
         /// <summary>
@@ -189,14 +188,14 @@ namespace easySave___Graphic.ViewModel
                     using (var jsonReader = new JsonTextReader(streamReader))
                     {
                         //Deserialization and import into the job table
-                        this.jobs = serializer.Deserialize<ObservableCollection<job>>(jsonReader);
+                        this.jobs = serializer.Deserialize<ObservableCollection<easySave___Graphic.Models.job>>(jsonReader);
                     }
                 }
             }
             // If nothing has been imported, initialize the list
             if (jobs == null)
             {
-                this.jobs = new ObservableCollection<job>();
+                this.jobs = new ObservableCollection<easySave___Graphic.Models.job>();
             }
         }
 
@@ -206,12 +205,12 @@ namespace easySave___Graphic.ViewModel
         public void updateLog(string oldName)
         {
             // Search index in state log list
-            int index = Global.listSaveAdvancement.FindIndex(item => item.Name == oldName);
+            int index = easySave___Graphic.Models.Global.listSaveAdvancement.FindIndex(item => item.Name == oldName);
 
             // Replace old name by the new name of the job in the state log
             if (index >= 0)
             {
-                Global.listSaveAdvancement[index].Name = selectedJob.Name;
+                easySave___Graphic.Models.Global.listSaveAdvancement[index].Name = selectedJob.Name;
                 selectedJob.writeLogAdvancement();
             }
         }
@@ -222,11 +221,11 @@ namespace easySave___Graphic.ViewModel
         public void deleteLog()
         {
             // Search index in state log list
-            int index = Global.listSaveAdvancement.FindIndex(item => item.Name == selectedJob.Name);
+            int index = easySave___Graphic.Models.Global.listSaveAdvancement.FindIndex(item => item.Name == selectedJob.Name);
 
             if (index >= 0)
             {
-                Global.listSaveAdvancement.RemoveAt(index);
+                easySave___Graphic.Models.Global.listSaveAdvancement.RemoveAt(index);
                 selectedJob.writeLogAdvancement();
             }
         }
