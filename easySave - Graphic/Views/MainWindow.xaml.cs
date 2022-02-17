@@ -62,7 +62,7 @@ namespace easySave___Graphic
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-            easySave.Models.job newJob = new easySave.Models.job();
+            easySave___Graphic.Models.job newJob = new easySave___Graphic.Models.job();
 
             Views.CreatJob creatJob = new Views.CreatJob();
 
