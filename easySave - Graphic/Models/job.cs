@@ -155,6 +155,7 @@ namespace easySave___Graphic.Models
         /// <returns>Return if the backup is well done</returns>
         public bool copy(string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
+            //Log Advancement initialize/////////////////////////////////////////////////////////////////////////////////
             logSave.Name = this.Name;
             logSave.SourceFilePath = this.pathSource;
             logSave.TargetFilePath = this.pathDestination;
@@ -162,7 +163,8 @@ namespace easySave___Graphic.Models
             logSave.TotalFilesSize = calculSizeFolder(this.pathSource);
             logSave.NbFilesLeftToDo = logSave.TotalFilesToCopy;
             nbFilesCopied = 0;
-
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
             progressBar.Value = 0;
 
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
@@ -173,7 +175,8 @@ namespace easySave___Graphic.Models
             //Try catch on the execution of the backup to avoid problems
             try
             {
-                if (this.typeSave) //Complete
+                //Complete////////////////////////////////////////////////////////////////////////////////////////////////
+                if (this.typeSave) 
                 {
                     //Verification that the directory exists
                     if (destination.Exists)
@@ -185,7 +188,10 @@ namespace easySave___Graphic.Models
 
                     confirmSave = true; //Validate the backup
                 }
-                else //Differential
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+                //Differential////////////////////////////////////////////////////////////////////////////////////////////
+                else
                 {
                     copyDifferential(source, destination, encryptionExtension, progressBar); //Launch backup
 
@@ -193,6 +199,7 @@ namespace easySave___Graphic.Models
 
                     confirmSave = true;
                 }
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////
             }
             catch (Exception e)
             {
@@ -342,11 +349,12 @@ namespace easySave___Graphic.Models
             //Create the destination directory
             Directory.CreateDirectory(destination.FullName);
 
-            //Copy all files in the folder
+            //Copy all files in the folder/////////////////////////////////////////////////////
             foreach (FileInfo file in source.GetFiles())
             {
                 copyFile(file, true, source, destination, encryptionExtension, progressBar);
             }
+            ///////////////////////////////////////////////////////////////////////////////////
 
             //Search and enter the subfolders of the current folder////////////////////////////
             foreach (DirectoryInfo subFolder in folders)
