@@ -56,6 +56,9 @@ namespace easySave.ViewModel
         /// </summary>
         string pathFilesEasySave = @"c:\EasySave";
 
+        // Create list to store strings of log save file
+        List<string> logSaveList = new List<string>();
+
         #endregion
 
         #region properties
@@ -88,11 +91,6 @@ namespace easySave.ViewModel
             string pathLogFolder = pathFilesEasySave + @"\Log";
             string pathLogProgressSave = pathLogFolder + @"\logProgressSave.json";
 
-            for (int i = 0; i < nbJobMax; i++)
-            {
-                this.jobs[i].SetPathFileLogProgress(pathLogFolder);
-            }
-
             if (!File.Exists(pathLogProgressSave))
             {
                 if (!Directory.Exists(pathLogFolder))
@@ -100,6 +98,11 @@ namespace easySave.ViewModel
                     Directory.CreateDirectory(pathLogFolder);
                 }
                 File.Create(pathLogProgressSave).Close();
+            }
+
+            for (int i = 0; i < nbJobMax; i++)
+            {
+                this.jobs[i].SetPathFileLogProgress(pathLogFolder);
             }
 
             updateHeader();
@@ -283,7 +286,7 @@ namespace easySave.ViewModel
             Console.WriteLine(job1.Name);
             Console.WriteLine(job1.PathSource);
             Console.WriteLine(job1.PathDestination);
-            Console.WriteLine(job1.TypeSave);
+            Console.WriteLine(job1.Complete);
 
             Console.WriteLine(job1.verifExist(job1.PathSource));
 
@@ -321,11 +324,11 @@ namespace easySave.ViewModel
 
             if (view.CreateJobType)
             {
-                this.jobs[numberJob - 1].TypeSave = true;
+                this.jobs[numberJob - 1].Complete = true;
             }
             else
             {
-                this.jobs[numberJob - 1].TypeSave = false;
+                this.jobs[numberJob - 1].Complete = false;
             }
 
             updateHeader(); //Update the header
@@ -413,13 +416,14 @@ namespace easySave.ViewModel
             this.jobs[numberJob - 1].Name = null;
             this.jobs[numberJob - 1].PathSource = null;
             this.jobs[numberJob - 1].PathDestination = null;
-            this.jobs[numberJob - 1].TypeSave = false;
+            this.jobs[numberJob - 1].Complete = false;
 
             updateHeader(); //Update the job list
 
             serializeJob(); //Serialization jobs 
             exportConfig(); //Export jobs
         }
+
         #endregion
     }
 }

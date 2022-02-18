@@ -21,9 +21,11 @@ namespace easySave___Graphic
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
+
+        public object SelectedJob { get; private set; }
 
         public MainWindow()
         {
@@ -60,7 +62,7 @@ namespace easySave___Graphic
 
         private void ButtonCreate_Click(object sender, RoutedEventArgs e)
         {
-            easySave.Models.job newJob = new easySave.Models.job();
+            easySave___Graphic.Models.job newJob = new easySave___Graphic.Models.job();
 
             Views.CreatJob creatJob = new Views.CreatJob();
 
@@ -69,17 +71,6 @@ namespace easySave___Graphic
             if (creatJob.ShowDialog() == true)
             {
                 ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
-
-                if (newJob.PathSource == null)
-                    newJob.PathSource = creatJob.TextBoxSource.Text;
-
-                if (newJob.PathDestination == null)
-                    newJob.PathDestination = creatJob.TextBoxDestination.Text;
-
-                if (creatJob.RadioComplete.IsChecked == true)
-                    newJob.TypeSave = true;
-                else
-                    newJob.TypeSave = false;
 
                 mainW.addJob(newJob);
             }
@@ -91,15 +82,20 @@ namespace easySave___Graphic
 
             if (mainW.SelectedJob != null)
             {
+                // Store the old name of the job
+                string oldName = mainW.SelectedJob.Name;
+
                 Views.CreatJob editJob = new Views.CreatJob();
 
                 editJob.DataContext = mainW.SelectedJob;
 
                 editJob.ShowDialog();
+
+                mainW.editJob(oldName);
             }
             else
             {
-                MessageBox.Show("Please select a job");
+                MessageBox.Show(resource.GetString("selectJob"));
             }
         }
 
@@ -110,15 +106,17 @@ namespace easySave___Graphic
             if (mainW.SelectedJob != null)
             {
                 Views.DeleteJob delete = new Views.DeleteJob();
+                delete.DeleteAlert.Content = resource.GetString("wantDelete") + mainW.SelectedJob.Name + " ?";
 
                 if (delete.ShowDialog() == true)
                 {
+                    mainW.deleteLog();
                     mainW.deleteJob(mainW.SelectedJob);
                 }
             }
             else
             {
-                MessageBox.Show("Please select job");
+                MessageBox.Show(resource.GetString("selectJob"));
             }
         }
         
@@ -129,7 +127,6 @@ namespace easySave___Graphic
             Views.saveMenu SaveMenu = new Views.saveMenu();
 
             SaveMenu.DataContext = mainW;
-
 
             if (mainW.SelectedJob != null)
             {
@@ -154,9 +151,16 @@ namespace easySave___Graphic
         {
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
-            Views.EncryptionWindow encryptionWindow = new Views.EncryptionWindow();
-            encryptionWindow.ShowDialog();
-        }
+            mainW.updateProcess();
 
+            Views.settings Settings = new Views.settings();
+
+            Settings.DataContext = mainW;
+
+            Settings.ShowDialog();
+
+            mainW.newEncryption();
+            mainW.newProcess();
+        }
     }
 }

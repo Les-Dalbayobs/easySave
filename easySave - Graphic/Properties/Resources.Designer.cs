@@ -61,6 +61,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à This action is irreversible.
+        /// </summary>
+        public static string advertisement {
+            get {
+                return ResourceManager.GetString("advertisement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Apply.
         /// </summary>
         public static string apply {
@@ -75,6 +84,24 @@ namespace easySave___Graphic.Properties {
         public static string cancel {
             get {
                 return ResourceManager.GetString("cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the name of the process (if not in use).
+        /// </summary>
+        public static string chooseProcess {
+            get {
+                return ResourceManager.GetString("chooseProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Complete.
+        /// </summary>
+        public static string complete {
+            get {
+                return ResourceManager.GetString("complete", resourceCulture);
             }
         }
         
@@ -97,11 +124,29 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Path of the destination.
+        ///   Recherche une chaîne localisée semblable à Destination path.
         /// </summary>
         public static string destination {
             get {
                 return ResourceManager.GetString("destination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error ! Incorrect destination path : .
+        /// </summary>
+        public static string destPathError {
+            get {
+                return ResourceManager.GetString("destPathError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Differential.
+        /// </summary>
+        public static string differential {
+            get {
+                return ResourceManager.GetString("differential", resourceCulture);
             }
         }
         
@@ -126,9 +171,9 @@ namespace easySave___Graphic.Properties {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Encryption.
         /// </summary>
-        public static string encryption {
+        public static string encryptionMenu {
             get {
-                return ResourceManager.GetString("encryption", resourceCulture);
+                return ResourceManager.GetString("encryptionMenu", resourceCulture);
             }
         }
         
@@ -142,11 +187,29 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Stop copying because the business software is running.
+        /// </summary>
+        public static string errorProcessRunning {
+            get {
+                return ResourceManager.GetString("errorProcessRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Exit.
         /// </summary>
         public static string exit {
             get {
                 return ResourceManager.GetString("exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter file extension (if not in the list).
+        /// </summary>
+        public static string fileExtension {
+            get {
+                return ResourceManager.GetString("fileExtension", resourceCulture);
             }
         }
         
@@ -178,11 +241,29 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Language.
+        ///   Recherche une chaîne localisée semblable à Languages.
         /// </summary>
         public static string language {
             get {
                 return ResourceManager.GetString("language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à List of current processes.
+        /// </summary>
+        public static string listProcess {
+            get {
+                return ResourceManager.GetString("listProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Make your choice : .
+        /// </summary>
+        public static string makeChoice {
+            get {
+                return ResourceManager.GetString("makeChoice", resourceCulture);
             }
         }
         
@@ -196,11 +277,20 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Non.
+        ///   Recherche une chaîne localisée semblable à No.
         /// </summary>
         public static string no {
             get {
                 return ResourceManager.GetString("no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Impossible to run backups because the business software is running.
+        /// </summary>
+        public static string noLaunchSave {
+            get {
+                return ResourceManager.GetString("noLaunchSave", resourceCulture);
             }
         }
         
@@ -214,6 +304,33 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Progress.
+        /// </summary>
+        public static string progress {
+            get {
+                return ResourceManager.GetString("progress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Business Software.
+        /// </summary>
+        public static string proSoftware {
+            get {
+                return ResourceManager.GetString("proSoftware", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Resume.
+        /// </summary>
+        public static string replay {
+            get {
+                return ResourceManager.GetString("replay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Save.
         /// </summary>
         public static string save {
@@ -223,7 +340,25 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Saving the job:.
+        ///   Recherche une chaîne localisée semblable à Save all jobs.
+        /// </summary>
+        public static string saveAllJobs {
+            get {
+                return ResourceManager.GetString("saveAllJobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save menu.
+        /// </summary>
+        public static string saveMenu {
+            get {
+                return ResourceManager.GetString("saveMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Saving the job : .
         /// </summary>
         public static string saveOneJob {
             get {
@@ -232,7 +367,25 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Path of the source.
+        ///   Recherche une chaîne localisée semblable à Please select a job.
+        /// </summary>
+        public static string selectJob {
+            get {
+                return ResourceManager.GetString("selectJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Settings.
+        /// </summary>
+        public static string setting {
+            get {
+                return ResourceManager.GetString("setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Source path.
         /// </summary>
         public static string source {
             get {
@@ -241,7 +394,16 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Type of backup.
+        ///   Recherche une chaîne localisée semblable à Error ! Incorrect source path : .
+        /// </summary>
+        public static string sourcePathError {
+            get {
+                return ResourceManager.GetString("sourcePathError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup type.
         /// </summary>
         public static string type {
             get {
@@ -250,7 +412,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Type of extension file.
+        ///   Recherche une chaîne localisée semblable à Choose file extension.
         /// </summary>
         public static string typeExtension {
             get {
@@ -259,7 +421,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you want to Delete this Job ?.
+        ///   Recherche une chaîne localisée semblable à Do you really want to delete this job : .
         /// </summary>
         public static string wantDelete {
             get {

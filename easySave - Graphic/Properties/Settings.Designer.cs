@@ -34,5 +34,29 @@ namespace easySave___Graphic.Properties {
                 this["lang"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string encryption {
+            get {
+                return ((string)(this["encryption"]));
+            }
+            set {
+                this["encryption"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string processUser {
+            get {
+                return ((string)(this["processUser"]));
+            }
+            set {
+                this["processUser"] = value;
+            }
+        }
     }
 }

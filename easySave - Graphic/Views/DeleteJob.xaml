@@ -6,17 +6,17 @@
         xmlns:local="clr-namespace:easySave___Graphic.Views"
         xmlns:language="clr-namespace:easySave___Graphic.Properties"
         mc:Ignorable="d"
-        Title="DeleteJob" Height="168" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" SnapsToDevicePixels="True">
-    <Grid>
+        Title="DeleteJob" Height="179" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" SizeToContent="Manual" >
+    <Grid Margin="0,6,0,0">
         <!--#region Text Box-->
-        <Label HorizontalAlignment="Center" Content="{x:Static language:Resources.wantDelete}" 
-                 VerticalAlignment="Top" Width="292"  Visibility="Visible" 
-                 FontWeight="Bold" Height="46" FontSize="18" Margin="0,26,0,0" 
+        <Label x:Name="DeleteAlert" HorizontalContentAlignment="Center" Content="{x:Static language:Resources.wantDelete}" 
+                 VerticalAlignment="Top" Width="480"  Visibility="Visible" 
+                 FontWeight="Bold" Height="34" FontSize="16" Margin="10,10,10,0" 
                  BorderBrush="White"/>
 
         <!--#region Button-->
         <Button x:Name="No" Content="{x:Static language:Resources.no}" 
-            Margin="272,91,102,0" 
+            Margin="267,105,107,0" 
             VerticalAlignment="Top" 
             Height="43" 
             BorderBrush="#FFD8D8D8" 
@@ -27,7 +27,7 @@
             FontSize="16"
             Click="No_Click"/>
         <Button x:Name="Yes" Content="{x:Static language:Resources.yes}" 
-            Margin="102,91,272,0" 
+            Margin="100,105,274,0" 
             VerticalAlignment="Top" 
             Height="43" 
             BorderBrush="#FFD8D8D8" 
@@ -40,9 +40,14 @@
         <!--#endregion-->
 
         <!--#region Image-->
-        <Image Height="73"
-               Margin="21,40,416,39" Width="63" 
-               Source="/Views/icons8-warning-48.png"/>
+        <Image HorizontalAlignment="Left" 
+               Height="28" Margin="144,54,0,0" 
+               VerticalAlignment="Top" Width="25" Source="/Views/icons8-warning-48.png"/>
+
+        <Label x:Name="DeleteAdvertisement" HorizontalContentAlignment="Center" Content="{x:Static language:Resources.advertisement}" 
+            VerticalAlignment="Top"  Visibility="Visible" 
+            FontWeight="Normal" Height="28" Margin="174,52,159,0" 
+            BorderBrush="White"/>
         <!--#endregion-->
     </Grid>
 </Window>

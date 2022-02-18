@@ -1,15 +1,8 @@
-﻿/// \file logProgressSave
-/// \author Sheridan SHABANI
-/// \author Steven LUCAS
-/// \author Ahmed EL HARIRI
-/// \version 1
-/// \date 28/01/2022
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace easySave.Models
+namespace easySave___Graphic.Models
 {
     class logProgressSave
     {
@@ -49,7 +42,7 @@ namespace easySave.Models
         #region constructor
         public logProgressSave()
         {
-            
+
         }
         #endregion
 

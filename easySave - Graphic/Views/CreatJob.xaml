@@ -37,24 +37,25 @@
         <!--#endregion-->
 
         <!--#region Image icone-->
-        <Button x:Name="ButtonSource" Margin="296,78,74,273" Click="ButtonSource_Click">
+        <Button x:Name="ButtonSource" Margin="296,78,74,242" Click="ButtonSource_Click">
             <Image x:Name="ImgFolderSource"
             Source="/Views/icons8-dossier-ouvert.png"/>
         </Button>
-        <Button x:Name="ButtonDestination" Margin="296,147,75,204" Click="ButtonDestination_Click">
+        <Button x:Name="ButtonDestination" Margin="296,147,75,173" Click="ButtonDestination_Click">
             <Image x:Name="ImgFolderDestination"
             Source="/Views/icons8-dossier-ouvert.png"/>
         </Button>
         <!--#endregion-->
 
         <!--#region Radio Button -->
-        <RadioButton x:Name="RadioComplete" Content="Complete" HorizontalAlignment="Left" Margin="66,211,0,0" 
+        <RadioButton x:Name="RadioComplete" Content="{x:Static language:Resources.complete}" HorizontalAlignment="Left" Margin="66,211,0,0" 
                      VerticalAlignment="Top" Height="25" Width="104" FontSize="18" ClickMode="Press" 
-                     IsChecked="True"
+                     IsChecked="{Binding Complete}"
                      FontWeight="Bold"/>
-        <RadioButton x:Name="RadioDifferential" Content="Differential" HorizontalAlignment="Left" Margin="197,211,0,0" 
-                     VerticalAlignment="Top" Height="25" Width="124" FontSize="18" ClickMode="Press"
-                     FontWeight="Bold"/>
+        <RadioButton x:Name="RadioDifferential" Content="{x:Static language:Resources.differential}" HorizontalAlignment="Left" Margin="197,211,0,0" 
+                     VerticalAlignment="Top" Height="25" Width="154" FontSize="18" ClickMode="Press"
+                     FontWeight="Bold"
+                     IsChecked="{Binding Differential}"/>
 
         <!--#endregion-->
 
@@ -70,7 +71,7 @@
             FontWeight="Normal" 
             FontSize="16" Click="Cancel_Click"/>
 
-        <Button x:Name="Ok" Content="{x:Static language:Resources.apply}" 
+        <Button x:Name="Ok" Content="{x:Static language:Resources.apply}"
             Margin="98,274,162,0" 
             VerticalAlignment="Top" 
             Height="50" 

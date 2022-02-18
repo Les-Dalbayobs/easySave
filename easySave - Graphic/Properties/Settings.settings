@@ -5,5 +5,11 @@
     <Setting Name="lang" Type="System.String" Scope="User">
       <Value Profile="(Default)">fr</Value>
     </Setting>
+    <Setting Name="encryption" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="processUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

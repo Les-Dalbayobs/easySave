@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +19,7 @@ namespace easySave___Graphic.Views
     /// </summary>
     public partial class saveMenu : Window
     {
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
         public saveMenu()
         {
             InitializeComponent();
@@ -24,49 +27,64 @@ namespace easySave___Graphic.Views
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel; 
+            ProgressBar progressBar = ProgressBarJob;
 
-
-            if (this.RadioAllJob.IsChecked == true)
+            if (mainW.checkProcess())
             {
-                bool error = false;
-                foreach (var oneJob in mainW.Jobs)
-                {
-                    if (!mainW.SelectedJob.verifExist(mainW.SelectedJob.PathSource))
-                    {
-                        MessageBox.Show("Source path error of the job: " + oneJob.Name);
-                        error = true;
-                        break;
-                    }
-                    if (!mainW.SelectedJob.verifCreateDestination())
-                    {
-                        MessageBox.Show("Destination path error of the job: " + oneJob.Name);
-                        error = true;
-                        break;
-                    }
-                    
-                }
-                if (!error)
-                {
-                    foreach (var oneJob in mainW.Jobs)
-                    {
-                        oneJob.copy();
-                    }
-                }
+                MessageBox.Show(resource.GetString("noLaunchSave"));
             }
             else
             {
-                if (!mainW.SelectedJob.verifExist(mainW.SelectedJob.PathSource))
+                if (this.RadioAllJob.IsChecked == true)
                 {
-                    MessageBox.Show("Source path error");
-                }
-                else if (!mainW.SelectedJob.verifCreateDestination())
-                {
-                    MessageBox.Show("Destination path error");
+                    bool error = false;
+                    foreach (var oneJob in mainW.Jobs)
+                    {
+                        if (!oneJob.verifExist(oneJob.PathSource))
+                        {
+                            MessageBox.Show(resource.GetString("sourcePathError") + oneJob.PathSource);
+                            error = true;
+                            break;
+                        }
+                        if (!oneJob.verifCreateDestination())
+                        {
+                            MessageBox.Show(resource.GetString("destPathError") + oneJob.PathDestination);
+                            error = true;
+                            break;
+                        }
+                    }
+                    if (!error)
+                    {
+                        foreach (var oneJob in mainW.Jobs)
+                        {
+                            if (mainW.checkProcess())
+                            {
+                                MessageBox.Show(resource.GetString("errorProcessRunning"));
+                                break;
+                            }
+                            else
+                            {
+                                oneJob.copy("." + mainW.EncryptionExtension, progressBar);
+                            }
+
+                        }
+                    }
                 }
                 else
                 {
-                    mainW.SelectedJob.copy();
+                    if (!mainW.SelectedJob.verifExist(mainW.SelectedJob.PathSource))
+                    {
+                        MessageBox.Show(resource.GetString("sourcePathError") + mainW.SelectedJob.PathSource);
+                    }
+                    else if (!mainW.SelectedJob.verifCreateDestination())
+                    {
+                        MessageBox.Show(resource.GetString("destPathError") + mainW.SelectedJob.PathDestination);
+                    }
+                    else
+                    {
+                        mainW.SelectedJob.copy("." + mainW.EncryptionExtension, progressBar);
+                    }
                 }
             }
         }
