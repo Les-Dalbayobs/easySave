@@ -62,7 +62,7 @@
             FontSize="16" Click="Ok_Click"
             />
         <ProgressBar x:Name="ProgressBarJob" HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355"/>
-        <Label Content="{x:Static language:Resources.progress}" HorizontalAlignment="Left" Margin="148,185,0,0" VerticalAlignment="Top" FontSize="10" IsEnabled="False"/>
+        <Label Content="{Binding ElementName=ProgressBarJob, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,182,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
         <Button x:Name="ButtonPlay" Content="{x:Static language:Resources.replay}" Margin="68,233,248,105">
             <!--<Image x:Name="ImgPlayPause"
             Source="../Pictures/playpause.png"/>
