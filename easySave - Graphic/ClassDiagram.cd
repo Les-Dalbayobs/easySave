@@ -1,27 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="easySave___Graphic.Properties.Resources">
-    <Position X="14.5" Y="0.5" Width="1.5" />
+    <Position X="21.25" Y="0.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AIBAEAACAACAAAoAkAgBMUAAQQAFAAQAAAFCBiBAAoA=</HashCode>
+      <HashCode>AOBAEAACAgCAAAoAkAuBMUAgYQAFAyQgAIFABiBAQoA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="easySave___Graphic.Properties.Settings">
-    <Position X="12.5" Y="0.5" Width="1.75" />
+    <Position X="24.5" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAIAAAAAABAAAAAAAAAAQACAA=</HashCode>
       <FileName>Settings.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="easySave___Graphic.ViewModel.MainWindowsViewsModel">
-    <Position X="7.5" Y="3.75" Width="2" />
+  <Class Name="easySave___Graphic.Models.Global">
+    <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQCAAAAAIAAAACEAAEAAAABACAAAAAAAAEgAAABQBAA=</HashCode>
-      <FileName>ViewModel\MainWindowsViewsModel.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\job.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="listSaveAdvancement" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="easySave___Graphic.Models.job">
+    <Position X="5.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QCAIAkA0IAAAEgKEAABQAgQAAAAEAGLAACAiABCAYAE=</HashCode>
+      <FileName>Models\job.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="logSave" />
+      <Field Name="logProgress" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="easySave___Graphic.Models.logProgressSave">
+    <Position X="11" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ARABAgACgEIAAoBAAAAASAQAAAgEAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\logProgressSave.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="easySave___Graphic.Models.logSaveAdvancement">
+    <Position X="11" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIAQAACAMAAAACBQAAAAUAAIEAAAgBAAAIAA=</HashCode>
+      <FileName>Models\logSaveAdvancement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="easySave___Graphic.ViewModel.MainWindowsViewsModel">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IQCQCCIAKQAAACFACEAAAABACAEAAAIBAEgCABBQBAg=</HashCode>
+      <FileName>ViewModel\MainWindowsViewsModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="jobs" />
+    </ShowAsCollectionAssociation>
+  </Class>
   <Class Name="easySave___Graphic.Views.CreatJob" BaseTypeListCollapsed="true">
-    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Position X="14.75" Y="3" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAIQAACAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\CreatJob.xaml.cs</FileName>
@@ -29,31 +67,31 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="easySave___Graphic.Views.DeleteJob" BaseTypeListCollapsed="true">
-    <Position X="4.25" Y="0.5" Width="1.5" />
+    <Position X="14.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\DeleteJob.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="easySave___Graphic.Views.EncryptionWindow" BaseTypeListCollapsed="true">
-    <Position X="7.75" Y="0.5" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Views\EncryptionWindow.xaml.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
   <Class Name="easySave___Graphic.Views.saveMenu" BaseTypeListCollapsed="true">
-    <Position X="6" Y="0.5" Width="1.5" />
+    <Position X="14.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAQAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\saveMenu.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="easySave___Graphic.Views.settings" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAEAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\settings.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
   <Class Name="easySave___Graphic.Views.WindowLang" BaseTypeListCollapsed="true">
-    <Position X="0.75" Y="0.5" Width="1.5" />
+    <Position X="24.25" Y="5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAACAAAAAAAQIAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\WindowLang.xaml.cs</FileName>
@@ -61,7 +99,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="easySave___Graphic.MainWindow" BaseTypeListCollapsed="true">
-    <Position X="0.75" Y="3" Width="1.5" />
+    <Position X="18" Y="2.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAQAEAAAEAAAACAAQAAAAAAAAAAABAAAAAAAAAAQAAQ=</HashCode>
       <FileName>Views\MainWindow.xaml.cs</FileName>
@@ -69,7 +107,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="easySave___Graphic.App">
-    <Position X="9.75" Y="0.5" Width="1.5" />
+    <Position X="24.75" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>App.xaml.cs</FileName>
