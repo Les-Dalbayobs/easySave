@@ -199,8 +199,6 @@ namespace easySave___Graphic.Models
                 confirmSave = false; //Backup not performed
             }
 
-            ViewModel.MainWindowsViewsModel.progressJob = 0;
-
             return confirmSave; //Returns whether the backup was performed
         }
 
@@ -259,6 +257,78 @@ namespace easySave___Graphic.Models
             return size; //Return total of the size
         }
 
+        public void copyFile(FileInfo file, bool overwrite, DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        {
+            //Log Progress update///////////////////////////////////////////////////////////////////
+            // Create progress log
+            logProgress.Name = this.Name;
+            logProgress.FileSource = file.FullName;
+            logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
+            logProgress.DestPath = destination.FullName;
+            logProgress.FileSize = file.Length.ToString();
+            DateTime transferDelay = DateTime.Now;
+            ///////////////////////////////////////////////////////////////////////////////////////
+
+            //Copy or encryption///////////////////////////////////////////////////////////////////
+            if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
+            {
+                int delayEncryption = encryption(file, destination);
+
+                logProgress.EncryptionTime = delayEncryption.ToString();
+
+                logProgress.FileTarget = Path.Combine(destination.FullName, Path.GetFileNameWithoutExtension(destination.FullName) + ".cry");
+            }
+            else
+            {
+                //Copy the file to the target folder
+                file.CopyTo(Path.Combine(destination.FullName, file.Name), overwrite);
+
+                logProgress.EncryptionTime = "0";
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////
+
+            //Log Advancement update///////////////////////////////////////////////////////////////
+            // Calculate number of files left to copy
+            logSave.NbFilesLeftToDo--;
+            // Calculate number of files copied;
+            nbFilesCopied++;
+            // Calculate progression of copy
+            logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
+            progressBar.Value = logSave.Progression;
+            Application.DoEvents();
+            // Determine current state
+            logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
+            //////////////////////////////////////////////////////////////////////////////////////
+
+            //Log Progress update/////////////////////////////////////////////////////////////////
+            // Calculate transfert Time
+            TimeSpan timeSpan = DateTime.Now - transferDelay;
+            logProgress.FileTransfertTime = timeSpan.ToString();
+
+            // Add time to logProgress
+            logProgress.SetTime();
+            //////////////////////////////////////////////////////////////////////////////////////
+
+            //Log Progress JSON///////////////////////////////////////////////////////////////////
+            jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+            using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+            {
+                writer.WriteLine(jsonStringLogProgress);
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////
+
+            //Log Progress XML/////////////////////////////////////////////////////////////////////
+            writeXmlLogProgress();
+            ///////////////////////////////////////////////////////////////////////////////////////
+
+            //Log advancement JSON/////////////////////////////////////////////////////////////////
+            readLogAdvancement();
+            searchLogAdvancement();
+            writeLogAdvancement();
+            ///////////////////////////////////////////////////////////////////////////////////////
+        }
+
         /// <summary>
         /// Method for making a full backup
         /// </summary>
@@ -275,73 +345,10 @@ namespace easySave___Graphic.Models
             //Copy all files in the folder
             foreach (FileInfo file in source.GetFiles())
             {
-                // Create progress log
-                logProgress.Name = this.Name;
-                logProgress.FileSource = file.FullName;
-                logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
-                logProgress.DestPath = destination.FullName;
-                logProgress.FileSize = file.Length.ToString();
-
-                DateTime transferDelay = DateTime.Now;
-
-                if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
-                {
-                    int delayEncryption = encryption(file, destination);
-
-                    logProgress.EncryptionTime = delayEncryption.ToString();
-
-                    logProgress.FileTarget = Path.Combine(destination.FullName, Path.GetFileNameWithoutExtension(destination.FullName) + ".cry");
-                }
-                else
-                {
-                    //Copy the file to the target folder
-                    file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
-
-                    logProgress.EncryptionTime = "0";
-                }
-
-                // Calculate number of files left to copy
-                logSave.NbFilesLeftToDo--;
-                // Calculate number of files copied;
-                nbFilesCopied++;
-                // Calculate progression of copy
-                logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
-                progressBar.Value = logSave.Progression;
-                Application.DoEvents();
-                // Determine current state
-                logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
-
-                TimeSpan timeSpan = DateTime.Now - transferDelay;
-
-                // Calculate transfert Time
-                logProgress.FileTransfertTime = timeSpan.ToString();
-
-                // Add time to logProgress
-                logProgress.SetTime();
-
-                jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
-                
-                if (!File.Exists(pathFileLogProgressXml))
-                {
-                    File.Create(pathFileLogProgressXml).Close();
-                }
-
-                XmlSerializer xmlSerializer = new XmlSerializer(typeof(logProgressSave));
-                TextWriter writerXml = new StreamWriter(pathFileLogProgressXml, true);
-                xmlSerializer.Serialize(writerXml, logProgress);
-                writerXml.Close();
-
-                using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
-                {
-                    writer.WriteLine(jsonStringLogProgress);
-                }
-
-                readLogAdvancement();
-                searchLogAdvancement();
-                writeLogAdvancement();
+                copyFile(file, true, source, destination, encryptionExtension, progressBar);
             }
 
-            //Search and enter the subfolders of the current folder
+            //Search and enter the subfolders of the current folder////////////////////////////
             foreach (DirectoryInfo subFolder in folders)
             {
                 //Creates a sub-folder and saves this information in a DirectoryInfo
@@ -350,11 +357,21 @@ namespace easySave___Graphic.Models
                 //Start saving the new folder
                 copyComplete(subFolder, destinationSubFolder,encryptionExtension, progressBar);
             }
+            /////////////////////////////////////////////////////////////////////////////////
         }
 
-        public void writeXmlLogSave()
+        public void writeXmlLogProgress()
         {
+            if (!File.Exists(pathFileLogProgressXml))
+            {
+                File.Create(pathFileLogProgressXml).Close();
+            }
 
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(logProgressSave));
+            TextWriter writerXml = new StreamWriter(pathFileLogProgressXml, true);
+            xmlSerializer.Serialize(writerXml, logProgress);
+            writerXml.Close();
         }
 
         public void searchLogAdvancement()
@@ -438,60 +455,7 @@ namespace easySave___Graphic.Models
                         //Try catch which will allow error handling if needed
                         try
                         {
-                            logProgress.Name = this.Name;
-                            logProgress.FileSource = file.FullName;
-                            logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
-                            logProgress.DestPath = destination.FullName;
-                            logProgress.FileSize = file.Length.ToString();
-
-                            DateTime transferDelay = DateTime.Now;
-
-                            if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
-                            {
-                                int delayEncryption = encryption(file, destination);
-
-                                logProgress.EncryptionTime = delayEncryption.ToString();
-
-                                logProgress.FileTarget = Path.Combine(destination.FullName, Path.GetFileNameWithoutExtension(destination.FullName) + ".cry");
-
-                            }
-                            else
-                            {
-                                //Copy the file to the target folder
-                                file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
-
-                                logProgress.EncryptionTime = "0";
-                            }
-
-                            //Copy the file to the target folder
-                            file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
-                            // Calculate number of files left to copy
-                            logSave.NbFilesLeftToDo--;
-                            // Calculate number of files copied;
-                            nbFilesCopied++;
-                            // Calculate progression of copy
-                            logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
-                            progressBar.Value = logSave.Progression;
-                            Application.DoEvents();
-                            // Determine current state
-                            logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
-                            TimeSpan timeSpan = DateTime.Now - transferDelay;
-
-                            logProgress.FileTransfertTime = timeSpan.ToString();
-
-                            logProgress.SetTime();
-
-                            jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
-                            jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
-
-                            using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
-                            {
-                                writer.WriteLine(jsonStringLogProgress);
-                            }
-
-                            readLogAdvancement();
-                            searchLogAdvancement();
-                            writeLogAdvancement();
+                            copyFile(file, true, source, destination, encryptionExtension, progressBar);
                         }
                         catch (Exception e)
                         {
@@ -503,69 +467,12 @@ namespace easySave___Graphic.Models
                 //Try catch which allow error handling if needed
                 try
                 {
-                    logProgress.Name = this.Name;
-                    logProgress.FileSource = file.FullName;
-                    logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
-                    logProgress.DestPath = destination.FullName;
-                    logProgress.FileSize = file.Length.ToString();
-
-                    DateTime transferDelay = DateTime.Now;
-
-                    if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
-                    {
-                        int delayEncryption = encryption(file, destination);
-
-                        logProgress.EncryptionTime = delayEncryption.ToString();
-
-                        logProgress.FileTarget = Path.Combine(destination.FullName, Path.GetFileNameWithoutExtension(destination.FullName) + ".cry");
-                    }
-                    else
-                    {
-                        try
-                        {
-                            //Copy the file to the target folder
-                            file.CopyTo(Path.Combine(destination.FullName, file.Name), false);
-                        }
-                        catch
-                        {
-                        }
-
-                        logProgress.EncryptionTime = "0";
-                    }
-
-                    // Calculate number of files left to copy
-                    logSave.NbFilesLeftToDo--;
-                    // Calculate number of files copied;
-                    nbFilesCopied++;
-                    // Calculate progression of copy
-                    logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
-                    progressBar.Value = logSave.Progression;
-                    Application.DoEvents();
-                    // Determine current state
-                    logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
-                    TimeSpan timeSpan = DateTime.Now - transferDelay;
-
-                    logProgress.FileTransfertTime = timeSpan.ToString();
-
-                    logProgress.SetTime();
-
-                    jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
-                    jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
-
-                    using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
-                    {
-                        writer.WriteLine(jsonStringLogProgress);
-                    }
-
-                    readLogAdvancement();
-                    searchLogAdvancement();
-                    writeLogAdvancement();
+                    copyFile(file, false, source, destination, encryptionExtension, progressBar);
                 }
                 catch (Exception e)
                 {
                     //Console.WriteLine("The process failed : " + e.ToString()); //Displays the error
                 }
-
             }
 
             //Search and enter the subfolders of the current folder
@@ -617,8 +524,6 @@ namespace easySave___Graphic.Models
                     {
                         File.Delete(Path.Combine(destination, file));
                     }
-                    //Console.WriteLine("File delete : " + file);
-
                 }
                 catch (Exception e)
                 {
