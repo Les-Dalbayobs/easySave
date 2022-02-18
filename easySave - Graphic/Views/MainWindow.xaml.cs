@@ -128,7 +128,6 @@ namespace easySave___Graphic
 
             SaveMenu.DataContext = mainW;
 
-
             if (mainW.SelectedJob != null)
             {
 

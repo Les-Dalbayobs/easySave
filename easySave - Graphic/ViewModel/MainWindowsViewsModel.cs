@@ -14,6 +14,8 @@ namespace easySave___Graphic.ViewModel
     class MainWindowsViewsModel
     {
         #region atributes
+        public static int progressJob;
+
         /// <summary>
         /// Observable collection with all jobs
         /// </summary>

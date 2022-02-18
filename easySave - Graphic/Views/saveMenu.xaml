@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:language="clr-namespace:easySave___Graphic.Properties"
-        xmlns:local="clr-namespace:easySave___Graphic.Views"
+        xmlns:local="clr-namespace:easySave___Graphic.ViewModel"
         mc:Ignorable="d"
         Title="saveMenu" Height="370" Width="395"
         ResizeMode="NoResize"
@@ -61,8 +61,8 @@
             FontWeight="Normal" 
             FontSize="16" Click="Ok_Click"
             />
-        <ProgressBar HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355"/>
-        <Label Content="{x:Static language:Resources.progress}" HorizontalAlignment="Left" Margin="148,185,0,0" VerticalAlignment="Top" FontSize="10" IsEnabled="False"/>
+        <ProgressBar x:Name="ProgressBarJob" HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355"/>
+        <Label Content="{Binding ElementName=ProgressBarJob, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,182,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
         <Button x:Name="ButtonPlay" Content="{x:Static language:Resources.replay}" Margin="68,233,248,105">
             <!--<Image x:Name="ImgPlayPause"
             Source="../Pictures/playpause.png"/>

@@ -27,7 +27,8 @@ namespace easySave___Graphic.Views
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel; 
+            ProgressBar progressBar = ProgressBarJob;
 
             if (mainW.checkProcess())
             {
@@ -64,7 +65,7 @@ namespace easySave___Graphic.Views
                             }
                             else
                             {
-                                oneJob.copy("." + mainW.EncryptionExtension);
+                                oneJob.copy("." + mainW.EncryptionExtension, progressBar);
                             }
 
                         }
@@ -82,7 +83,7 @@ namespace easySave___Graphic.Views
                     }
                     else
                     {
-                        mainW.SelectedJob.copy("." + mainW.EncryptionExtension);
+                        mainW.SelectedJob.copy("." + mainW.EncryptionExtension, progressBar);
                     }
                 }
             }
