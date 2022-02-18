@@ -4,7 +4,7 @@ using System.Text;
 
 namespace easySave___Graphic.Models
 {
-    class logProgressSave
+    public class logProgressSave
     {
         #region attributes
         string name;

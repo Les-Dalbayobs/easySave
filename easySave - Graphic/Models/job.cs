@@ -7,6 +7,7 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace easySave___Graphic.Models
 {
@@ -25,6 +26,7 @@ namespace easySave___Graphic.Models
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
         string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
+        string pathFileLogProgressXml = @"C:\EasySave\Log\logProgressSave.xml";
         string pathfolderLog;
 
         /// <summary>
@@ -35,6 +37,7 @@ namespace easySave___Graphic.Models
         string jsonStringLogSave;
         // Create variable which stores the path for the log save file
         string pathFileLogSave = @"C:\EasySave\Log\logSaveAdvancement.json";
+        string pathFileLogSaveXml = @"C:\EasySave\Log\logSaveAdvancement.xml";
 
         /// <summary>
         /// Initialize variable which stores number of files already copied
@@ -317,6 +320,16 @@ namespace easySave___Graphic.Models
                 logProgress.SetTime();
 
                 jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+                
+                if (!File.Exists(pathFileLogProgressXml))
+                {
+                    File.Create(pathFileLogProgressXml).Close();
+                }
+
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(logProgressSave));
+                TextWriter writerXml = new StreamWriter(pathFileLogProgressXml, true);
+                xmlSerializer.Serialize(writerXml, logProgress);
+                writerXml.Close();
 
                 using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                 {
@@ -337,6 +350,11 @@ namespace easySave___Graphic.Models
                 //Start saving the new folder
                 copyComplete(subFolder, destinationSubFolder,encryptionExtension, progressBar);
             }
+        }
+
+        public void writeXmlLogSave()
+        {
+
         }
 
         public void searchLogAdvancement()
@@ -533,7 +551,6 @@ namespace easySave___Graphic.Models
 
                     jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
                     jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
-
 
                     using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
                     {
