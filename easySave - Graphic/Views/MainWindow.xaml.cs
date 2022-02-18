@@ -25,8 +25,6 @@ namespace easySave___Graphic
     {
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
-        public object SelectedJob { get; private set; }
-
         public MainWindow()
         {
             string language = Properties.Settings.Default.lang;
