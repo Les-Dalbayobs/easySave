@@ -155,6 +155,11 @@ namespace easySave___Graphic
 
             Settings.DataContext = mainW;
 
+            if (Properties.Settings.Default.typeLog == "json")
+            {
+                Settings.ToggleButtonFormatLog.IsChecked = true;
+            }
+
             Settings.ShowDialog();
 
             mainW.newEncryption();
