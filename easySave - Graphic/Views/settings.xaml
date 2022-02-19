@@ -122,7 +122,7 @@
         <!--#endregion-->
         
         <!--#region ToggleButton-->
-        <ToggleButton 
+        <ToggleButton x:Name="ToggleButtonFormatLog" 
         Content="{x:Static language:Resources.formatLog}" 
         Style="{StaticResource ToggleButtonStyle1}" Margin="10,405,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="232"/>
         <!--#endregion-->
