@@ -58,5 +58,17 @@ namespace easySave___Graphic.Properties {
                 this["processUser"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("json")]
+        public string typeLog {
+            get {
+                return ((string)(this["typeLog"]));
+            }
+            set {
+                this["typeLog"] = value;
+            }
+        }
     }
 }

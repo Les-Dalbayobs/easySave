@@ -168,6 +168,9 @@
   <data name="fileExtension" xml:space="preserve">
     <value>Enter file extension (if not in the list)</value>
   </data>
+  <data name="formatLog" xml:space="preserve">
+    <value>Log file format</value>
+  </data>
   <data name="fr" xml:space="preserve">
     <value>French</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="noSelectJob" xml:space="preserve">
     <value>No job selected in the main menu</value>
+  </data>
+  <data name="other" xml:space="preserve">
+    <value>Other</value>
   </data>
   <data name="progress" xml:space="preserve">
     <value>Progress</value>
