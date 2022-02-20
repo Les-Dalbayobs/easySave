@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Windows.Threading;
+using System.Windows;
 
 namespace easySave___Graphic.Models
 {
@@ -148,6 +150,10 @@ namespace easySave___Graphic.Models
         #endregion
 
         #region methodes
+        public void updateProgressBar(System.Windows.Controls.ProgressBar progressBar, double value)
+        {
+            progressBar.Value = value;
+        }
 
         /// <summary>
         /// Method to start a backup
@@ -165,9 +171,8 @@ namespace easySave___Graphic.Models
             nbFilesCopied = 0;
             readLogAdvancement();
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            progressBar.Value = 0;
-
+            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateProgressBar(progressBar, 0)), DispatcherPriority.ContextIdle);
+             
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
             DirectoryInfo source = new DirectoryInfo(this.pathSource); //Create the DirectoryInfo of the source
@@ -309,8 +314,8 @@ namespace easySave___Graphic.Models
             nbFilesCopied++;
             // Calculate progression of copy
             logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
-            progressBar.Value = logSave.Progression;
-            Application.DoEvents();
+            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateProgressBar(progressBar, logSave.Progression)), DispatcherPriority.ContextIdle);
+            //System.Windows.Forms.Application.DoEvents();
             // Determine current state
             logSave.State = logSave.NbFilesLeftToDo == 0 ? "END" : "ACTIVE";
             //////////////////////////////////////////////////////////////////////////////////////

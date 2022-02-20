@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -83,7 +84,10 @@ namespace easySave___Graphic.Views
                     }
                     else
                     {
-                        mainW.SelectedJob.copy("." + mainW.EncryptionExtension, progressBar);
+                        Models.jobThread thread = new Models.jobThread(mainW.SelectedJob, progressBar);
+                        Thread oneJob = new Thread(new ThreadStart(thread.threadLoop));
+                        oneJob.Start();
+                        //mainW.SelectedJob.copy("." + mainW.EncryptionExtension, progressBar);
                     }
                 }
             }
