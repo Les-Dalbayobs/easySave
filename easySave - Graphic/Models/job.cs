@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Windows.Threading;
 using System.Windows;
+using System.Threading;
 
 namespace easySave___Graphic.Models
 {
@@ -24,6 +25,7 @@ namespace easySave___Graphic.Models
     class job
     {
         #region attributes
+        static object lockReadOrWriteLog = new object();
 
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
@@ -129,7 +131,10 @@ namespace easySave___Graphic.Models
         /// </summary>
         public job()
         {
-            readLogAdvancement();
+            lock (lockReadOrWriteLog)
+            {
+                readLogAdvancement();
+            }
         }
 
         /// <summary>
@@ -152,7 +157,10 @@ namespace easySave___Graphic.Models
         #region methodes
         public void updateProgressBar(System.Windows.Controls.ProgressBar progressBar, double value)
         {
-            progressBar.Value = value;
+            if (progressBar != null)
+            {
+                progressBar.Value = value;
+            }
         }
 
         /// <summary>
@@ -169,7 +177,10 @@ namespace easySave___Graphic.Models
             logSave.TotalFilesSize = calculSizeFolder(this.pathSource);
             logSave.NbFilesLeftToDo = logSave.TotalFilesToCopy;
             nbFilesCopied = 0;
-            readLogAdvancement();
+            lock (lockReadOrWriteLog)
+            {
+                readLogAdvancement();
+            }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////
             System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateProgressBar(progressBar, 0)), DispatcherPriority.ContextIdle);
              
@@ -328,29 +339,33 @@ namespace easySave___Graphic.Models
             // Add time to logProgress
             logProgress.SetTime();
             //////////////////////////////////////////////////////////////////////////////////////
-
-            if (Properties.Settings.Default.typeLog == "json")
+            
+            lock (lockReadOrWriteLog)
             {
-                //Log Progress JSON///////////////////////////////////////////////////////////////////
-                jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
-
-                using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                if (Properties.Settings.Default.typeLog == "json")
                 {
-                    writer.WriteLine(jsonStringLogProgress);
+                    //Log Progress JSON///////////////////////////////////////////////////////////////////
+                    jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+                    using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                    {
+                        writer.WriteLine(jsonStringLogProgress);
+                    }
+                    ///////////////////////////////////////////////////////////////////////////////////////
                 }
-                ///////////////////////////////////////////////////////////////////////////////////////
-            }
-            else
-            {
-                //Log Progress XML/////////////////////////////////////////////////////////////////////
-                writeXmlLogProgress();
+                else
+                {
+                    //Log Progress XML/////////////////////////////////////////////////////////////////////
+                    writeXmlLogProgress();
+                    ///////////////////////////////////////////////////////////////////////////////////////
+                }
+
+                //Log advancement//////////////////////////////////////////////////////////////////////
+                searchLogAdvancement();
+                writeLogAdvancement();
                 ///////////////////////////////////////////////////////////////////////////////////////
             }
 
-            //Log advancement//////////////////////////////////////////////////////////////////////
-            searchLogAdvancement();
-            writeLogAdvancement();
-            ///////////////////////////////////////////////////////////////////////////////////////
         }
 
         /// <summary>
@@ -401,12 +416,15 @@ namespace easySave___Graphic.Models
 
         public void searchLogAdvancement()
         {
-            int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
+            lock (Global.listSaveAdvancement)
+            {
+                int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
 
             if (index >= 0)
                 Global.listSaveAdvancement[index] = logSave;
             else
                 Global.listSaveAdvancement.Add(logSave);
+            }
         }
 
         public void writeLogAdvancement()
@@ -469,6 +487,7 @@ namespace easySave___Graphic.Models
                 {
                     try
                     {
+
                         var doc = new System.Xml.XmlDocument();
                         doc.Load(pathFileLogSaveXml);
 
@@ -477,6 +496,7 @@ namespace easySave___Graphic.Models
                         {
                             Global.listSaveAdvancement = (List<logSaveAdvancement>)xml.Deserialize(stream);
                         }
+                        
                     }
                     catch (System.Xml.XmlException e)
                     {
@@ -485,9 +505,24 @@ namespace easySave___Graphic.Models
                     
                 }
             }
-            
         }
 
+        public bool IsFileLocked(FileInfo file)
+        {
+            try
+            {
+                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    stream.Close();
+                }
+            }
+            catch (IOException)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Method for making a differential backup

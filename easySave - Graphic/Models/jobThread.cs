@@ -10,7 +10,7 @@ namespace easySave___Graphic.Models
         System.Windows.Controls.ProgressBar progressBar;
         string encryption;
 
-        public jobThread(job newJob, System.Windows.Controls.ProgressBar ProBar)
+        public jobThread(job newJob, System.Windows.Controls.ProgressBar ProBar = null)
         {
             this.myjob = newJob;
             this.progressBar = ProBar;
