@@ -163,8 +163,9 @@ namespace easySave___Graphic.Models
             logSave.TotalFilesSize = calculSizeFolder(this.pathSource);
             logSave.NbFilesLeftToDo = logSave.TotalFilesToCopy;
             nbFilesCopied = 0;
+            readLogAdvancement();
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
+
             progressBar.Value = 0;
 
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
@@ -287,8 +288,15 @@ namespace easySave___Graphic.Models
             }
             else
             {
-                //Copy the file to the target folder
-                file.CopyTo(Path.Combine(destination.FullName, file.Name), overwrite);
+                try
+                {
+                    //Copy the file to the target folder
+                    file.CopyTo(Path.Combine(destination.FullName, file.Name), overwrite);
+                }
+                catch
+                {
+
+                }
 
                 logProgress.EncryptionTime = "0";
             }
@@ -316,21 +324,25 @@ namespace easySave___Graphic.Models
             logProgress.SetTime();
             //////////////////////////////////////////////////////////////////////////////////////
 
-            //Log Progress JSON///////////////////////////////////////////////////////////////////
-            jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
-
-            using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+            if (Properties.Settings.Default.typeLog == "json")
             {
-                writer.WriteLine(jsonStringLogProgress);
+                //Log Progress JSON///////////////////////////////////////////////////////////////////
+                jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+                using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                {
+                    writer.WriteLine(jsonStringLogProgress);
+                }
+                ///////////////////////////////////////////////////////////////////////////////////////
             }
-            ///////////////////////////////////////////////////////////////////////////////////////
+            else
+            {
+                //Log Progress XML/////////////////////////////////////////////////////////////////////
+                writeXmlLogProgress();
+                ///////////////////////////////////////////////////////////////////////////////////////
+            }
 
-            //Log Progress XML/////////////////////////////////////////////////////////////////////
-            writeXmlLogProgress();
-            ///////////////////////////////////////////////////////////////////////////////////////
-
-            //Log advancement JSON/////////////////////////////////////////////////////////////////
-            readLogAdvancement();
+            //Log advancement//////////////////////////////////////////////////////////////////////
             searchLogAdvancement();
             writeLogAdvancement();
             ///////////////////////////////////////////////////////////////////////////////////////
@@ -394,44 +406,81 @@ namespace easySave___Graphic.Models
 
         public void writeLogAdvancement()
         {
-            jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
-
-            using (var streamWriter = new StreamWriter(pathFileLogSave))
+            if (Properties.Settings.Default.typeLog == "json")
             {
-                //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
-                using (var jsonWriter = new JsonTextWriter(streamWriter))
+                jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
+
+                using (var streamWriter = new StreamWriter(pathFileLogSave))
                 {
-                    jsonWriter.Formatting = Formatting.Indented;
-                    serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonStringLogSave));
+                    //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
+                    using (var jsonWriter = new JsonTextWriter(streamWriter))
+                    {
+                        jsonWriter.Formatting = Formatting.Indented;
+                        serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonStringLogSave));
+                    }
+                }
+            }
+            else
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
+                using (var streamWriter = new StreamWriter(pathFileLogSaveXml))
+                {
+                    xml.Serialize(streamWriter, Global.listSaveAdvancement);
                 }
             }
         }
 
         public void readLogAdvancement()
         {
-            if (!File.Exists(pathFileLogSave))
+            if (Properties.Settings.Default.typeLog == "json")
             {
-                File.Create(pathFileLogSave).Close();
-            }
-
-            if (File.Exists(pathFileLogSave))
-            {
-                Global.listSaveAdvancement = new List<logSaveAdvancement>();
-
-                //StreamReader instance to read text from a file
-                using (var streamReader = new StreamReader(pathFileLogSave))
+                if (!File.Exists(pathFileLogSave))
                 {
-                    using (var jsonReader = new JsonTextReader(streamReader))
+                    File.Create(pathFileLogSave).Close();
+                }
+                else
+                {
+                    using (var streamReader = new StreamReader(pathFileLogSave))
                     {
-                        Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                        using (var jsonReader = new JsonTextReader(streamReader))
+                        {
+                            Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                        }
                     }
                 }
-            }
 
-            if (Global.listSaveAdvancement == null)
-            {
-                Global.listSaveAdvancement = new List<logSaveAdvancement>();
+                if (Global.listSaveAdvancement == null)
+                {
+                    Global.listSaveAdvancement = new List<logSaveAdvancement>();
+                }
             }
+            else
+            {
+                if (!File.Exists(pathFileLogSaveXml))
+                {
+                    File.Create(pathFileLogSaveXml).Close();
+                }
+                else
+                {
+                    try
+                    {
+                        var doc = new System.Xml.XmlDocument();
+                        doc.Load(pathFileLogSaveXml);
+
+                        XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
+                        using (var stream = new FileStream(pathFileLogSaveXml, FileMode.Open))
+                        {
+                            Global.listSaveAdvancement = (List<logSaveAdvancement>)xml.Deserialize(stream);
+                        }
+                    }
+                    catch (System.Xml.XmlException e)
+                    {
+                        Global.listSaveAdvancement = new List<logSaveAdvancement>();
+                    }
+                    
+                }
+            }
+            
         }
 
 
