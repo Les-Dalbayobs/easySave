@@ -35,6 +35,16 @@ namespace easySave___Graphic.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (this.ToggleButtonFormatLog.IsChecked.Value)
+            {
+                Properties.Settings.Default.typeLog = "json";
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                Properties.Settings.Default.typeLog = "xml";
+                Properties.Settings.Default.Save();
+            }
             this.Close();
         }
 

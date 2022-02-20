@@ -25,8 +25,6 @@ namespace easySave___Graphic
     {
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
-        public object SelectedJob { get; private set; }
-
         public MainWindow()
         {
             string language = Properties.Settings.Default.lang;
@@ -156,6 +154,11 @@ namespace easySave___Graphic
             Views.settings Settings = new Views.settings();
 
             Settings.DataContext = mainW;
+
+            if (Properties.Settings.Default.typeLog == "json")
+            {
+                Settings.ToggleButtonFormatLog.IsChecked = true;
+            }
 
             Settings.ShowDialog();
 

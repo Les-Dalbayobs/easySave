@@ -214,6 +214,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Log file format.
+        /// </summary>
+        public static string formatLog {
+            get {
+                return ResourceManager.GetString("formatLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à French.
         /// </summary>
         public static string fr {
@@ -300,6 +309,15 @@ namespace easySave___Graphic.Properties {
         public static string noSelectJob {
             get {
                 return ResourceManager.GetString("noSelectJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Other.
+        /// </summary>
+        public static string other {
+            get {
+                return ResourceManager.GetString("other", resourceCulture);
             }
         }
         

@@ -6,8 +6,63 @@
         xmlns:local="clr-namespace:easySave___Graphic.Views"
         xmlns:language="clr-namespace:easySave___Graphic.Properties"
         mc:Ignorable="d"
-        Title="EncryptionWindow" Height="419" Width="400" WindowStyle="None" ResizeMode="NoResize" MinWidth="400" MinHeight="413">
-
+        Title="EncryptionWindow" Height="520" Width="400" WindowStyle="None" ResizeMode="NoResize" MinWidth="400" MinHeight="520">
+    <Window.Resources>
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#F3F3F3" Offset="0"/>
+            <GradientStop Color="#EBEBEB" Offset="0.5"/>
+            <GradientStop Color="#DDDDDD" Offset="0.5"/>
+            <GradientStop Color="#CDCDCD" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+        <Style x:Key="ToggleButtonStyle1" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,-114,0">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Border x:Name="on" Width="50" Height="25" Background="LightGray" CornerRadius="2,0,0,4" Margin="10,0,0,0">
+                                <TextBlock x:Name="onText" Text="JSON" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border x:Name="off" Width="50" Height="25" Background="LightGray" CornerRadius="0,2,4,0">
+                                <TextBlock x:Name="offText" Text="XML" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="on" Property="Background" Value="#FFAC00E7"/>
+                                <Setter TargetName="onText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="off" Property="Background" Value="#FFAC00E7"/>
+                                <Setter TargetName="offText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <!--#region List of extends files-->
         <ComboBox x:Name="ComboBoxExtension" HorizontalAlignment="Left" Margin="10,82,0,0"
@@ -37,7 +92,7 @@
         <!--#endregion-->
 
         <!--#region Button-->
-        <Button Content="Ok"  Margin="153,368,153,0" 
+        <Button Content="Ok"  Margin="153,470,153,0" 
                 VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
                 Foreground="White" FontFamily="Bahnschrift" FontSize="18" Height="40" Width="94" Click="Button_Click"/>
         <!--#endregion-->
@@ -54,6 +109,7 @@
                VerticalAlignment="Top" FontFamily="Bahnschrift"/>
         <Label Content="{x:Static language:Resources.chooseProcess}" HorizontalAlignment="Left" Margin="10,293,0,0" 
                VerticalAlignment="Top" FontFamily="Bahnschrift"/>
+        <Label Content="{x:Static language:Resources.other}" HorizontalContentAlignment="Center" Margin="10,363,10,0" VerticalAlignment="Top" Width="380" FontSize="20" FontWeight="Bold"/>
         <!--#endregion-->
 
         <!--#region TextBox-->
@@ -63,6 +119,12 @@
         <TextBox x:Name="TextBoxProcess" HorizontalContentAlignment="Center" Margin="10,317,10,0"  TextWrapping="NoWrap" 
                  VerticalAlignment="Top" Width="380" Height="29" RenderTransformOrigin="0.642,0.484"
                  Text="{Binding SelectedProcess}"/>
+        <!--#endregion-->
+        
+        <!--#region ToggleButton-->
+        <ToggleButton x:Name="ToggleButtonFormatLog" 
+        Content="{x:Static language:Resources.formatLog}" 
+        Style="{StaticResource ToggleButtonStyle1}" Margin="10,405,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="232"/>
         <!--#endregion-->
     </Grid>
 </Window>

@@ -11,5 +11,8 @@
     <Setting Name="processUser" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="typeLog" Type="System.String" Scope="User">
+      <Value Profile="(Default)">json</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
