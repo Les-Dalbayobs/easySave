@@ -375,7 +375,11 @@ namespace easySave___Graphic.Models
         /// <param name="destination">Destination DirectoryInfo</param>
         public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
-            //Cache directories before we start copying
+
+            var sourceListPathFile = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories);
+            var listPrio = Directory.EnumerateFiles(source.FullName, "*.txt", SearchOption.AllDirectories);
+
+            /*//Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
 
             //Create the destination directory
@@ -397,7 +401,7 @@ namespace easySave___Graphic.Models
                 //Start saving the new folder
                 copyComplete(subFolder, destinationSubFolder,encryptionExtension, progressBar);
             }
-            /////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////*/
         }
 
         public void writeXmlLogProgress()
@@ -406,7 +410,6 @@ namespace easySave___Graphic.Models
             {
                 File.Create(pathFileLogProgressXml).Close();
             }
-
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(logProgressSave));
             TextWriter writerXml = new StreamWriter(pathFileLogProgressXml, true);
