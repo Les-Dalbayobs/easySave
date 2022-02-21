@@ -41,35 +41,35 @@ namespace easySave___Graphic.Models
             {
                 if (proBar1.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar1);
+                    myjob.copy("." + encryption, ProgressBar1);
                     proBar1.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar2.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar2);
+                    myjob.copy("." + encryption, ProgressBar2);
                     proBar2.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar3.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar3);
+                    myjob.copy("." + encryption, ProgressBar3);
                     proBar3.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar4.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar4);
+                    myjob.copy("." + encryption, ProgressBar4);
                     proBar4.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar5.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar5);
+                    myjob.copy("." + encryption, ProgressBar5);
                     proBar5.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
