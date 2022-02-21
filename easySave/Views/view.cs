@@ -433,6 +433,10 @@ namespace easySave.Views
             Console.ReadLine(); //Waits for the user to press enter
         }
 
+        /// <summary>
+        /// Method to choose the save option
+        /// </summary>
+        /// <returns></returns>
         public int chooseSave()
         {
             int job; //Choice of menu
@@ -529,10 +533,12 @@ namespace easySave.Views
 
             header();
 
+            // Display for finished save of all jobs
             if (nbjob == 6)
             {
                 Console.WriteLine(rm.GetString("saveFinishAll"));
             }
+            // Display finished save message
             else
             {
                 Console.WriteLine(rm.GetString("saveFinishOne") + nbjob + rm.GetString("saveFinishOne2"));
@@ -582,6 +588,11 @@ namespace easySave.Views
             //End of menu display
         }
 
+        /// <summary>
+        /// Method to display save error
+        /// </summary>
+        /// <param name="nbJob"></param>
+        /// <param name="sourceOrDestination"></param>
         public void errorSave(int nbJob, bool sourceOrDestination)
         {
             header();
