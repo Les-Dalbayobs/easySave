@@ -11,12 +11,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Runtime.InteropServices;
 
 namespace easySave___Graphic.Views
 {
     /// <summary>
     /// Interaction logic for saveMenu.xaml
     /// </summary>
+    
+    
     public partial class saveMenu : Window
     {
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
