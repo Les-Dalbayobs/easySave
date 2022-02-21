@@ -39,14 +39,6 @@ namespace easySave.ViewModel
         List<Models.job> jobs;
 
         int nbJobMax;
-        /// <summary>
-        /// Creation of job objects
-        /// </summary>
-        Models.job job1 = new Models.job();
-        Models.job job2 = new Models.job();
-        Models.job job3 = new Models.job();
-        Models.job job4 = new Models.job();
-        Models.job job5 = new Models.job();
 
         /// <summary>
         /// Store the string in json
@@ -179,6 +171,7 @@ namespace easySave.ViewModel
                             }
                         }
 
+                    // Save menu choice
                     case 3:
                         {
                             int nbjob = view.chooseSave();
@@ -264,19 +257,48 @@ namespace easySave.ViewModel
 
                             break;
                         }
+
+                    // Settings menu
                     case 4:
                         {
-                            int language = view.changeLanguage();
-                            if (language == 1)
+                            int settings = view.Settings();
+
+                            if (settings == 3)
                             {
-                                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr");
+                                break;
                             }
-                            else if (language == 2)
+
+                            else if (settings == 2)
                             {
-                                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
+                                int language = view.changeLanguage();
+                                if (language == 1)
+                                {
+                                    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr");
+                                }
+                                else if (language == 2)
+                                {
+                                    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
+                                }
+                                break;
                             }
+
+                            else if (settings == 1)
+                            {
+                                int logs = view.Logs();
+                                if (logs == 1)
+                                {
+
+                                }
+                                else if (logs == 2)
+                                {
+
+                                }
+                                break;
+                            }
+
                             break;
                         }
+
                     default:
                         break;
 
@@ -419,17 +441,6 @@ namespace easySave.ViewModel
             }
         }
 
-        /// <summary>
-        /// Method to copy the import of json into jobs
-        /// </summary>
-        public void copyImportConfig()
-        {
-            this.job1 = jobs[0];
-            this.job2 = jobs[1];
-            this.job3 = jobs[2];
-            this.job4 = jobs[3];
-            this.job5 = jobs[4];
-        }
 
         public void deleteJob(int numberJob)
         {

@@ -562,7 +562,7 @@ namespace easySave.Views
                 language = Convert.ToInt32(Console.ReadLine());
 
                 // If - to handle typing errors
-                if ((language > 2 || language < 1) && language != 3)
+                if (language > 3 || language < 1)
                 {
                     errorMenu(); // Launch the error window
                     int menuError = changeLanguage(); // Restarts the menu display and saves the return value
@@ -602,6 +602,9 @@ namespace easySave.Views
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Method to display the name of the solution at launch
+        /// </summary>
         public void Title()
         {
             Console.WriteLine(@"        ______                    _____                      ");
@@ -610,6 +613,87 @@ namespace easySave.Views
             Console.WriteLine(@"     / /___ / /_/ /(__  )/ /_/ /___/ // /_/ / | |/ //  __/  ");
             Console.WriteLine(@"    /_____/ \__,_//____/ \__, //____/ \__,_/  |___/ \___/    ");
             Console.WriteLine(@"                        /____/                                  ");
+        }
+
+        /// <summary>
+        /// Method to create the settings view
+        /// </summary>
+        public int Settings()
+        {
+            int settings;
+
+            header();
+
+            Console.WriteLine(rm.GetString("settings"));
+
+            // End of menu display
+
+            // Try catch to manage typing errors
+            try
+            {
+                // Retrieves the value entered by the user and converts it to int
+                settings = Convert.ToInt32(Console.ReadLine());
+
+                // If - to handle typing errors
+                if (settings > 3 || settings < 1)
+                {
+                    errorMenu(); // Launch the error window
+                    int menuError = Settings(); // Restarts the menu display and saves the return value
+
+                    return menuError; // Returns the menu choice
+                }
+            }
+            catch
+            {
+                errorMenu(); // Launch the error window
+                int menuError = Settings(); // Restarts the menu display and saves the return value
+
+                return menuError; // Returns the menu choice
+            }
+
+            return settings;
+            //End of menu display
+        }
+
+
+        /// <summary>
+        /// Method to create the settings view
+        /// </summary>
+        public int Logs()
+        {
+            int logs;
+
+            header();
+
+            Console.WriteLine(rm.GetString("logs"));
+
+            // End of menu display
+
+            // Try catch to manage typing errors
+            try
+            {
+                // Retrieves the value entered by the user and converts it to int
+                logs = Convert.ToInt32(Console.ReadLine());
+
+                // If - to handle typing errors
+                if (logs > 3 || logs < 1)
+                {
+                    errorMenu(); // Launch the error window
+                    int menuError = Logs(); // Restarts the menu display and saves the return value
+
+                    return menuError; // Returns the menu choice
+                }
+            }
+            catch
+            {
+                errorMenu(); // Launch the error window
+                int menuError = Logs(); // Restarts the menu display and saves the return value
+
+                return menuError; // Returns the menu choice
+            }
+
+            return logs;
+            //End of menu display
         }
 
         #endregion
