@@ -22,7 +22,7 @@ namespace easySave___Graphic.Models
     /// <summary>
     /// Class allowing the creation of jobs
     /// </summary>
-    class job
+    public class job
     {
         #region attributes
         static object lockReadOrWriteLog = new object();
@@ -420,9 +420,9 @@ namespace easySave___Graphic.Models
             {
                 int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
 
-            if (index >= 0)
+                if (index >= 0)
                 Global.listSaveAdvancement[index] = logSave;
-            else
+                else
                 Global.listSaveAdvancement.Add(logSave);
             }
         }

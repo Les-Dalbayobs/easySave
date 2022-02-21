@@ -21,6 +21,7 @@ namespace easySave___Graphic.Views
     public partial class saveMenu : Window
     {
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
+
         public saveMenu()
         {
             InitializeComponent();
@@ -30,20 +31,11 @@ namespace easySave___Graphic.Views
         {
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
-            ProgressBar progressBar1 = ProgressBarJob1;
-            ProgressBar progressBar2 = ProgressBarJob2;
-            ProgressBar progressBar3 = ProgressBarJob3;
-            ProgressBar progressBar4 = ProgressBarJob4;
-            ProgressBar progressBar5 = ProgressBarJob5;
-
-            int Worker, IOC;
-
-            ThreadPool.GetMinThreads(out Worker, out IOC);
-            ThreadPool.SetMinThreads(1, IOC);
-
-            ThreadPool.GetMaxThreads(out Worker, out IOC);
-            ThreadPool.SetMaxThreads(5, IOC);
-
+            Models.jobThread.ProgressBar1 = ProgressBarJob1;
+            Models.jobThread.ProgressBar2 = ProgressBarJob2;
+            Models.jobThread.ProgressBar3 = ProgressBarJob3;
+            Models.jobThread.ProgressBar4 = ProgressBarJob4;
+            Models.jobThread.ProgressBar5 = ProgressBarJob5;
 
             if (mainW.checkProcess())
             {
@@ -81,8 +73,8 @@ namespace easySave___Graphic.Views
                             else
                             {
                                 Models.jobThread thread = new Models.jobThread(oneJob);
-
-                                ThreadPool.QueueUserWorkItem((s) => thread.threadLoop());
+                                Thread threadOneJob = new Thread(new ThreadStart(thread.threadLoop));
+                                threadOneJob.Start();
                             }
                         }
                     }
@@ -99,15 +91,14 @@ namespace easySave___Graphic.Views
                     }
                     else
                     {
-                        Models.jobThread thread = new Models.jobThread(mainW.SelectedJob, progressBar1);
+                        Models.jobThread thread = new Models.jobThread(mainW.SelectedJob);
                         Thread oneJob = new Thread(new ThreadStart(thread.threadLoop));
                         oneJob.Start();
-                        //mainW.SelectedJob.copy("." + mainW.EncryptionExtension, progressBar);
                     }
                 }
             }
         }
-
+        
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
