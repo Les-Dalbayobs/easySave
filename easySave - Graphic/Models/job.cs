@@ -208,14 +208,14 @@ namespace easySave___Graphic.Models
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////
         
                 //Differential////////////////////////////////////////////////////////////////////////////////////////////
-                else
+                /*else
                 {
                     copyDifferential(source, destination, encryptionExtension, progressBar); //Launch backup
 
                     compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
 
                     confirmSave = true;
-                }
+                }*/
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
             }
             catch (Exception e)
@@ -281,14 +281,14 @@ namespace easySave___Graphic.Models
             return size; //Return total of the size
         }
 
-        public void copyFile(FileInfo file, bool overwrite, DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public void copyFile(FileInfo file, bool overwrite, string destinationDirectory, string destinationFile, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
             //Log Progress update///////////////////////////////////////////////////////////////////
             // Create progress log
             logProgress.Name = this.Name;
             logProgress.FileSource = file.FullName;
-            logProgress.FileTarget = Path.Combine(destination.FullName, file.Name);
-            logProgress.DestPath = destination.FullName;
+            logProgress.FileTarget = destinationFile;
+            logProgress.DestPath = destinationDirectory;
             logProgress.FileSize = file.Length.ToString();
             DateTime transferDelay = DateTime.Now;
             ///////////////////////////////////////////////////////////////////////////////////////
@@ -296,18 +296,18 @@ namespace easySave___Graphic.Models
             //Copy or encryption///////////////////////////////////////////////////////////////////
             if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
             {
-                int delayEncryption = encryption(file, destination);
+                int delayEncryption = encryption(file, destinationDirectory);
 
                 logProgress.EncryptionTime = delayEncryption.ToString();
 
-                logProgress.FileTarget = Path.Combine(destination.FullName, Path.GetFileNameWithoutExtension(destination.FullName) + ".cry");
+                logProgress.FileTarget = Path.GetFileNameWithoutExtension(destinationFile) + ".cry";
             }
             else
             {
                 try
                 {
                     //Copy the file to the target folder
-                    file.CopyTo(Path.Combine(destination.FullName, file.Name), overwrite);
+                    file.CopyTo(destinationFile, overwrite);
                 }
                 catch
                 {
@@ -368,6 +368,40 @@ namespace easySave___Graphic.Models
 
         }
 
+        public void copyListFiles(List<string> sourceList, List<string> prioList, bool overwrite, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        {
+            for (int i = 0; i < prioList.Count;)
+            {
+                string pathFile = prioList[i].Replace(this.pathSource, string.Empty);
+                string destinationFile = this.pathDestination + pathFile;
+
+                FileInfo fileSource = new FileInfo(prioList[i]);
+
+                string directoryDestination = Path.GetDirectoryName(destinationFile);
+                Directory.CreateDirectory(directoryDestination);
+
+                copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+
+                sourceList.Remove(prioList[i]);
+                prioList.Remove(prioList[i]);
+            }
+
+            for (int i = 0; i < sourceList.Count;)
+            {
+                string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
+                string destinationFile = this.pathDestination + pathFile;
+
+                string directoryDestination = Path.GetDirectoryName(destinationFile);
+                Directory.CreateDirectory(directoryDestination);
+
+                FileInfo fileSource = new FileInfo(sourceList[i]);
+
+                copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+
+                sourceList.Remove(sourceList[i]);
+            }
+        }
+
         /// <summary>
         /// Method for making a full backup
         /// </summary>
@@ -376,32 +410,11 @@ namespace easySave___Graphic.Models
         public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
 
-            var sourceListPathFile = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories);
-            var listPrio = Directory.EnumerateFiles(source.FullName, "*.txt", SearchOption.AllDirectories);
+            List<string> sourceListPathFile = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
+            List<string> listPrioExtension = Directory.EnumerateFiles(source.FullName, "*.txt", SearchOption.AllDirectories).ToList<string>();
 
-            /*//Cache directories before we start copying
-            DirectoryInfo[] folders = source.GetDirectories();
+            copyListFiles(sourceListPathFile, listPrioExtension, true, encryptionExtension, progressBar);
 
-            //Create the destination directory
-            Directory.CreateDirectory(destination.FullName);
-
-            //Copy all files in the folder/////////////////////////////////////////////////////
-            foreach (FileInfo file in source.GetFiles())
-            {
-                copyFile(file, true, source, destination, encryptionExtension, progressBar);
-            }
-            ///////////////////////////////////////////////////////////////////////////////////
-
-            //Search and enter the subfolders of the current folder////////////////////////////
-            foreach (DirectoryInfo subFolder in folders)
-            {
-                //Creates a sub-folder and saves this information in a DirectoryInfo
-                DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
-
-                //Start saving the new folder
-                copyComplete(subFolder, destinationSubFolder,encryptionExtension, progressBar);
-            }
-            /////////////////////////////////////////////////////////////////////////////////*/
         }
 
         public void writeXmlLogProgress()
@@ -532,7 +545,7 @@ namespace easySave___Graphic.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Source DirectoryInfo</param>
-        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        /*public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
@@ -585,6 +598,7 @@ namespace easySave___Graphic.Models
                 copyDifferential(subFolder, destinationSubFolder, encryptionExtension, progressBar);
             }
         }
+        */
 
         /// <summary>
         /// Method to compare the source and destination to find the files to delete from the source.
@@ -662,11 +676,11 @@ namespace easySave___Graphic.Models
             return verif;
         }
 
-        public int encryption(FileInfo fileSource, DirectoryInfo destination)
+        public int encryption(FileInfo fileSource, string destinationDirectory)
         {
             string pathCryptoSoft = @"C:\Program Files (x86)\CryptoSoft\CryptoSoft.exe";
 
-            string path = destination.FullName + @"\" + Path.GetFileNameWithoutExtension(fileSource.FullName) + ".cry";
+            string path = destinationDirectory + @"\" + Path.GetFileNameWithoutExtension(fileSource.FullName) + ".cry";
 
             var e = Process.Start(pathCryptoSoft, "\"" + fileSource.FullName + "\"" + " " + "\"" + path + "\"");
 
