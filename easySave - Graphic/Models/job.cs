@@ -300,7 +300,7 @@ namespace easySave___Graphic.Models
 
                 logProgress.EncryptionTime = delayEncryption.ToString();
 
-                logProgress.FileTarget = Path.GetFileNameWithoutExtension(destinationFile) + ".cry";
+                logProgress.FileTarget = destinationDirectory + @"\" + Path.GetFileNameWithoutExtension(destinationFile) + ".cry";
             }
             else
             {
