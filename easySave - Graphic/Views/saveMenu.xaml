@@ -6,7 +6,7 @@
         xmlns:language="clr-namespace:easySave___Graphic.Properties"
         xmlns:local="clr-namespace:easySave___Graphic.ViewModel"
         mc:Ignorable="d"
-        Title="saveMenu" Height="370" Width="395"
+        Title="saveMenu" Height="583" Width="395"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
         
@@ -39,7 +39,7 @@
 
         <!--#region Button-->
         <Button x:Name="Cancel" Content="{x:Static language:Resources.cancel}" 
-            Margin="250,310,10,0" 
+            Margin="250,526,9,0" 
             VerticalAlignment="Top" 
             Height="50" 
             BorderBrush="#FFD8D8D8" 
@@ -51,7 +51,7 @@
                />
 
         <Button x:Name="Ok" Content=" Ok " 
-            Margin="98,310,162,0" 
+            Margin="98,526,162,0" 
             VerticalAlignment="Top" 
             Height="50" 
             BorderBrush="#FFD8D8D8" 
@@ -61,26 +61,69 @@
             FontWeight="Normal" 
             FontSize="16" Click="Ok_Click"
             />
-        <ProgressBar x:Name="ProgressBarJob" HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355" Background="#FFE6E6E6">
-            <ProgressBar.Foreground>
+
+        <ProgressBar x:Name="ProgressBarJob1" HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355" Background="#FFE6E6E6">
+          <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label Content="{Binding ElementName=ProgressBarJob, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,182,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
-        <Button x:Name="ButtonPlay" Content="{x:Static language:Resources.replay}" Margin="68,233,248,105">
+        <Label Content="{Binding ElementName=ProgressBarJob1, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,182,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+
+        <ProgressBar x:Name="ProgressBarJob2" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="356" Margin="0,258,0,0" Background="#FFE6E6E6">
+          <ProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFAC00E7" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+        <Label Content="{Binding ElementName=ProgressBarJob2, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+
+        <ProgressBar x:Name="ProgressBarJob3" HorizontalAlignment="Center" Height="20" Margin="0,308,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
+          <ProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFAC00E7" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+        <Label Content="{Binding ElementName=ProgressBarJob3, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+
+        <ProgressBar x:Name="ProgressBarJob4" HorizontalAlignment="Center" Height="20" Margin="0,358,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
+          <ProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFAC00E7" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+        <Label Content="{Binding ElementName=ProgressBarJob4, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,332,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+
+        <ProgressBar x:Name="ProgressBarJob5" HorizontalAlignment="Center" Height="20" Margin="0,408,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
+          <ProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFAC00E7" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
+        <Label Content="{Binding ElementName=ProgressBarJob5, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,382,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+
+        <Button x:Name="ButtonPlay" Content="{x:Static language:Resources.replay}" Margin="70,458,246,0" Height="32" VerticalAlignment="Top">
+
             <!--<Image x:Name="ImgPlayPause"
             Source="../Pictures/playpause.png"/>
             -->
         </Button>
-        <Button x:Name="ButtonStop" Content="Stop" Margin="266,233,63,105">
+        <Button x:Name="ButtonStop" Content="Stop" Margin="267,458,62,0" Height="32" VerticalAlignment="Top">
             <!-- <Image x:Name="ImgStop"
                 Source="../Pictures/stop.png"/>
             -->
         </Button>
-        <Button x:Name="ButtonPause" Content="Pause" Margin="152,233,160,105">
+        <Button x:Name="ButtonPause" Content="Pause" Margin="160,458,152,0" Height="32" VerticalAlignment="Top">
             <!--<Image x:Name="ImgPlayPause"
             Source="../Pictures/playpause.png"/>
             -->
