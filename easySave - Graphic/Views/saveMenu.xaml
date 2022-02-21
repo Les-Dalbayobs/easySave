@@ -61,7 +61,14 @@
             FontWeight="Normal" 
             FontSize="16" Click="Ok_Click"
             />
-        <ProgressBar x:Name="ProgressBarJob" HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355"/>
+        <ProgressBar x:Name="ProgressBarJob" HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355" Background="#FFE6E6E6">
+            <ProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFAC00E7" Offset="1"/>
+                </LinearGradientBrush>
+            </ProgressBar.Foreground>
+        </ProgressBar>
         <Label Content="{Binding ElementName=ProgressBarJob, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,182,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
         <Button x:Name="ButtonPlay" Content="{x:Static language:Resources.replay}" Margin="68,233,248,105">
             <!--<Image x:Name="ImgPlayPause"
