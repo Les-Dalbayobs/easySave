@@ -20,6 +20,14 @@ namespace easySave___Graphic.Views
     public partial class settings : Window
     {
 
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            // Commencez à faire glisser la fenêtre
+            this.DragMove();
+        }
+
         public settings()
         {
             InitializeComponent();

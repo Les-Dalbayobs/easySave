@@ -15,6 +15,7 @@ namespace easySave___Graphic
     /// </summary>
     public partial class App : Application
     {
+
         protected override void OnStartup(StartupEventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = 
