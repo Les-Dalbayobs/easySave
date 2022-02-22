@@ -14,7 +14,7 @@ namespace easySave___Graphic.ViewModel
     class MainWindowsViewsModel
     {
         #region atributes
-        public static int progressJob;
+        ObservableCollection<string> prioExtension;
 
         /// <summary>
         /// Observable collection with all jobs
@@ -63,6 +63,7 @@ namespace easySave___Graphic.ViewModel
         public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
         public List<string> CurrentProcess { get => currentProcess; set => currentProcess = value; }
         public string SelectedProcess { get => selectedProcess; set => selectedProcess = value; }
+        public ObservableCollection<string> PrioExtension { get => prioExtension; set => prioExtension = value; }
 
         #endregion
 
@@ -73,7 +74,7 @@ namespace easySave___Graphic.ViewModel
 
             encryptionExtension = Properties.Settings.Default.encryption;
             readProcess();
-
+            
             importConfig();
 
             string pathLogFolder = pathFilesEasySave + @"\Log";
@@ -88,11 +89,24 @@ namespace easySave___Graphic.ViewModel
                 }
                 File.Create(pathLogProgressSave).Close();
             }
+
+            upadtePrioExtension();
         }
 
         #endregion
 
         #region methods
+
+        public void upadtePrioExtension()
+        {
+            prioExtension = new ObservableCollection<string>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                prioExtension.Add("test");
+            }
+        }
+
         /// <summary>
         ///  Method to remove a job to the list and export the config
         /// </summary>

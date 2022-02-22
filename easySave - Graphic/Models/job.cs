@@ -201,7 +201,9 @@ namespace easySave___Graphic.Models
                         destination.Delete(true); //Delete the directory
                     }
 
-                    copyComplete(source, destination, encryptionExtension, progressBar); //Launch backup
+
+                    List<string> test = null;
+                    copyComplete(source, destination, test, encryptionExtension, progressBar); //Launch backup
 
                     confirmSave = true; //Validate the backup
                 }
@@ -368,24 +370,27 @@ namespace easySave___Graphic.Models
 
         }
 
-        public void copyListFiles(List<string> sourceList, List<string> prioList, bool overwrite, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public void copyListFiles(List<string> sourceList, bool overwrite, List<string> prioList = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
-            for (int i = 0; i < prioList.Count;)
+            if (prioList != null)
             {
-                string pathFile = prioList[i].Replace(this.pathSource, string.Empty);
-                string destinationFile = this.pathDestination + pathFile;
+                for (int i = 0; i < prioList.Count;)
+                {
+                    string pathFile = prioList[i].Replace(this.pathSource, string.Empty);
+                    string destinationFile = this.pathDestination + pathFile;
 
-                FileInfo fileSource = new FileInfo(prioList[i]);
+                    FileInfo fileSource = new FileInfo(prioList[i]);
 
-                string directoryDestination = Path.GetDirectoryName(destinationFile);
-                Directory.CreateDirectory(directoryDestination);
+                    string directoryDestination = Path.GetDirectoryName(destinationFile);
+                    Directory.CreateDirectory(directoryDestination);
 
-                copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+                    copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
 
-                sourceList.Remove(prioList[i]);
-                prioList.Remove(prioList[i]);
+                    sourceList.Remove(prioList[i]);
+                    prioList.Remove(prioList[i]);
+                }
             }
-
+            
             for (int i = 0; i < sourceList.Count;)
             {
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
@@ -402,18 +407,44 @@ namespace easySave___Graphic.Models
             }
         }
 
+        public List<string> createListPrio(string sourceFullName, List<string> listPrioExtensions = null)
+        {
+            if (listPrioExtensions != null)
+            {
+                List<string> fullPrio = new List<string>();
+                
+                foreach (string onePrio in listPrioExtensions)
+                {
+                    fullPrio.AddRange(Directory.EnumerateFiles(sourceFullName, "*." + onePrio, SearchOption.AllDirectories).ToList<string>());
+                }
+
+                return fullPrio;
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Method for making a full backup
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Destination DirectoryInfo</param>
-        public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public void copyComplete(DirectoryInfo source, DirectoryInfo destination,List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
 
-            List<string> sourceListPathFile = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
-            List<string> listPrioExtension = Directory.EnumerateFiles(source.FullName, "*.txt", SearchOption.AllDirectories).ToList<string>();
+            List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
 
-            copyListFiles(sourceListPathFile, listPrioExtension, true, encryptionExtension, progressBar);
+            if (listPrioExtensions != null)
+            {
+                List<string> listFilesPrio = createListPrio(source.FullName, listPrioExtensions);
+
+                copyListFiles(sourceListPathFiles, true, listFilesPrio, encryptionExtension, progressBar);
+            }
+            else
+            {
+                copyListFiles(sourceListPathFiles, true, listPrioExtensions, encryptionExtension, progressBar);
+            }
+            
 
         }
 
