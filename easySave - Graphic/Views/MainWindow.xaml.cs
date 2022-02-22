@@ -25,7 +25,16 @@ namespace easySave___Graphic
     {
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            // Commencez à faire glisser la fenêtre
+            this.DragMove();
+        }
+
         public MainWindow()
+
         {
             string language = Properties.Settings.Default.lang;
             Thread.CurrentThread.CurrentUICulture =

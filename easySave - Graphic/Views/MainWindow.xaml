@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:easySave___Graphic"
         mc:Ignorable="d"
         xmlns:language="clr-namespace:easySave___Graphic.Properties"
-        Title="EasySave" Height="600" Width="1004">
+        Title="EasySave" Height="600" Width="1004" WindowStyle="None">
     <!--#region STYLE-->
     <Window.Resources>
         <Style x:Key="FocusVisual">
@@ -67,7 +67,7 @@
     </Window.Resources>
 
     <!--#endregion-->
-   <Grid>
+   <Grid AutomationProperties.IsOffscreenBehavior="Default">
         <Grid.RowDefinitions>
             <RowDefinition Height="142*"/>
             <RowDefinition Height="135*"/>
