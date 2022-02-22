@@ -167,7 +167,7 @@ namespace easySave___Graphic.Models
         /// Method to start a backup
         /// </summary>
         /// <returns>Return if the backup is well done</returns>
-        public bool copy(string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public bool copy(List<string> prioExtension = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
             //Log Advancement initialize/////////////////////////////////////////////////////////////////////////////////
             logSave.Name = this.Name;
@@ -201,9 +201,7 @@ namespace easySave___Graphic.Models
                         destination.Delete(true); //Delete the directory
                     }
 
-
-                    List<string> test = null;
-                    copyComplete(source, destination, test, encryptionExtension, progressBar); //Launch backup
+                    copyComplete(source, destination, prioExtension, encryptionExtension, progressBar); //Launch backup
 
                     confirmSave = true; //Validate the backup
                 }

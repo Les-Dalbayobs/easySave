@@ -151,7 +151,7 @@ namespace easySave___Graphic.ViewModel
         ///  Method to remove a job to the list and export the config
         /// </summary>
         /// <param name="jobDelete">Job to remove in the list</param>
-        public void deleteJob(easySave___Graphic.Models.job jobDelete)
+        public void deleteJob(Models.job jobDelete)
         {
             this.jobs.Remove(jobDelete);
             serializeJob();
@@ -162,7 +162,7 @@ namespace easySave___Graphic.ViewModel
         /// Method to add a job to the list and export the config
         /// </summary>
         /// <param name="jobAdd">Job to add in the list</param>
-        public void addJob(easySave___Graphic.Models.job jobAdd)
+        public void addJob(Models.job jobAdd)
         {
             this.jobs.Add(jobAdd);
             serializeJob();
