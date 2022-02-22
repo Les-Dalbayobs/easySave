@@ -67,13 +67,13 @@
     </Window.Resources>
 
     <!--#endregion-->
-   <Grid AutomationProperties.IsOffscreenBehavior="Default">
+    <Grid AutomationProperties.IsOffscreenBehavior="Default">
         <Grid.RowDefinitions>
             <RowDefinition Height="142*"/>
             <RowDefinition Height="135*"/>
         </Grid.RowDefinitions>
-     
-     <DataGrid x:Name="listJob"
+
+        <DataGrid x:Name="listJob"
                   IsReadOnly="true"
                   SelectedItem="{Binding SelectedJob}"
                   ItemsSource="{Binding Jobs}"
@@ -82,7 +82,7 @@
                   Width="944" Grid.RowSpan="2" 
                   BorderBrush="#FF020202">
         </DataGrid>
-     
+
         <Rectangle Height="130" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1008" Stroke="White"
                    Fill="#FF333333" StrokeThickness="0"/>
         <Label Content="EasySave" HorizontalAlignment="Left" Margin="52,31,0,0" VerticalAlignment="Top"
@@ -95,7 +95,7 @@
 
         <Button x:Name="ButtonCreate" Style="{DynamicResource RoundedBorderButtonStyle}"  
                 Content="{x:Static language:Resources.create}" 
-                HorizontalAlignment="Left" Margin="31,155,0,0" VerticalAlignment="Top" 
+                HorizontalAlignment="Left" Margin="30,175,0,0" VerticalAlignment="Top" 
                 Height="50" Width="120" 
                 BorderBrush="#FFD8D8D8" Foreground="White" 
                 FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
@@ -106,38 +106,38 @@
                 <SolidColorBrush Color="#AC00E7"/>
             </Button.Background>
         </Button>
-       
+
         <Button x:Name="ButtonDelete" Content="{x:Static language:Resources.delete}" 
-                HorizontalAlignment="Left" Margin="181,155,0,0" VerticalAlignment="Top" 
+                HorizontalAlignment="Left" Margin="187,175,0,0" VerticalAlignment="Top" 
                 Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" 
                 Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal"
                 FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" 
                 Click="ButtonDelete_Click"/>
-       
+
         <Button x:Name="ButtonEdit" Content="{x:Static language:Resources.edit}" HorizontalAlignment="Left"
-                Margin="331,155,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8"
+                Margin="331,175,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8"
                 Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" 
                 FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" 
                 Click="ButtonEdit_Click"/>
-        
-        <Button x:Name="ButtonSave" Content="{x:Static language:Resources.save}" HorizontalAlignment="Left" Margin="481,155,0,0"
+
+        <Button x:Name="ButtonSave" Content="{x:Static language:Resources.save}" HorizontalAlignment="Left" Margin="482,175,0,0"
                 VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" 
                 Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
                 Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="ButtonSave_Click"/>
-       
+
         <Button x:Name="ButtonExit" Content="{x:Static language:Resources.exit}" HorizontalAlignment="Left" 
-                Margin="854,215,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" 
+                Margin="854,232,0,0" VerticalAlignment="Top" Height="50" Width="120" BorderBrush="#FFD8D8D8" 
                 Foreground="White" Background="#AC00E7" FontFamily="Bahnschrift" FontWeight="Normal" 
                 FontSize="14" Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" 
                 Click="ButtonExit_Click"/>
-       
+
         <Button x:Name="buttonLanguage" Content="{x:Static language:Resources.language}" 
-                HorizontalAlignment="Left" Margin="715,215,0,0" VerticalAlignment="Top" Height="50" 
+                HorizontalAlignment="Left" Margin="715,232,0,0" VerticalAlignment="Top" Height="50" 
                 Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7" 
                 FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
                 Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="buttonLanguage_Click"/>
-       
-        <Button Content="{x:Static language:Resources.setting}" HorizontalAlignment="Left" Margin="574,215,0,0" VerticalAlignment="Top" 
+
+        <Button Content="{x:Static language:Resources.setting}" HorizontalAlignment="Left" Margin="574,232,0,0" VerticalAlignment="Top" 
                 Height="50" Width="120" BorderBrush="#FFD8D8D8" Foreground="White" Background="#AC00E7"
                 FontFamily="Bahnschrift" FontWeight="Normal" FontSize="14" 
                 Style="{DynamicResource RoundedBorderButtonStyle}" Grid.Row="1" Click="ButtonEncryption_Click" 
