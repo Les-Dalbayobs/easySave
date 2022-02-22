@@ -11,7 +11,7 @@ using System.Text;
 
 namespace easySave.Models
 {
-    class logProgressSave
+    public class logProgressSave
     {
         #region attributes
         string name;

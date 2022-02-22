@@ -29,8 +29,11 @@ namespace easySave___Graphic.Models
 
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
+        // Set the path for log progress file in JSON
         string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
+        // Set the path for the log progress file in XML
         string pathFileLogProgressXml = @"C:\EasySave\Log\logProgressSave.xml";
+        // Set the folder for logs
         string pathfolderLog;
 
         /// <summary>
@@ -41,6 +44,7 @@ namespace easySave___Graphic.Models
         string jsonStringLogSave;
         // Create variable which stores the path for the log save file
         string pathFileLogSave = @"C:\EasySave\Log\logSaveAdvancement.json";
+        // Create variable which stores the path for the state log file
         string pathFileLogSaveXml = @"C:\EasySave\Log\logSaveAdvancement.xml";
 
         /// <summary>
@@ -400,6 +404,9 @@ namespace easySave___Graphic.Models
             /////////////////////////////////////////////////////////////////////////////////
         }
 
+        /// <summary>
+        /// Method to write in XML log progress file
+        /// </summary>
         public void writeXmlLogProgress()
         {
             if (!File.Exists(pathFileLogProgressXml))
@@ -414,6 +421,9 @@ namespace easySave___Graphic.Models
             writerXml.Close();
         }
 
+        /// <summary>
+        /// Method to search into a state log file  
+        /// </summary>
         public void searchLogAdvancement()
         {
             lock (Global.listSaveAdvancement)
@@ -427,6 +437,9 @@ namespace easySave___Graphic.Models
             }
         }
 
+        /// <summary>
+        /// Method to write into state log files
+        /// </summary>
         public void writeLogAdvancement()
         {
             if (Properties.Settings.Default.typeLog == "json")
@@ -453,6 +466,9 @@ namespace easySave___Graphic.Models
             }
         }
 
+        /// <summary>
+        /// Method to read into the logs 
+        /// </summary>
         public void readLogAdvancement()
         {
             if (Properties.Settings.Default.typeLog == "json")
@@ -629,6 +645,10 @@ namespace easySave___Graphic.Models
             }
         }
 
+        /// <summary>
+        /// Method which overrites the included ToString method
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Name : {this.name}\n" +
@@ -637,6 +657,10 @@ namespace easySave___Graphic.Models
                 $"Type : {this.typeSave}\n";
         }
 
+        /// <summary>
+        /// Method to verify if the destination exists during creation
+        /// </summary>
+        /// <returns></returns>
         public bool verifCreateDestination()
         {
             bool verif = false;
@@ -659,8 +683,15 @@ namespace easySave___Graphic.Models
             return verif;
         }
 
+        /// <summary>
+        /// Method to encrypt specific files during a save
+        /// </summary>
+        /// <param name="fileSource"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
         public int encryption(FileInfo fileSource, DirectoryInfo destination)
         {
+            // Set the path for Cryptosoft software
             string pathCryptoSoft = @"C:\Program Files (x86)\CryptoSoft\CryptoSoft.exe";
 
             string path = destination.FullName + @"\" + Path.GetFileNameWithoutExtension(fileSource.FullName) + ".cry";
