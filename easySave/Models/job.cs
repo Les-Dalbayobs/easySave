@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Diagnostics;
-
+using System.Xml.Serialization;
 
 /// <summary>
 /// Models namespace
@@ -33,7 +33,11 @@ namespace easySave.Models
 
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
+
+        // Set the path for the log progress file
         string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
+
+        // Set the folder for log progress save
         string pathfolderLog;
 
         /// <summary>
@@ -44,6 +48,8 @@ namespace easySave.Models
         string jsonStringLogSave;
         // Create variable which stores the path for the log save file
         string pathFileLogSave = @"C:\EasySave\Log\logSaveAdvancement.json";
+        // Create variable which stores the path for the state log file
+        string pathFileLogSaveXml = @"C:\EasySave\Log\logSaveAdvancement.xml";
 
         /// <summary>
         /// Initialize variable which stores number of files already copied
@@ -133,7 +139,7 @@ namespace easySave.Models
         /// </summary>
         public job()
         {
-            readLogAdvancement();
+
         }
 
         /// <summary>
@@ -159,7 +165,7 @@ namespace easySave.Models
         /// Method to start a backup
         /// </summary>
         /// <returns>Return if the backup is well done</returns>
-        public bool copy(string encryptionExtension = null)
+        public bool copy(bool Typelog, string encryptionExtension = null)
         {
             logSave.Name = this.Name;
             logSave.SourceFilePath = this.pathSource;
@@ -185,13 +191,13 @@ namespace easySave.Models
                         destination.Delete(true); //Delete the directory
                     }
 
-                    copyComplete(source, destination, encryptionExtension); //Launch backup
+                    copyComplete(Typelog, source, destination, encryptionExtension); //Launch backup
 
                     confirmSave = true; //Validate the backup
                 }
                 else //Differential
                 {
-                    copyDifferential(source, destination, encryptionExtension); //Launch backup
+                    copyDifferential(Typelog, source, destination, encryptionExtension); //Launch backup
 
                     compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
 
@@ -266,7 +272,7 @@ namespace easySave.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Destination DirectoryInfo</param>
-        public void copyComplete(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null)
+        public void copyComplete(bool Typelog, DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories(); 
@@ -326,7 +332,7 @@ namespace easySave.Models
                     writer.WriteLine(jsonStringLogProgress);
                 }
 
-                readLogAdvancement();
+                readLogAdvancement(Typelog);
                 searchLogAdvancement();
                 writeLogAdvancement();
             }
@@ -338,10 +344,13 @@ namespace easySave.Models
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
                 
                 //Start saving the new folder
-                copyComplete(subFolder, destinationSubFolder);
+                copyComplete(Typelog, subFolder, destinationSubFolder);
             }
         }
 
+        /// <summary>
+        /// Method to search specific attributes into the logs files
+        /// </summary>
         public void searchLogAdvancement()
         {
             int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
@@ -352,6 +361,9 @@ namespace easySave.Models
                 Global.listSaveAdvancement.Add(logSave);
         }
 
+        /// <summary>
+        /// Method to write into JSON logs
+        /// </summary>
         public void writeLogAdvancement()
         {
             jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
@@ -367,24 +379,59 @@ namespace easySave.Models
             }
         }
 
-        public void readLogAdvancement()
+        /// <summary>
+        /// Method to read into the specific logs files
+        /// </summary>
+        /// <param name="Typelog"></param>
+        public void readLogAdvancement(bool Typelog)
         {
-            if (!File.Exists(pathFileLogSave))
+            // If it's a json format
+            if (Typelog)
             {
-                File.Create(pathFileLogSave).Close();
-            }
-
-            if (File.Exists(pathFileLogSave))
-            {
-                easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
-
-                //StreamReader instance to read text from a file
-                using (var streamReader = new StreamReader(pathFileLogSave))
+                if (!File.Exists(pathFileLogSave))
                 {
-                    using (var jsonReader = new JsonTextReader(streamReader))
+                    File.Create(pathFileLogSave).Close();
+                }
+
+                if (File.Exists(pathFileLogSave))
+                {
+                    easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
+
+                    //StreamReader instance to read text from a file
+                    using (var streamReader = new StreamReader(pathFileLogSave))
                     {
-                        Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                        using (var jsonReader = new JsonTextReader(streamReader))
+                        {
+                            Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                        }
                     }
+                }
+            }
+            // If it's a XML format
+            else
+            {
+                if (!File.Exists(pathFileLogSaveXml))
+                {
+                    File.Create(pathFileLogSaveXml).Close();
+                }
+                else
+                {
+                    try
+                    {
+                        var doc = new System.Xml.XmlDocument();
+                        doc.Load(pathFileLogSaveXml);
+
+                        XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
+                        using (var stream = new FileStream(pathFileLogSaveXml, FileMode.Open))
+                        {
+                            Global.listSaveAdvancement = (List<logSaveAdvancement>)xml.Deserialize(stream);
+                        }
+                    }
+                    catch (System.Xml.XmlException e)
+                    {
+                        Global.listSaveAdvancement = new List<logSaveAdvancement>();
+                    }
+
                 }
             }
 
@@ -400,7 +447,7 @@ namespace easySave.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Source DirectoryInfo</param>
-        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null)
+        public void copyDifferential(bool Typelog, DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null)
         {
             //Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
@@ -472,7 +519,7 @@ namespace easySave.Models
                                 writer.WriteLine(jsonStringLogProgress);
                             }
 
-                            readLogAdvancement();
+                            readLogAdvancement(Typelog);
                             searchLogAdvancement();
                             writeLogAdvancement();
                         }
@@ -535,7 +582,7 @@ namespace easySave.Models
                         writer.WriteLine(jsonStringLogProgress);
                     }
 
-                    readLogAdvancement();
+                    readLogAdvancement(Typelog);
                     searchLogAdvancement();
                     writeLogAdvancement();
                 }
@@ -553,7 +600,7 @@ namespace easySave.Models
                 DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
 
                 //Start saving the new folder
-                copyDifferential(subFolder, destinationSubFolder);
+                copyDifferential(Typelog, subFolder, destinationSubFolder);
             }
         }
 

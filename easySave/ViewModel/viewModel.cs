@@ -59,6 +59,10 @@ namespace easySave.ViewModel
         // Create list to store strings of log save file
         List<string> logSaveList = new List<string>();
 
+        // Variable to store type of logs, initialized with JSON by default value ( = false )
+        bool Typelog = false;
+        
+
         #endregion
 
         #region properties
@@ -122,14 +126,18 @@ namespace easySave.ViewModel
 
             do
             {
+                // Call method to display menu
                 menu = view.displayMenu();
 
+                // Switch to manage choices into the menu
                 switch (menu)
                 {
+                    // Create job menu
                     case 1:
                         {
                             int nbJob = view.chooseCreate();
-                            if (nbJob == 6)
+                            
+                            if (nbJob == 6) // = Exit
                             {
                                 break;
                             }
@@ -137,7 +145,7 @@ namespace easySave.ViewModel
                             view.create(false);
 
                             int valid = view.confirmCreate();
-                            if (valid == 2)
+                            if (valid == 2) // = Cancel creation
                             {
                                 break;
                             }
@@ -152,13 +160,13 @@ namespace easySave.ViewModel
                     case 2:
                         {
                             int nbJob = view.chooseDelete(); // Initialize Job number variable
-                            if (nbJob == 6)
+                            if (nbJob == 6) // Equal to exit choice
                             {
                                 break;
                             }
 
                             int valid = view.confirmDelete(nbJob);
-                            if (valid == 2)
+                            if (valid == 2) // = Cancel delete
                             {
                                 break;
                             }
@@ -176,18 +184,18 @@ namespace easySave.ViewModel
                         {
                             int nbjob = view.chooseSave();
 
-                            if (nbjob == 7)
+                            if (nbjob == 7) // Exit choice
                             {
                                 break;
                             }
 
                             int valid = view.confirmSave(nbjob);
-                            if (valid == 2)
+                            if (valid == 2) // Cancel save
                             {
                                 break;
                             }
 
-                            if (nbjob == 6)
+                            if (nbjob == 6) // Save all jobs
                             {
                                 int numberJob = 1;
                                 bool error = false;
@@ -217,7 +225,7 @@ namespace easySave.ViewModel
                                     {
                                         if (job.PathSource != null || job.PathDestination != null)
                                         {
-                                            job.copy();
+                                            job.copy(Typelog);
                                         }
                                     }
                                 }
@@ -242,7 +250,7 @@ namespace easySave.ViewModel
                                     }
                                     else
                                     {
-                                        this.jobs[nbjob - 1].copy();
+                                        this.jobs[nbjob - 1].copy(Typelog);
                                     }
                                 }
                                 else
@@ -334,6 +342,7 @@ namespace easySave.ViewModel
         {
             view.JobsName = new List<string>();
 
+            // Loop to display each jobs name
             for (int i = 0; i < nbJobMax; i++)
             {
                 string name = this.jobs[i].Name;
