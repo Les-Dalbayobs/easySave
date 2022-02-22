@@ -574,9 +574,22 @@ namespace easySave___Graphic.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Source DirectoryInfo</param>
-        /*public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
-            //Cache directories before we start copying
+            List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
+
+            if (listPrioExtensions != null)
+            {
+                List<string> listFilesPrio = createListPrio(source.FullName, listPrioExtensions);
+
+                copyListFiles(sourceListPathFiles, false, listFilesPrio, encryptionExtension, progressBar);
+            }
+            else
+            {
+                copyListFiles(sourceListPathFiles, false, listPrioExtensions, encryptionExtension, progressBar);
+            }
+
+            /*//Cache directories before we start copying
             DirectoryInfo[] folders = source.GetDirectories();
 
             //Create the destination directory
@@ -625,9 +638,8 @@ namespace easySave___Graphic.Models
 
                 //Start saving the new folder
                 copyDifferential(subFolder, destinationSubFolder, encryptionExtension, progressBar);
-            }
+            }*/
         }
-        */
 
         /// <summary>
         /// Method to compare the source and destination to find the files to delete from the source.
