@@ -327,11 +327,23 @@ namespace easySave.Models
                 // Add time to logProgress
                 logProgress.SetTime();
 
-                jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
-
-                using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                // Write into log progress files
+                if (Typelog == false)
                 {
-                    writer.WriteLine(jsonStringLogProgress);
+                    //Log Progress JSON///////////////////////////////////////////////////////////////////
+                    jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+                    using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                    {
+                        writer.WriteLine(jsonStringLogProgress);
+                    }
+                    ///////////////////////////////////////////////////////////////////////////////////////
+                }
+                else
+                {
+                    //Log Progress XML/////////////////////////////////////////////////////////////////////
+                    writeXmlLogProgress();
+                    ///////////////////////////////////////////////////////////////////////////////////////
                 }
 
                 readLogAdvancement(Typelog);
@@ -525,13 +537,25 @@ namespace easySave.Models
 
                             logProgress.SetTime();
 
-                            jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
-                            jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
-
-                            using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                            // Write into log progress files
+                            if (Typelog == false)
                             {
-                                writer.WriteLine(jsonStringLogProgress);
+                                //Log Progress JSON///////////////////////////////////////////////////////////////////
+                                jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+                                using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                                {
+                                    writer.WriteLine(jsonStringLogProgress);
+                                }
+                                ///////////////////////////////////////////////////////////////////////////////////////
                             }
+                            else
+                            {
+                                //Log Progress XML/////////////////////////////////////////////////////////////////////
+                                writeXmlLogProgress();
+                                ///////////////////////////////////////////////////////////////////////////////////////
+                            }
+
 
                             readLogAdvancement(Typelog);
                             searchLogAdvancement();
@@ -587,13 +611,23 @@ namespace easySave.Models
 
                     logProgress.SetTime();
 
-                    jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
-                    jsonStringLogSave = JsonConvert.SerializeObject(logSave, Formatting.Indented);
-
-
-                    using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                    // Write into log progress files
+                    if (Typelog == false)
                     {
-                        writer.WriteLine(jsonStringLogProgress);
+                        //Log Progress JSON///////////////////////////////////////////////////////////////////
+                        jsonStringLogProgress = JsonConvert.SerializeObject(logProgress, Formatting.Indented);
+
+                        using (StreamWriter writer = new StreamWriter(pathFileLogProgress, true))
+                        {
+                            writer.WriteLine(jsonStringLogProgress);
+                        }
+                        ///////////////////////////////////////////////////////////////////////////////////////
+                    }
+                    else
+                    {
+                        //Log Progress XML/////////////////////////////////////////////////////////////////////
+                        writeXmlLogProgress();
+                        ///////////////////////////////////////////////////////////////////////////////////////
                     }
 
                     readLogAdvancement(Typelog);
