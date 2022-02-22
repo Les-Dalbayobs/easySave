@@ -260,7 +260,7 @@ Choisissez un chiffre et appuyez sur entrer : </value>
 2. Langue
 3. Quitter
 
-Choose number and press enter :</value>
+Choisissez un nombre et appuyez sur entrer :</value>
   </data>
   <data name="validation" xml:space="preserve">
     <value> --------------------VALIDATION--------------------
