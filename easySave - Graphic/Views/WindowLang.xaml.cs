@@ -21,6 +21,15 @@ namespace easySave___Graphic.Views
     /// </summary>
     public partial class WindowLang : Window
     {
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            // Commencez à faire glisser la fenêtre
+            this.DragMove();
+        }
+
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
         public WindowLang()
