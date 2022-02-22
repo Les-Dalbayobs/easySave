@@ -346,8 +346,10 @@ namespace easySave.Models
                     ///////////////////////////////////////////////////////////////////////////////////////
                 }
 
+                
                 readLogAdvancement(Typelog);
                 searchLogAdvancement();
+                // Writes changes into logs
                 writeLogAdvancement(Typelog);
             }
 
