@@ -70,5 +70,16 @@ namespace easySave___Graphic.Properties {
                 this["typeLog"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection prioExtension {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["prioExtension"]));
+            }
+            set {
+                this["prioExtension"] = value;
+            }
+        }
     }
 }

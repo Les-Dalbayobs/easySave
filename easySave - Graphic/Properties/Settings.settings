@@ -14,5 +14,8 @@
     <Setting Name="typeLog" Type="System.String" Scope="User">
       <Value Profile="(Default)">json</Value>
     </Setting>
+    <Setting Name="prioExtension" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

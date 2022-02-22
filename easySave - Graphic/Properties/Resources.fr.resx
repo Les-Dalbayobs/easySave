@@ -237,6 +237,12 @@
   <data name="saveOneJob" xml:space="preserve">
     <value>Sauvegarde du job : </value>
   </data>
+  <data name="selectAddExtension" xml:space="preserve">
+    <value>Veuillez écrire l'extension à ajouter !</value>
+  </data>
+  <data name="selectExtension" xml:space="preserve">
+    <value>Veuillez sélectionnez une extension à supprimer !</value>
+  </data>
   <data name="selectJob" xml:space="preserve">
     <value>Veuillez sélectionner un job</value>
   </data>

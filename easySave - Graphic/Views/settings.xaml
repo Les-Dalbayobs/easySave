@@ -127,14 +127,15 @@
         Style="{StaticResource ToggleButtonStyle1}" Margin="9,495,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="232" FontSize="11"/>
         <Label Content="{x:Static language:Resources.setting}" HorizontalContentAlignment="Center" Margin="9,8,11,0" VerticalAlignment="Top" Width="380" FontSize="20" FontWeight="Bold"/>
         <TextBox HorizontalAlignment="Left" Margin="9,215,0,0" Text="{x:Static language:Resources.descSettingsBS}" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontSize="9" FontStyle="Italic" SelectionOpacity="0.8" BorderThickness="0,0,0,0" Opacity="0.6"/>
-        <ListBox Margin="9,365,151,125"/>
+        <ListBox x:Name="ListBoxPrioExtension" Margin="9,365,151,125" ItemsSource="{Binding PrioExtension}" SelectedItem="{Binding SelectPrioExtension}" HorizontalContentAlignment="Center"/>
         <Label Content="{x:Static language:Resources.prioritization}" HorizontalContentAlignment="Left" Margin="7,335,289,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
-        <Button Content="{x:Static language:Resources.add}"  Margin="289,371,37,0" 
+        <Button x:Name="ButtonNewPrioExtension" Content="{x:Static language:Resources.add}"  Margin="289,406,37,0" 
             VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
-            Foreground="White" FontFamily="Bahnschrift" Height="28"/>
-        <Button Content="{x:Static language:Resources.remove}"  Margin="289,417,37,0" 
+            Foreground="White" FontFamily="Bahnschrift" Height="28" Click="ButtonNewPrioExtension_Click"/>
+        <Button x:Name="ButtonRemovePrioExtension" Content="{x:Static language:Resources.remove}"  Margin="289,447,37,0" 
             VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
-            Foreground="White" FontFamily="Bahnschrift" Height="28"/>
+            Foreground="White" FontFamily="Bahnschrift" Height="28" Click="ButtonRemovePrioExtension_Click"/>
+        <TextBox x:Name="TextBoxPrioExtension" Text="{Binding SelectPrioExtension}" TextWrapping="NoWrap" Margin="254,374,10,207" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
         <!--#endregion-->
     </Grid>
 </Window>

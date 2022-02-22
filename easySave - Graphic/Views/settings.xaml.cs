@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -19,6 +21,7 @@ namespace easySave___Graphic.Views
     /// </summary>
     public partial class settings : Window
     {
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
         public settings()
         {
@@ -55,6 +58,39 @@ namespace easySave___Graphic.Views
             this.TextBoxProcess.Text = text;
             this.TextBoxProcess.Focus();
 
+        }
+
+        private void ButtonRemovePrioExtension_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
+            if (mainW.SelectPrioExtension != null)
+            {
+                mainW.deletePrioExtension();
+            }
+            else if (this.ListBoxPrioExtension.Items.Count == 1)
+            {
+                mainW.PrioExtension.RemoveAt(0);
+            }
+            else
+            {
+                MessageBox.Show(resource.GetString("selectExtension"));
+            }
+        }
+
+        private void ButtonNewPrioExtension_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
+
+            if (mainW.SelectPrioExtension != null)
+            {
+                mainW.addPrioExtension();
+                this.TextBoxPrioExtension.Text = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show(resource.GetString("selectAddExtension"));
+            }
         }
     }
 }
