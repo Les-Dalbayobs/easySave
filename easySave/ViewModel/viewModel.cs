@@ -295,11 +295,11 @@ namespace easySave.ViewModel
                                 int logs = view.Logs();
                                 if (logs == 1)
                                 {
-
+                                    Typelog = false;
                                 }
                                 else if (logs == 2)
                                 {
-
+                                    Typelog = true;
                                 }
                                 break;
                             }
@@ -332,7 +332,7 @@ namespace easySave.ViewModel
 
             Console.WriteLine(job1.calculSizeFolder(job1.PathSource));
 
-            Console.WriteLine(job1.copy());
+            Console.WriteLine(job1.copy(Typelog));
         }
 
         /// <summary>
@@ -450,7 +450,10 @@ namespace easySave.ViewModel
             }
         }
 
-
+        /// <summary>
+        /// Method to delete job
+        /// </summary>
+        /// <param name="numberJob"></param>
         public void deleteJob(int numberJob)
         {
             this.jobs[numberJob - 1].Name = null;

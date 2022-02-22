@@ -50,6 +50,8 @@ namespace easySave.Models
         string pathFileLogSave = @"C:\EasySave\Log\logSaveAdvancement.json";
         // Create variable which stores the path for the state log file
         string pathFileLogSaveXml = @"C:\EasySave\Log\logSaveAdvancement.xml";
+        // Set the path for the log progress file in XML
+        string pathFileLogProgressXml = @"C:\EasySave\Log\logProgressSave.xml";
 
         /// <summary>
         /// Initialize variable which stores number of files already copied
@@ -334,7 +336,7 @@ namespace easySave.Models
 
                 readLogAdvancement(Typelog);
                 searchLogAdvancement();
-                writeLogAdvancement();
+                writeLogAdvancement(Typelog);
             }
 
             //Search and enter the subfolders of the current folder
@@ -362,19 +364,31 @@ namespace easySave.Models
         }
 
         /// <summary>
-        /// Method to write into JSON logs
+        /// Method to write into state log files
         /// </summary>
-        public void writeLogAdvancement()
+        public void writeLogAdvancement(bool Typelog)
         {
-            jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
-
-            using (var streamWriter = new StreamWriter(pathFileLogSave))
+            if (Typelog)
             {
-                //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
-                using (var jsonWriter = new JsonTextWriter(streamWriter))
+                XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
+                using (var streamWriter = new StreamWriter(pathFileLogSaveXml))
                 {
-                    jsonWriter.Formatting = Formatting.Indented;
-                    serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonStringLogSave));
+                    xml.Serialize(streamWriter, Global.listSaveAdvancement);
+                }
+            }
+            else
+            {
+
+                jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
+
+                using (var streamWriter = new StreamWriter(pathFileLogSave))
+                {
+                    //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
+                    using (var jsonWriter = new JsonTextWriter(streamWriter))
+                    {
+                        jsonWriter.Formatting = Formatting.Indented;
+                        serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonStringLogSave));
+                    }
                 }
             }
         }
@@ -387,28 +401,6 @@ namespace easySave.Models
         {
             // If it's a json format
             if (Typelog)
-            {
-                if (!File.Exists(pathFileLogSave))
-                {
-                    File.Create(pathFileLogSave).Close();
-                }
-
-                if (File.Exists(pathFileLogSave))
-                {
-                    easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
-
-                    //StreamReader instance to read text from a file
-                    using (var streamReader = new StreamReader(pathFileLogSave))
-                    {
-                        using (var jsonReader = new JsonTextReader(streamReader))
-                        {
-                            Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
-                        }
-                    }
-                }
-            }
-            // If it's a XML format
-            else
             {
                 if (!File.Exists(pathFileLogSaveXml))
                 {
@@ -432,6 +424,28 @@ namespace easySave.Models
                         Global.listSaveAdvancement = new List<logSaveAdvancement>();
                     }
 
+                }
+            }
+            // If it's a XML format
+            else
+            {
+                if (!File.Exists(pathFileLogSave))
+                {
+                    File.Create(pathFileLogSave).Close();
+                }
+
+                if (File.Exists(pathFileLogSave))
+                {
+                    easySave.Models.Global.listSaveAdvancement = new List<easySave.Models.logSaveAdvancement>();
+
+                    //StreamReader instance to read text from a file
+                    using (var streamReader = new StreamReader(pathFileLogSave))
+                    {
+                        using (var jsonReader = new JsonTextReader(streamReader))
+                        {
+                            Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                        }
+                    }
                 }
             }
 
@@ -521,7 +535,7 @@ namespace easySave.Models
 
                             readLogAdvancement(Typelog);
                             searchLogAdvancement();
-                            writeLogAdvancement();
+                            writeLogAdvancement(Typelog);
                         }
                         catch (Exception e)
                         {
@@ -584,7 +598,8 @@ namespace easySave.Models
 
                     readLogAdvancement(Typelog);
                     searchLogAdvancement();
-                    writeLogAdvancement();
+                    writeLogAdvancement(Typelog);
+
                 }
                 catch (Exception e)
                 {
@@ -652,6 +667,10 @@ namespace easySave.Models
             }
         }
 
+        /// <summary>
+        /// Method which overrides the integrated ToString method
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Name : {this.name}\n" +
@@ -660,6 +679,10 @@ namespace easySave.Models
                 $"Type : {this.typeSave}\n";
         }
 
+        /// <summary>
+        /// Method which verify if the destination filled in the creation form exists
+        /// </summary>
+        /// <returns></returns>
         public bool verifCreateDestination()
         {
             bool verif = false;
@@ -682,6 +705,12 @@ namespace easySave.Models
             return verif;
         }
 
+        /// <summary>
+        /// Method to encrypt specific format files during a save
+        /// </summary>
+        /// <param name="fileSource"></param>
+        /// <param name="destination"></param>
+        /// <returns></returns>
         public int encryption(FileInfo fileSource, DirectoryInfo destination)
         {
             string pathCryptoSoft = @"C:\Program Files (x86)\CryptoSoft\CryptoSoft.exe";
@@ -695,6 +724,23 @@ namespace easySave.Models
             int returnEncryption = e.ExitCode;
 
             return returnEncryption;
+        }
+
+        /// <summary>
+        /// Method to write in XML log progress file
+        /// </summary>
+        public void writeXmlLogProgress()
+        {
+            if (!File.Exists(pathFileLogProgressXml))
+            {
+                File.Create(pathFileLogProgressXml).Close();
+            }
+
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(logProgressSave));
+            TextWriter writerXml = new StreamWriter(pathFileLogProgressXml, true);
+            xmlSerializer.Serialize(writerXml, logProgress);
+            writerXml.Close();
         }
         #endregion
 

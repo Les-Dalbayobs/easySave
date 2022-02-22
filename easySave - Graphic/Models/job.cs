@@ -25,8 +25,11 @@ namespace easySave___Graphic.Models
 
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
+        // Set the path for log progress file in JSON
         string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
+        // Set the path for the log progress file in XML
         string pathFileLogProgressXml = @"C:\EasySave\Log\logProgressSave.xml";
+        // Set the folder for logs
         string pathfolderLog;
 
         /// <summary>
@@ -381,6 +384,9 @@ namespace easySave___Graphic.Models
             /////////////////////////////////////////////////////////////////////////////////
         }
 
+        /// <summary>
+        /// Method to write in XML log progress file
+        /// </summary>
         public void writeXmlLogProgress()
         {
             if (!File.Exists(pathFileLogProgressXml))
@@ -395,6 +401,9 @@ namespace easySave___Graphic.Models
             writerXml.Close();
         }
 
+        /// <summary>
+        /// Method to search into a state log file  
+        /// </summary>
         public void searchLogAdvancement()
         {
             int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
@@ -405,6 +414,9 @@ namespace easySave___Graphic.Models
                 Global.listSaveAdvancement.Add(logSave);
         }
 
+        /// <summary>
+        /// Method to write into state log files
+        /// </summary>
         public void writeLogAdvancement()
         {
             if (Properties.Settings.Default.typeLog == "json")
