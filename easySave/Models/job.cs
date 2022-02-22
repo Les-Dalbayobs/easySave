@@ -413,7 +413,7 @@ namespace easySave.Models
         /// <param name="Typelog"></param>
         public void readLogAdvancement(bool Typelog)
         {
-            // If it's a json format
+            // If it's a XML format
             if (Typelog)
             {
                 if (!File.Exists(pathFileLogSaveXml))
@@ -440,7 +440,7 @@ namespace easySave.Models
 
                 }
             }
-            // If it's a XML format
+            // If it's a JSON format
             else
             {
                 if (!File.Exists(pathFileLogSave))
