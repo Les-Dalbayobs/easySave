@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
   <data name="advertisement" xml:space="preserve">
     <value>Cette action est irréversible</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="delete" xml:space="preserve">
     <value>Supprimer</value>
+  </data>
+  <data name="descSettingsBS" xml:space="preserve">
+    <value>Ce paramètre empêchera le lancement si un processus spécifique est lancé</value>
   </data>
   <data name="destination" xml:space="preserve">
     <value>Chemin de la destination</value>
@@ -204,11 +210,17 @@
   <data name="other" xml:space="preserve">
     <value>Autres</value>
   </data>
+  <data name="prioritization" xml:space="preserve">
+    <value>Prioritisation</value>
+  </data>
   <data name="progress" xml:space="preserve">
     <value>Progression</value>
   </data>
   <data name="proSoftware" xml:space="preserve">
-    <value>Logiciel metier</value>
+    <value>Logiciel métier</value>
+  </data>
+  <data name="remove" xml:space="preserve">
+    <value>Retirer</value>
   </data>
   <data name="replay" xml:space="preserve">
     <value>Reprendre</value>

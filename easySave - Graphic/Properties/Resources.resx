@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="add" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="advertisement" xml:space="preserve">
     <value>This action is irreversible</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="delete" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="descSettingsBS" xml:space="preserve">
+    <value>This setting will prevent the program to run if a specific process is in use</value>
   </data>
   <data name="destination" xml:space="preserve">
     <value>Destination path</value>
@@ -202,13 +208,19 @@
     <value>No job selected in the main menu</value>
   </data>
   <data name="other" xml:space="preserve">
-    <value>Other</value>
+    <value>Others</value>
+  </data>
+  <data name="prioritization" xml:space="preserve">
+    <value>Prioritization</value>
   </data>
   <data name="progress" xml:space="preserve">
     <value>Progress</value>
   </data>
   <data name="proSoftware" xml:space="preserve">
     <value>Business Software</value>
+  </data>
+  <data name="remove" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="replay" xml:space="preserve">
     <value>Resume</value>
