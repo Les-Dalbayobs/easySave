@@ -651,6 +651,11 @@ namespace easySave___Graphic.Models
             //Deletes all files found
             foreach (string file in filesToDelete)
             {
+                while (Global.pause == true)
+                {
+                    Thread.Sleep(1000);
+                }
+
                 //Try catch which will allow error handling if needed
                 try
                 {
