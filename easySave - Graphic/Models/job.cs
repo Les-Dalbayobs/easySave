@@ -208,14 +208,13 @@ namespace easySave___Graphic.Models
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////
         
                 //Differential////////////////////////////////////////////////////////////////////////////////////////////
-                /*else
                 {
-                    copyDifferential(source, destination, encryptionExtension, progressBar); //Launch backup
+                    copyDifferential(source, destination, prioExtension, encryptionExtension, progressBar); //Launch backup
 
                     compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
 
                     confirmSave = true;
-                }*/
+                }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
             }
             catch (Exception e)
@@ -311,7 +310,12 @@ namespace easySave___Graphic.Models
                 }
                 catch
                 {
+                    FileInfo fileDestination = new FileInfo(destinationFile);
 
+                    if (fileDestination.Exists && file.Name == fileDestination.Name && file.LastWriteTime > fileDestination.LastWriteTime)
+                    {
+                        file.CopyTo(destinationFile, true);
+                    }
                 }
 
                 logProgress.EncryptionTime = "0";
@@ -588,57 +592,6 @@ namespace easySave___Graphic.Models
             {
                 copyListFiles(sourceListPathFiles, false, listPrioExtensions, encryptionExtension, progressBar);
             }
-
-            /*//Cache directories before we start copying
-            DirectoryInfo[] folders = source.GetDirectories();
-
-            //Create the destination directory
-            Directory.CreateDirectory(destination.FullName);
-
-            compareDelete(source.FullName, destination.FullName);
-
-            //Copy iteration for all files in the folder
-            foreach (FileInfo file in source.GetFiles())
-            {
-                //Now we look at all the files in the destination folder
-                foreach (FileInfo fileDestination in destination.GetFiles())
-                {
-                    //If the name of the source file and the destination file are the same,
-                    //as well as the date of modification of the source file superior to the destination file then it is copied.
-                    if (file.Name == fileDestination.Name && file.LastWriteTime > fileDestination.LastWriteTime)
-                    {
-                        //Try catch which will allow error handling if needed
-                        try
-                        {
-                            copyFile(file, true, source, destination, encryptionExtension, progressBar);
-                        }
-                        catch (Exception e)
-                        {
-                            //Console.WriteLine("The process failed : " + e.ToString()); //Displays the error
-                        }
-                    }
-                }
-
-                //Try catch which allow error handling if needed
-                try
-                {
-                    copyFile(file, false, source, destination, encryptionExtension, progressBar);
-                }
-                catch (Exception e)
-                {
-                    //Console.WriteLine("The process failed : " + e.ToString()); //Displays the error
-                }
-            }
-
-            //Search and enter the subfolders of the current folder
-            foreach (DirectoryInfo subFolder in folders)
-            {
-                //Creates a sub-folder and saves this information in a DirectoryInfo
-                DirectoryInfo destinationSubFolder = destination.CreateSubdirectory(subFolder.Name);
-
-                //Start saving the new folder
-                copyDifferential(subFolder, destinationSubFolder, encryptionExtension, progressBar);
-            }*/
         }
 
         /// <summary>
