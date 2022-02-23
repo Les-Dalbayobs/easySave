@@ -100,5 +100,40 @@ namespace easySave___Graphic.Views
                 MessageBox.Show(resource.GetString("selectAddExtension"));
             }
         }
+
+        private void TextBoxBigSize_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = !IsNumberKey(e.Key) && !IsDelOrBackspaceOrTabKey(e.Key);
+        }
+        private bool IsNumberKey(Key inKey)
+        {
+            if (inKey < Key.D0 || inKey > Key.D9)
+            {
+                if (inKey < Key.NumPad0 || inKey > Key.NumPad9)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+ 
+        private bool IsDelOrBackspaceOrTabKey(Key inKey)
+        {
+            return inKey == Key.Delete || inKey == Key.Back || inKey == Key.Tab;
+        }
+
+        private void TextBoxBigSize_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string tmp = TextBoxBigSize.Text;
+
+            foreach (char c in TextBoxBigSize.Text.ToCharArray())
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(c.ToString(), "^[0-9]*$"))
+                {
+                    tmp = tmp.Replace(c.ToString(), "");
+                }
+            }
+            TextBoxBigSize.Text = tmp;
+        }
     }
 }

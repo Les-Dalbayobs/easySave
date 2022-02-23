@@ -44,35 +44,45 @@ namespace easySave___Graphic.Models
             {
                 if (proBar1.WaitOne(1000))
                 {
-                    myjob.copy(prio, "." + encryption, ProgressBar1);
+                    if (Global.stop == false)
+                        myjob.copy(prio, "." + encryption, ProgressBar1);
+
                     proBar1.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar2.WaitOne(1000))
                 {
-                    myjob.copy(prio, "." + encryption, ProgressBar2);
+                    if (Global.stop == false)
+                        myjob.copy(prio, "." + encryption, ProgressBar2);
+
                     proBar2.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar3.WaitOne(1000))
                 {
-                    myjob.copy(prio, "." + encryption, ProgressBar3);
+                    if (Global.stop == false)
+                        myjob.copy(prio, "." + encryption, ProgressBar3);
+
                     proBar3.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar4.WaitOne(1000))
                 {
-                    myjob.copy(prio ,"." + encryption, ProgressBar4);
+                    if (Global.stop == false)
+                        myjob.copy(prio ,"." + encryption, ProgressBar4);
+
                     proBar4.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar5.WaitOne(1000))
                 {
-                    myjob.copy(prio, "." + encryption, ProgressBar5);
+                    if (Global.stop == false)
+                        myjob.copy(prio, "." + encryption, ProgressBar5);
+
                     proBar5.ReleaseMutex();
                     finish = true;
                     semaphore.Release();

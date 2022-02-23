@@ -173,6 +173,7 @@ namespace easySave___Graphic
 
             mainW.newEncryption();
             mainW.newProcess();
+            mainW.newBigSize();
         }
     }
 }

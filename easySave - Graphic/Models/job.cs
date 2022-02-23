@@ -29,6 +29,9 @@ namespace easySave___Graphic.Models
         #region attributes
         static object lockReadOrWriteLog = new object();
 
+        public static Mutex bigFile = new Mutex();
+
+
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
         // Set the path for log progress file in JSON
@@ -426,13 +429,20 @@ namespace easySave___Graphic.Models
                     break;
                 }
 
+                FileInfo fileSource = new FileInfo(sourceList[i]);
+
+                if (fileSource.Length > 2)
+                {
+
+                }
+                
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
                 string destinationFile = this.pathDestination + pathFile;
 
                 string directoryDestination = Path.GetDirectoryName(destinationFile);
                 Directory.CreateDirectory(directoryDestination);
 
-                FileInfo fileSource = new FileInfo(sourceList[i]);
+                
 
                 copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
 

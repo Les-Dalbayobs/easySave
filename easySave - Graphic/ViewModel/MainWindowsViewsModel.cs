@@ -49,6 +49,8 @@ namespace easySave___Graphic.ViewModel
         List<string> currentProcess;
 
         string selectedProcess;
+
+        long bigSize;
         #endregion
 
         #region properties
@@ -67,6 +69,7 @@ namespace easySave___Graphic.ViewModel
         public string SelectedProcess { get => selectedProcess; set => selectedProcess = value; }
         public ObservableCollection<string> PrioExtension { get => prioExtension; set => prioExtension = value; }
         public string SelectPrioExtension { get => selectPrioExtension; set => selectPrioExtension = value; }
+        public long BigSize { get => bigSize; set => bigSize = value; }
 
         #endregion
 
@@ -81,6 +84,7 @@ namespace easySave___Graphic.ViewModel
 
             importPrioExtension();
             importConfig();
+            importBigSize();
 
             string pathLogFolder = pathFilesEasySave + @"\Log";
 
@@ -333,6 +337,17 @@ namespace easySave___Graphic.ViewModel
             }
             
             return false;
+        }
+
+        public void newBigSize()
+        {
+            Properties.Settings.Default.bigSize = this.bigSize;
+            Properties.Settings.Default.Save();
+        }
+
+        public void importBigSize()
+        {
+            this.bigSize = Properties.Settings.Default.bigSize;
         }
         #endregion
     }

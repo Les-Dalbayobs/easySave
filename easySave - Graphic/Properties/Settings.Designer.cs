@@ -81,5 +81,17 @@ namespace easySave___Graphic.Properties {
                 this["prioExtension"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long bigSize {
+            get {
+                return ((long)(this["bigSize"]));
+            }
+            set {
+                this["bigSize"] = value;
+            }
+        }
     }
 }
