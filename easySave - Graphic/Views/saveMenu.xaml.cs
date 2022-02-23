@@ -31,6 +31,7 @@ namespace easySave___Graphic.Views
         }
 
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
+        //public static List<Thread> threads = new List<Thread>();
 
         public saveMenu()
         {
@@ -113,6 +114,24 @@ namespace easySave___Graphic.Views
         {
             this.DialogResult = false;
             this.Close();
+        }
+
+        private void ButtonStop_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void ButtonPause_Click(object sender, RoutedEventArgs e)
+        {
+            Models.Global.pause = true;
+            ButtonPause.IsEnabled = false;
+            ButtonPlay.IsEnabled = true;
+        }
+
+        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
+        {
+            Models.Global.pause = false;
+            ButtonPlay.IsEnabled = false;
+            ButtonPause.IsEnabled = true;
         }
     }
 }

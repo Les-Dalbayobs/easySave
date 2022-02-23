@@ -17,6 +17,7 @@ namespace easySave___Graphic.Models
     public static class Global
     {
         public static List<logSaveAdvancement> listSaveAdvancement;
+        public static bool pause = false;
     }
 
     /// <summary>
@@ -383,6 +384,11 @@ namespace easySave___Graphic.Models
             {
                 for (int i = 0; i < prioList.Count;)
                 {
+                    while (Global.pause == true)
+                    {
+                        Thread.Sleep(1000);
+                    }
+
                     string pathFile = prioList[i].Replace(this.pathSource, string.Empty);
                     string destinationFile = this.pathDestination + pathFile;
 
@@ -396,10 +402,16 @@ namespace easySave___Graphic.Models
                     sourceList.Remove(prioList[i]);
                     prioList.Remove(prioList[i]);
                 }
+
             }
             
             for (int i = 0; i < sourceList.Count;)
             {
+                while (Global.pause == true)
+                {
+                    Thread.Sleep(1000);
+                }
+
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
                 string destinationFile = this.pathDestination + pathFile;
 
