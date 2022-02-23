@@ -23,6 +23,14 @@ namespace easySave___Graphic.Views
     {
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            // Commencez à faire glisser la fenêtre
+            this.DragMove();
+        }
+
         public settings()
         {
             InitializeComponent();

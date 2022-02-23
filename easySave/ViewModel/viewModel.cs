@@ -39,14 +39,6 @@ namespace easySave.ViewModel
         List<Models.job> jobs;
 
         int nbJobMax;
-        /// <summary>
-        /// Creation of job objects
-        /// </summary>
-        Models.job job1 = new Models.job();
-        Models.job job2 = new Models.job();
-        Models.job job3 = new Models.job();
-        Models.job job4 = new Models.job();
-        Models.job job5 = new Models.job();
 
         /// <summary>
         /// Store the string in json
@@ -66,6 +58,10 @@ namespace easySave.ViewModel
 
         // Create list to store strings of log save file
         List<string> logSaveList = new List<string>();
+
+        // Variable to store type of logs, initialized with JSON by default value ( = false )
+        bool Typelog = false;
+        
 
         #endregion
 
@@ -130,14 +126,18 @@ namespace easySave.ViewModel
 
             do
             {
+                // Call method to display menu
                 menu = view.displayMenu();
 
+                // Switch to manage choices into the menu
                 switch (menu)
                 {
+                    // Create job menu
                     case 1:
                         {
                             int nbJob = view.chooseCreate();
-                            if (nbJob == 6)
+                            
+                            if (nbJob == 6) // = Exit
                             {
                                 break;
                             }
@@ -145,7 +145,7 @@ namespace easySave.ViewModel
                             view.create(false);
 
                             int valid = view.confirmCreate();
-                            if (valid == 2)
+                            if (valid == 2) // = Cancel creation
                             {
                                 break;
                             }
@@ -160,13 +160,13 @@ namespace easySave.ViewModel
                     case 2:
                         {
                             int nbJob = view.chooseDelete(); // Initialize Job number variable
-                            if (nbJob == 6)
+                            if (nbJob == 6) // Equal to exit choice
                             {
                                 break;
                             }
 
                             int valid = view.confirmDelete(nbJob);
-                            if (valid == 2)
+                            if (valid == 2) // = Cancel delete
                             {
                                 break;
                             }
@@ -179,22 +179,23 @@ namespace easySave.ViewModel
                             }
                         }
 
+                    // Save menu choice
                     case 3:
                         {
                             int nbjob = view.chooseSave();
 
-                            if (nbjob == 7)
+                            if (nbjob == 7) // Exit choice
                             {
                                 break;
                             }
 
                             int valid = view.confirmSave(nbjob);
-                            if (valid == 2)
+                            if (valid == 2) // Cancel save
                             {
                                 break;
                             }
 
-                            if (nbjob == 6)
+                            if (nbjob == 6) // Save all jobs
                             {
                                 int numberJob = 1;
                                 bool error = false;
@@ -224,7 +225,7 @@ namespace easySave.ViewModel
                                     {
                                         if (job.PathSource != null || job.PathDestination != null)
                                         {
-                                            job.copy();
+                                            job.copy(Typelog);
                                         }
                                     }
                                 }
@@ -249,7 +250,7 @@ namespace easySave.ViewModel
                                     }
                                     else
                                     {
-                                        this.jobs[nbjob - 1].copy();
+                                        this.jobs[nbjob - 1].copy(Typelog);
                                     }
                                 }
                                 else
@@ -264,19 +265,48 @@ namespace easySave.ViewModel
 
                             break;
                         }
+
+                    // Settings menu
                     case 4:
                         {
-                            int language = view.changeLanguage();
-                            if (language == 1)
+                            int settings = view.Settings();
+
+                            if (settings == 3)
                             {
-                                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr");
+                                break;
                             }
-                            else if (language == 2)
+
+                            else if (settings == 2)
                             {
-                                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
+                                int language = view.changeLanguage();
+                                if (language == 1)
+                                {
+                                    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr");
+                                }
+                                else if (language == 2)
+                                {
+                                    Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("en");
+                                }
+                                break;
                             }
+
+                            else if (settings == 1)
+                            {
+                                int logs = view.Logs();
+                                if (logs == 1)
+                                {
+                                    Typelog = false;
+                                }
+                                else if (logs == 2)
+                                {
+                                    Typelog = true;
+                                }
+                                break;
+                            }
+
                             break;
                         }
+
                     default:
                         break;
 
@@ -302,7 +332,7 @@ namespace easySave.ViewModel
 
             Console.WriteLine(job1.calculSizeFolder(job1.PathSource));
 
-            Console.WriteLine(job1.copy());
+            Console.WriteLine(job1.copy(Typelog));
         }
 
         /// <summary>
@@ -312,6 +342,7 @@ namespace easySave.ViewModel
         {
             view.JobsName = new List<string>();
 
+            // Loop to display each jobs name
             for (int i = 0; i < nbJobMax; i++)
             {
                 string name = this.jobs[i].Name;
@@ -420,17 +451,9 @@ namespace easySave.ViewModel
         }
 
         /// <summary>
-        /// Method to copy the import of json into jobs
+        /// Method to delete job
         /// </summary>
-        public void copyImportConfig()
-        {
-            this.job1 = jobs[0];
-            this.job2 = jobs[1];
-            this.job3 = jobs[2];
-            this.job4 = jobs[3];
-            this.job5 = jobs[4];
-        }
-
+        /// <param name="numberJob"></param>
         public void deleteJob(int numberJob)
         {
             this.jobs[numberJob - 1].Name = null;

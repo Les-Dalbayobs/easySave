@@ -19,6 +19,15 @@ namespace easySave___Graphic.Views
     /// </summary>
     public partial class DeleteJob : Window
     {
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+
+            // Commencez à faire glisser la fenêtre
+            this.DragMove();
+        }
+
         public DeleteJob()
         {
             InitializeComponent();

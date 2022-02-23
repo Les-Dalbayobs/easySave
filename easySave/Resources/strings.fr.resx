@@ -189,14 +189,23 @@
  1. Français
  2. Anglais
  3. Quitter
+
  Choisissez un nombre et faites entrer : </value>
+  </data>
+  <data name="logs" xml:space="preserve">
+    <value>-----------------------LOGS------------------------
+1. JSON
+2. XML
+3. Quitter
+
+Choisissez un chiffre et appuyez sur entrer : </value>
   </data>
   <data name="menu" xml:space="preserve">
     <value> -----------------------MENU-----------------------
  1. Créer
  2. Supprimer
  3. Sauvegarder
- 4. Langue
+ 4. Paramètres
  5. Quitter
  --------------------------------------------------
  Choissisez un chiffre et appuyez sur entrer : </value>
@@ -216,6 +225,7 @@
     <value> --------------------SAUVEGARDER------------------
  6. Tout sauvegarder
  7. Quitter
+
  Choississez un chiffre et appuyez sur entrer :</value>
   </data>
   <data name="pressEnter" xml:space="preserve">
@@ -244,10 +254,19 @@
   <data name="saveOne2" xml:space="preserve">
     <value>, êtes-vous sûr ?</value>
   </data>
+  <data name="settings" xml:space="preserve">
+    <value>-------------------PARAMETRES--------------------
+1. Logs
+2. Langue
+3. Quitter
+
+Choisissez un nombre et appuyez sur entrer :</value>
+  </data>
   <data name="validation" xml:space="preserve">
     <value> --------------------VALIDATION--------------------
  1. Oui
  2. Non
+
  Êtes-vous sûr : </value>
   </data>
 </root>
