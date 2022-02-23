@@ -40,6 +40,12 @@ namespace easySave___Graphic.Views
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
+            Models.Global.stop = false;
+
+            Ok.IsEnabled = false;
+            ButtonPause.IsEnabled = true;
+            ButtonStop.IsEnabled = true;
+
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
             Models.jobThread.ProgressBar1 = ProgressBarJob1;
@@ -113,7 +119,8 @@ namespace easySave___Graphic.Views
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
-            Models.Global.stop = false;
+            Models.Global.stop = true;
+            Models.Global.pause = false;
             this.Close();
         }
 
