@@ -13,6 +13,8 @@ namespace easySave___Graphic.Models
 
         public static Semaphore semaphore = new Semaphore(5, 5);
 
+        List<string> prio;
+
         public static Mutex proBar1 = new Mutex();
         public static Mutex proBar2 = new Mutex();
         public static Mutex proBar3 = new Mutex();
@@ -29,6 +31,7 @@ namespace easySave___Graphic.Models
         {
             this.myjob = newJob;
             this.encryption = Properties.Settings.Default.encryption;
+            createListPrioExtension();
         }
 
         public void threadLoop()
@@ -41,39 +44,56 @@ namespace easySave___Graphic.Models
             {
                 if (proBar1.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar1);
+                    myjob.copy(prio, "." + encryption, ProgressBar1);
                     proBar1.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar2.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar2);
+                    myjob.copy(prio, "." + encryption, ProgressBar2);
                     proBar2.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar3.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar3);
+                    myjob.copy(prio, "." + encryption, ProgressBar3);
                     proBar3.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar4.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar4);
+                    myjob.copy(prio ,"." + encryption, ProgressBar4);
                     proBar4.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
                 else if (proBar5.WaitOne(1000))
                 {
-                    myjob.copy(encryption, ProgressBar5);
+                    myjob.copy(prio, "." + encryption, ProgressBar5);
                     proBar5.ReleaseMutex();
                     finish = true;
                     semaphore.Release();
                 }
+            }
+        }
+
+        public void createListPrioExtension()
+        {
+            if (Properties.Settings.Default.prioExtension != null)
+            {
+                this.prio = new List<string>();
+
+                foreach (var item in Properties.Settings.Default.prioExtension)
+                {
+                    this.prio.Add(item);
+                }
+            }
+            else
+            {
+                this.prio = null;
             }
         }
     }

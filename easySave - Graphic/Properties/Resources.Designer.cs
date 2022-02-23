@@ -61,6 +61,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add.
+        /// </summary>
+        public static string add {
+            get {
+                return ResourceManager.GetString("add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à This action is irreversible.
         /// </summary>
         public static string advertisement {
@@ -120,6 +129,15 @@ namespace easySave___Graphic.Properties {
         public static string delete {
             get {
                 return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à This setting will prevent the program to run if a specific process is in use.
+        /// </summary>
+        public static string descSettingsBS {
+            get {
+                return ResourceManager.GetString("descSettingsBS", resourceCulture);
             }
         }
         
@@ -313,11 +331,20 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Other.
+        ///   Recherche une chaîne localisée semblable à Others.
         /// </summary>
         public static string other {
             get {
                 return ResourceManager.GetString("other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Prioritization.
+        /// </summary>
+        public static string prioritization {
+            get {
+                return ResourceManager.GetString("prioritization", resourceCulture);
             }
         }
         
@@ -336,6 +363,15 @@ namespace easySave___Graphic.Properties {
         public static string proSoftware {
             get {
                 return ResourceManager.GetString("proSoftware", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove.
+        /// </summary>
+        public static string remove {
+            get {
+                return ResourceManager.GetString("remove", resourceCulture);
             }
         }
         
@@ -381,6 +417,24 @@ namespace easySave___Graphic.Properties {
         public static string saveOneJob {
             get {
                 return ResourceManager.GetString("saveOneJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please write the extension to add!.
+        /// </summary>
+        public static string selectAddExtension {
+            get {
+                return ResourceManager.GetString("selectAddExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please select an extension to remove!.
+        /// </summary>
+        public static string selectExtension {
+            get {
+                return ResourceManager.GetString("selectExtension", resourceCulture);
             }
         }
         
