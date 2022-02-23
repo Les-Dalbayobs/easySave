@@ -210,8 +210,9 @@ namespace easySave___Graphic.Models
                     confirmSave = true; //Validate the backup
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+                
                 //Differential////////////////////////////////////////////////////////////////////////////////////////////
+                else
                 {
                     copyDifferential(source, destination, prioExtension, encryptionExtension, progressBar); //Launch backup
 
@@ -380,7 +381,7 @@ namespace easySave___Graphic.Models
         {
             if (prioList != null)
             {
-                for (int i = 0; i <= prioList.Count;)
+                for (int i = 0; i < prioList.Count;)
                 {
                     string pathFile = prioList[i].Replace(this.pathSource, string.Empty);
                     string destinationFile = this.pathDestination + pathFile;
@@ -397,7 +398,7 @@ namespace easySave___Graphic.Models
                 }
             }
             
-            for (int i = 0; i <= sourceList.Count;)
+            for (int i = 0; i < sourceList.Count;)
             {
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
                 string destinationFile = this.pathDestination + pathFile;
@@ -437,7 +438,6 @@ namespace easySave___Graphic.Models
         /// <param name="destination">Destination DirectoryInfo</param>
         public void copyComplete(DirectoryInfo source, DirectoryInfo destination,List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
         {
-
             List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
 
             if (listPrioExtensions != null)
@@ -450,8 +450,6 @@ namespace easySave___Graphic.Models
             {
                 copyListFiles(sourceListPathFiles, true, listPrioExtensions, encryptionExtension, progressBar);
             }
-            
-
         }
 
         /// <summary>
