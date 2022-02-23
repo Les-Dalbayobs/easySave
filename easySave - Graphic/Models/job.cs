@@ -31,6 +31,9 @@ namespace easySave___Graphic.Models
 
         public static Mutex bigFile = new Mutex();
 
+        static object lockPrioFinish = new object();
+        public static int prioFinish = 0;
+
 
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
@@ -389,6 +392,11 @@ namespace easySave___Graphic.Models
         {
             if (prioList != null)
             {
+                lock (lockPrioFinish)
+                {
+                    prioFinish++;
+                }
+
                 for (int i = 0; i < prioList.Count;)
                 {
                     while (Global.pause == true)
@@ -409,17 +417,41 @@ namespace easySave___Graphic.Models
                     string directoryDestination = Path.GetDirectoryName(destinationFile);
                     Directory.CreateDirectory(directoryDestination);
 
-                    copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+                    if (fileSource.Length > (Properties.Settings.Default.bigSize * 1024) && Properties.Settings.Default.bigSize != 0)
+                    {
+                        if (bigFile.WaitOne(1000))
+                        {
+                            copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
 
-                    sourceList.Remove(prioList[i]);
-                    prioList.Remove(prioList[i]);
+                            sourceList.Remove(prioList[i]);
+                            prioList.Remove(prioList[i]);
+
+                            bigFile.ReleaseMutex();
+                        }
+                    }
+                    else
+                    {
+                        copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+
+                        sourceList.Remove(prioList[i]);
+                        prioList.Remove(prioList[i]);
+                    }
                 }
 
+                lock (lockPrioFinish)
+                {
+                    prioFinish--;
+                }
             }
             
             for (int i = 0; i < sourceList.Count;)
             {
                 while (Global.pause == true)
+                {
+                    Thread.Sleep(1000);
+                }
+
+                while (prioFinish != 0)
                 {
                     Thread.Sleep(1000);
                 }
@@ -431,22 +463,29 @@ namespace easySave___Graphic.Models
 
                 FileInfo fileSource = new FileInfo(sourceList[i]);
 
-                if (fileSource.Length > 2)
-                {
-
-                }
-                
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
                 string destinationFile = this.pathDestination + pathFile;
 
                 string directoryDestination = Path.GetDirectoryName(destinationFile);
                 Directory.CreateDirectory(directoryDestination);
 
-                
+                if (fileSource.Length > (Properties.Settings.Default.bigSize * 1024) && Properties.Settings.Default.bigSize != 0)
+                {
+                    if (bigFile.WaitOne(1000))
+                    {
+                        copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
 
-                copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+                        sourceList.Remove(sourceList[i]);
 
-                sourceList.Remove(sourceList[i]);
+                        bigFile.ReleaseMutex();
+                    }
+                }
+                else
+                {
+                    copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+
+                    sourceList.Remove(sourceList[i]);
+                }
             }
         }
 

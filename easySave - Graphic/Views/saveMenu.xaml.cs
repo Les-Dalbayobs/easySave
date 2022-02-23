@@ -41,6 +41,7 @@ namespace easySave___Graphic.Views
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             Models.Global.stop = false;
+            Models.job.prioFinish = 0;
 
             Ok.IsEnabled = false;
             ButtonPause.IsEnabled = true;
