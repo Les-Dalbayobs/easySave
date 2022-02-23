@@ -175,7 +175,8 @@
     <value>Entrez l'extension de fichiers désirée (si pas dans la liste)</value>
   </data>
   <data name="formatLog" xml:space="preserve">
-    <value>Format des fichiers log</value>
+    <value>Format des 
+fichiers log</value>
   </data>
   <data name="fr" xml:space="preserve">
     <value>Français</value>
@@ -194,6 +195,10 @@
   </data>
   <data name="makeChoice" xml:space="preserve">
     <value>Faites votre choix : </value>
+  </data>
+  <data name="maxSize" xml:space="preserve">
+    <value>Taille max. fichiers 
+simultanés</value>
   </data>
   <data name="name" xml:space="preserve">
     <value>Nom</value>

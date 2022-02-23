@@ -380,7 +380,7 @@ namespace easySave___Graphic.Models
         {
             if (prioList != null)
             {
-                for (int i = 0; i < prioList.Count;)
+                for (int i = 0; i <= prioList.Count;)
                 {
                     string pathFile = prioList[i].Replace(this.pathSource, string.Empty);
                     string destinationFile = this.pathDestination + pathFile;
@@ -397,7 +397,7 @@ namespace easySave___Graphic.Models
                 }
             }
             
-            for (int i = 0; i < sourceList.Count;)
+            for (int i = 0; i <= sourceList.Count;)
             {
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
                 string destinationFile = this.pathDestination + pathFile;
