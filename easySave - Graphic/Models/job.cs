@@ -17,6 +17,8 @@ namespace easySave___Graphic.Models
     public static class Global
     {
         public static List<logSaveAdvancement> listSaveAdvancement;
+        public static bool pause = false;
+        public static bool stop = false;
     }
 
     /// <summary>
@@ -216,7 +218,10 @@ namespace easySave___Graphic.Models
                 {
                     copyDifferential(source, destination, prioExtension, encryptionExtension, progressBar); //Launch backup
 
-                    compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
+                    if (Global.stop == false)
+                    {
+                        compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
+                    }
 
                     confirmSave = true;
                 }
@@ -383,6 +388,16 @@ namespace easySave___Graphic.Models
             {
                 for (int i = 0; i < prioList.Count;)
                 {
+                    while (Global.pause == true)
+                    {
+                        Thread.Sleep(1000);
+                    }
+
+                    if (Global.stop == true)
+                    {
+                        break;
+                    }
+
                     string pathFile = prioList[i].Replace(this.pathSource, string.Empty);
                     string destinationFile = this.pathDestination + pathFile;
 
@@ -396,10 +411,21 @@ namespace easySave___Graphic.Models
                     sourceList.Remove(prioList[i]);
                     prioList.Remove(prioList[i]);
                 }
+
             }
             
             for (int i = 0; i < sourceList.Count;)
             {
+                while (Global.pause == true)
+                {
+                    Thread.Sleep(1000);
+                }
+
+                if (Global.stop == true)
+                {
+                    break;
+                }
+
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
                 string destinationFile = this.pathDestination + pathFile;
 
@@ -639,6 +665,11 @@ namespace easySave___Graphic.Models
             //Deletes all files found
             foreach (string file in filesToDelete)
             {
+                while (Global.pause == true)
+                {
+                    Thread.Sleep(1000);
+                }
+
                 //Try catch which will allow error handling if needed
                 try
                 {

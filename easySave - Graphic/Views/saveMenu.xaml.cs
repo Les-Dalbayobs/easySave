@@ -31,6 +31,7 @@ namespace easySave___Graphic.Views
         }
 
         ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
+        //public static List<Thread> threads = new List<Thread>();
 
         public saveMenu()
         {
@@ -39,6 +40,12 @@ namespace easySave___Graphic.Views
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
+            Models.Global.stop = false;
+
+            Ok.IsEnabled = false;
+            ButtonPause.IsEnabled = true;
+            ButtonStop.IsEnabled = true;
+
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
             Models.jobThread.ProgressBar1 = ProgressBarJob1;
@@ -112,7 +119,33 @@ namespace easySave___Graphic.Views
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+            Models.Global.stop = true;
+            Models.Global.pause = false;
             this.Close();
+        }
+
+        private void ButtonStop_Click(object sender, RoutedEventArgs e)
+        {
+            Models.Global.stop = true;
+            Models.Global.pause = false;
+            ButtonPause.IsEnabled = false;
+            ButtonPlay.IsEnabled = false;
+            ButtonStop.IsEnabled = false;
+            Ok.IsEnabled = false;
+        }
+
+        private void ButtonPause_Click(object sender, RoutedEventArgs e)
+        {
+            Models.Global.pause = true;
+            ButtonPause.IsEnabled = false;
+            ButtonPlay.IsEnabled = true;
+        }
+
+        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
+        {
+            Models.Global.pause = false;
+            ButtonPlay.IsEnabled = false;
+            ButtonPause.IsEnabled = true;
         }
     }
 }
