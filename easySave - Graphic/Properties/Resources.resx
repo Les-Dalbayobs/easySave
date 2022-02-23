@@ -195,6 +195,10 @@
   <data name="makeChoice" xml:space="preserve">
     <value>Make your choice : </value>
   </data>
+  <data name="maxSize" xml:space="preserve">
+    <value>Max. simultaneous 
+files size</value>
+  </data>
   <data name="name" xml:space="preserve">
     <value>Name</value>
   </data>
