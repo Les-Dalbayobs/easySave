@@ -113,11 +113,18 @@ namespace easySave___Graphic.Views
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+            Models.Global.stop = false;
             this.Close();
         }
 
         private void ButtonStop_Click(object sender, RoutedEventArgs e)
         {
+            Models.Global.stop = true;
+            Models.Global.pause = false;
+            ButtonPause.IsEnabled = false;
+            ButtonPlay.IsEnabled = false;
+            ButtonStop.IsEnabled = false;
+            Ok.IsEnabled = false;
         }
 
         private void ButtonPause_Click(object sender, RoutedEventArgs e)

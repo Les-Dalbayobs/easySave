@@ -18,6 +18,7 @@ namespace easySave___Graphic.Models
     {
         public static List<logSaveAdvancement> listSaveAdvancement;
         public static bool pause = false;
+        public static bool stop = false;
     }
 
     /// <summary>
@@ -217,7 +218,10 @@ namespace easySave___Graphic.Models
                 {
                     copyDifferential(source, destination, prioExtension, encryptionExtension, progressBar); //Launch backup
 
-                    compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
+                    if (Global.stop == false)
+                    {
+                        compareDelete(this.pathSource, this.pathDestination); //Delete non-existent files in the source
+                    }
 
                     confirmSave = true;
                 }
@@ -389,6 +393,11 @@ namespace easySave___Graphic.Models
                         Thread.Sleep(1000);
                     }
 
+                    if (Global.stop == true)
+                    {
+                        break;
+                    }
+
                     string pathFile = prioList[i].Replace(this.pathSource, string.Empty);
                     string destinationFile = this.pathDestination + pathFile;
 
@@ -410,6 +419,11 @@ namespace easySave___Graphic.Models
                 while (Global.pause == true)
                 {
                     Thread.Sleep(1000);
+                }
+
+                if (Global.stop == true)
+                {
+                    break;
                 }
 
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
