@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Resources;
+using System.Globalization;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace EasyConsole
 {
@@ -24,5 +28,26 @@ namespace EasyConsole
         {
             InitializeComponent();
         }
+
+        private void Connect_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Disconnect_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        } 
+        
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
+   
 }
