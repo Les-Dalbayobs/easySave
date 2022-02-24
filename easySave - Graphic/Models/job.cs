@@ -442,6 +442,10 @@ namespace easySave___Graphic.Models
 
                             bigFile.ReleaseMutex();
                         }
+                        else
+                        {
+                            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait copy big file")), DispatcherPriority.ContextIdle);
+                        }
                     }
                     else
                     {
@@ -468,7 +472,7 @@ namespace easySave___Graphic.Models
 
                 while (prioFinish != 0)
                 {
-                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait")), DispatcherPriority.ContextIdle);
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait prio")), DispatcherPriority.ContextIdle);
                     Thread.Sleep(1000);
                 }
 
@@ -495,11 +499,15 @@ namespace easySave___Graphic.Models
 
                         bigFile.ReleaseMutex();
                     }
+                    else
+                    {
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait copy big file")), DispatcherPriority.ContextIdle);
+                    }
                 }
                 else
                 {
                     copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar, label);
-
+                  
                     sourceList.Remove(sourceList[i]);
                 }
             }
