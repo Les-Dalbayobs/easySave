@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,8 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
   <data name="advertisement" xml:space="preserve">
     <value>Cette action est irréversible</value>
+    <comment>Avertissement au moment de la suppression</comment>
   </data>
   <data name="apply" xml:space="preserve">
     <value>Appliquer</value>
@@ -128,6 +132,7 @@
   </data>
   <data name="chooseProcess" xml:space="preserve">
     <value>Entrez le nom du processus (si pas en cours d'utilisation)</value>
+    <comment>Pour choisir un logiciel métier qui bloque les sauvegardes</comment>
   </data>
   <data name="complete" xml:space="preserve">
     <value>Complète</value>
@@ -138,11 +143,16 @@
   <data name="delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="descSettingsBS" xml:space="preserve">
+    <value>Ce paramètre empêchera le lancement si un processus spécifique est lancé</value>
+    <comment>Description du paramètre business software</comment>
+  </data>
   <data name="destination" xml:space="preserve">
     <value>Chemin de la destination</value>
   </data>
   <data name="destPathError" xml:space="preserve">
     <value>Erreur ! Chemin de destination incorrect : </value>
+    <comment>Erreur du chemin de destination</comment>
   </data>
   <data name="differential" xml:space="preserve">
     <value>Différentielle</value>
@@ -161,6 +171,7 @@
   </data>
   <data name="errorProcessRunning" xml:space="preserve">
     <value>Arrêt des copies car le logiciel métier est en cours d'utilisation</value>
+    <comment>Erreur lorsque le logiciel détecte que le logiciel métier est en cours d'utilisation</comment>
   </data>
   <data name="exit" xml:space="preserve">
     <value>Quitter</value>
@@ -168,11 +179,19 @@
   <data name="fileExtension" xml:space="preserve">
     <value>Entrez l'extension de fichiers désirée (si pas dans la liste)</value>
   </data>
+  <data name="finished" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="formatLog" xml:space="preserve">
+    <value>Format des 
+fichiers log</value>
+  </data>
   <data name="fr" xml:space="preserve">
     <value>Français</value>
   </data>
   <data name="french" xml:space="preserve">
     <value>Français</value>
+    <comment>! Doublon !</comment>
   </data>
   <data name="id" xml:space="preserve">
     <value>ID</value>
@@ -186,6 +205,10 @@
   <data name="makeChoice" xml:space="preserve">
     <value>Faites votre choix : </value>
   </data>
+  <data name="maxSize" xml:space="preserve">
+    <value>Taille max. fichiers 
+simultanés</value>
+  </data>
   <data name="name" xml:space="preserve">
     <value>Nom</value>
   </data>
@@ -198,11 +221,23 @@
   <data name="noSelectJob" xml:space="preserve">
     <value>Pas de job sélectionné</value>
   </data>
+  <data name="other" xml:space="preserve">
+    <value>Autres</value>
+  </data>
+  <data name="paused" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="prioritization" xml:space="preserve">
+    <value>Prioritisation</value>
+  </data>
   <data name="progress" xml:space="preserve">
     <value>Progression</value>
   </data>
   <data name="proSoftware" xml:space="preserve">
-    <value>Logiciel metier</value>
+    <value>Logiciel métier</value>
+  </data>
+  <data name="remove" xml:space="preserve">
+    <value>Retirer</value>
   </data>
   <data name="replay" xml:space="preserve">
     <value>Reprendre</value>
@@ -218,6 +253,12 @@
   </data>
   <data name="saveOneJob" xml:space="preserve">
     <value>Sauvegarde du job : </value>
+  </data>
+  <data name="selectAddExtension" xml:space="preserve">
+    <value>Veuillez écrire l'extension à ajouter !</value>
+  </data>
+  <data name="selectExtension" xml:space="preserve">
+    <value>Veuillez sélectionnez une extension à supprimer !</value>
   </data>
   <data name="selectJob" xml:space="preserve">
     <value>Veuillez sélectionner un job</value>
@@ -236,6 +277,15 @@
   </data>
   <data name="typeExtension" xml:space="preserve">
     <value>Extension du fichier</value>
+  </data>
+  <data name="waitForBigFiles" xml:space="preserve">
+    <value>En attente de la copie des autres fichiers volumineux</value>
+  </data>
+  <data name="waitForPrioritizedFiles" xml:space="preserve">
+    <value>En attente de la copie des fichiers priorisés</value>
+  </data>
+  <data name="waitForProcess" xml:space="preserve">
+    <value>En attente de fermeture du logiciel métier</value>
   </data>
   <data name="wantDelete" xml:space="preserve">
     <value>Voulez-vous vraiment supprimer le job : </value>

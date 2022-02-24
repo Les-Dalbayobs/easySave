@@ -190,12 +190,20 @@
  3. Exit
  Choose number and press enter : </value>
   </data>
+  <data name="logs" xml:space="preserve">
+    <value> ----------------LOGS---------------
+1. JSON
+2. XML
+3. Exit
+
+Choose logs language and press enter : </value>
+  </data>
   <data name="menu" xml:space="preserve">
     <value> ----------------MENU---------------
  1. Create
  2. Delete
  3. Save
- 4. Language
+ 4. Settings
  5. Exit
  -----------------------------------
  Choose number and press enter : </value>
@@ -243,10 +251,19 @@
   <data name="saveOne2" xml:space="preserve">
     <value>, are you sure ?</value>
   </data>
+  <data name="settings" xml:space="preserve">
+    <value> -------------SETTINGS-------------
+1. Logs
+2. Language
+3. Exit
+
+Choose number and press enter : </value>
+  </data>
   <data name="validation" xml:space="preserve">
     <value> ------------VALIDATION------------
  1. Yes
  2. No
+
  Choose number and press enter : </value>
   </data>
 </root>

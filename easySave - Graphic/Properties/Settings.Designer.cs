@@ -58,5 +58,40 @@ namespace easySave___Graphic.Properties {
                 this["processUser"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("json")]
+        public string typeLog {
+            get {
+                return ((string)(this["typeLog"]));
+            }
+            set {
+                this["typeLog"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection prioExtension {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["prioExtension"]));
+            }
+            set {
+                this["prioExtension"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long bigSize {
+            get {
+                return ((long)(this["bigSize"]));
+            }
+            set {
+                this["bigSize"] = value;
+            }
+        }
     }
 }

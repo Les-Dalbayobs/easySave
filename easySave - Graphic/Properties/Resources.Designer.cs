@@ -61,6 +61,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add.
+        /// </summary>
+        public static string add {
+            get {
+                return ResourceManager.GetString("add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à This action is irreversible.
         /// </summary>
         public static string advertisement {
@@ -120,6 +129,15 @@ namespace easySave___Graphic.Properties {
         public static string delete {
             get {
                 return ResourceManager.GetString("delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à This setting will prevent the program to run if a specific process is in use.
+        /// </summary>
+        public static string descSettingsBS {
+            get {
+                return ResourceManager.GetString("descSettingsBS", resourceCulture);
             }
         }
         
@@ -214,6 +232,24 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Finished.
+        /// </summary>
+        public static string finished {
+            get {
+                return ResourceManager.GetString("finished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Log file format.
+        /// </summary>
+        public static string formatLog {
+            get {
+                return ResourceManager.GetString("formatLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à French.
         /// </summary>
         public static string fr {
@@ -268,6 +304,16 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Max. simultaneous 
+        ///files size.
+        /// </summary>
+        public static string maxSize {
+            get {
+                return ResourceManager.GetString("maxSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Name.
         /// </summary>
         public static string name {
@@ -304,6 +350,33 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Others.
+        /// </summary>
+        public static string other {
+            get {
+                return ResourceManager.GetString("other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Paused.
+        /// </summary>
+        public static string paused {
+            get {
+                return ResourceManager.GetString("paused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Prioritization.
+        /// </summary>
+        public static string prioritization {
+            get {
+                return ResourceManager.GetString("prioritization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Progress.
         /// </summary>
         public static string progress {
@@ -318,6 +391,15 @@ namespace easySave___Graphic.Properties {
         public static string proSoftware {
             get {
                 return ResourceManager.GetString("proSoftware", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remove.
+        /// </summary>
+        public static string remove {
+            get {
+                return ResourceManager.GetString("remove", resourceCulture);
             }
         }
         
@@ -363,6 +445,24 @@ namespace easySave___Graphic.Properties {
         public static string saveOneJob {
             get {
                 return ResourceManager.GetString("saveOneJob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please write the extension to add!.
+        /// </summary>
+        public static string selectAddExtension {
+            get {
+                return ResourceManager.GetString("selectAddExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please select an extension to remove!.
+        /// </summary>
+        public static string selectExtension {
+            get {
+                return ResourceManager.GetString("selectExtension", resourceCulture);
             }
         }
         
@@ -421,7 +521,43 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this job : .
+        ///   Looks up a localized string similar to Waiting for big files to copy.
+        /// </summary>
+        public static string waitForBigFiles {
+            get {
+                return ResourceManager.GetString("waitForBigFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for prioritized files to copy.
+        /// </summary>
+        public static string waitForPrioritizedFiles {
+            get {
+                return ResourceManager.GetString("waitForPrioritizedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pending close of the business software.
+        /// </summary>
+        public static string waitForProcess {
+            get {
+                return ResourceManager.GetString("waitForProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Waiting.
+        /// </summary>
+        public static string waiting {
+            get {
+                return ResourceManager.GetString("waiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete this job : .
         /// </summary>
         public static string wantDelete {
             get {

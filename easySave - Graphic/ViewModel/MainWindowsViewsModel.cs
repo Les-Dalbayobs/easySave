@@ -16,7 +16,9 @@ namespace easySave___Graphic.ViewModel
     class MainWindowsViewsModel
     {
         #region atributes
-        public static int progressJob;
+        ObservableCollection<string> prioExtension;
+
+        string selectPrioExtension;
 
         /// <summary>
         /// Observable collection with all jobs
@@ -50,6 +52,8 @@ namespace easySave___Graphic.ViewModel
         List<string> currentProcess;
 
         string selectedProcess;
+
+        long bigSize;
         #endregion
 
         #region properties
@@ -66,6 +70,9 @@ namespace easySave___Graphic.ViewModel
         public string EncryptionExtension { get => encryptionExtension; set => encryptionExtension = value; }
         public List<string> CurrentProcess { get => currentProcess; set => currentProcess = value; }
         public string SelectedProcess { get => selectedProcess; set => selectedProcess = value; }
+        public ObservableCollection<string> PrioExtension { get => prioExtension; set => prioExtension = value; }
+        public string SelectPrioExtension { get => selectPrioExtension; set => selectPrioExtension = value; }
+        public long BigSize { get => bigSize; set => bigSize = value; }
 
         #endregion
 
@@ -75,9 +82,12 @@ namespace easySave___Graphic.ViewModel
             serializer = new JsonSerializer();
 
             encryptionExtension = Properties.Settings.Default.encryption;
+
             readProcess();
 
+            importPrioExtension();
             importConfig();
+            importBigSize();
 
             string pathLogFolder = pathFilesEasySave + @"\Log";
 
@@ -96,11 +106,59 @@ namespace easySave___Graphic.ViewModel
         #endregion
 
         #region methods
+        public void importPrioExtension()
+        {
+            this.prioExtension = new ObservableCollection<string>();
+
+            if (Properties.Settings.Default.prioExtension != null)
+            {
+                foreach (var item in Properties.Settings.Default.prioExtension)
+                {
+                    this.prioExtension.Add(item);
+                }
+            }
+        }
+
+        public void savePrioExtension()
+        {
+            if (this.prioExtension.Count != 0)
+            {
+                StringCollection copyPrio = new StringCollection();
+
+                foreach (var item in this.prioExtension)
+                {
+                    copyPrio.Add(item);
+                }
+
+                Properties.Settings.Default.prioExtension = copyPrio;
+            }
+            else
+            {
+                Properties.Settings.Default.prioExtension = null;
+            }
+        }
+
+        public void addPrioExtension()
+        {
+            this.prioExtension.Add(selectPrioExtension);
+            this.selectPrioExtension = null;
+
+            savePrioExtension();
+        }
+
+        public void deletePrioExtension()
+        {
+            this.prioExtension.Remove(selectPrioExtension);
+            this.selectPrioExtension = null;
+
+            savePrioExtension();
+        }
+
         /// <summary>
         ///  Method to remove a job to the list and export the config
         /// </summary>
         /// <param name="jobDelete">Job to remove in the list</param>
-        public void deleteJob(easySave___Graphic.Models.job jobDelete)
+        public void deleteJob(Models.job jobDelete)
         {
             this.jobs.Remove(jobDelete);
             serializeJob();
@@ -111,7 +169,7 @@ namespace easySave___Graphic.ViewModel
         /// Method to add a job to the list and export the config
         /// </summary>
         /// <param name="jobAdd">Job to add in the list</param>
-        public void addJob(easySave___Graphic.Models.job jobAdd)
+        public void addJob(Models.job jobAdd)
         {
             this.jobs.Add(jobAdd);
             serializeJob();
@@ -282,6 +340,17 @@ namespace easySave___Graphic.ViewModel
             }
             
             return false;
+        }
+
+        public void newBigSize()
+        {
+            Properties.Settings.Default.bigSize = this.bigSize;
+            Properties.Settings.Default.Save();
+        }
+
+        public void importBigSize()
+        {
+            this.bigSize = Properties.Settings.Default.bigSize;
         }
         #endregion
     }

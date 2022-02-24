@@ -6,11 +6,66 @@
         xmlns:local="clr-namespace:easySave___Graphic.Views"
         xmlns:language="clr-namespace:easySave___Graphic.Properties"
         mc:Ignorable="d"
-        Title="EncryptionWindow" Height="419" Width="400" WindowStyle="None" ResizeMode="NoResize" MinWidth="400" MinHeight="413">
-
+        Title="EncryptionWindow" Height="600" Width="400" WindowStyle="None" ResizeMode="NoResize" MinWidth="400" MinHeight="600">
+    <Window.Resources>
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#F3F3F3" Offset="0"/>
+            <GradientStop Color="#EBEBEB" Offset="0.5"/>
+            <GradientStop Color="#DDDDDD" Offset="0.5"/>
+            <GradientStop Color="#CDCDCD" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+        <Style x:Key="ToggleButtonStyle1" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,-114,0">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Border x:Name="on" Width="50" Height="25" Background="LightGray" CornerRadius="2,0,0,4" Margin="10,0,0,0">
+                                <TextBlock x:Name="onText" Text="JSON" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <Border x:Name="off" Width="50" Height="25" Background="LightGray" CornerRadius="0,2,4,0">
+                                <TextBlock x:Name="offText" Text="XML" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="on" Property="Background" Value="#FFAC00E7"/>
+                                <Setter TargetName="onText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="off" Property="Background" Value="#FFAC00E7"/>
+                                <Setter TargetName="offText" Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <!--#region List of extends files-->
-        <ComboBox x:Name="ComboBoxExtension" HorizontalAlignment="Left" Margin="10,82,0,0"
+        <ComboBox x:Name="ComboBoxExtension" HorizontalAlignment="Left" Margin="9,97,0,0"
                   VerticalAlignment="Top" 
                   Width="240" Height="28" SelectionChanged="ComboBoxExtension_SelectionChanged">
             <ComboBoxItem>txt</ComboBoxItem>
@@ -31,38 +86,60 @@
             <ComboBoxItem>ini</ComboBoxItem>
         </ComboBox>
 
-        <ComboBox x:Name="ComboBoxProcess" HorizontalAlignment="Left" Margin="10,260,0,0"
+        <ComboBox x:Name="ComboBoxProcess" HorizontalAlignment="Left" Margin="9,249,0,0"
                   VerticalAlignment="Top" 
                   Width="240" Height="28" ItemsSource="{Binding CurrentProcess}" SelectionChanged="ComboBoxProcess_SelectionChanged"></ComboBox>
         <!--#endregion-->
 
         <!--#region Button-->
-        <Button Content="Ok"  Margin="153,368,153,0" 
+        <Button Content="Ok"  Margin="153,550,153,0" 
                 VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
                 Foreground="White" FontFamily="Bahnschrift" FontSize="18" Height="40" Width="94" Click="Button_Click"/>
         <!--#endregion-->
 
         <!--#region Label-->
-        <Label Content="{x:Static language:Resources.fileExtension}" HorizontalAlignment="Center" Margin="0,115,0,0" 
-               VerticalAlignment="Top" FontFamily="Bahnschrift" Width="380"/>
-        <Label Content="{x:Static language:Resources.typeExtension}" HorizontalAlignment="Left" Margin="10,55,0,0" 
-               VerticalAlignment="Top" FontFamily="Bahnschrift"/>
-        <Label Content="{x:Static language:Resources.encryptionMenu}" HorizontalContentAlignment="Center" Margin="10,17,10,0" VerticalAlignment="Top" Width="380" FontSize="20" FontWeight="Bold"/>
-        <Label Content="{x:Static language:Resources.proSoftware}" HorizontalContentAlignment="Center" Margin="10,192,10,0" VerticalAlignment="Top" Width="380" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Enter below file extension (if not in the list)" HorizontalAlignment="Center" Margin="0,125,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" Width="380" FontSize="11"/>
+        <Label Content="{x:Static language:Resources.typeExtension}" HorizontalAlignment="Left" Margin="9,75,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" Height="22" FontSize="11"/>
+        <Label Content="{x:Static language:Resources.encryptionMenu}" HorizontalContentAlignment="Left" Margin="7,45,277,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="15"/>
+        <Label Content="{x:Static language:Resources.proSoftware}" HorizontalContentAlignment="Left" Margin="7,185,235,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
 
-        <Label Content="{x:Static language:Resources.listProcess}" HorizontalAlignment="Left" Margin="10,233,0,0" 
-               VerticalAlignment="Top" FontFamily="Bahnschrift"/>
-        <Label Content="{x:Static language:Resources.chooseProcess}" HorizontalAlignment="Left" Margin="10,293,0,0" 
-               VerticalAlignment="Top" FontFamily="Bahnschrift"/>
+        <Label Content="{x:Static language:Resources.listProcess}" HorizontalAlignment="Left" Margin="9,229,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11"/>
+        <Label Content="Enter below the  name of the process (if not in use)" HorizontalAlignment="Left" Margin="9,277,0,0" 
+               VerticalAlignment="Top" FontFamily="Bahnschrift" FontSize="11"/>
+        <Label Content="{x:Static language:Resources.other}" HorizontalContentAlignment="Left" Margin="7,475,324,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
         <!--#endregion-->
 
         <!--#region TextBox-->
-        <TextBox x:Name="TextBoxEncryption" HorizontalContentAlignment="Center" Margin="10,139,10,0"  TextWrapping="NoWrap" 
-                 VerticalAlignment="Top" Width="380" Height="29" RenderTransformOrigin="0.642,0.484"
+        <TextBox x:Name="TextBoxEncryption" HorizontalContentAlignment="Center" Margin="9,145,11,0"  TextWrapping="NoWrap" 
+                 VerticalAlignment="Top" Width="380" Height="28" RenderTransformOrigin="0.642,0.484"
                  Text="{Binding EncryptionExtension}"/>
-        <TextBox x:Name="TextBoxProcess" HorizontalContentAlignment="Center" Margin="10,317,10,0"  TextWrapping="NoWrap" 
-                 VerticalAlignment="Top" Width="380" Height="29" RenderTransformOrigin="0.642,0.484"
+        <TextBox x:Name="TextBoxProcess" HorizontalContentAlignment="Center" Margin="9,301,11,0"  TextWrapping="NoWrap" 
+                 VerticalAlignment="Top" Width="380" Height="28" RenderTransformOrigin="0.642,0.484"
                  Text="{Binding SelectedProcess}"/>
+        <!--#endregion-->
+
+        <!--#region ToggleButton-->
+        <ToggleButton x:Name="ToggleButtonFormatLog" 
+        Content="{x:Static language:Resources.formatLog}" 
+        Style="{StaticResource ToggleButtonStyle1}" Margin="9,495,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="186" FontSize="10"/>
+        <Label Content="{x:Static language:Resources.setting}" HorizontalContentAlignment="Center" Margin="9,8,11,0" VerticalAlignment="Top" Width="380" FontSize="20" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Margin="9,215,0,0" Text="{x:Static language:Resources.descSettingsBS}" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontSize="9" FontStyle="Italic" SelectionOpacity="0.8" BorderThickness="0,0,0,0" Opacity="0.6"/>
+        <ListBox x:Name="ListBoxPrioExtension" Margin="9,365,151,125" ItemsSource="{Binding PrioExtension}" SelectedItem="{Binding SelectPrioExtension}" HorizontalContentAlignment="Center"/>
+        <Label Content="{x:Static language:Resources.prioritization}" HorizontalContentAlignment="Left" Margin="7,335,289,0" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+        <Button x:Name="ButtonNewPrioExtension" Content="{x:Static language:Resources.add}"  Margin="289,406,37,0" 
+            VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
+            Foreground="White" FontFamily="Bahnschrift" Height="28" Click="ButtonNewPrioExtension_Click"/>
+        <Button x:Name="ButtonRemovePrioExtension" Content="{x:Static language:Resources.remove}"  Margin="289,447,37,0" 
+            VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
+            Foreground="White" FontFamily="Bahnschrift" Height="28" Click="ButtonRemovePrioExtension_Click"/>
+        <TextBox x:Name="TextBoxPrioExtension" Text="{Binding SelectPrioExtension}" TextWrapping="NoWrap" Margin="254,374,10,207" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+        <Label Content="{x:Static language:Resources.maxSize}" HorizontalAlignment="Left" Margin="208,499,0,0" VerticalAlignment="Top" FontSize="10" Width="97" Height="36"/>
+        <Label Content="Ko" HorizontalAlignment="Left" Margin="366,505,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.468,0.578"/>
+        <TextBox x:Name="TextBoxBigSize" Text="{Binding BigSize}" HorizontalAlignment="Left" Margin="305,504,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="61" Height="26" KeyDown="TextBoxBigSize_KeyDown" TextChanged="TextBoxBigSize_TextChanged"/>
+        <GridSplitter HorizontalAlignment="Left" Height="50" Margin="200,490,0,0" VerticalAlignment="Top" Width="3" Background="#FFAC00E7"/>
         <!--#endregion-->
     </Grid>
 </Window>
