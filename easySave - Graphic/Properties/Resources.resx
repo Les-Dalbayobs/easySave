@@ -289,4 +289,7 @@ files size</value>
   <data name="waitForPrioritizedFiles" xml:space="preserve">
     <value>Waiting for prioritized files to copy</value>
   </data>
+  <data name="waitForProcess" xml:space="preserve">
+    <value>Pending close of the business software</value>
+  </data>
 </root>

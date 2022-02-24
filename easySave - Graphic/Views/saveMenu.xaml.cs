@@ -43,10 +43,6 @@ namespace easySave___Graphic.Views
             Models.Global.stop = false;
             Models.job.prioFinish = 0;
 
-            Ok.IsEnabled = false;
-            ButtonPause.IsEnabled = true;
-            ButtonStop.IsEnabled = true;
-
             ViewModel.MainWindowsViewsModel mainW = this.DataContext as ViewModel.MainWindowsViewsModel;
 
             Models.jobThread.ProgressBar1 = ProgressBarJob1;
@@ -73,6 +69,10 @@ namespace easySave___Graphic.Views
             }
             else
             {
+                Ok.IsEnabled = false;
+                ButtonPause.IsEnabled = true;
+                ButtonStop.IsEnabled = true;
+
                 if (this.RadioAllJob.IsChecked == true)
                 {
                     bool error = false;

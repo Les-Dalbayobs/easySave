@@ -189,6 +189,31 @@ namespace easySave___Graphic.Models
         #endregion
 
         #region methodes
+        public bool checkProcess()
+        {
+            if (Properties.Settings.Default.processUser != null && Properties.Settings.Default.processUser != "")
+            {
+                Process[] allProcess = Process.GetProcesses();
+
+                foreach (var oneProcess in allProcess)
+                {
+                    if (Properties.Settings.Default.processUser == oneProcess.ProcessName)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public void updateLabel(System.Windows.Controls.Label label, string value)
+        {
+            if (label != null)
+            {
+                label.Content = value;
+            }
+        }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////                      METHODS TO COPY                          ////////////////////////
@@ -403,6 +428,12 @@ namespace easySave___Graphic.Models
                         Thread.Sleep(1000);
                     }
 
+                    while (checkProcess())
+                    {
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForProcess"))), DispatcherPriority.ContextIdle);
+                        Thread.Sleep(1000);
+                    }
+
                     // If the button stop is pressed, stop the save
                     if (Global.stop == true)
                     {
@@ -459,6 +490,12 @@ namespace easySave___Graphic.Models
                 while (prioFinish != 0)
                 {
                     System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForPrioritizedFiles"))), DispatcherPriority.ContextIdle);
+                    Thread.Sleep(1000);
+                }
+
+                while (checkProcess())
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForProcess"))), DispatcherPriority.ContextIdle);
                     Thread.Sleep(1000);
                 }
 
@@ -634,11 +671,43 @@ namespace easySave___Graphic.Models
                 {
                     verif = true;
                 }
+                catch (Exception e)
+                {
+                    //Console.WriteLine("The process failed : " + e.ToString());
+                }
             }
             // If not, return false
                 catch
                 {
                     verif = false;
+        }
+
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////                      PREVENT ERRORS                          ////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// Method to verify if the destination exists during creation
+        /// </summary>
+        /// <returns></returns>
+        public bool verifCreateDestination()
+        {
+            // Initialize the verification variable at false
+            bool verif = false;
+
+            /// Try catch to verify if the destination exists
+            try
+            {
+                // Create the directory at the destination path
+                DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
+                Directory.CreateDirectory(destination.FullName);
+
+                // If the path exists, return true
+                if (destination.Exists)
+                {
+                    verif = true;
                 }
             return verif;
         }
@@ -664,9 +733,12 @@ namespace easySave___Graphic.Models
             {
                 exist = true; //Update the variable with true
             }
-
             return exist; //Bool - On the existence of the directory
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////                      RELATIVE TO LOGS                          ///////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>
         /// Method to read into the logs 
@@ -722,7 +794,6 @@ namespace easySave___Graphic.Models
                     {
                         Global.listSaveAdvancement = new List<logSaveAdvancement>();
                     }
-
                 }
             }
         }
@@ -855,6 +926,11 @@ namespace easySave___Graphic.Models
             return null;
         }
 
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////                      TOOLS                          ////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         /// <summary>
         /// Method to encrypt specific files during a save
         /// </summary>
@@ -891,7 +967,6 @@ namespace easySave___Graphic.Models
                 $"Destination : {this.pathDestination}\n" +
                 $"Type : {this.typeSave}\n";
         }
-
 
         /// <summary>
         /// Method to update progress bar label
