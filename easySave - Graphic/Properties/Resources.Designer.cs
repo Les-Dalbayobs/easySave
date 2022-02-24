@@ -521,7 +521,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Waiting for big files to copy.
+        ///   Looks up a localized string similar to Waiting for big files to copy.
         /// </summary>
         public static string waitForBigFiles {
             get {
@@ -530,7 +530,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Waiting for prioritized files to copy.
+        ///   Looks up a localized string similar to Waiting for prioritized files to copy.
         /// </summary>
         public static string waitForPrioritizedFiles {
             get {
@@ -557,7 +557,7 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you really want to delete this job : .
+        ///   Looks up a localized string similar to Do you really want to delete this job : .
         /// </summary>
         public static string wantDelete {
             get {
