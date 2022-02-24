@@ -278,8 +278,8 @@ simultanés</value>
   <data name="typeExtension" xml:space="preserve">
     <value>Extension du fichier</value>
   </data>
-  <data name="waiting" xml:space="preserve">
-    <value>En attente</value>
+  <data name="waitForBigFiles" xml:space="preserve">
+    <value>En attente de la copie des autres fichiers volumineux</value>
   </data>
   <data name="wantDelete" xml:space="preserve">
     <value>Voulez-vous vraiment supprimer le job : </value>

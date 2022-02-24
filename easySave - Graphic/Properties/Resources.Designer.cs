@@ -521,11 +521,11 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waiting.
+        ///   Looks up a localized string similar to Waiting for big files to copy.
         /// </summary>
-        public static string waiting {
+        public static string waitForBigFiles {
             get {
-                return ResourceManager.GetString("waiting", resourceCulture);
+                return ResourceManager.GetString("waitForBigFiles", resourceCulture);
             }
         }
         

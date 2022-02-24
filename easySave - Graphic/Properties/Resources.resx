@@ -274,6 +274,9 @@ files size</value>
   <data name="waiting" xml:space="preserve">
     <value>Waiting</value>
   </data>
+  <data name="waitForBigFiles" xml:space="preserve">
+    <value>Waiting for big files to copy</value>
+  </data>
   <data name="wantDelete" xml:space="preserve">
     <value>Do you really want to delete this job : </value>
   </data>
