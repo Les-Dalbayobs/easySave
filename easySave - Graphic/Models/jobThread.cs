@@ -55,14 +55,20 @@ namespace easySave___Graphic.Models
             }
         }
 
+        /// <summary>
+        /// Method which creates a loop for all threads
+        /// </summary>
         public void threadLoop()
         {
+            // Initialize finish at false
             bool finish = false;
 
             semaphore.WaitOne();
 
+            // While loop which provides job to all progress bars
             while (!finish)
             {
+                // Check if the first progress bar waits for a job
                 if (proBar1.WaitOne(1000))
                 {
                     if (Global.stop == false)
@@ -78,6 +84,7 @@ namespace easySave___Graphic.Models
                     finish = true;
                     semaphore.Release();
                 }
+                // Check if the second progress bar waits for a job
                 else if (proBar2.WaitOne(1000))
                 {
                     if (Global.stop == false)
@@ -93,6 +100,7 @@ namespace easySave___Graphic.Models
                     finish = true;
                     semaphore.Release();
                 }
+                // Check if the third progress bar waits for a job
                 else if (proBar3.WaitOne(1000))
                 {
                     if (Global.stop == false)
@@ -108,6 +116,7 @@ namespace easySave___Graphic.Models
                     finish = true;
                     semaphore.Release();
                 }
+                // Check if the fourth progress bar waits for a job
                 else if (proBar4.WaitOne(1000))
                 {
                     if (Global.stop == false)
@@ -123,6 +132,7 @@ namespace easySave___Graphic.Models
                     finish = true;
                     semaphore.Release();
                 }
+                // Check if the fifth progress bar waits for a job
                 else if (proBar5.WaitOne(1000))
                 {
                     if (Global.stop == false)
@@ -141,10 +151,15 @@ namespace easySave___Graphic.Models
             }
         }
 
+        /// <summary>
+        /// Method which create a list of all file extensions the user wants to save in priority
+        /// </summary>
         public void createListPrioExtension()
         {
+            // Check if the user specified file extensions or not
             if (Properties.Settings.Default.prioExtension != null)
             {
+                //  If yes, this creates a list of string which all file extensions he created
                 this.prio = new List<string>();
 
                 foreach (var item in Properties.Settings.Default.prioExtension)
@@ -152,6 +167,7 @@ namespace easySave___Graphic.Models
                     this.prio.Add(item);
                 }
             }
+            // If not -> prio = null
             else
             {
                 this.prio = null;
