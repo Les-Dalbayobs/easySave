@@ -189,26 +189,20 @@ namespace easySave___Graphic.Models
         #endregion
 
         #region methodes
-        public void updateLabel(System.Windows.Controls.Label label, string value)
-        {
-            if (label != null)
-            {
-                label.Content = value;
-            }
-        }
 
-        public void updateProgressBar(System.Windows.Controls.ProgressBar progressBar, double value)
-        {
-            if (progressBar != null)
-            {
-                progressBar.Value = value;
-            }
-        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////                      METHODS TO COPY                          ////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region Methods to copy
 
         /// <summary>
-        /// Method to start a backup
+        /// Method to set all parameters for each jobs
         /// </summary>
-        /// <returns>Return if the backup is well done</returns>
+        /// <param name="prioExtension"></param>
+        /// <param name="encryptionExtension"></param>
+        /// <param name="progressBar"></param>
+        /// <param name="label"></param>
+        /// <returns></returns>
         public bool copy(List<string> prioExtension = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             //Log Advancement initialize/////////////////////////////////////////////////////////////////////////////////
@@ -225,7 +219,7 @@ namespace easySave___Graphic.Models
             }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////
             System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateProgressBar(progressBar, 0)), DispatcherPriority.ContextIdle);
-             
+
             bool confirmSave = false; //Confirmation of the backup execution - Set to false
 
             DirectoryInfo source = new DirectoryInfo(this.pathSource); //Create the DirectoryInfo of the source
@@ -235,7 +229,7 @@ namespace easySave___Graphic.Models
             try
             {
                 //Complete////////////////////////////////////////////////////////////////////////////////////////////////
-                if (this.typeSave) 
+                if (this.typeSave)
                 {
                     //Verification that the directory exists
                     if (destination.Exists)
@@ -248,7 +242,7 @@ namespace easySave___Graphic.Models
                     confirmSave = true; //Validate the backup
                 }
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-                
+
                 //Differential////////////////////////////////////////////////////////////////////////////////////////////
                 else
                 {
@@ -277,60 +271,15 @@ namespace easySave___Graphic.Models
         }
 
         /// <summary>
-        /// Method to check if a directory exists
+        /// Method relative to files copy. It concerns only one by one file
         /// </summary>
-        /// <param name="path">Directory path</param>
-        /// <returns>Bool - On the existence of the directory</returns>
-        public bool verifExist(string path)
-        {
-            bool exist = false; //Variable who stock the boolean result
-
-            DirectoryInfo source = new DirectoryInfo(path); //Create the DirectoryInfo of the path
-
-            if (source.Exists) //To know if the source exist
-            {
-                exist = true; //Update the variable with true
-            }
-
-            return exist; //Bool - On the existence of the directory
-        }
-
-        /// <summary>
-        /// Method for calculating the total number of files in a folder and the subfolders
-        /// </summary>
-        /// <param name="path">Directory path</param>
-        /// <returns>The total number of files in the folder and sub-folders </returns>
-        public int calculNbFiles(string path)
-        {
-            int size = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Length;
-
-            return size;
-        }
-
-        /// <summary>
-        /// Method to calculate the size in bytes of a folder
-        /// </summary>
-        /// <param name="pathSource">Directory path</param>
-        /// <returns>Size in bytes</returns>
-        public Int64 calculSizeFolder(string pathSource)
-        {
-            Int64 size = 0; //Intialisation size of the repertory = 0
-
-            DirectoryInfo folder = new DirectoryInfo(pathSource); //Create the DirectoryInfo of the path
-
-            foreach (FileInfo file in folder.GetFiles()) //Keep all files 
-            {
-                size += file.Length; //Foreach files sizes, add in size variable
-            }
-
-            foreach (DirectoryInfo dir in folder.GetDirectories()) //Keep all folders
-            {
-                size += calculSizeFolder(dir.FullName);// Restart calculSize of the repertory
-            }
-
-            return size; //Return total of the size
-        }
-
+        /// <param name="file"></param>
+        /// <param name="overwrite"></param>
+        /// <param name="destinationDirectory"></param>
+        /// <param name="destinationFile"></param>
+        /// <param name="encryptionExtension"></param>
+        /// <param name="progressBar"></param>
+        /// <param name="label"></param>
         public void copyFile(FileInfo file, bool overwrite, string destinationDirectory, string destinationFile, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
 
@@ -376,13 +325,14 @@ namespace easySave___Graphic.Models
             }
             ///////////////////////////////////////////////////////////////////////////////////////
 
-            //Log Advancement update///////////////////////////////////////////////////////////////
+            //  Statelog    //////////////////////////////////////////////////////////////////////
             // Calculate number of files left to copy
             logSave.NbFilesLeftToDo--;
             // Calculate number of files copied;
             nbFilesCopied++;
             // Calculate progression of copy
             logSave.Progression = Math.Round(((double)nbFilesCopied / (double)logSave.TotalFilesToCopy * 100), 1);
+            // Method to update progress bar
             System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateProgressBar(progressBar, logSave.Progression)), DispatcherPriority.ContextIdle);
             //System.Windows.Forms.Application.DoEvents();
             // Determine current state
@@ -397,7 +347,7 @@ namespace easySave___Graphic.Models
             // Add time to logProgress
             logProgress.SetTime();
             //////////////////////////////////////////////////////////////////////////////////////
-            
+
             lock (lockReadOrWriteLog)
             {
                 if (Properties.Settings.Default.typeLog == "json")
@@ -426,6 +376,15 @@ namespace easySave___Graphic.Models
 
         }
 
+        /// <summary>
+        /// Main method to launch backups
+        /// </summary>
+        /// <param name="sourceList"></param>
+        /// <param name="overwrite"></param>
+        /// <param name="prioList"></param>
+        /// <param name="encryptionExtension"></param>
+        /// <param name="progressBar"></param>
+        /// <param name="label"></param>
         public void copyListFiles(List<string> sourceList, bool overwrite, List<string> prioList = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             if (prioList != null)
@@ -488,7 +447,7 @@ namespace easySave___Graphic.Models
                     prioFinish--;
                 }
             }
-            
+
             for (int i = 0; i < sourceList.Count;)
             {
                 while (Global.pause == true)
@@ -534,37 +493,14 @@ namespace easySave___Graphic.Models
                 else
                 {
                     copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar, label);
-                  
+
                     sourceList.Remove(sourceList[i]);
                 }
             }
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sourceFullName"></param>
-        /// <param name="listPrioExtensions"></param>
-        /// <returns></returns>
-        public List<string> createListPrio(string sourceFullName, List<string> listPrioExtensions = null)
-        {
-            if (listPrioExtensions != null)
-            {
-                List<string> fullPrio = new List<string>();
-                
-                foreach (string onePrio in listPrioExtensions)
-                {
-                    fullPrio.AddRange(Directory.EnumerateFiles(sourceFullName, "*." + onePrio, SearchOption.AllDirectories).ToList<string>());
-                }
-
-                return fullPrio;
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// 
+        /// Method to make a complete copy
         /// </summary>
         /// <param name="source"></param>
         /// <param name="destination"></param>
@@ -572,7 +508,7 @@ namespace easySave___Graphic.Models
         /// <param name="encryptionExtension"></param>
         /// <param name="progressBar"></param>
         /// <param name="label"></param>
-        public void copyComplete(DirectoryInfo source, DirectoryInfo destination,List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
+        public void copyComplete(DirectoryInfo source, DirectoryInfo destination, List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
 
@@ -587,28 +523,6 @@ namespace easySave___Graphic.Models
                 copyListFiles(sourceListPathFiles, true, listPrioExtensions, encryptionExtension, progressBar, label);
             }
         }
-
-        /// <summary>
-        /// Method to write in XML log progress file
-        /// </summary>
-        public void writeXmlLogProgress()
-        {
-            if (!File.Exists(pathFileLogProgressXml))
-            {
-                File.Create(pathFileLogProgressXml).Close();
-            }
-
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(logProgressSave));
-            TextWriter writerXml = new StreamWriter(pathFileLogProgressXml, true);
-            xmlSerializer.Serialize(writerXml, logProgress);
-            writerXml.Close();
-        }
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////                      METHODS TO COPY                          ////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #region Methods to copy
 
         /// <summary>
         /// Method to make a differential save
@@ -697,6 +611,7 @@ namespace easySave___Graphic.Models
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////                      PREVENT ERRORS                          ////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region Preventing errors
 
         /// <summary>
         /// Method to verify if the destination exists during creation
@@ -727,10 +642,31 @@ namespace easySave___Graphic.Models
                 }
             return verif;
         }
+        #endregion
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////                      RELATIVE TO LOGS                          ///////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region Relative to logs
+
+        /// <summary>
+        /// Method to check if a directory exists
+        /// </summary>
+        /// <param name="path">Directory path</param>
+        /// <returns>Bool - On the existence of the directory</returns>
+        public bool verifExist(string path)
+        {
+            bool exist = false; //Variable who stock the boolean result
+
+            DirectoryInfo source = new DirectoryInfo(path); //Create the DirectoryInfo of the path
+
+            if (source.Exists) //To know if the source exist
+            {
+                exist = true; //Update the variable with true
+            }
+
+            return exist; //Bool - On the existence of the directory
+        }
 
         /// <summary>
         /// Method to read into the logs 
@@ -791,6 +727,7 @@ namespace easySave___Graphic.Models
             }
         }
 
+
         /// <summary>
         /// Method to search into a state log file  
         /// </summary>
@@ -836,10 +773,87 @@ namespace easySave___Graphic.Models
             }
         }
 
+        /// <summary>
+        /// Method to write in XML log progress file
+        /// </summary>
+        public void writeXmlLogProgress()
+        {
+            if (!File.Exists(pathFileLogProgressXml))
+            {
+                File.Create(pathFileLogProgressXml).Close();
+            }
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(logProgressSave));
+            TextWriter writerXml = new StreamWriter(pathFileLogProgressXml, true);
+            xmlSerializer.Serialize(writerXml, logProgress);
+            writerXml.Close();
+        }
+
+        #endregion
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////                      TOOLS                          ////////////////////////////
+        //////////////////////                      TOOLS AND SETTINGS                         ///////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region Tools and Settings
+
+        /// <summary>
+        /// Method for calculating the total number of files in a folder and the subfolders
+        /// </summary>
+        /// <param name="path">Directory path</param>
+        /// <returns>The total number of files in the folder and sub-folders </returns>
+        public int calculNbFiles(string path)
+        {
+            int size = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Length;
+
+            return size;
+        }
+
+        /// <summary>
+        /// Method to calculate the size in bytes of a folder
+        /// </summary>
+        /// <param name="pathSource">Directory path</param>
+        /// <returns>Size in bytes</returns>
+        public Int64 calculSizeFolder(string pathSource)
+        {
+            Int64 size = 0; //Intialisation size of the repertory = 0
+
+            DirectoryInfo folder = new DirectoryInfo(pathSource); //Create the DirectoryInfo of the path
+
+            foreach (FileInfo file in folder.GetFiles()) //Keep all files 
+            {
+                size += file.Length; //Foreach files sizes, add in size variable
+            }
+
+            foreach (DirectoryInfo dir in folder.GetDirectories()) //Keep all folders
+            {
+                size += calculSizeFolder(dir.FullName);// Restart calculSize of the repertory
+            }
+
+            return size; //Return total of the size
+        }
+
+        /// <summary>
+        /// Create a list of prioritized files
+        /// </summary>
+        /// <param name="sourceFullName"></param>
+        /// <param name="listPrioExtensions"></param>
+        /// <returns></returns>
+        public List<string> createListPrio(string sourceFullName, List<string> listPrioExtensions = null)
+        {
+            if (listPrioExtensions != null)
+            {
+                List<string> fullPrio = new List<string>();
+
+                foreach (string onePrio in listPrioExtensions)
+                {
+                    fullPrio.AddRange(Directory.EnumerateFiles(sourceFullName, "*." + onePrio, SearchOption.AllDirectories).ToList<string>());
+                }
+
+                return fullPrio;
+            }
+
+            return null;
+        }
 
         /// <summary>
         /// Method to encrypt specific files during a save
@@ -877,6 +891,35 @@ namespace easySave___Graphic.Models
                 $"Destination : {this.pathDestination}\n" +
                 $"Type : {this.typeSave}\n";
         }
+
+
+        /// <summary>
+        /// Method to update progress bar label
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="value"></param>
+        public void updateLabel(System.Windows.Controls.Label label, string value)
+        {
+            if (label != null)
+            {
+                label.Content = value;
+            }
+        }
+
+        /// <summary>
+        /// Method to update progress bar percentage
+        /// </summary>
+        /// <param name="progressBar"></param>
+        /// <param name="value"></param>
+        public void updateProgressBar(System.Windows.Controls.ProgressBar progressBar, double value)
+        {
+            if (progressBar != null)
+            {
+                progressBar.Value = value;
+            }
+        }
+
+        #endregion
 
         // End of methods region
         #endregion
