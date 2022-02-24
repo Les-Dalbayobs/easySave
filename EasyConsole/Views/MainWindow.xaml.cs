@@ -32,6 +32,11 @@ namespace EasyConsole
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
 
+            if (Connect.IsEnabled == true)
+            {
+                Connect.IsEnabled = false;
+            }
+
         }
 
         private void Disconnect_Click(object sender, RoutedEventArgs e)
