@@ -364,12 +364,6 @@ namespace easySave___Graphic.Models
             DateTime transferDelay = DateTime.Now;
             ///////////////////////////////////////////////////////////////////////////////////////
 
-            while (!checkProcess())
-            {
-                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Pause")), DispatcherPriority.ContextIdle);
-                Thread.Sleep(1000);
-            }
-
             //Copy or encryption///////////////////////////////////////////////////////////////////
             if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
             {
@@ -468,6 +462,12 @@ namespace easySave___Graphic.Models
                         Thread.Sleep(1000);
                     }
 
+                    while (checkProcess())
+                    {
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForProcess"))), DispatcherPriority.ContextIdle);
+                        Thread.Sleep(1000);
+                    }
+
                     // If the button stop is pressed, stop the save
                     if (Global.stop == true)
                     {
@@ -524,6 +524,12 @@ namespace easySave___Graphic.Models
                 while (prioFinish != 0)
                 {
                     System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForPrioritizedFiles"))), DispatcherPriority.ContextIdle);
+                    Thread.Sleep(1000);
+                }
+
+                while (checkProcess())
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForProcess"))), DispatcherPriority.ContextIdle);
                     Thread.Sleep(1000);
                 }
 

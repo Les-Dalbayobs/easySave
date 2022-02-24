@@ -284,6 +284,9 @@ simultanés</value>
   <data name="waitForPrioritizedFiles" xml:space="preserve">
     <value>En attente de la copie des fichiers priorisés</value>
   </data>
+  <data name="waitForProcess" xml:space="preserve">
+    <value>En attente de fermeture du logiciel métier</value>
+  </data>
   <data name="wantDelete" xml:space="preserve">
     <value>Voulez-vous vraiment supprimer le job : </value>
   </data>
