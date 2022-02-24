@@ -604,110 +604,11 @@ namespace easySave___Graphic.Models
             writerXml.Close();
         }
 
-        /// <summary>
-        /// Method to search into a state log file  
-        /// </summary>
-        public void searchLogAdvancement()
-        {
-            lock (Global.listSaveAdvancement)
-            {
-                int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
 
-                if (index >= 0)
-                Global.listSaveAdvancement[index] = logSave;
-                else
-                Global.listSaveAdvancement.Add(logSave);
-            }
-        }
-
-        /// <summary>
-        /// Method to write into state log files
-        /// </summary>
-        public void writeLogAdvancement()
-        {
-            if (Properties.Settings.Default.typeLog == "json")
-            {
-                jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
-
-                using (var streamWriter = new StreamWriter(pathFileLogSave))
-                {
-                    //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
-                    using (var jsonWriter = new JsonTextWriter(streamWriter))
-                    {
-                        jsonWriter.Formatting = Formatting.Indented;
-                        serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonStringLogSave));
-                    }
-                }
-            }
-            else
-            {
-                XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
-                using (var streamWriter = new StreamWriter(pathFileLogSaveXml))
-                {
-                    xml.Serialize(streamWriter, Global.listSaveAdvancement);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Method to read into the logs 
-        /// </summary>
-        public void readLogAdvancement()
-        {
-            if (Properties.Settings.Default.typeLog == "json")
-            {
-                if (!File.Exists(pathFileLogSave))
-                {
-                    File.Create(pathFileLogSave).Close();
-                }
-                else
-                {
-                    using (var streamReader = new StreamReader(pathFileLogSave))
-                    {
-                        using (var jsonReader = new JsonTextReader(streamReader))
-                        {
-                            Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
-                        }
-                    }
-                }
-
-                if (Global.listSaveAdvancement == null)
-                {
-                    Global.listSaveAdvancement = new List<logSaveAdvancement>();
-                }
-            }
-            else
-            {
-                if (!File.Exists(pathFileLogSaveXml))
-                {
-                    File.Create(pathFileLogSaveXml).Close();
-                }
-                else
-                {
-                    try
-                    {
-
-                        var doc = new System.Xml.XmlDocument();
-                        doc.Load(pathFileLogSaveXml);
-
-                        XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
-                        using (var stream = new FileStream(pathFileLogSaveXml, FileMode.Open))
-                        {
-                            Global.listSaveAdvancement = (List<logSaveAdvancement>)xml.Deserialize(stream);
-                        }
-                        
-                    }
-                    catch (System.Xml.XmlException e)
-                    {
-                        Global.listSaveAdvancement = new List<logSaveAdvancement>();
-                    }
-                    
-                }
-            }
-        }
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////                      METHODS TO COPY                          ////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region Methods to copy
 
         /// <summary>
         /// Method to make a differential save
@@ -764,10 +665,10 @@ namespace easySave___Graphic.Models
                 destinationFiles.Add(Path.GetFileName(file));
             }
 
-            //Creation of list of files delete from the source
+            // Creation of list of files deleted from the source
             var filesToDelete = destinationFiles.Except(sourceFiles);
 
-            //Deletes all files found
+            // Deletes all files found
             foreach (string file in filesToDelete)
             {
                 while (Global.pause == true)
@@ -775,7 +676,8 @@ namespace easySave___Graphic.Models
                     Thread.Sleep(1000);
                 }
 
-                //Try catch which will allow error handling if needed
+                // Try catch which will allow error handling if needed
+                // Check if folder contains encrypted files and delete these
                 try
                 {
                     if (!file.Contains(".cry"))
@@ -790,18 +692,11 @@ namespace easySave___Graphic.Models
             }
         }
 
-        /// <summary>
-        /// Method which overrites the included ToString method
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            /// Change all the default parameters
-            return $"Name : {this.name}\n" +
-                $"Source : {this.pathSource}\n" +
-                $"Destination : {this.pathDestination}\n" +
-                $"Type : {this.typeSave}\n";
-        }
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////                      PREVENT ERRORS                          ////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>
         /// Method to verify if the destination exists during creation
@@ -833,6 +728,119 @@ namespace easySave___Graphic.Models
             return verif;
         }
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////                      RELATIVE TO LOGS                          ///////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// Method to read into the logs 
+        /// </summary>
+        public void readLogAdvancement()
+        {
+            // Check if the default type of log is JSON
+            if (Properties.Settings.Default.typeLog == "json")
+            {
+                if (!File.Exists(pathFileLogSave))
+                {
+                    File.Create(pathFileLogSave).Close();
+                }
+                else
+                {
+                    using (var streamReader = new StreamReader(pathFileLogSave))
+                    {
+                        using (var jsonReader = new JsonTextReader(streamReader))
+                        {
+                            Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                        }
+                    }
+                }
+
+                if (Global.listSaveAdvancement == null)
+                {
+                    Global.listSaveAdvancement = new List<logSaveAdvancement>();
+                }
+            }
+            // Check if the default type of log is XML
+            else
+            {
+                if (!File.Exists(pathFileLogSaveXml))
+                {
+                    File.Create(pathFileLogSaveXml).Close();
+                }
+                else
+                {
+                    try
+                    {
+
+                        var doc = new System.Xml.XmlDocument();
+                        doc.Load(pathFileLogSaveXml);
+
+                        XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
+                        using (var stream = new FileStream(pathFileLogSaveXml, FileMode.Open))
+                        {
+                            Global.listSaveAdvancement = (List<logSaveAdvancement>)xml.Deserialize(stream);
+                        }
+
+                    }
+                    catch (System.Xml.XmlException e)
+                    {
+                        Global.listSaveAdvancement = new List<logSaveAdvancement>();
+                    }
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method to search into a state log file  
+        /// </summary>
+        public void searchLogAdvancement()
+        {
+            lock (Global.listSaveAdvancement)
+            {
+                int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
+
+                if (index >= 0)
+                    Global.listSaveAdvancement[index] = logSave;
+                else
+                    Global.listSaveAdvancement.Add(logSave);
+            }
+        }
+
+        /// <summary>
+        /// Method to write into state log files
+        /// </summary>
+        public void writeLogAdvancement()
+        {
+            if (Properties.Settings.Default.typeLog == "json")
+            {
+                jsonStringLogSave = JsonConvert.SerializeObject(Global.listSaveAdvancement, Formatting.Indented);
+
+                using (var streamWriter = new StreamWriter(pathFileLogSave))
+                {
+                    //Initializes a new instance of the JsonTextWriter class using the specified TextWriter.
+                    using (var jsonWriter = new JsonTextWriter(streamWriter))
+                    {
+                        jsonWriter.Formatting = Formatting.Indented;
+                        serializer.Serialize(jsonWriter, JsonConvert.DeserializeObject(jsonStringLogSave));
+                    }
+                }
+            }
+            else
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
+                using (var streamWriter = new StreamWriter(pathFileLogSaveXml))
+                {
+                    xml.Serialize(streamWriter, Global.listSaveAdvancement);
+                }
+            }
+        }
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////                      TOOLS                          ////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         /// <summary>
         /// Method to encrypt specific files during a save
         /// </summary>
@@ -856,6 +864,21 @@ namespace easySave___Graphic.Models
 
             return returnEncryption;
         }
+
+        /// <summary>
+        /// Method which overrites the included ToString method
+        /// </summary>
+        /// <returns>Returns the converted value</returns>
+        public override string ToString()
+        {
+            /// Change all the default parameters
+            return $"Name : {this.name}\n" +
+                $"Source : {this.pathSource}\n" +
+                $"Destination : {this.pathDestination}\n" +
+                $"Type : {this.typeSave}\n";
+        }
+
+        // End of methods region
         #endregion
     }
 }
