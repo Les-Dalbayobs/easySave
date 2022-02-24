@@ -167,6 +167,24 @@ namespace easySave___Graphic.Models
         #endregion
 
         #region methodes
+        public bool checkProcess()
+        {
+            if (Properties.Settings.Default.processUser != null && Properties.Settings.Default.processUser != "")
+            {
+                Process[] allProcess = Process.GetProcesses();
+
+                foreach (var oneProcess in allProcess)
+                {
+                    if (Properties.Settings.Default.processUser == oneProcess.ProcessName)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public void updateLabel(System.Windows.Controls.Label label, string value)
         {
             if (label != null)
@@ -320,6 +338,12 @@ namespace easySave___Graphic.Models
             logProgress.FileSize = file.Length.ToString();
             DateTime transferDelay = DateTime.Now;
             ///////////////////////////////////////////////////////////////////////////////////////
+
+            while (!checkProcess())
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Pause")), DispatcherPriority.ContextIdle);
+                Thread.Sleep(1000);
+            }
 
             //Copy or encryption///////////////////////////////////////////////////////////////////
             if (encryptionExtension != null && encryptionExtension != "" && file.Extension == encryptionExtension)
