@@ -122,6 +122,7 @@
   </data>
   <data name="advertisement" xml:space="preserve">
     <value>Cette action est irréversible</value>
+    <comment>Avertissement au moment de la suppression</comment>
   </data>
   <data name="apply" xml:space="preserve">
     <value>Appliquer</value>
@@ -131,6 +132,7 @@
   </data>
   <data name="chooseProcess" xml:space="preserve">
     <value>Entrez le nom du processus (si pas en cours d'utilisation)</value>
+    <comment>Pour choisir un logiciel métier qui bloque les sauvegardes</comment>
   </data>
   <data name="complete" xml:space="preserve">
     <value>Complète</value>
@@ -143,12 +145,14 @@
   </data>
   <data name="descSettingsBS" xml:space="preserve">
     <value>Ce paramètre empêchera le lancement si un processus spécifique est lancé</value>
+    <comment>Description du paramètre business software</comment>
   </data>
   <data name="destination" xml:space="preserve">
     <value>Chemin de la destination</value>
   </data>
   <data name="destPathError" xml:space="preserve">
     <value>Erreur ! Chemin de destination incorrect : </value>
+    <comment>Erreur du chemin de destination</comment>
   </data>
   <data name="differential" xml:space="preserve">
     <value>Différentielle</value>
@@ -167,12 +171,16 @@
   </data>
   <data name="errorProcessRunning" xml:space="preserve">
     <value>Arrêt des copies car le logiciel métier est en cours d'utilisation</value>
+    <comment>Erreur lorsque le logiciel détecte que le logiciel métier est en cours d'utilisation</comment>
   </data>
   <data name="exit" xml:space="preserve">
     <value>Quitter</value>
   </data>
   <data name="fileExtension" xml:space="preserve">
     <value>Entrez l'extension de fichiers désirée (si pas dans la liste)</value>
+  </data>
+  <data name="finished" xml:space="preserve">
+    <value>Terminé</value>
   </data>
   <data name="formatLog" xml:space="preserve">
     <value>Format des 
@@ -183,6 +191,7 @@ fichiers log</value>
   </data>
   <data name="french" xml:space="preserve">
     <value>Français</value>
+    <comment>! Doublon !</comment>
   </data>
   <data name="id" xml:space="preserve">
     <value>ID</value>
@@ -214,6 +223,9 @@ simultanés</value>
   </data>
   <data name="other" xml:space="preserve">
     <value>Autres</value>
+  </data>
+  <data name="paused" xml:space="preserve">
+    <value>Pause</value>
   </data>
   <data name="prioritization" xml:space="preserve">
     <value>Prioritisation</value>
@@ -265,6 +277,12 @@ simultanés</value>
   </data>
   <data name="typeExtension" xml:space="preserve">
     <value>Extension du fichier</value>
+  </data>
+  <data name="waitForBigFiles" xml:space="preserve">
+    <value>En attente de la copie des autres fichiers volumineux</value>
+  </data>
+  <data name="waitForPrioritizedFiles" xml:space="preserve">
+    <value>En attente de la copie des fichiers priorisés</value>
   </data>
   <data name="wantDelete" xml:space="preserve">
     <value>Voulez-vous vraiment supprimer le job : </value>

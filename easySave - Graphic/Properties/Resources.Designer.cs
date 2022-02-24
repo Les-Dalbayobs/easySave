@@ -232,6 +232,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finished.
+        /// </summary>
+        public static string finished {
+            get {
+                return ResourceManager.GetString("finished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log file format.
         /// </summary>
         public static string formatLog {
@@ -346,6 +355,15 @@ namespace easySave___Graphic.Properties {
         public static string other {
             get {
                 return ResourceManager.GetString("other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paused.
+        /// </summary>
+        public static string paused {
+            get {
+                return ResourceManager.GetString("paused", resourceCulture);
             }
         }
         
@@ -499,6 +517,33 @@ namespace easySave___Graphic.Properties {
         public static string typeExtension {
             get {
                 return ResourceManager.GetString("typeExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for big files to copy.
+        /// </summary>
+        public static string waitForBigFiles {
+            get {
+                return ResourceManager.GetString("waitForBigFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for prioritized files to copy.
+        /// </summary>
+        public static string waitForPrioritizedFiles {
+            get {
+                return ResourceManager.GetString("waitForPrioritizedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting.
+        /// </summary>
+        public static string waiting {
+            get {
+                return ResourceManager.GetString("waiting", resourceCulture);
             }
         }
         

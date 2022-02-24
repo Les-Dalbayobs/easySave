@@ -11,13 +11,22 @@ using System.Xml.Serialization;
 using System.Windows.Threading;
 using System.Windows;
 using System.Threading;
+using System.Resources;
+using System.Reflection;
 
 namespace easySave___Graphic.Models
 {
+
+    /// <summary>
+    /// Declare global variables
+    /// </summary>
     public static class Global
     {
+        // For state log list
         public static List<logSaveAdvancement> listSaveAdvancement;
+        // For button pause
         public static bool pause = false;
+        // For button stop
         public static bool stop = false;
     }
 
@@ -27,20 +36,30 @@ namespace easySave___Graphic.Models
     public class job
     {
         #region attributes
+
+        // Set the traductions ressources by creating an instance of ressource manager
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
+
         static object lockReadOrWriteLog = new object();
 
         public static Mutex bigFile = new Mutex();
 
         static object lockPrioFinish = new object();
+
         public static int prioFinish = 0;
 
-
+        // Creates a new instance of log progress save
         logProgressSave logProgress = new logProgressSave();
+
+        // Set the log progress file in JSON
         string jsonStringLogProgress;
+
         // Set the path for log progress file in JSON
         string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
+
         // Set the path for the log progress file in XML
         string pathFileLogProgressXml = @"C:\EasySave\Log\logProgressSave.xml";
+
         // Set the folder for logs
         string pathfolderLog;
 
@@ -48,10 +67,13 @@ namespace easySave___Graphic.Models
         /// Create a new instance from logSaveAdvancement, named logSave
         /// </summary>
         logSaveAdvancement logSave = new logSaveAdvancement();
+
         // Create variable which stores json String for the Save Log
         string jsonStringLogSave;
+
         // Create variable which stores the path for the log save file
         string pathFileLogSave = @"C:\EasySave\Log\logSaveAdvancement.json";
+
         // Create variable which stores the path for the state log file
         string pathFileLogSaveXml = @"C:\EasySave\Log\logSaveAdvancement.xml";
 
@@ -258,9 +280,12 @@ namespace easySave___Graphic.Models
                     confirmSave = true;
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Finish")), DispatcherPriority.ContextIdle);
+
+                // Dislay the state "finished" if the save is finished
+                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("finished"))), DispatcherPriority.ContextIdle);
 
             }
+            // Catch error
             catch (Exception e)
             {
                 confirmSave = false; //Backup not performed
@@ -438,10 +463,12 @@ namespace easySave___Graphic.Models
                 {
                     while (Global.pause == true)
                     {
-                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Pause")), DispatcherPriority.ContextIdle);
+                        // Display the "paused" state if the save is awaiting
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("paused"))), DispatcherPriority.ContextIdle);
                         Thread.Sleep(1000);
                     }
 
+                    // If the button stop is pressed, stop the save
                     if (Global.stop == true)
                     {
                         break;
@@ -468,7 +495,7 @@ namespace easySave___Graphic.Models
                         }
                         else
                         {
-                            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait copy big file")), DispatcherPriority.ContextIdle);
+                            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForBigFiles"))), DispatcherPriority.ContextIdle);
                         }
                     }
                     else
@@ -490,13 +517,13 @@ namespace easySave___Graphic.Models
             {
                 while (Global.pause == true)
                 {
-                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Pause")), DispatcherPriority.ContextIdle);
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("paused"))), DispatcherPriority.ContextIdle);
                     Thread.Sleep(1000);
                 }
 
                 while (prioFinish != 0)
                 {
-                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait prio")), DispatcherPriority.ContextIdle);
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForPrioritizedFiles"))), DispatcherPriority.ContextIdle);
                     Thread.Sleep(1000);
                 }
 
@@ -525,7 +552,7 @@ namespace easySave___Graphic.Models
                     }
                     else
                     {
-                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait copy big file")), DispatcherPriority.ContextIdle);
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForBigFiles"))), DispatcherPriority.ContextIdle);
                     }
                 }
                 else
@@ -537,6 +564,12 @@ namespace easySave___Graphic.Models
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceFullName"></param>
+        /// <param name="listPrioExtensions"></param>
+        /// <returns></returns>
         public List<string> createListPrio(string sourceFullName, List<string> listPrioExtensions = null)
         {
             if (listPrioExtensions != null)
@@ -555,10 +588,14 @@ namespace easySave___Graphic.Models
         }
 
         /// <summary>
-        /// Method for making a full backup
+        /// 
         /// </summary>
-        /// <param name="source">Source DirectoryInfo</param>
-        /// <param name="destination">Destination DirectoryInfo</param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
+        /// <param name="listPrioExtensions"></param>
+        /// <param name="encryptionExtension"></param>
+        /// <param name="progressBar"></param>
+        /// <param name="label"></param>
         public void copyComplete(DirectoryInfo source, DirectoryInfo destination,List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
@@ -591,6 +628,193 @@ namespace easySave___Graphic.Models
             writerXml.Close();
         }
 
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////                      METHODS TO COPY                          ////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region Methods to copy
+
+        /// <summary>
+        /// Method to make a differential save
+        /// </summary>
+        /// <param name="source">Source path</param>
+        /// <param name="destination">Destination path</param>
+        /// <param name="listPrioExtensions">List of priorized files</param>
+        /// <param name="encryptionExtension">Encryption extension</param>
+        /// <param name="progressBar">Progress bars</param>
+        /// <param name="label">Labels</param>
+        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
+        {
+            // List of all source files extensions
+            List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
+
+            // Check if the list of priorization is empty
+            if (listPrioExtensions != null)
+            {
+                // If not, creates a list of priorities, with file full name and list all the extensions prioritized
+                List<string> listFilesPrio = createListPrio(source.FullName, listPrioExtensions);
+
+                // Then copy all the list, taking all prios in consideration
+                copyListFiles(sourceListPathFiles, false, listFilesPrio, encryptionExtension, progressBar, label);
+            }
+            else
+            {
+                // If not, copy directly
+                copyListFiles(sourceListPathFiles, false, listPrioExtensions, encryptionExtension, progressBar, label);
+            }
+        }
+
+        /// <summary>
+        /// Method to compare the source and destination to find the files to delete from the source.
+        /// </summary>
+        /// <param name="source">Source DirectoryInfo</param>
+        /// <param name="destination">Source DirectoryInfo</param>
+        public void compareDelete(string source, string destination)
+        {
+            //Lists all files in both folders and stores them in an enumeration list
+            var sourceListPathFile = Directory.EnumerateFiles(source, ".", SearchOption.AllDirectories);
+            var destinationListPathFile = Directory.EnumerateFiles(destination, ".", SearchOption.AllDirectories);
+
+            //Create lists that will contain just the file names (not the full path)
+            var sourceFiles = new List<string>();
+            var destinationFiles = new List<string>();
+
+            //Adds all file names to the lists
+            foreach (string file in sourceListPathFile)
+            {
+                sourceFiles.Add(Path.GetFileName(file));
+            }
+            foreach (string file in destinationListPathFile)
+            {
+                destinationFiles.Add(Path.GetFileName(file));
+            }
+
+            // Creation of list of files deleted from the source
+            var filesToDelete = destinationFiles.Except(sourceFiles);
+
+            // Deletes all files found
+            foreach (string file in filesToDelete)
+            {
+                while (Global.pause == true)
+                {
+                    Thread.Sleep(1000);
+                }
+
+                // Try catch which will allow error handling if needed
+                // Check if folder contains encrypted files and delete these
+                try
+                {
+                    if (!file.Contains(".cry"))
+                    {
+                        File.Delete(Path.Combine(destination, file));
+                    }
+                }
+                catch (Exception e)
+                {
+                    //Console.WriteLine("The process failed : " + e.ToString());
+                }
+            }
+        }
+
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////                      PREVENT ERRORS                          ////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// Method to verify if the destination exists during creation
+        /// </summary>
+        /// <returns></returns>
+        public bool verifCreateDestination()
+        {
+            // Initialize the verification variable at false
+            bool verif = false;
+
+            /// Try catch to verify if the destination exists
+            try
+            {
+                // Create the directory at the destination path
+                DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
+                Directory.CreateDirectory(destination.FullName);
+
+                // If the path exists, return true
+                if (destination.Exists)
+                {
+                    verif = true;
+                }
+            }
+            // If not, return false
+                catch
+                {
+                    verif = false;
+                }
+            return verif;
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////                      RELATIVE TO LOGS                          ///////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// Method to read into the logs 
+        /// </summary>
+        public void readLogAdvancement()
+        {
+            // Check if the default type of log is JSON
+            if (Properties.Settings.Default.typeLog == "json")
+            {
+                if (!File.Exists(pathFileLogSave))
+                {
+                    File.Create(pathFileLogSave).Close();
+                }
+                else
+                {
+                    using (var streamReader = new StreamReader(pathFileLogSave))
+                    {
+                        using (var jsonReader = new JsonTextReader(streamReader))
+                        {
+                            Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
+                        }
+                    }
+                }
+
+                if (Global.listSaveAdvancement == null)
+                {
+                    Global.listSaveAdvancement = new List<logSaveAdvancement>();
+                }
+            }
+            // Check if the default type of log is XML
+            else
+            {
+                if (!File.Exists(pathFileLogSaveXml))
+                {
+                    File.Create(pathFileLogSaveXml).Close();
+                }
+                else
+                {
+                    try
+                    {
+
+                        var doc = new System.Xml.XmlDocument();
+                        doc.Load(pathFileLogSaveXml);
+
+                        XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
+                        using (var stream = new FileStream(pathFileLogSaveXml, FileMode.Open))
+                        {
+                            Global.listSaveAdvancement = (List<logSaveAdvancement>)xml.Deserialize(stream);
+                        }
+
+                    }
+                    catch (System.Xml.XmlException e)
+                    {
+                        Global.listSaveAdvancement = new List<logSaveAdvancement>();
+                    }
+
+                }
+            }
+        }
+
         /// <summary>
         /// Method to search into a state log file  
         /// </summary>
@@ -601,9 +825,9 @@ namespace easySave___Graphic.Models
                 int index = Global.listSaveAdvancement.FindIndex(logSave => logSave.Name == name);
 
                 if (index >= 0)
-                Global.listSaveAdvancement[index] = logSave;
+                    Global.listSaveAdvancement[index] = logSave;
                 else
-                Global.listSaveAdvancement.Add(logSave);
+                    Global.listSaveAdvancement.Add(logSave);
             }
         }
 
@@ -636,203 +860,26 @@ namespace easySave___Graphic.Models
             }
         }
 
-        /// <summary>
-        /// Method to read into the logs 
-        /// </summary>
-        public void readLogAdvancement()
-        {
-            if (Properties.Settings.Default.typeLog == "json")
-            {
-                if (!File.Exists(pathFileLogSave))
-                {
-                    File.Create(pathFileLogSave).Close();
-                }
-                else
-                {
-                    using (var streamReader = new StreamReader(pathFileLogSave))
-                    {
-                        using (var jsonReader = new JsonTextReader(streamReader))
-                        {
-                            Global.listSaveAdvancement = serializer.Deserialize<List<logSaveAdvancement>>(jsonReader);
-                        }
-                    }
-                }
 
-                if (Global.listSaveAdvancement == null)
-                {
-                    Global.listSaveAdvancement = new List<logSaveAdvancement>();
-                }
-            }
-            else
-            {
-                if (!File.Exists(pathFileLogSaveXml))
-                {
-                    File.Create(pathFileLogSaveXml).Close();
-                }
-                else
-                {
-                    try
-                    {
-
-                        var doc = new System.Xml.XmlDocument();
-                        doc.Load(pathFileLogSaveXml);
-
-                        XmlSerializer xml = new XmlSerializer(typeof(List<logSaveAdvancement>));
-                        using (var stream = new FileStream(pathFileLogSaveXml, FileMode.Open))
-                        {
-                            Global.listSaveAdvancement = (List<logSaveAdvancement>)xml.Deserialize(stream);
-                        }
-                        
-                    }
-                    catch (System.Xml.XmlException e)
-                    {
-                        Global.listSaveAdvancement = new List<logSaveAdvancement>();
-                    }
-                    
-                }
-            }
-        }
-
-        public bool IsFileLocked(FileInfo file)
-        {
-            try
-            {
-                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
-                {
-                    stream.Close();
-                }
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Method for making a differential backup
-        /// </summary>
-        /// <param name="source">Source DirectoryInfo</param>
-        /// <param name="destination">Source DirectoryInfo</param>
-        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
-        {
-            List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
-
-            if (listPrioExtensions != null)
-            {
-                List<string> listFilesPrio = createListPrio(source.FullName, listPrioExtensions);
-
-                copyListFiles(sourceListPathFiles, false, listFilesPrio, encryptionExtension, progressBar, label);
-            }
-            else
-            {
-                copyListFiles(sourceListPathFiles, false, listPrioExtensions, encryptionExtension, progressBar, label);
-            }
-        }
-
-        /// <summary>
-        /// Method to compare the source and destination to find the files to delete from the source.
-        /// </summary>
-        /// <param name="source">Source DirectoryInfo</param>
-        /// <param name="destination">Source DirectoryInfo</param>
-        public void compareDelete(string source, string destination)
-        {
-            //Lists all files in both folders and stores them in an enumeration list
-            var sourceListPathFile = Directory.EnumerateFiles(source, ".", SearchOption.AllDirectories);
-            var destinationListPathFile = Directory.EnumerateFiles(destination, ".", SearchOption.AllDirectories);
-
-            //Create lists that will contain just the file names (not the full path)
-            var sourceFiles = new List<string>();
-            var destinationFiles = new List<string>();
-
-            //Adds all file names to the lists
-            foreach (string file in sourceListPathFile)
-            {
-                sourceFiles.Add(Path.GetFileName(file));
-            }
-            foreach (string file in destinationListPathFile)
-            {
-                destinationFiles.Add(Path.GetFileName(file));
-            }
-
-            //Creation of list of files delete from the source
-            var filesToDelete = destinationFiles.Except(sourceFiles);
-
-            //Deletes all files found
-            foreach (string file in filesToDelete)
-            {
-                while (Global.pause == true)
-                {
-                    Thread.Sleep(1000);
-                }
-
-                //Try catch which will allow error handling if needed
-                try
-                {
-                    if (!file.Contains(".cry"))
-                    {
-                        File.Delete(Path.Combine(destination, file));
-                    }
-                }
-                catch (Exception e)
-                {
-                    //Console.WriteLine("The process failed : " + e.ToString());
-                }
-            }
-        }
-
-        /// <summary>
-        /// Method which overrites the included ToString method
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return $"Name : {this.name}\n" +
-                $"Source : {this.pathSource}\n" +
-                $"Destination : {this.pathDestination}\n" +
-                $"Type : {this.typeSave}\n";
-        }
-
-        /// <summary>
-        /// Method to verify if the destination exists during creation
-        /// </summary>
-        /// <returns></returns>
-        public bool verifCreateDestination()
-        {
-            bool verif = false;
-
-            try
-            {
-                DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
-                Directory.CreateDirectory(destination.FullName);
-
-                if (destination.Exists)
-                {
-                    verif = true;
-                }
-            }
-            catch
-            {
-                verif = false;
-            }
-
-            return verif;
-        }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////                      TOOLS                          ////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>
         /// Method to encrypt specific files during a save
         /// </summary>
-        /// <param name="fileSource"></param>
-        /// <param name="destination"></param>
+        /// <param name="fileSource">Source of the file</param>
+        /// <param name="destination">Destination of the copy</param>
         /// <returns></returns>
         public int encryption(FileInfo fileSource, string destinationDirectory)
         {
             // Set the path for Cryptosoft software
             string pathCryptoSoft = @"C:\Program Files (x86)\CryptoSoft\CryptoSoft.exe";
 
+            // Set the destination path for encrypted files
             string path = destinationDirectory + @"\" + Path.GetFileNameWithoutExtension(fileSource.FullName) + ".cry";
 
+            // Start the process of encryption
             var e = Process.Start(pathCryptoSoft, "\"" + fileSource.FullName + "\"" + " " + "\"" + path + "\"");
 
             e.WaitForExit();
@@ -841,6 +888,21 @@ namespace easySave___Graphic.Models
 
             return returnEncryption;
         }
+
+        /// <summary>
+        /// Method which overrites the included ToString method
+        /// </summary>
+        /// <returns>Returns the converted value</returns>
+        public override string ToString()
+        {
+            /// Change all the default parameters
+            return $"Name : {this.name}\n" +
+                $"Source : {this.pathSource}\n" +
+                $"Destination : {this.pathDestination}\n" +
+                $"Type : {this.typeSave}\n";
+        }
+
+        // End of methods region
         #endregion
     }
 }

@@ -174,6 +174,9 @@
   <data name="fileExtension" xml:space="preserve">
     <value>Enter file extension (if not in the list)</value>
   </data>
+  <data name="finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
   <data name="formatLog" xml:space="preserve">
     <value>Log file format</value>
   </data>
@@ -213,6 +216,9 @@ files size</value>
   </data>
   <data name="other" xml:space="preserve">
     <value>Others</value>
+  </data>
+  <data name="paused" xml:space="preserve">
+    <value>Paused</value>
   </data>
   <data name="prioritization" xml:space="preserve">
     <value>Prioritization</value>
@@ -265,6 +271,12 @@ files size</value>
   <data name="typeExtension" xml:space="preserve">
     <value>Choose file extension</value>
   </data>
+  <data name="waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="waitForBigFiles" xml:space="preserve">
+    <value>Waiting for big files to copy</value>
+  </data>
   <data name="wantDelete" xml:space="preserve">
     <value>Do you really want to delete this job : </value>
   </data>
@@ -273,5 +285,8 @@ files size</value>
   </data>
   <data name="yes" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="waitForPrioritizedFiles" xml:space="preserve">
+    <value>Waiting for prioritized files to copy</value>
   </data>
 </root>
