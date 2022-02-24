@@ -63,54 +63,59 @@
             />
 
         <ProgressBar x:Name="ProgressBarJob1" HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355" Background="#FFE6E6E6">
-          <ProgressBar.Foreground>
+            <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label Content="{Binding ElementName=ProgressBarJob1, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,182,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label Content="{Binding ElementName=ProgressBarJob1, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Left" Margin="344,182,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label x:Name="LabelSave1" Content="" HorizontalAlignment="Left" Margin="20,182,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="307"/>
 
         <ProgressBar x:Name="ProgressBarJob2" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="356" Margin="0,258,0,0" Background="#FFE6E6E6">
-          <ProgressBar.Foreground>
+            <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label Content="{Binding ElementName=ProgressBarJob2, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label Content="{Binding ElementName=ProgressBarJob2, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Left" Margin="344,232,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label x:Name="LabelSave2" Content="" HorizontalAlignment="Left" Margin="20,232,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="308"/>
 
         <ProgressBar x:Name="ProgressBarJob3" HorizontalAlignment="Center" Height="20" Margin="0,308,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
-          <ProgressBar.Foreground>
+            <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label Content="{Binding ElementName=ProgressBarJob3, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label Content="{Binding ElementName=ProgressBarJob3, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Left" Margin="344,283,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label x:Name="LabelSave3" Content="" HorizontalAlignment="Left" Margin="20,283,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="307"/>
 
         <ProgressBar x:Name="ProgressBarJob4" HorizontalAlignment="Center" Height="20" Margin="0,358,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
-          <ProgressBar.Foreground>
+            <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label Content="{Binding ElementName=ProgressBarJob4, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,332,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label Content="{Binding ElementName=ProgressBarJob4, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Left" Margin="344,333,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label x:Name="LabelSave4" Content="" HorizontalAlignment="Left" Margin="20,333,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="308"/>
 
         <ProgressBar x:Name="ProgressBarJob5" HorizontalAlignment="Center" Height="20" Margin="0,408,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
-          <ProgressBar.Foreground>
+            <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label Content="{Binding ElementName=ProgressBarJob5, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Center" Margin="0,382,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label Content="{Binding ElementName=ProgressBarJob5, Path=Value, StringFormat={}{0:O}%}" HorizontalAlignment="Left" Margin="344,383,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold"/>
+        <Label x:Name="LabelSave5" Content="" HorizontalAlignment="Left" Margin="19,383,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="308"/>
 
         <Button x:Name="ButtonPlay" Content="{x:Static language:Resources.replay}" Margin="70,458,246,0" Height="32" VerticalAlignment="Top" Click="ButtonPlay_Click" IsEnabled="False">
 
@@ -128,8 +133,10 @@
             Source="../Pictures/playpause.png"/>
             -->
         </Button>
-
-
-
+        <Label x:Name="LabelSaveStatut1" Content="" HorizontalAlignment="Left" Margin="20,206,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="335" FontSize="10" Foreground="Black"/>
+        <Label x:Name="LabelSaveStatut2" Content="" HorizontalAlignment="Left" Margin="19,255,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="335" FontSize="10" Foreground="Black"/>
+        <Label x:Name="LabelSaveStatut3" Content="" HorizontalAlignment="Left" Margin="20,306,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="335" FontSize="10" Foreground="Black"/>
+        <Label x:Name="LabelSaveStatut4" Content="" HorizontalAlignment="Left" Margin="20,356,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="335" FontSize="10" Foreground="Black"/>
+        <Label x:Name="LabelSaveStatut5" Content="" HorizontalAlignment="Left" Margin="20,406,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" Width="335" FontSize="10" Foreground="Black"/>
     </Grid>
 </Window>

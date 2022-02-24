@@ -41,6 +41,7 @@ namespace easySave___Graphic.Views
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             Models.Global.stop = false;
+            Models.job.prioFinish = 0;
 
             Ok.IsEnabled = false;
             ButtonPause.IsEnabled = true;
@@ -53,6 +54,18 @@ namespace easySave___Graphic.Views
             Models.jobThread.ProgressBar3 = ProgressBarJob3;
             Models.jobThread.ProgressBar4 = ProgressBarJob4;
             Models.jobThread.ProgressBar5 = ProgressBarJob5;
+
+            Models.jobThread.label1 = LabelSaveStatut1;
+            Models.jobThread.label2 = LabelSaveStatut2;
+            Models.jobThread.label3 = LabelSaveStatut3;
+            Models.jobThread.label4 = LabelSaveStatut4;
+            Models.jobThread.label5 = LabelSaveStatut5;
+
+            Models.jobThread.labelName1 = LabelSave1;
+            Models.jobThread.labelName2 = LabelSave2;
+            Models.jobThread.labelName3 = LabelSave3;
+            Models.jobThread.labelName4 = LabelSave4;
+            Models.jobThread.labelName5 = LabelSave5;
 
             if (mainW.checkProcess())
             {

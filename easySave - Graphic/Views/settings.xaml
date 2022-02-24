@@ -124,7 +124,7 @@
         <!--#region ToggleButton-->
         <ToggleButton x:Name="ToggleButtonFormatLog" 
         Content="{x:Static language:Resources.formatLog}" 
-        Style="{StaticResource ToggleButtonStyle1}" Margin="9,495,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="214" FontSize="10"/>
+        Style="{StaticResource ToggleButtonStyle1}" Margin="9,495,0,0" Height="46" VerticalAlignment="Top" HorizontalAlignment="Left" Width="186" FontSize="10"/>
         <Label Content="{x:Static language:Resources.setting}" HorizontalContentAlignment="Center" Margin="9,8,11,0" VerticalAlignment="Top" Width="380" FontSize="20" FontWeight="Bold"/>
         <TextBox HorizontalAlignment="Left" Margin="9,215,0,0" Text="{x:Static language:Resources.descSettingsBS}" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" FontSize="9" FontStyle="Italic" SelectionOpacity="0.8" BorderThickness="0,0,0,0" Opacity="0.6"/>
         <ListBox x:Name="ListBoxPrioExtension" Margin="9,365,151,125" ItemsSource="{Binding PrioExtension}" SelectedItem="{Binding SelectPrioExtension}" HorizontalContentAlignment="Center"/>
@@ -136,10 +136,10 @@
             VerticalAlignment="Top" BorderBrush="#FFAC00E7" Background="#FFAC00E7" 
             Foreground="White" FontFamily="Bahnschrift" Height="28" Click="ButtonRemovePrioExtension_Click"/>
         <TextBox x:Name="TextBoxPrioExtension" Text="{Binding SelectPrioExtension}" TextWrapping="NoWrap" Margin="254,374,10,207" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
-        <Label Content="{x:Static language:Resources.maxSize}" HorizontalAlignment="Left" Margin="228,499,0,0" VerticalAlignment="Top" FontSize="10" Width="94" Height="36"/>
-        <Label Content="Mo" HorizontalAlignment="Left" Margin="363,500,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.468,0.578"/>
-        <TextBox HorizontalAlignment="Left" Margin="327,504,0,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Top" Width="36" Height="26" FontWeight="Bold" RenderTransformOrigin="-0.088,0.423"/>
-        <GridSplitter HorizontalAlignment="Left" Height="50" Margin="215,490,0,0" VerticalAlignment="Top" Width="3" Background="#FFAC00E7"/>
+        <Label Content="{x:Static language:Resources.maxSize}" HorizontalAlignment="Left" Margin="208,499,0,0" VerticalAlignment="Top" FontSize="10" Width="97" Height="36"/>
+        <Label Content="Ko" HorizontalAlignment="Left" Margin="366,505,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.468,0.578"/>
+        <TextBox x:Name="TextBoxBigSize" Text="{Binding BigSize}" HorizontalAlignment="Left" Margin="305,504,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="61" Height="26" KeyDown="TextBoxBigSize_KeyDown" TextChanged="TextBoxBigSize_TextChanged"/>
+        <GridSplitter HorizontalAlignment="Left" Height="50" Margin="200,490,0,0" VerticalAlignment="Top" Width="3" Background="#FFAC00E7"/>
         <!--#endregion-->
     </Grid>
 </Window>

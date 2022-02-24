@@ -29,6 +29,12 @@ namespace easySave___Graphic.Models
         #region attributes
         static object lockReadOrWriteLog = new object();
 
+        public static Mutex bigFile = new Mutex();
+
+        static object lockPrioFinish = new object();
+        public static int prioFinish = 0;
+
+
         logProgressSave logProgress = new logProgressSave();
         string jsonStringLogProgress;
         // Set the path for log progress file in JSON
@@ -161,6 +167,14 @@ namespace easySave___Graphic.Models
         #endregion
 
         #region methodes
+        public void updateLabel(System.Windows.Controls.Label label, string value)
+        {
+            if (label != null)
+            {
+                label.Content = value;
+            }
+        }
+
         public void updateProgressBar(System.Windows.Controls.ProgressBar progressBar, double value)
         {
             if (progressBar != null)
@@ -173,7 +187,7 @@ namespace easySave___Graphic.Models
         /// Method to start a backup
         /// </summary>
         /// <returns>Return if the backup is well done</returns>
-        public bool copy(List<string> prioExtension = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public bool copy(List<string> prioExtension = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             //Log Advancement initialize/////////////////////////////////////////////////////////////////////////////////
             logSave.Name = this.Name;
@@ -207,7 +221,7 @@ namespace easySave___Graphic.Models
                         destination.Delete(true); //Delete the directory
                     }
 
-                    copyComplete(source, destination, prioExtension, encryptionExtension, progressBar); //Launch backup
+                    copyComplete(source, destination, prioExtension, encryptionExtension, progressBar, label); //Launch backup
 
                     confirmSave = true; //Validate the backup
                 }
@@ -216,7 +230,7 @@ namespace easySave___Graphic.Models
                 //Differential////////////////////////////////////////////////////////////////////////////////////////////
                 else
                 {
-                    copyDifferential(source, destination, prioExtension, encryptionExtension, progressBar); //Launch backup
+                    copyDifferential(source, destination, prioExtension, encryptionExtension, progressBar, label); //Launch backup
 
                     if (Global.stop == false)
                     {
@@ -226,6 +240,8 @@ namespace easySave___Graphic.Models
                     confirmSave = true;
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Finish")), DispatcherPriority.ContextIdle);
+
             }
             catch (Exception e)
             {
@@ -290,8 +306,11 @@ namespace easySave___Graphic.Models
             return size; //Return total of the size
         }
 
-        public void copyFile(FileInfo file, bool overwrite, string destinationDirectory, string destinationFile, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public void copyFile(FileInfo file, bool overwrite, string destinationDirectory, string destinationFile, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
+
+            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, file.Name)), DispatcherPriority.ContextIdle);
+
             //Log Progress update///////////////////////////////////////////////////////////////////
             // Create progress log
             logProgress.Name = this.Name;
@@ -382,14 +401,20 @@ namespace easySave___Graphic.Models
 
         }
 
-        public void copyListFiles(List<string> sourceList, bool overwrite, List<string> prioList = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public void copyListFiles(List<string> sourceList, bool overwrite, List<string> prioList = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             if (prioList != null)
             {
+                lock (lockPrioFinish)
+                {
+                    prioFinish++;
+                }
+
                 for (int i = 0; i < prioList.Count;)
                 {
                     while (Global.pause == true)
                     {
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Pause")), DispatcherPriority.ContextIdle);
                         Thread.Sleep(1000);
                     }
 
@@ -406,18 +431,44 @@ namespace easySave___Graphic.Models
                     string directoryDestination = Path.GetDirectoryName(destinationFile);
                     Directory.CreateDirectory(directoryDestination);
 
-                    copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+                    if (fileSource.Length > (Properties.Settings.Default.bigSize * 1024) && Properties.Settings.Default.bigSize != 0)
+                    {
+                        if (bigFile.WaitOne(1000))
+                        {
+                            copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar, label);
 
-                    sourceList.Remove(prioList[i]);
-                    prioList.Remove(prioList[i]);
+                            sourceList.Remove(prioList[i]);
+                            prioList.Remove(prioList[i]);
+
+                            bigFile.ReleaseMutex();
+                        }
+                    }
+                    else
+                    {
+                        copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar, label);
+
+                        sourceList.Remove(prioList[i]);
+                        prioList.Remove(prioList[i]);
+                    }
                 }
 
+                lock (lockPrioFinish)
+                {
+                    prioFinish--;
+                }
             }
             
             for (int i = 0; i < sourceList.Count;)
             {
                 while (Global.pause == true)
                 {
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Pause")), DispatcherPriority.ContextIdle);
+                    Thread.Sleep(1000);
+                }
+
+                while (prioFinish != 0)
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait")), DispatcherPriority.ContextIdle);
                     Thread.Sleep(1000);
                 }
 
@@ -426,17 +477,31 @@ namespace easySave___Graphic.Models
                     break;
                 }
 
+                FileInfo fileSource = new FileInfo(sourceList[i]);
+
                 string pathFile = sourceList[i].Replace(this.PathSource, string.Empty);
                 string destinationFile = this.pathDestination + pathFile;
 
                 string directoryDestination = Path.GetDirectoryName(destinationFile);
                 Directory.CreateDirectory(directoryDestination);
 
-                FileInfo fileSource = new FileInfo(sourceList[i]);
+                if (fileSource.Length > (Properties.Settings.Default.bigSize * 1024) && Properties.Settings.Default.bigSize != 0)
+                {
+                    if (bigFile.WaitOne(1000))
+                    {
+                        copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar, label);
 
-                copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar);
+                        sourceList.Remove(sourceList[i]);
 
-                sourceList.Remove(sourceList[i]);
+                        bigFile.ReleaseMutex();
+                    }
+                }
+                else
+                {
+                    copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar, label);
+
+                    sourceList.Remove(sourceList[i]);
+                }
             }
         }
 
@@ -462,7 +527,7 @@ namespace easySave___Graphic.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Destination DirectoryInfo</param>
-        public void copyComplete(DirectoryInfo source, DirectoryInfo destination,List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public void copyComplete(DirectoryInfo source, DirectoryInfo destination,List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
 
@@ -470,11 +535,11 @@ namespace easySave___Graphic.Models
             {
                 List<string> listFilesPrio = createListPrio(source.FullName, listPrioExtensions);
 
-                copyListFiles(sourceListPathFiles, true, listFilesPrio, encryptionExtension, progressBar);
+                copyListFiles(sourceListPathFiles, true, listFilesPrio, encryptionExtension, progressBar, label);
             }
             else
             {
-                copyListFiles(sourceListPathFiles, true, listPrioExtensions, encryptionExtension, progressBar);
+                copyListFiles(sourceListPathFiles, true, listPrioExtensions, encryptionExtension, progressBar, label);
             }
         }
 
@@ -618,7 +683,7 @@ namespace easySave___Graphic.Models
         /// </summary>
         /// <param name="source">Source DirectoryInfo</param>
         /// <param name="destination">Source DirectoryInfo</param>
-        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null)
+        public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
 
@@ -626,11 +691,11 @@ namespace easySave___Graphic.Models
             {
                 List<string> listFilesPrio = createListPrio(source.FullName, listPrioExtensions);
 
-                copyListFiles(sourceListPathFiles, false, listFilesPrio, encryptionExtension, progressBar);
+                copyListFiles(sourceListPathFiles, false, listFilesPrio, encryptionExtension, progressBar, label);
             }
             else
             {
-                copyListFiles(sourceListPathFiles, false, listPrioExtensions, encryptionExtension, progressBar);
+                copyListFiles(sourceListPathFiles, false, listPrioExtensions, encryptionExtension, progressBar, label);
             }
         }
 
