@@ -27,13 +27,14 @@ namespace EasyConsole
         public MainWindow()
         {
             InitializeComponent();
+            ViewModel.ViewModel mainWindowsViewsModel = new ViewModel.ViewModel();
+
+            this.DataContext = mainWindowsViewsModel;
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
-
             Connect.IsEnabled = false;
-            
         }
 
         private void Disconnect_Click(object sender, RoutedEventArgs e)
