@@ -503,6 +503,15 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting for big files to copy.
+        /// </summary>
+        public static string waitForBigFiles {
+            get {
+                return ResourceManager.GetString("waitForBigFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete this job : .
         /// </summary>
         public static string wantDelete {

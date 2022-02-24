@@ -11,6 +11,8 @@ using System.Xml.Serialization;
 using System.Windows.Threading;
 using System.Windows;
 using System.Threading;
+using System.Resources;
+using System.Reflection;
 
 namespace easySave___Graphic.Models
 {
@@ -27,6 +29,10 @@ namespace easySave___Graphic.Models
     public class job
     {
         #region attributes
+
+        // Set the traductions ressources by creating an instance of ressource manager
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
+
         static object lockReadOrWriteLog = new object();
 
         public static Mutex bigFile = new Mutex();
@@ -240,9 +246,12 @@ namespace easySave___Graphic.Models
                     confirmSave = true;
                 }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Finish")), DispatcherPriority.ContextIdle);
+
+                // Dislay the state "finished" if the save is finished
+                System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("finished"))), DispatcherPriority.ContextIdle);
 
             }
+            // Catch error
             catch (Exception e)
             {
                 confirmSave = false; //Backup not performed
@@ -414,10 +423,12 @@ namespace easySave___Graphic.Models
                 {
                     while (Global.pause == true)
                     {
-                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Pause")), DispatcherPriority.ContextIdle);
+                        // Display the "paused" state if the save is awaiting
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("paused"))), DispatcherPriority.ContextIdle);
                         Thread.Sleep(1000);
                     }
 
+                    // If the button stop is pressed, stop the save
                     if (Global.stop == true)
                     {
                         break;
