@@ -65,7 +65,7 @@
         <ProgressBar x:Name="ProgressBarJob1" HorizontalAlignment="Center" Height="20" Margin="0,208,0,0" VerticalAlignment="Top" Width="355" Background="#FFE6E6E6">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
+                    <GradientStop Color="#bf63df"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
@@ -76,7 +76,7 @@
         <ProgressBar x:Name="ProgressBarJob2" HorizontalAlignment="Center" Height="20" VerticalAlignment="Top" Width="356" Margin="0,258,0,0" Background="#FFE6E6E6">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
+                    <GradientStop Color="#bf63df"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
@@ -87,7 +87,7 @@
         <ProgressBar x:Name="ProgressBarJob3" HorizontalAlignment="Center" Height="20" Margin="0,308,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
+                    <GradientStop Color="#bf63df"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
@@ -98,7 +98,7 @@
         <ProgressBar x:Name="ProgressBarJob4" HorizontalAlignment="Center" Height="20" Margin="0,358,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
+                    <GradientStop Color="#bf63df"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
@@ -109,7 +109,7 @@
         <ProgressBar x:Name="ProgressBarJob5" HorizontalAlignment="Center" Height="20" Margin="0,408,0,0" VerticalAlignment="Top" Width="356" Background="#FFE6E6E6">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="White"/>
+                    <GradientStop Color="#bf63df"/>
                     <GradientStop Color="#FFAC00E7" Offset="1"/>
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
