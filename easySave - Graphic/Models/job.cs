@@ -14,10 +14,17 @@ using System.Threading;
 
 namespace easySave___Graphic.Models
 {
+
+    /// <summary>
+    /// Declare global variables
+    /// </summary>
     public static class Global
     {
+        // For state log list
         public static List<logSaveAdvancement> listSaveAdvancement;
+        // For button pause
         public static bool pause = false;
+        // For button stop
         public static bool stop = false;
     }
 
@@ -27,20 +34,27 @@ namespace easySave___Graphic.Models
     public class job
     {
         #region attributes
+
         static object lockReadOrWriteLog = new object();
 
         public static Mutex bigFile = new Mutex();
 
         static object lockPrioFinish = new object();
+
         public static int prioFinish = 0;
 
-
+        // Creates a new instance of log progress save
         logProgressSave logProgress = new logProgressSave();
+
+        // Set the log progress file in JSON
         string jsonStringLogProgress;
+
         // Set the path for log progress file in JSON
         string pathFileLogProgress = @"C:\EasySave\Log\logProgressSave.json";
+
         // Set the path for the log progress file in XML
         string pathFileLogProgressXml = @"C:\EasySave\Log\logProgressSave.xml";
+
         // Set the folder for logs
         string pathfolderLog;
 
@@ -48,10 +62,13 @@ namespace easySave___Graphic.Models
         /// Create a new instance from logSaveAdvancement, named logSave
         /// </summary>
         logSaveAdvancement logSave = new logSaveAdvancement();
+
         // Create variable which stores json String for the Save Log
         string jsonStringLogSave;
+
         // Create variable which stores the path for the log save file
         string pathFileLogSave = @"C:\EasySave\Log\logSaveAdvancement.json";
+
         // Create variable which stores the path for the state log file
         string pathFileLogSaveXml = @"C:\EasySave\Log\logSaveAdvancement.xml";
 
@@ -670,6 +687,9 @@ namespace easySave___Graphic.Models
                 }
             }
         }
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /// <summary>
         /// Method to make a differential save
