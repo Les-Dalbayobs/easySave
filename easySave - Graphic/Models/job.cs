@@ -207,18 +207,10 @@ namespace easySave___Graphic.Models
             return false;
         }
 
-        public void updateLabel(System.Windows.Controls.Label label, string value)
-        {
-            if (label != null)
-            {
-                label.Content = value;
-            }
-        }
-
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////                      METHODS TO COPY                          ////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #region Methods to copy
+        #region Methodstocopy
 
         /// <summary>
         /// Method to set all parameters for each jobs
@@ -656,61 +648,26 @@ namespace easySave___Graphic.Models
         /// <returns></returns>
         public bool verifCreateDestination()
         {
-            // Initialize the verification variable at false
             bool verif = false;
 
-            /// Try catch to verify if the destination exists
             try
             {
-                // Create the directory at the destination path
                 DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
                 Directory.CreateDirectory(destination.FullName);
 
-                // If the path exists, return true
                 if (destination.Exists)
                 {
                     verif = true;
-                }
-                catch (Exception e)
-                {
-                    //Console.WriteLine("The process failed : " + e.ToString());
                 }
             }
-            // If not, return false
-                catch
-                {
-                    verif = false;
-        }
-
-        #endregion
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////                      PREVENT ERRORS                          ////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        /// <summary>
-        /// Method to verify if the destination exists during creation
-        /// </summary>
-        /// <returns></returns>
-        public bool verifCreateDestination()
-        {
-            // Initialize the verification variable at false
-            bool verif = false;
-
-            /// Try catch to verify if the destination exists
-            try
+            catch
             {
-                // Create the directory at the destination path
-                DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
-                Directory.CreateDirectory(destination.FullName);
+                verif = false;
+            }
 
-                // If the path exists, return true
-                if (destination.Exists)
-                {
-                    verif = true;
-                }
             return verif;
         }
+
         #endregion
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
