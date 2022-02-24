@@ -505,6 +505,12 @@ namespace easySave___Graphic.Models
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceFullName"></param>
+        /// <param name="listPrioExtensions"></param>
+        /// <returns></returns>
         public List<string> createListPrio(string sourceFullName, List<string> listPrioExtensions = null)
         {
             if (listPrioExtensions != null)
@@ -523,10 +529,14 @@ namespace easySave___Graphic.Models
         }
 
         /// <summary>
-        /// Method for making a full backup
+        /// 
         /// </summary>
-        /// <param name="source">Source DirectoryInfo</param>
-        /// <param name="destination">Destination DirectoryInfo</param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
+        /// <param name="listPrioExtensions"></param>
+        /// <param name="encryptionExtension"></param>
+        /// <param name="progressBar"></param>
+        /// <param name="label"></param>
         public void copyComplete(DirectoryInfo source, DirectoryInfo destination,List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
             List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
@@ -661,40 +671,32 @@ namespace easySave___Graphic.Models
             }
         }
 
-        public bool IsFileLocked(FileInfo file)
-        {
-            try
-            {
-                using (FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None))
-                {
-                    stream.Close();
-                }
-            }
-            catch (IOException)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         /// <summary>
-        /// Method for making a differential backup
+        /// Method to make a differential save
         /// </summary>
-        /// <param name="source">Source DirectoryInfo</param>
-        /// <param name="destination">Source DirectoryInfo</param>
+        /// <param name="source">Source path</param>
+        /// <param name="destination">Destination path</param>
+        /// <param name="listPrioExtensions">List of priorized files</param>
+        /// <param name="encryptionExtension">Encryption extension</param>
+        /// <param name="progressBar">Progress bars</param>
+        /// <param name="label">Labels</param>
         public void copyDifferential(DirectoryInfo source, DirectoryInfo destination, List<string> listPrioExtensions = null, string encryptionExtension = null, System.Windows.Controls.ProgressBar progressBar = null, System.Windows.Controls.Label label = null)
         {
+            // List of all source files extensions
             List<string> sourceListPathFiles = Directory.EnumerateFiles(source.FullName, ".", SearchOption.AllDirectories).ToList<string>();
 
+            // Check if the list of priorization is empty
             if (listPrioExtensions != null)
             {
+                // If not, creates a list of priorities, with file full name and list all the extensions prioritized
                 List<string> listFilesPrio = createListPrio(source.FullName, listPrioExtensions);
 
+                // Then copy all the list, taking all prios in consideration
                 copyListFiles(sourceListPathFiles, false, listFilesPrio, encryptionExtension, progressBar, label);
             }
             else
             {
+                // If not, copy directly
                 copyListFiles(sourceListPathFiles, false, listPrioExtensions, encryptionExtension, progressBar, label);
             }
         }
@@ -756,6 +758,7 @@ namespace easySave___Graphic.Models
         /// <returns></returns>
         public override string ToString()
         {
+            /// Change all the default parameters
             return $"Name : {this.name}\n" +
                 $"Source : {this.pathSource}\n" +
                 $"Destination : {this.pathDestination}\n" +
@@ -768,39 +771,45 @@ namespace easySave___Graphic.Models
         /// <returns></returns>
         public bool verifCreateDestination()
         {
+            // Initialize the verification variable at false
             bool verif = false;
 
+            /// Try catch to verify if the destination exists
             try
             {
+                // Create the directory at the destination path
                 DirectoryInfo destination = new DirectoryInfo(this.pathDestination);
                 Directory.CreateDirectory(destination.FullName);
 
+                // If the path exists, return true
                 if (destination.Exists)
                 {
                     verif = true;
                 }
             }
-            catch
-            {
-                verif = false;
-            }
-
+            // If not, return false
+                catch
+                {
+                    verif = false;
+                }
             return verif;
         }
 
         /// <summary>
         /// Method to encrypt specific files during a save
         /// </summary>
-        /// <param name="fileSource"></param>
-        /// <param name="destination"></param>
+        /// <param name="fileSource">Source of the file</param>
+        /// <param name="destination">Destination of the copy</param>
         /// <returns></returns>
         public int encryption(FileInfo fileSource, string destinationDirectory)
         {
             // Set the path for Cryptosoft software
             string pathCryptoSoft = @"C:\Program Files (x86)\CryptoSoft\CryptoSoft.exe";
 
+            // Set the destination path for encrypted files
             string path = destinationDirectory + @"\" + Path.GetFileNameWithoutExtension(fileSource.FullName) + ".cry";
 
+            // Start the process of encryption
             var e = Process.Start(pathCryptoSoft, "\"" + fileSource.FullName + "\"" + " " + "\"" + path + "\"");
 
             e.WaitForExit();
