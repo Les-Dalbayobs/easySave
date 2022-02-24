@@ -286,4 +286,7 @@ files size</value>
   <data name="yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="waitForPrioritizedFiles" xml:space="preserve">
+    <value>Waiting for prioritized files to copy</value>
+  </data>
 </root>

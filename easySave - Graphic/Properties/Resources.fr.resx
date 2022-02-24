@@ -281,6 +281,9 @@ simultanés</value>
   <data name="waitForBigFiles" xml:space="preserve">
     <value>En attente de la copie des autres fichiers volumineux</value>
   </data>
+  <data name="waitForPrioritizedFiles" xml:space="preserve">
+    <value>En attente de la copie des fichiers priorisés</value>
+  </data>
   <data name="wantDelete" xml:space="preserve">
     <value>Voulez-vous vraiment supprimer le job : </value>
   </data>

@@ -530,6 +530,24 @@ namespace easySave___Graphic.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting for prioritized files to copy.
+        /// </summary>
+        public static string waitForPrioritizedFiles {
+            get {
+                return ResourceManager.GetString("waitForPrioritizedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting.
+        /// </summary>
+        public static string waiting {
+            get {
+                return ResourceManager.GetString("waiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete this job : .
         /// </summary>
         public static string wantDelete {

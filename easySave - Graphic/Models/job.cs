@@ -471,7 +471,7 @@ namespace easySave___Graphic.Models
                         }
                         else
                         {
-                            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait copy big file")), DispatcherPriority.ContextIdle);
+                            System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForBigFiles"))), DispatcherPriority.ContextIdle);
                         }
                     }
                     else
@@ -493,13 +493,13 @@ namespace easySave___Graphic.Models
             {
                 while (Global.pause == true)
                 {
-                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Pause")), DispatcherPriority.ContextIdle);
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("paused"))), DispatcherPriority.ContextIdle);
                     Thread.Sleep(1000);
                 }
 
                 while (prioFinish != 0)
                 {
-                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait prio")), DispatcherPriority.ContextIdle);
+                    System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForPrioritizedFiles"))), DispatcherPriority.ContextIdle);
                     Thread.Sleep(1000);
                 }
 
@@ -528,7 +528,7 @@ namespace easySave___Graphic.Models
                     }
                     else
                     {
-                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, "Wait copy big file")), DispatcherPriority.ContextIdle);
+                        System.Windows.Application.Current.Dispatcher.Invoke(new Action(() => updateLabel(label, resource.GetString("waitForBigFiles"))), DispatcherPriority.ContextIdle);
                     }
                 }
                 else
