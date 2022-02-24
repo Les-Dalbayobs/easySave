@@ -507,7 +507,7 @@ namespace easySave___Graphic.Models
                 else
                 {
                     copyFile(fileSource, overwrite, directoryDestination, destinationFile, encryptionExtension, progressBar, label);
-
+                  
                     sourceList.Remove(sourceList[i]);
                 }
             }
