@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using Newtonsoft.Json;
 using System.Configuration;
@@ -32,6 +34,7 @@ namespace easySave___Graphic.ViewModel
         /// easySave folder path
         /// </summary>
         string pathFilesEasySave = @"c:\EasySave";
+        ResourceManager resource = new ResourceManager("easySave___Graphic.Properties.Resources", Assembly.GetExecutingAssembly());
 
         /// <summary>
         /// Creation serialize JsonSerializer to serialize objects or value types into JSON,
