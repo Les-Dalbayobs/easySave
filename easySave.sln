@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "easySave", "easySave\easySa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "easySave - Graphic", "easySave - Graphic\easySave - Graphic.csproj", "{8BFB5F0E-E8C4-4492-A08D-214E39609897}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyConsole", "EasyConsole\EasyConsole.csproj", "{FCDFD9C6-4B7B-4FCC-AB33-7EFAE9E4BB00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyConsole", "EasyConsole\EasyConsole.csproj", "{1D926744-2C7D-4858-88F5-61D11F19C05A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{8BFB5F0E-E8C4-4492-A08D-214E39609897}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BFB5F0E-E8C4-4492-A08D-214E39609897}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BFB5F0E-E8C4-4492-A08D-214E39609897}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCDFD9C6-4B7B-4FCC-AB33-7EFAE9E4BB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCDFD9C6-4B7B-4FCC-AB33-7EFAE9E4BB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCDFD9C6-4B7B-4FCC-AB33-7EFAE9E4BB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCDFD9C6-4B7B-4FCC-AB33-7EFAE9E4BB00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D926744-2C7D-4858-88F5-61D11F19C05A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D926744-2C7D-4858-88F5-61D11F19C05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D926744-2C7D-4858-88F5-61D11F19C05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D926744-2C7D-4858-88F5-61D11F19C05A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
